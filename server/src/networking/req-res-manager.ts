@@ -2,11 +2,12 @@ import { WebSocket } from "ws";
 import { encodeNetworkMessage, MessageType, NetworkMessage } from "./encoder.js";
 import { createNonce } from "./nonce.js";
 
+const DEFAULT_TIMEOUT = 2000;
 const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 export function createRequestResponseManager(wsClient: WebSocket) {
 	return {
-		sendRequest<TRes>(data: unknown, timeout: number): Promise<TRes> {
+		sendRequest<TRes>(data: unknown, timeout: number = DEFAULT_TIMEOUT): Promise<TRes> {
 			const nonce = createNonce();
 			const message = encodeNetworkMessage(nonce, MessageType.RPC_CALL, data);
 			const responsePromise = new Promise<TRes>(async (resolve, reject) => {

@@ -14,6 +14,7 @@ export function initSocketConnection(wsClient: WebSocket) {
 
 	wsClient.on('close', () => {
 		console.log('Client disconnected');
+		identity.onIdentityDisconnect();
 	});
 
 	wsClient.on('error', (error) => {

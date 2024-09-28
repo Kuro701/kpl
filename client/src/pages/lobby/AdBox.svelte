@@ -1,6 +1,4 @@
 <script>
-  import AdBox from './AdBox.svelte';
-
   import ProfileEditor from './ProfileEditor.svelte';
 
   import ItemList from "../../components/layout/ItemList.svelte";
@@ -12,8 +10,6 @@
   import { safeAwait } from '../../utils/safe-await';
   import { encodeNetworkMessage, MessageType } from '../../lib/networking/encoder';
   import KartyBezCenzury from '../../components/ad/KartyBezCenzury.svelte';
-  import HowToPlay from './HowToPlay.svelte';
-  import Login from './Login.svelte';
 
   let connecting = false;
 
@@ -62,72 +58,39 @@
     navigate('/create');
   }
 </script>
-<LayoutMenu>
-  <ItemList>
-    <h1>Hrát</h1>
-  </ItemList>
 
-  <TwoColumns>
-    <ItemList slot="left">
-      <h2>Rychlá hra</h2>
-
-      <ProfileEditor bind:username disabled={connecting} />
-
-      <div class="actions">
-        <div class="action">
-          <button class="button" on:click={randomJoin} disabled={connecting}>
-            Náhodně připojit
-          </button>
-        </div>
-        <div class="action">
-          <button class="button" on:click={showLobby} disabled={connecting}>
-            Místnosti
-          </button>
-          <button class="button" aria-label="Vytvořit místnost" data-balloon-pos="right" on:click={createRoom}  disabled={connecting}>
-            <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" draggable="false" />
-          </button>
-        </div>
-      </div>
-
-
-    </ItemList>
-    <div class="how-to-play" slot="right">
-      <!-- <HowToPlay /> -->
-      <Login />
-      <AdBox />
-    </div>
-  </TwoColumns>
-</LayoutMenu>
+<div class="sponsor-wrap">
+	<div class="sponsor-label">
+		Sponzorováno
+	</div>
+	<div class="sponsor">
+		<KartyBezCenzury />
+	</div>
+</div>
 
 <style>
-  .actions {
-    display: flex;
-    flex-direction: column;
-    width: 15rem;
-    gap: .5rem;
-    margin: 1rem 0 2rem 0;
+  .sponsor-wrap {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: .25rem;
+	align-items: center;
   }
-  .action {
-    display: flex;
-    justify-content: space-between;
-    gap: .25rem;
+  .sponsor {
+    width: calc(100% - 5rem);
+    height: 8rem;
+    background-color: gray;
+    overflow: hidden;
+    position: relative;
+    border-radius: .5rem;
   }
-  .action > .button:first-child {
-    flex: 1;
-  }
-
-  h1 {
-    margin-bottom: 0;
-  }
-
-  .how-to-play {
-    display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    padding-bottom: 2rem;
+  .sponsor-label {
+    font-size: .75rem;
+    opacity: .8;
+    margin-top: 1rem;
+    width: calc(100% - 5rem);
+    padding-left: .5rem;
+    cursor: var(--cursor-text);
   }
 </style>
+

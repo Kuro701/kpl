@@ -1,3 +1,8 @@
+@font-face {
+	font-family: '7tA114RsvV';
+	src: url('/font/destroy.ttf')
+}
+
 html,
 body {
 	padding: 0;
@@ -9,10 +14,12 @@ body {
 	--white-transparency: rgba(255, 255, 255, 0.75);
 
 	--font-text: "Poppins", sans-serif;
+	--font-karty-bez-cenzury: '7tA114RsvV', sans-serif;
 
 	--cursor-normal: url('/img/cursor/pixel/tile_0168.png'), auto;
 	--cursor-poiner: url('/img/cursor/pixel/tile_0137.png'), auto;
 	--cursor-text: url('/img/cursor/pixel/tile_0140.png'), auto;
+	--cursor-not-allowed: url('/img/cursor/pixel/tile_0015.png'), auto;
 
 	cursor: var(--cursor-normal);
 	font-family: var(--font-text);
@@ -74,4 +81,10 @@ input {
 }
 [aria-label][data-balloon-pos] {
 	cursor: var(--cursor-poiner);
+}
+
+.button[disabled] {
+	background-color: var(--blackish);
+	color: var(--white-transparency);
+	cursor: var(--cursor-not-allowed);
 }

@@ -1,4 +1,4 @@
-import cuid from "cuid";
+import { createId as cuid } from "@paralleldrive/cuid2";
 import { KplPlayer } from "./player.js";
 import { randomBytes } from "crypto";
 import { destroyRoom } from "./room-manager.js";

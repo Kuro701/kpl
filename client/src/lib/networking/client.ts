@@ -1,5 +1,6 @@
+import { writable } from "svelte/store";
 import { handleNetworkMessage } from "./message-handler";
-
+import { navigate } from "svelte-routing";
 type AuthProvier = 'anonymous' | 'discord';
 
 type AuthCredentials = {
@@ -13,10 +14,15 @@ const SERVER_URL = 'ws://localhost:8080'; // TODO: Load from env or let user spe
 
 let connection: WebSocket | null = null;
 let authCredentials: AuthCredentials | null = null;
-
 export function getAuthCredentials() {
 	return { ...authCredentials };
 }
+
+type IPlayerIdentity = {
+	username: string;
+}
+
+export const PlayerIdentity = writable<IPlayerIdentity | null>(null);
 
 export async function sendRaw(message: string) {
 	if (!connection || connection.readyState !== WebSocket.OPEN) {
@@ -26,12 +32,40 @@ export async function sendRaw(message: string) {
 	connection.send(message);
 }
 
-export async function connect(credentials: AuthCredentials) {
+export function waitForIdentity(timeout: number = 2000): Promise<IPlayerIdentity> {
+	return new Promise((resolve, reject) => {
+		let rejected = false;
+		let timeoutId: number | null = null;
+
+		const unsubscribe = PlayerIdentity.subscribe((identity) => {
+			if (identity) {
+				if (timeoutId) {
+					clearTimeout(timeoutId);
+				}
+
+				if (!rejected) {
+					unsubscribe();
+					resolve(identity);
+				}
+			}
+		});
+
+		timeoutId = setTimeout(() => {
+			rejected = true;
+			unsubscribe();
+			reject(new Error('Timeout waiting for identity'));
+		}, timeout);
+	});
+}
+
+export async function connect(credentials: AuthCredentials): Promise<void> {
 	authCredentials = credentials;
 
 	if (connection && (connection.readyState === WebSocket.OPEN  || connection.readyState === WebSocket.CONNECTING)) {
 		connection.close();
 	}
+
+	PlayerIdentity.set(null);
 
 	connection = new WebSocket(SERVER_URL);
 	if (!connection) {
@@ -44,6 +78,7 @@ export async function connect(credentials: AuthCredentials) {
 
 	connection.addEventListener('close', () => {
 		console.log('Disconnected from server');
+		navigate('/');
 	});
 
 	connection.addEventListener('error', (error) => {
@@ -58,6 +93,5 @@ export async function connect(credentials: AuthCredentials) {
 		} catch (error) {
 			console.error('Failed to handle message:', error);
 		}
-
 	});
 }
