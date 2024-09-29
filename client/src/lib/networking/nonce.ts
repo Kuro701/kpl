@@ -2,5 +2,5 @@ import { createId as cuid } from "@paralleldrive/cuid2";
 
 export const NONCE_EMPTY = '';
 export function createNonce() {
-	return `s_${cuid()}`;
+	return `c_${cuid()}`;
 }

@@ -17,7 +17,7 @@ body {
 	--font-karty-bez-cenzury: '7tA114RsvV', sans-serif;
 
 	--cursor-normal: url('/img/cursor/pixel/tile_0168.png'), auto;
-	--cursor-poiner: url('/img/cursor/pixel/tile_0137.png'), auto;
+	--cursor-pointer: url('/img/cursor/pixel/tile_0137.png'), auto;
 	--cursor-text: url('/img/cursor/pixel/tile_0140.png'), auto;
 	--cursor-not-allowed: url('/img/cursor/pixel/tile_0015.png'), auto;
 
@@ -32,10 +32,10 @@ h1, h2, h3, h4, h5, h6, p, span, label {
 }
 
 button, a {
-	cursor: var(--cursor-poiner);
+	cursor: var(--cursor-pointer);
 }
 
-input {
+input, select {
 	cursor: var(--cursor-text);
 	font-family: var(--font-text);
 	height: 2rem;
@@ -45,6 +45,18 @@ input {
 	border: 1px solid var(--blackish);
 	border-radius: 0.25rem;
 	width: 100%;
+}
+
+select {
+	padding: 0 .25rem;
+}
+
+select, option {
+	cursor: var(--cursor-pointer);
+}
+
+input:disabled, select:disabled {
+	cursor: var(--cursor-not-allowed);
 }
 
 .button {
@@ -64,7 +76,7 @@ input {
 	border-radius: 0.5rem;
 	background-color: var(--blackish);
 	color: var(--white);
-	cursor: var(--cursor-poiner);
+	cursor: var(--cursor-pointer);
 }
 .button:hover {
 	background-color: var(--black);
@@ -94,7 +106,7 @@ input {
 	filter: invert(1);
 }
 [aria-label][data-balloon-pos] {
-	cursor: var(--cursor-poiner);
+	cursor: var(--cursor-pointer);
 }
 
 .button[disabled] {

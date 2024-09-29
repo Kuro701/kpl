@@ -1,5 +1,6 @@
 import { sendRaw } from "./client";
 import { decodeNetworkMessage, encodeNetworkMessage, MessageType } from "./encoder";
+import { processIncomingRPCTrafic } from "./req-res-manager";
 import { rpcFunctions } from "./rpc-functions";
 
 export async function handleNetworkMessage(message: string) {
@@ -29,6 +30,11 @@ export async function handleNetworkMessage(message: string) {
 
 		await func((data: unknown) => sendRaw(encodeNetworkMessage(decoded.nonce, MessageType.RPC_RESPONSE, data)), rest);
 
+		return;
+	}
+
+	if (decoded.type === MessageType.RPC_RESPONSE) {
+		processIncomingRPCTrafic(decoded);
 		return;
 	}
 }
