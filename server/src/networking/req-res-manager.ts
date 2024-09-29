@@ -1,13 +1,20 @@
 import { WebSocket } from "ws";
 import { encodeNetworkMessage, MessageType, NetworkMessage } from "./encoder.js";
-import { createNonce } from "./nonce.js";
+import { createNonce, NONCE_EMPTY } from "./nonce.js";
 
 const DEFAULT_TIMEOUT = 2000;
+const NO_WAIT = -1;
 const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 export function createRequestResponseManager(wsClient: WebSocket) {
 	return {
 		sendRequest<TRes>(data: unknown, timeout: number = DEFAULT_TIMEOUT): Promise<TRes> {
+			if (timeout < 0) {
+				const message = encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, data);
+				wsClient.send(message);
+				return Promise.resolve() as Promise<TRes>;
+			}
+
 			const nonce = createNonce();
 			const message = encodeNetworkMessage(nonce, MessageType.RPC_CALL, data);
 			const responsePromise = new Promise<TRes>(async (resolve, reject) => {
@@ -32,6 +39,13 @@ export function createRequestResponseManager(wsClient: WebSocket) {
 				wsClient.send(message);
 			});
 			return responsePromise;
+		},
+
+		rpcCall(fnName: string, data: object = {}) {
+			return this.sendRequest({
+				f: fnName,
+				...data,
+			});
 		},
 
 		processIncomingTrafic(msg: NetworkMessage<unknown>) {

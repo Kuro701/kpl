@@ -23,7 +23,18 @@ type IPlayerIdentity = {
 	anonymous: boolean;
 }
 
+type LobbyRoom = {
+	uuid: string,
+	name: string,
+	playerCount: number,
+	maxPlayers: number,
+	goal: number,
+	isPublic: boolean,
+	state: string,
+}
+
 export const PlayerIdentity = writable<IPlayerIdentity | null>(null);
+export const LobbyRooms = writable<LobbyRoom[]>([]);
 
 export async function sendRaw(message: string) {
 	if (!connection || connection.readyState !== WebSocket.OPEN) {

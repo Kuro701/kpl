@@ -4,10 +4,17 @@
   import LobbyBackButton from "../../components/layout/LobbyBackButton.svelte";
   import LobbyHeader from "../../components/layout/LobbyHeader.svelte";
   import { randomRoomName } from "../../lib/random";
-  import { PlayerIdentity } from "../../lib/networking/client";
-  import Switch from "../../components/form/Switch.svelte";
+  import RoomSettings from "./RoomSettings.svelte";
+  import { safeAwait } from "../../utils/safe-await";
+  import { rpcCall } from "../../lib/networking/req-res-manager";
 
   export let backTo = '/';
+
+  function back() {
+    if (!working) {
+      navigate(backTo);
+    }
+  }
 
   let settings = {
     name: randomRoomName(),
@@ -15,107 +22,53 @@
     goal: 10,
     isPublic: false,
   };
+
+  let working = false;
+  async function createRoom() {
+    working = true;
+
+    // TODO: Validate settings
+
+
+    const [roomUUID, error] = await safeAwait(rpcCall('createRoom', settings));
+    working = false;
+    if (error || !roomUUID) {
+      console.error(error);
+      return;
+    }
+
+    // Following line will not connect player to the room
+    // server will send join event to the player
+    // this is just a shortcut to avoid waiting and make the app feel faster
+    navigate(`/room/${roomUUID}`);
+  }
+
 </script>
 <LayoutMenu>
 	<LobbyHeader>
-		<LobbyBackButton slot="left" action={() => navigate(backTo)} />
+		  <LobbyBackButton slot="left" action={back} />
 		<h1>Vytvořit místnost</h1>
 	</LobbyHeader>
   <div class="room-creator">
-    <div class="settings">
-      <div class="property">
-        <div class="property__tile">
-          Název místnosti:
-        </div>
-        <div class="property__input">
-          {#if !$PlayerIdentity || $PlayerIdentity.anonymous}
-            <div data-balloon-pos="up" aria-label="Pro úpravu názvu místnosti se přihlaste">
-              <input type="text" value={settings.name} disabled />
-            </div>
-          {:else}
-            <input type="text" bind:value={settings.name} />
-          {/if}
-          <div aria-label="Náhodný název" data-balloon-pos="up">
-            <button class="button button--random" on:click={() => settings.name = randomRoomName()}>
-              <img src="/img/icons/dice.png" alt="Obnovit" />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="property">
-        <div class="property__title">
-          Max. počet hráčů:
-        </div>
-        <div class="property__input">
-          <select bind:value={settings.maxPlayers}>
-            {#each [5, 10, 15, 20, 25, 30] as goal}
-              <option value={goal}>{goal}</option>
-            {/each}
-          </select>
-        </div>
-      </div>
-      <div class="property">
-        <div class="property__title">
-          Cíl hry:
-        </div>
-        <div class="property__input">
-          <select bind:value={settings.goal}>
-            {#each [5, 10, 15, 20] as goal}
-              <option value={goal}>{goal}</option>
-            {/each}
-          </select>
-        </div>
-      </div>
-      <div class="property">
-        <div class="property__title">
-          Veřejná místnost:
-        </div>
-        <div class="property__input">
-          <Switch bind:value={settings.isPublic} />
-        </div>
-      </div>
-    </div>
+    <RoomSettings bind:value={settings} />
     <div class="card-packs">
 
+    </div>
+
+    <div class="actions">
+      <button class="button" on:click={createRoom}>
+        <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" />
+        Vytvořit místnost
+      </button>
     </div>
   </div>
 </LayoutMenu>
 
 <style>
-  .settings {
-    padding: 1rem 2rem;
+  .actions {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .settings .property {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .settings .property > div {
-    flex: 1;
-    display: flex;
-  }
-
-  .settings .property__input > *:first-child {
-    width: 100%;
-  }
-
-  .button--random {
-    background: none;
-    border: none;
-    padding: 0 0 0 .5rem;
-    height: 2rem;
-  }
-  .button--random img {
-    width: 2rem;
-    height: 2rem;
-    opacity: .8;
-  }
-  .button--random:hover img {
-    opacity: 1;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 </style>

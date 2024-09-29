@@ -6,6 +6,8 @@ import { AwaitResponse } from "./req-res-manager.js";
 import { safeAwait } from "../utils/safe-await.js";
 import { createPlayer, destroyPlayer } from "../game/player-manager.js";
 import { createAnonymousPlayer, tryReviveAnonymousPlayer } from "./anonymous-player-provider.js";
+import { NetworkKit } from "./socket-connection-client.js";
+import { getLobbyStateNetworkMessage } from "../game/room-manager.js";
 
 const LOGIN_TIMEOUT = 1000;
 
@@ -17,7 +19,7 @@ type AuthCredentials = {
 	user_token: string;
 };
 
-export function createClientIdentity(ws: WebSocket, sendRequest: AwaitResponse) {
+export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitResponse) {
 	let player: KplPlayer | null = null;
 
 	return {
@@ -35,19 +37,19 @@ export function createClientIdentity(ws: WebSocket, sendRequest: AwaitResponse) 
 			}, LOGIN_TIMEOUT));
 
 			if (error) {
-				ws.send(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'AUTH_TIMEOUT'));
-				ws.close();
+				networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'AUTH_TIMEOUT'));
+				networkKit.disconnect();
 				return;
 			}
 
 			if (data.provider === 'anonymous') {
 				const playerIndentity = tryReviveAnonymousPlayer(data.user_id, data.user_token) || createAnonymousPlayer();
 				console.log(playerIndentity);
-				player = createPlayer(data.username, playerIndentity.user_id);
+				player = createPlayer(data.username, playerIndentity.user_id, networkKit);
 
 				if (!player) {
-					ws.send(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'ALREADY_LOGGED_IN'));
-					ws.close();
+					networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'ALREADY_LOGGED_IN'));
+					networkKit.disconnect();
 					return;
 				}
 
@@ -57,13 +59,16 @@ export function createClientIdentity(ws: WebSocket, sendRequest: AwaitResponse) 
 					token: playerIndentity.token,
 					username: player.username,
 					anonymous: true,
-				}));
+				}, -1));
+
+				networkKit.sendRaw(getLobbyStateNetworkMessage());
+
 				return;
 			}
 
 			if (!player) {
-				ws.send(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'AUTH_FAILED'));
-				ws.close();
+				networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'AUTH_FAILED'));
+				networkKit.disconnect();
 				return;
 			}
 

@@ -9,8 +9,8 @@
 
 <Router>
   <Route path="/" component={PageEntry} />
-  <Route path="/create" component={PageCreate} back="/" />
-  <Route path="/rooms/create" component={PageCreate} back="/rooms" />
+  <Route path="/create" component={PageCreate} backTo="/" />
+  <Route path="/rooms/create" component={PageCreate} backTo="/rooms" />
   <Route path="/rooms" component={PageRooms} />
   <Route path="/rules" component={PageRules} />
 </Router>

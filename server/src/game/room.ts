@@ -1,10 +1,10 @@
 import { createId as cuid } from "@paralleldrive/cuid2";
 import { KplPlayer } from "./player.js";
 import { randomBytes } from "crypto";
-import { destroyRoom, generateUniqueJoinCode } from "./room-manager.js";
+import { broadcastLobbyUpdate, destroyRoom, generateUniqueJoinCode } from "./room-manager.js";
 
 enum RoomState {
-	LOBBY,
+	LOBBY = 'lobby',
 }
 
 type PlayerData = {};
@@ -32,7 +32,7 @@ export class KplRoom {
 	private playerData: Record<string, PlayerData> = {}; // TODO: Sync with clients
 	private spectators: KplPlayer[] = []; // TODO: Sync with clients
 
-	private state: RoomState = RoomState.LOBBY;  // TODO: Sync with clients
+	private _state: RoomState = RoomState.LOBBY;  // TODO: Sync with clients
 	private intermissionEnd: Date | null = null; // TODO: Sync with clients
 	private intermissionTimer: NodeJS.Timeout | null = null; // TODO: Sync with clients
 
@@ -46,29 +46,41 @@ export class KplRoom {
 		if (host) {
 			this.hostUUID = host.uuid;
 		}
+
+		console.log(`Room ${this.name} (${this.uuid}) created by ${host?.username ?? 'system'}`);
 	}
 
-	public addPlayer(player: KplPlayer): void {
+	public get playerCount(): number {
+		return this.players.length;
+	}
+
+	public get state(): RoomState {
+		return this._state;
+	}
+
+	public onPlayerJoin(player: KplPlayer): boolean {
 		// If player already was in the room before but disconnected (reconnect)
 		if (this.playerData[player.uuid]) {
+			console.log(`Player ${player.username} reconnected to room ${this.name}`);
 			this.players.push(player);
-			this.broadcastGameState();
-			return;
+			broadcastLobbyUpdate();
+			return true;
 		}
 
 		// If player is new and game is already running, refuse to join
-		if (this.state !== RoomState.LOBBY) {
+		if (this._state !== RoomState.LOBBY) {
 			// TODO: Send game has already started error
-			return;
+			return false;
 		}
 
 		// If room is full, refuse to join
 		if (this.players.length >= this.maxPlayers) {
 			// TODO: Send room is full error
-			return;
+			return false;
 		}
 
 		// Add player to room
+		console.log(`Player ${player.username} joined room ${this.name}`);
 		this.players.push(player);
 		this.playerData[player.uuid] = {};
 		this.broadcastGameState();
@@ -82,14 +94,19 @@ export class KplRoom {
 
 			this.broadcastGameState();
 		}
+
+		broadcastLobbyUpdate();
+		return true;
 	}
 
-	public removePlayer(player: KplPlayer): void {
+	public onPlayerLeave(player: KplPlayer): void {
+		console.log(`Player ${player.username} left room ${this.name}`);
+
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);
 
 		// If game is not running, remove player data entirely
-		if (this.state === RoomState.LOBBY) {
+		if (this._state === RoomState.LOBBY) {
 			delete this.playerData[player.uuid];
 		}
 
@@ -110,6 +127,11 @@ export class KplRoom {
 		if (this.players.length === 0) {
 			destroyRoom(this);
 		}
+	}
+
+	public onRoomDestroy(): void {
+		console.log(`Room ${this.name} (${this.uuid}) destroyed`);
+		this.players.forEach(player => player.quitRoom());
 	}
 
 	private broadcastGameState(): void {

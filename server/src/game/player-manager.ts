@@ -1,14 +1,16 @@
+import { NetworkKit } from "../networking/socket-connection-client.js";
+import { safeAwait } from "../utils/safe-await.js";
 import { KplPlayer } from "./player.js";
 
 const players: KplPlayer[] = [];
 
-export function createPlayer(username: string, uuid: string): KplPlayer | null {
+export function createPlayer(username: string, uuid: string, networkKit: NetworkKit): KplPlayer | null {
 	const existingPlayer = getPlayerById(uuid);
 	if (existingPlayer) {
 		return null;
 	}
 
-	const player = new KplPlayer(username, uuid);
+	const player = new KplPlayer(username, uuid, networkKit);
 	players.push(player);
 	return player;
 }
@@ -23,4 +25,10 @@ export function destroyPlayer(player: KplPlayer): void {
 	if (index !== -1) {
 		players.splice(index, 1);
 	}
+}
+
+export async function broadcastRawToAllPlayers(message: string): Promise<void> {
+	await Promise.all(players.map(async (player) => {
+		await player.sendRaw(message);
+	}));
 }

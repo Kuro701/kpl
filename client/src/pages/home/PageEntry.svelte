@@ -11,6 +11,7 @@
   import { encodeNetworkMessage, MessageType } from '../../lib/networking/encoder';
   import Login from './Login.svelte';
   import LobbyHeader from '../../components/layout/LobbyHeader.svelte';
+  import { rpcCall } from '../../lib/networking/req-res-manager';
 
   let connecting = false;
 
@@ -46,7 +47,14 @@
 
   async function randomJoin() {
     if(!await connectToServer()) return;
-    sendRaw(encodeNetworkMessage('', MessageType.PLAIN, 'join_random'));
+    const [roomId, error] = await safeAwait(rpcCall('joinRandomRoom'));
+
+    if (error) {
+      console.error('Failed to join random room:', error);
+      return;
+    }
+
+    navigate(`/room/${roomId}`);
   }
 
   async function showLobby() {
