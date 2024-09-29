@@ -1,8 +1,6 @@
 <script lang="ts">
   import ItemList from "../../components/layout/ItemList.svelte";
-  import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
-  import TwoColumns from "../../components/layout/TwoColumns.svelte";
-  import { randomUsername } from "../../lib/random";
+  import { autoFocus } from "../../use/auto-focus";
 
   export let username: string;
   export let disabled: boolean = false;
@@ -19,7 +17,7 @@
       Přezdívka
     </div>
     <div class="username__input">
-      <input type="text" bind:value={username} required maxlength="25" {disabled} />
+      <input type="text" bind:value={username} required maxlength="25" {disabled} use:autoFocus />
     </div>
   </div>
 </ItemList>

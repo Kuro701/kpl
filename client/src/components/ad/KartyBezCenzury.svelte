@@ -8,7 +8,7 @@
 				Karty bez cenzury
 			</div>
 			<div class="kbc__text">
-				Sleva X% s kódem <b>KPL-ONLINE</b>
+				Sleva 10% s kódem <b>KPL-ONLINE</b>
 			</div>
 		</div>
 	</div>

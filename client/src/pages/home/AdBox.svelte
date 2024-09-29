@@ -1,9 +1,4 @@
 <script>
-  import ProfileEditor from './ProfileEditor.svelte';
-
-  import ItemList from "../../components/layout/ItemList.svelte";
-  import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
-  import TwoColumns from "../../components/layout/TwoColumns.svelte";
   import { connect, sendRaw, waitForIdentity } from '../../lib/networking/client';
   import { randomUsername } from '../../lib/random';
   import { navigate } from 'svelte-routing';

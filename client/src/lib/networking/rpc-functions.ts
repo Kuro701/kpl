@@ -10,14 +10,14 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(getAuthCredentials());
 	},
 	identity: async (reply: ReplyFunction, data) => {
-		const { uuid, token, username } = data as { uuid: string, token: string, username: string };
+		const { uuid, token, username, anonymous } = data as { uuid: string, token: string, username: string, anonymous: boolean };
 		console.log('Identity:', { uuid, token, username });
 
 		localStorage.setItem('uuid', uuid);
 		localStorage.setItem('token', token);
 		localStorage.setItem('username', username);
 
-		PlayerIdentity.set({ username });
+		PlayerIdentity.set({ username, anonymous });
 
 		reply(OK);
 	},

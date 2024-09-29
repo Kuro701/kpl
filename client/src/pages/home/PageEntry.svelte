@@ -1,19 +1,16 @@
 <script>
   import AdBox from './AdBox.svelte';
-
   import ProfileEditor from './ProfileEditor.svelte';
-
   import ItemList from "../../components/layout/ItemList.svelte";
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import TwoColumns from "../../components/layout/TwoColumns.svelte";
   import { connect, sendRaw, waitForIdentity } from '../../lib/networking/client';
   import { randomUsername } from '../../lib/random';
-  import { navigate } from 'svelte-routing';
+  import { navigate, link } from 'svelte-routing';
   import { safeAwait } from '../../utils/safe-await';
   import { encodeNetworkMessage, MessageType } from '../../lib/networking/encoder';
-  import KartyBezCenzury from '../../components/ad/KartyBezCenzury.svelte';
-  import HowToPlay from './HowToPlay.svelte';
   import Login from './Login.svelte';
+  import LobbyHeader from '../../components/layout/LobbyHeader.svelte';
 
   let connecting = false;
 
@@ -54,7 +51,7 @@
 
   async function showLobby() {
     if(!await connectToServer()) return;
-    navigate('/lobby');
+    navigate('/rooms');
   }
 
   async function createRoom() {
@@ -63,9 +60,15 @@
   }
 </script>
 <LayoutMenu>
-  <ItemList>
+  <LobbyHeader>
     <h1>Hrát</h1>
-  </ItemList>
+
+    <svelte:fragment slot="right">
+      <a class="button button--social" aria-label="Pravidla" data-balloon-pos="down" href="/rules" use:link>
+        <img src="/img/icons/rules.png" alt="Pravidla" draggable="false" />
+      </a>
+    </svelte:fragment>
+  </LobbyHeader>
 
   <TwoColumns>
     <ItemList slot="left">

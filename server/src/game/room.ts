@@ -1,7 +1,7 @@
 import { createId as cuid } from "@paralleldrive/cuid2";
 import { KplPlayer } from "./player.js";
 import { randomBytes } from "crypto";
-import { destroyRoom } from "./room-manager.js";
+import { destroyRoom, generateUniqueJoinCode } from "./room-manager.js";
 
 enum RoomState {
 	LOBBY,
@@ -11,10 +11,17 @@ type PlayerData = {};
 const MIN_PLAYERS = 3;
 const TIME_TO_START = 30;
 
+export type RoomConstructorData = {
+	name: string;
+	goal: number;
+	maxPlayers: number;
+	isPublic: boolean;
+	host: KplPlayer | undefined;
+};
+
 export class KplRoom {
 	public readonly uuid: string;
 	public readonly name: string;
-	public readonly joinCode: string;
 
 	public readonly maxPlayers: number;
 	public readonly goal: number;
@@ -29,13 +36,12 @@ export class KplRoom {
 	private intermissionEnd: Date | null = null; // TODO: Sync with clients
 	private intermissionTimer: NodeJS.Timeout | null = null; // TODO: Sync with clients
 
-	constructor(name: string, goal: number, maxPlayers: number, isPublic: boolean, host: KplPlayer | undefined = undefined) {
-		this.uuid = cuid();
+	constructor({ name, goal, maxPlayers, isPublic, host }: RoomConstructorData) {
+		this.uuid = generateUniqueJoinCode();
 		this.name = name;
 		this.goal = goal;
 		this.maxPlayers = maxPlayers;
 		this.isPublic = isPublic;
-		this.joinCode = randomBytes(4).toString('hex');
 
 		if (host) {
 			this.hostUUID = host.uuid;

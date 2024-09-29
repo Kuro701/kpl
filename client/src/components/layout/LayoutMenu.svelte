@@ -31,6 +31,8 @@
 		background: white;
 		border-radius: .5rem;
 		width: 60rem;
+		max-height: calc(100vh - 14.5rem); /* 2*1,5rem (gaps) 5rem (logo) 1,5rem (footer padding) 5ren (foorer) */
+		overflow: hidden auto;
 	}
 	.layout-menu__logo img {
 		height: 5rem;

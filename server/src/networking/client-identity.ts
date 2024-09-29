@@ -56,6 +56,7 @@ export function createClientIdentity(ws: WebSocket, sendRequest: AwaitResponse) 
 					uuid: player.uuid,
 					token: playerIndentity.token,
 					username: player.username,
+					anonymous: true,
 				}));
 				return;
 			}

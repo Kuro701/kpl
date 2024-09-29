@@ -20,6 +20,7 @@ export function getAuthCredentials() {
 
 type IPlayerIdentity = {
 	username: string;
+	anonymous: boolean;
 }
 
 export const PlayerIdentity = writable<IPlayerIdentity | null>(null);
