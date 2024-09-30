@@ -23,7 +23,7 @@ type IPlayerIdentity = {
 	anonymous: boolean;
 }
 
-type LobbyRoom = {
+export type LobbyRoom = {
 	uuid: string,
 	name: string,
 	playerCount: number,

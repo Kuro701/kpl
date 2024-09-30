@@ -3,55 +3,79 @@
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import LobbyBackButton from "../../components/layout/LobbyBackButton.svelte";
   import LobbyHeader from "../../components/layout/LobbyHeader.svelte";
-  import { LobbyRooms } from "../../lib/networking/client";
-  import { safeAwait } from "../../utils/safe-await";
-  import { rpcCall } from "../../lib/networking/req-res-manager";
+  import { LobbyRooms, type LobbyRoom } from "../../lib/networking/client";
+  import RoomWidget from "./RoomWidget.svelte";
 
-  let working = false;
-  async function joinRoom(roomId: string) {
-    if (working) return;
-    working = true;
+  let roomsByState: Record<string, LobbyRoom[]> = {
+    lobby: [],
+    ingame: [],
+  };
 
-    const [roomUUID, error] = await safeAwait(rpcCall('joinRoom', {
-      roomUUID: roomId,
-    }));
-
-    if (error || !roomUUID) {
-      console.error(error);
-      working = false;
-      return;
-    }
-
-    navigate(`/room/${roomUUID}`);
-  }
+  $: roomsByState = $LobbyRooms.reduce((acc, room) => {
+    const state = room.state === 'lobby' ? 'lobby' : 'ingame';
+    acc[state].push(room);
+    return acc;
+  }, { lobby: [], ingame: [] } as Record<string, LobbyRoom[]>);
 </script>
 <LayoutMenu>
   <LobbyHeader>
     <LobbyBackButton slot="left" action={() => navigate('/')} />
     <h1>Místnosti</h1>
     <svelte:fragment slot="right">
-      <a class="button button--social" aria-label="Vytvořit místnost" data-balloon-pos="down" href="/rooms/create" use:link>
-        <img src="/img/icons/plus.png" alt="Pravidla" draggable="false" />
+      <a class="button" href="/rooms/create" use:link>
+        <img src="/img/icons/plus.png" alt="Plus" draggable="false" class="icon invert" />
+        Vytvořit místnost
       </a>
     </svelte:fragment>
   </LobbyHeader>
 
 
+  {#if $LobbyRooms.length === 0}
+    <div class="empty">
+      Je tu nějak prázdno :c <br />
+      Svolej svoje kámoše a pojďte to tady oživit!
+    </div>
+  {:else}
+    <div class="rooms">
+      {#each roomsByState.lobby as room (room.uuid)}
+        <RoomWidget value={room} />
+      {/each}
+      {#each roomsByState.ingame as room (room.uuid)}
+        <RoomWidget value={room} />
+      {/each}
 
-  <div class="rooms">
-    {#each $LobbyRooms as room}
-      <pre>{JSON.stringify(room, null, 2)}</pre>
-      <button class="button" on:click={() => joinRoom(room.uuid)}>
-        Připojit se
-      </button>
-    {/each}
-  </div>
+    </div>
+  {/if}
 </LayoutMenu>
 
 
 <style>
-  .button--social img {
-    height: 2rem;
-    width: 2rem;
+  .button img {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .rooms {
+    padding: .5rem 2rem;
+    display: grid;
+    height: 25rem;
+    overflow: hidden auto;
+    gap: 1rem;
+
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-template-rows: min-content;
+  }
+
+  .empty {
+    padding: .5rem 2rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--blackish);
+    font-weight: 300;
+    text-align: center;
   }
 </style>

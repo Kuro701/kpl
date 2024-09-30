@@ -59,6 +59,12 @@ export class KplRoom {
 	}
 
 	public onPlayerJoin(player: KplPlayer): boolean {
+		// If room is full, refuse to join
+		if (this.players.length >= this.maxPlayers) {
+			// TODO: Send room is full error
+			return false;
+		}
+
 		// If player already was in the room before but disconnected (reconnect)
 		if (this.playerData[player.uuid]) {
 			console.log(`Player ${player.username} reconnected to room ${this.name}`);
@@ -70,12 +76,6 @@ export class KplRoom {
 		// If player is new and game is already running, refuse to join
 		if (this._state !== RoomState.LOBBY) {
 			// TODO: Send game has already started error
-			return false;
-		}
-
-		// If room is full, refuse to join
-		if (this.players.length >= this.maxPlayers) {
-			// TODO: Send room is full error
 			return false;
 		}
 
