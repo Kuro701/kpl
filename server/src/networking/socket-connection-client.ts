@@ -82,7 +82,7 @@ export function initSocketConnection(wsClient: WebSocket) {
 	});
 
 	const onOpen = () => {
-		console.log('Client connected');
+		console.log(`Client connected`);
 		identity.requestAuth();
 	};
 

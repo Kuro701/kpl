@@ -30,22 +30,24 @@
       </button>
     {/if}
   </div>
-  <div class="username">
-    <div class="username__label">
-      <i class="fas fa-user"></i>
-      Přezdívka
+  {#if $LocalIdentity.provider === 'anonymous'}
+    <div class="username">
+      <div class="username__label">
+        <i class="fas fa-user"></i>
+        Přezdívka
+      </div>
+      <div class="username__input">
+        <input
+          type="text"
+          bind:value={username}
+          required
+          maxlength="25"
+          {disabled}
+          use:autoFocus
+        />
+      </div>
     </div>
-    <div class="username__input">
-      <input
-        type="text"
-        bind:value={username}
-        required
-        maxlength="25"
-        {disabled}
-        use:autoFocus
-      />
-    </div>
-  </div>
+  {/if}
 </ItemList>
 
 <style>

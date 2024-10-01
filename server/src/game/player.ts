@@ -22,14 +22,14 @@ export class KplPlayer {
 	}
 
 	constructor(username: string, uuid: string, netkit: NetworkKit) {
-		console.log(`Player ${username} connected`);
+		console.log(`Player ${username} (${uuid}) connected`);
 		this.username = username;
 		this.uuid = uuid;
 		this.netkit = netkit;
 	}
 
 	onDisconnect() {
-		console.log(`Player ${this.username} disconnected`);
+		console.log(`Player ${this.username} (${this.uuid}) disconnected`);
 		this.quitRoom();
 	}
 

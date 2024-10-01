@@ -50,7 +50,7 @@ export class KplRoom {
 			this.hostUUID = host.uuid;
 		}
 
-		console.log(`Room ${this.name} (${this.uuid}) created by ${host?.username ?? 'system'}`);
+		console.log(`Room ${this.name} (${this.uuid}) created by ${host ? `${host.username} (${host.uuid})` : 'system'}`);
 	}
 
 	public get playerCount(): number {
@@ -93,7 +93,7 @@ export class KplRoom {
 
 		// If player already was in the room before but disconnected (reconnect)
 		if (this.playerData[player.uuid]) {
-			console.log(`Player ${player.username} reconnected to room ${this.name}`);
+			console.log(`Player ${player.username} (${player.uuid}) reconnected to room ${this.name} (${this.uuid})`);
 			this.players.push(player);
 			broadcastLobbyUpdate();
 			return true;
@@ -106,7 +106,7 @@ export class KplRoom {
 		}
 
 		// Add player to room
-		console.log(`Player ${player.username} joined room ${this.name}`);
+		console.log(`Player ${player.username} (${player.uuid}) joined room ${this.name} (${this.uuid})`);
 		this.players.push(player);
 		this.playerData[player.uuid] = {
 			points: 0,
