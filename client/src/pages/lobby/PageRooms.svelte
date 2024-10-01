@@ -5,6 +5,8 @@
   import LobbyHeader from "../../components/layout/LobbyHeader.svelte";
   import { LobbyRooms, type LobbyRoom } from "../../lib/networking/client";
   import RoomWidget from "./RoomWidget.svelte";
+  import Debuger from "../../components/debug/Debuger.svelte";
+  import DebugVariable from "../../components/debug/DebugVariable.svelte";
 
   let roomsByState: Record<string, LobbyRoom[]> = {
     lobby: [],
@@ -17,6 +19,11 @@
     return acc;
   }, { lobby: [], ingame: [] } as Record<string, LobbyRoom[]>);
 </script>
+
+<Debuger>
+  <DebugVariable name="LobbyRooms" variable={$LobbyRooms} />
+</Debuger>
+
 <LayoutMenu>
   <LobbyHeader>
     <LobbyBackButton slot="left" action={() => navigate('/')} />
@@ -43,7 +50,6 @@
       {#each roomsByState.ingame as room (room.uuid)}
         <RoomWidget value={room} />
       {/each}
-
     </div>
   {/if}
 </LayoutMenu>

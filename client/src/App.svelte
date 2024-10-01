@@ -4,6 +4,7 @@
   import PageRooms from "./pages/lobby/PageRooms.svelte";
   import PageRules from "./pages/rules/PageRules.svelte";
   import PageCreate from "./pages/create/PageCreate.svelte";
+  import PageIngame from "./pages/ingame/PageIngame.svelte";
 
 </script>
 
@@ -13,4 +14,5 @@
   <Route path="/rooms/create" component={PageCreate} backTo="/rooms" />
   <Route path="/rooms" component={PageRooms} />
   <Route path="/rules" component={PageRules} />
+  <Route path="/room/:roomUUID" component={PageIngame} />
 </Router>

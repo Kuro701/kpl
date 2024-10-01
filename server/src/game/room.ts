@@ -2,12 +2,15 @@ import { createId as cuid } from "@paralleldrive/cuid2";
 import { KplPlayer } from "./player.js";
 import { randomBytes } from "crypto";
 import { broadcastLobbyUpdate, destroyRoom, generateUniqueJoinCode } from "./room-manager.js";
+import { safeAwait } from "../utils/safe-await.js";
 
 enum RoomState {
 	LOBBY = 'lobby',
 }
 
-type PlayerData = {};
+type PlayerData = {
+	points: number;
+};
 const MIN_PLAYERS = 3;
 const TIME_TO_START = 30;
 
@@ -30,7 +33,6 @@ export class KplRoom {
 	private hostUUID: string | null = null;
 	private players: KplPlayer[] = [];  // TODO: Sync with clients
 	private playerData: Record<string, PlayerData> = {}; // TODO: Sync with clients
-	private spectators: KplPlayer[] = []; // TODO: Sync with clients
 
 	private _state: RoomState = RoomState.LOBBY;  // TODO: Sync with clients
 	private intermissionEnd: Date | null = null; // TODO: Sync with clients
@@ -82,8 +84,9 @@ export class KplRoom {
 		// Add player to room
 		console.log(`Player ${player.username} joined room ${this.name}`);
 		this.players.push(player);
-		this.playerData[player.uuid] = {};
-		this.broadcastGameState();
+		this.playerData[player.uuid] = {
+			points: 0,
+		};
 
 		// If room doesn't have a host (automated room) and enough players, start game countdown
 		if (this.players.length >= MIN_PLAYERS && !this.hostUUID) {
@@ -92,9 +95,9 @@ export class KplRoom {
 				// TODO: Start game
 			}, TIME_TO_START * 1000);
 
-			this.broadcastGameState();
 		}
 
+		this.broadcastGameState();
 		broadcastLobbyUpdate();
 		return true;
 	}
@@ -104,6 +107,7 @@ export class KplRoom {
 
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);
+		safeAwait(player.rpc('room', null, -1));
 
 		// If game is not running, remove player data entirely
 		if (this._state === RoomState.LOBBY) {
@@ -113,15 +117,16 @@ export class KplRoom {
 		// If player was host, assign new host
 		if (this.hostUUID === player.uuid) {
 			this.hostUUID = this.players[0]?.uuid ?? null;
-			this.broadcastGameState();
 		}
 
 		// If room doesn't have a host (automated room) and not enough players, stop game countdown
 		if (this.players.length < MIN_PLAYERS && !this.hostUUID && this.intermissionTimer) {
 			clearTimeout(this.intermissionTimer);
 			this.intermissionEnd = null;
-			this.broadcastGameState();
+
 		}
+
+		this.broadcastGameState();
 
 		// If room is empty, destroy room
 		if (this.players.length === 0) {
@@ -134,7 +139,36 @@ export class KplRoom {
 		this.players.forEach(player => player.quitRoom());
 	}
 
-	private broadcastGameState(): void {
-		// TODO: Broadcast game state
+	private async broadcastGameState(): Promise<void> {
+		await Promise.all(this.players.map(player => this.sendGameState(player)));
+	}
+
+	private async sendGameState(player: KplPlayer) {
+		const roomData = {
+			uuid: this.uuid,
+			name: this.name,
+			goal: this.goal,
+			maxPlayers: this.maxPlayers,
+			isPublic: this.isPublic,
+
+			state: this._state,
+			intermissionEnd: this.intermissionEnd,
+
+			hand: {
+
+			},
+			table: {
+
+			},
+
+			players: this.players.map(p => ({
+				uuid: p.uuid,
+				username: p.username,
+				points: this.playerData[p.uuid].points,
+				isHost: this.hostUUID === p.uuid,
+			})),
+		};
+
+		return await safeAwait(player.rpc('room', roomData, -1));
 	}
 }

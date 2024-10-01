@@ -10,7 +10,7 @@ import { safeAwait } from "../utils/safe-await.js";
 export type NetworkKit = {
 	sendError: (message: string) => void;
 	sendRaw: (message: string) => void;
-	rpcCall: (fnName: string, data: object) => Promise<unknown>;
+	rpcCall: (fnName: string, data: object, timeout?: number) => Promise<unknown>;
 	disconnect: () => void;
 };
 

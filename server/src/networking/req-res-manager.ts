@@ -7,45 +7,47 @@ const NO_WAIT = -1;
 const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 export function createRequestResponseManager(wsClient: WebSocket) {
-	return {
-		sendRequest<TRes>(data: unknown, timeout: number = DEFAULT_TIMEOUT): Promise<TRes> {
-			if (timeout < 0) {
-				const message = encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, data);
-				wsClient.send(message);
-				return Promise.resolve() as Promise<TRes>;
-			}
 
-			const nonce = createNonce();
-			const message = encodeNetworkMessage(nonce, MessageType.RPC_CALL, data);
-			const responsePromise = new Promise<TRes>(async (resolve, reject) => {
-				promises.set(nonce, {
-					resolve: (value: unknown) => {
-						resolve(value as TRes),
-						promises.delete(nonce);
-					},
-					reject: (reason: any) => {
-						reject(reason),
-						promises.delete(nonce);
-					}
-				});
+	const sendRequest = <TRes>(data: unknown, timeout: number = DEFAULT_TIMEOUT): Promise<TRes> => {
+		if (timeout < 0) {
+			const message = encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, data);
+			wsClient.send(message);
+			return Promise.resolve() as Promise<TRes>;
+		}
 
-				setTimeout(() => {
-					if (promises.has(nonce)) {
-						promises.delete(nonce);
-						reject('TIMEOUT');
-					}
-				}, timeout);
-
-				wsClient.send(message);
+		const nonce = createNonce();
+		const message = encodeNetworkMessage(nonce, MessageType.RPC_CALL, data);
+		const responsePromise = new Promise<TRes>(async (resolve, reject) => {
+			promises.set(nonce, {
+				resolve: (value: unknown) => {
+					resolve(value as TRes),
+					promises.delete(nonce);
+				},
+				reject: (reason: any) => {
+					reject(reason),
+					promises.delete(nonce);
+				}
 			});
-			return responsePromise;
-		},
 
-		rpcCall(fnName: string, data: object = {}) {
-			return this.sendRequest({
+			setTimeout(() => {
+				if (promises.has(nonce)) {
+					promises.delete(nonce);
+					reject('TIMEOUT');
+				}
+			}, timeout);
+
+			wsClient.send(message);
+		});
+		return responsePromise;
+	}
+
+	return {
+		sendRequest,
+		rpcCall(fnName: string, data: object = {}, timeout?: number) {
+			return sendRequest({
 				f: fnName,
 				...data,
-			});
+			}, timeout);
 		},
 
 		processIncomingTrafic(msg: NetworkMessage<unknown>) {

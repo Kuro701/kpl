@@ -7,6 +7,8 @@
   import RoomSettings from "./RoomSettings.svelte";
   import { safeAwait } from "../../utils/safe-await";
   import { rpcCall } from "../../lib/networking/req-res-manager";
+  import Debuger from "../../components/debug/Debuger.svelte";
+  import DebugVariable from "../../components/debug/DebugVariable.svelte";
 
   export let backTo = '/';
 
@@ -44,6 +46,12 @@
   }
 
 </script>
+
+<Debuger>
+  <DebugVariable name="working" variable={working} />
+  <DebugVariable name="settings" variable={settings} />
+</Debuger>
+
 <LayoutMenu>
 	<LobbyHeader>
 		  <LobbyBackButton slot="left" action={back} />

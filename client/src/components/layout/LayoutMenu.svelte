@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { ActiveTheme, Theme } from "../../lib/theme";
+
 	const yearNow = new Date().getFullYear();
 </script>
 
-<div class="layout-menu">
+<div class="layout-menu" class:dark-theme={$ActiveTheme === Theme.DARK}>
 	<div class="layout-menu__logo">
 		<img src="/img/logo_white.png" alt="Logo" draggable="false" />
 	</div>
@@ -11,7 +13,7 @@
 	</div>
 	<div class="layout-menu__footer">
 		<div>Hosted by <a href="https://link.helkor.eu/from-kpl" target="_blank">Helkor.eu</a></div>
-		<div>By <a href="https://jakubhyza.cz/" target="_blank">Negix</a> with ❤️ and a lot of ☕</div>
+		<div>By <a href="https://negix.eu/" target="_blank">Negix</a> with ❤️ and a lot of ☕</div>
 		<div>2018 - {yearNow}</div>
 	</div>
 </div>
@@ -26,6 +28,10 @@
 		justify-content: center;
 		gap: 1.5rem;
 	}
+	.layout-menu.dark-theme {
+		background: var(--black);
+		color: rgb(255 255 255 / 93%);
+	}
 
 	.layout-menu__content {
 		background: white;
@@ -36,6 +42,9 @@
 	}
 	.layout-menu__logo img {
 		height: 5rem;
+	}
+	.dark-theme .layout-menu__content {
+		background: var(--blackish);
 	}
 
 	.layout-menu__footer {

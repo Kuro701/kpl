@@ -1,4 +1,5 @@
 import { getAuthCredentials, LobbyRooms, PlayerIdentity } from "./client";
+import { IngameRoom } from "./room";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -25,4 +26,8 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		LobbyRooms.set((data as any).rooms ?? []);
 		reply(OK);
 	},
+	room: async (reply, data) => {
+		IngameRoom.set(data as any);
+		reply(OK);
+	}
 }

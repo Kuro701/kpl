@@ -59,4 +59,8 @@ export class KplPlayer {
 	public sendRaw(message: string) {
 		this.netkit.sendRaw(message);
 	}
+
+	public rpc(method: string, data: any, timeout?: number) {
+		return this.netkit.rpcCall(method, data, timeout);
+	}
 }
