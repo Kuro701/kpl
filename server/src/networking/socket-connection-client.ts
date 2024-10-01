@@ -16,8 +16,6 @@ export type NetworkKit = {
 
 export function initSocketConnection(wsClient: WebSocket) {
 	const reqResMan = createRequestResponseManager(wsClient);
-
-
 	const sendError = (message: string) => wsClient.send(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, message));
 
 	const networkKit = {
@@ -31,6 +29,7 @@ export function initSocketConnection(wsClient: WebSocket) {
 
 	wsClient.on('close', () => {
 		console.log('Client disconnected');
+		reqResMan.rejectAllPromises('DISCONNECTED');
 		identity.onIdentityDisconnect();
 	});
 

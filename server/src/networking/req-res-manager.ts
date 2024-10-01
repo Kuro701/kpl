@@ -58,9 +58,17 @@ export function createRequestResponseManager(wsClient: WebSocket) {
 				}
 
 				const promise = promises.get(msg.nonce);
+				promises.delete(msg.nonce);
 				promise?.resolve(msg.data);
 				return;
 			}
+		},
+
+		rejectAllPromises(reason: string) {
+			for (const promise of promises.values()) {
+				promise.reject(reason);
+			}
+			promises.clear();
 		}
 	}
 }
