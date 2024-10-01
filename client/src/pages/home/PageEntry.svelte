@@ -4,7 +4,7 @@
   import ItemList from "../../components/layout/ItemList.svelte";
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import TwoColumns from "../../components/layout/TwoColumns.svelte";
-  import { connect, sendRaw, waitForIdentity } from '../../lib/networking/client';
+  import { connect, connectToServer, sendRaw, waitForIdentity } from '../../lib/networking/client';
   import { randomUsername } from '../../lib/random';
   import { navigate, link } from 'svelte-routing';
   import { safeAwait } from '../../utils/safe-await';
@@ -12,41 +12,17 @@
   import Login from './Login.svelte';
   import LobbyHeader from '../../components/layout/LobbyHeader.svelte';
   import { rpcCall } from '../../lib/networking/req-res-manager';
+  import { getLoginCredentials, LocalIdentity } from '../../lib/auth/auth';
+  import Debuger from '../../components/debug/Debuger.svelte';
+  import DebugVariable from '../../components/debug/DebugVariable.svelte';
+  import AccountHome from './AccountHome.svelte';
 
   let connecting = false;
 
-  let username = window.localStorage.getItem('username') || randomUsername();
-
-  async function connectToServer() {
-    if (connecting) return false;
-
-    connecting = true;
-    const [_, connectionError] = await safeAwait(connect({
-      provider: 'anonymous',
-      username: username,
-      user_id: window.localStorage.getItem('uuid') || '',
-      user_token: window.localStorage.getItem('token') || '',
-    }));
-
-    if (connectionError) {
-      connecting = false;
-      console.error('Failed to connect:', connectionError);
-      return false;
-    }
-
-    const [_identity, identityError] = await safeAwait(waitForIdentity())
-
-    if (identityError) {
-      connecting = false;
-      console.error('Failed to get identity:', identityError);
-      return false;
-    }
-
-    return true;
-  }
+  let username = $LocalIdentity.username;
 
   async function randomJoin() {
-    if(!await connectToServer()) return;
+    if(!await connectToServer(username)) return;
     const [roomId, error] = await safeAwait(rpcCall('joinRandomRoom'));
 
     if (error) {
@@ -58,15 +34,20 @@
   }
 
   async function showLobby() {
-    if(!await connectToServer()) return;
+    if(!await connectToServer(username)) return;
     navigate('/rooms');
   }
 
   async function createRoom() {
-    if(!await connectToServer()) return;
+    if(!await connectToServer(username)) return;
     navigate('/create');
   }
 </script>
+
+<Debuger>
+  <DebugVariable name="identity" variable={$LocalIdentity} />
+</Debuger>
+
 <LayoutMenu>
   <LobbyHeader>
     <h1>Hrát</h1>
@@ -104,7 +85,11 @@
     </ItemList>
     <div class="how-to-play" slot="right">
       <!-- <HowToPlay /> -->
-      <Login />
+      {#if $LocalIdentity.provider === 'anonymous'}
+        <Login />
+      {:else}
+        <AccountHome />
+      {/if}
       <AdBox />
     </div>
   </TwoColumns>

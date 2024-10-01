@@ -9,7 +9,13 @@ if (path.startsWith('/room/')) {
   throw new Error('REDIRECT');
 }
 
-if (!path.startsWith('/join/') && !['/', '/rules'].includes(path)) {
+const allowedPaths = [
+  '/',
+  '/rules',
+  '/auth/callback/discord',
+];
+
+if (!path.startsWith('/join/') && !allowedPaths.includes(path)) {
   window.location.pathname = '/';
   throw new Error('REDIRECT');
 }

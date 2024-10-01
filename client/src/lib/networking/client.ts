@@ -1,9 +1,11 @@
 import { writable } from "svelte/store";
 import { handleNetworkMessage } from "./message-handler";
 import { navigate } from "svelte-routing";
-type AuthProvier = 'anonymous' | 'discord';
+import { safeAwait } from "../../utils/safe-await";
+import { getLoginCredentials } from "../auth/auth";
+export type AuthProvier = 'anonymous' | 'discord';
 
-type AuthCredentials = {
+export type AuthCredentials = {
 	provider: AuthProvier;
 	username: string;
 	user_id: string;
@@ -19,6 +21,7 @@ export function getAuthCredentials() {
 }
 
 type IPlayerIdentity = {
+	uuid: string;
 	username: string;
 	anonymous: boolean;
 }
@@ -43,6 +46,40 @@ export async function sendRaw(message: string) {
 
 	connection.send(message);
 }
+
+let _connecting = false;
+export async function connectToServer(username: string): Promise<boolean> {
+	if (_connecting) return false;
+
+	_connecting = true;
+	const [_, connectionError] = await safeAwait(connect(getLoginCredentials(username)));
+
+	if (connectionError) {
+	  _connecting = false;
+	  console.error('Failed to connect:', connectionError);
+	  return false;
+	}
+
+	const [_identity, identityError] = await safeAwait(waitForIdentity())
+
+	if (identityError) {
+	  _connecting = false;
+	  console.error('Failed to get identity:', identityError);
+	  return false;
+	}
+
+	_connecting = false;
+	return true;
+}
+
+export async function disconnect() {
+	if (connection && (connection.readyState === WebSocket.OPEN  || connection.readyState === WebSocket.CONNECTING)) {
+		connection.close();
+	}
+
+	PlayerIdentity.set(null);
+}
+
 
 export function waitForIdentity(timeout: number = 2000): Promise<IPlayerIdentity> {
 	return new Promise((resolve, reject) => {

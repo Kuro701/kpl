@@ -6,8 +6,8 @@ const DEFAULT_TIMEOUT = 2000;
 const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 
-export async function rpcCall(fnName: string, data: object = {}) {
-	return await sendRequestAwaitResponse({
+export async function rpcCall<T>(fnName: string, data: object = {}) {
+	return await sendRequestAwaitResponse<T>({
 		f: fnName,
 		...data,
 	});

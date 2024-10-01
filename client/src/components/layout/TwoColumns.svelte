@@ -9,6 +9,7 @@
 
 <style>
 	.columns {
+		width: 100%;
 		display: flex;
 		flex-direction: row;
 		gap: 1rem;

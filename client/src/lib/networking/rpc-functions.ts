@@ -14,11 +14,14 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		const { uuid, token, username, anonymous } = data as { uuid: string, token: string, username: string, anonymous: boolean };
 		console.log('Identity:', { uuid, token, username });
 
-		localStorage.setItem('uuid', uuid);
-		localStorage.setItem('token', token);
-		localStorage.setItem('username', username);
+		if (anonymous) {
+			localStorage.setItem('identity_provider', 'anonymous');
+			localStorage.setItem('username', username);
+			localStorage.setItem('uuid', uuid);
+			localStorage.setItem('token', token);
+		}
 
-		PlayerIdentity.set({ username, anonymous });
+		PlayerIdentity.set({ uuid, username, anonymous });
 
 		reply(OK);
 	},

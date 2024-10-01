@@ -35,6 +35,7 @@ export class KplRoom {
 	private playerData: Record<string, PlayerData> = {}; // TODO: Sync with clients
 
 	private _state: RoomState = RoomState.LOBBY;  // TODO: Sync with clients
+	private intermissionStart: Date | null = null; // TODO: Sync with clients
 	private intermissionEnd: Date | null = null; // TODO: Sync with clients
 	private intermissionTimer: NodeJS.Timeout | null = null; // TODO: Sync with clients
 
@@ -58,6 +59,29 @@ export class KplRoom {
 
 	public get state(): RoomState {
 		return this._state;
+	}
+
+	private cancelIntermission(): void {
+		if (this.intermissionTimer) {
+			clearTimeout(this.intermissionTimer);
+			this.intermissionTimer = null;
+			this.intermissionStart = null;
+			this.intermissionEnd = null;
+			this.broadcastGameState();
+		}
+	}
+
+	private setIntermission(duration: number, callback: () => void): void {
+		if (this.intermissionTimer) {
+			clearTimeout(this.intermissionTimer);
+			this.intermissionTimer = null;
+			this.intermissionEnd = null;
+		}
+
+		this.intermissionStart = new Date();
+		this.intermissionEnd = new Date(Date.now() + duration * 1000);
+		this.intermissionTimer = setTimeout(callback, duration * 1000);
+		this.broadcastGameState();
 	}
 
 	public onPlayerJoin(player: KplPlayer): boolean {
@@ -90,10 +114,9 @@ export class KplRoom {
 
 		// If room doesn't have a host (automated room) and enough players, start game countdown
 		if (this.players.length >= MIN_PLAYERS && !this.hostUUID) {
-			this.intermissionEnd = new Date(Date.now() + TIME_TO_START * 1000);
-			this.intermissionTimer = setTimeout(() => {
+			this.setIntermission(TIME_TO_START * 1000, () => {
 				// TODO: Start game
-			}, TIME_TO_START * 1000);
+			});
 
 		}
 
@@ -121,9 +144,7 @@ export class KplRoom {
 
 		// If room doesn't have a host (automated room) and not enough players, stop game countdown
 		if (this.players.length < MIN_PLAYERS && !this.hostUUID && this.intermissionTimer) {
-			clearTimeout(this.intermissionTimer);
-			this.intermissionEnd = null;
-
+			this.cancelIntermission();
 		}
 
 		this.broadcastGameState();
@@ -152,6 +173,7 @@ export class KplRoom {
 			isPublic: this.isPublic,
 
 			state: this._state,
+			intermissionStart: this.intermissionStart,
 			intermissionEnd: this.intermissionEnd,
 
 			hand: {

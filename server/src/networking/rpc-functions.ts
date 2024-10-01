@@ -1,5 +1,5 @@
 import { KplPlayer } from "../game/player.js";
-import { createRoom, getRandomJoinableRoom, getRoomByUUID } from "../game/room-manager.js";
+import { createRoom, getRandomJoinableRoom, getRoomByUUID, getRoomLobbyState } from "../game/room-manager.js";
 import { RoomConstructorData } from "../game/room.js";
 
 type ReplyFunction = (data: unknown) => void;
@@ -66,5 +66,24 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			reply(newRoom.uuid);
 			player.joinRoom(newRoom);
 		}
+	},
+
+	// Returns lobby room info including private rooms
+	getRoomInfo: async (player: KplPlayer, reply: ReplyFunction, data) => {
+		const roomId = (data as any).roomUUID;
+
+		if (!roomId) {
+			reply(false);
+			return;
+		}
+
+		const room = getRoomByUUID(roomId);
+
+		if (!room) {
+			reply(false);
+			return;
+		}
+
+		reply(getRoomLobbyState(room));
 	}
 }

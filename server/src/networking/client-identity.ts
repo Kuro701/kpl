@@ -8,6 +8,7 @@ import { createPlayer, destroyPlayer } from "../game/player-manager.js";
 import { createAnonymousPlayer, tryReviveAnonymousPlayer } from "./anonymous-player-provider.js";
 import { NetworkKit } from "./socket-connection-client.js";
 import { getLobbyStateNetworkMessage } from "../game/room-manager.js";
+import { getDiscordUserInfo } from "../auth/discord.js";
 
 const LOGIN_TIMEOUT = 1000;
 
@@ -64,6 +65,35 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 				networkKit.sendRaw(getLobbyStateNetworkMessage());
 
 				return;
+			} else if (data.provider === 'discord') {
+				const [discordUser, error] = await safeAwait(getDiscordUserInfo(data.user_token));
+				if (error) {
+					networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'AUTH_FAILED'));
+					networkKit.disconnect();
+					return;
+				}
+
+				const playerUUID = `discord_${discordUser.id}`;
+				player = createPlayer(data.username, playerUUID, networkKit);
+
+				if (!player) {
+					networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'ALREADY_LOGGED_IN'));
+					networkKit.disconnect();
+					return;
+				}
+
+				safeAwait(sendRequest({
+					f: 'identity',
+					uuid: player.uuid,
+					token: data.user_token,
+					username: player.username,
+					anonymous: false,
+				}, -1));
+
+				networkKit.sendRaw(getLobbyStateNetworkMessage());
+
+				return;
+
 			}
 
 			if (!player) {

@@ -5,6 +5,8 @@
   import PageRules from "./pages/rules/PageRules.svelte";
   import PageCreate from "./pages/create/PageCreate.svelte";
   import PageIngame from "./pages/ingame/PageIngame.svelte";
+  import AuthCallback from "./pages/auth/AuthCallback.svelte";
+  import PageJoin from "./pages/home/PageJoin.svelte";
 
 </script>
 
@@ -15,4 +17,6 @@
   <Route path="/rooms" component={PageRooms} />
   <Route path="/rules" component={PageRules} />
   <Route path="/room/:roomUUID" component={PageIngame} />
+  <Route path="/join/:roomUUID" component={PageJoin} />
+  <Route path="/auth/callback/:provider" component={AuthCallback} />
 </Router>

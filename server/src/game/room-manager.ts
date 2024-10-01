@@ -55,13 +55,17 @@ export function getLobbyStateNetworkMessage() {
 export function getLobbyState() {
 	return Array.from(rooms.values())
 		.filter(room => room.isPublic)
-		.map(room => ({
-			uuid: room.uuid,
-			name: room.name,
-			playerCount: room.playerCount,
-			maxPlayers: room.maxPlayers,
-			goal: room.goal,
-			isPublic: room.isPublic,
-			state: room.state,
-		}));
+		.map(getRoomLobbyState);
+}
+
+export function getRoomLobbyState(room: KplRoom) {
+	return {
+		uuid: room.uuid,
+		name: room.name,
+		playerCount: room.playerCount,
+		maxPlayers: room.maxPlayers,
+		goal: room.goal,
+		isPublic: room.isPublic,
+		state: room.state,
+	};
 }
