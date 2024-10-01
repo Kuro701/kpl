@@ -1,4 +1,4 @@
-import { getAuthCredentials, LobbyRooms, PlayerIdentity } from "./client";
+import { getAuthCredentials, LobbyRooms, PlayerIdentity, type LobbyRoom } from "./client";
 import { IngameRoom } from "./room";
 
 type ReplyFunction = (data: unknown) => void;
@@ -30,7 +30,18 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(OK);
 	},
 	room: async (reply, data) => {
-		IngameRoom.set(data as any);
+		const roomData = data as null | IngameRoom;
+
+		if (roomData === null) {
+			IngameRoom.set(null);
+			reply(OK);
+			return;
+		}
+
+		roomData.intermissionStart = roomData.intermissionStart ? new Date(roomData.intermissionStart) : null;
+		roomData.intermissionEnd = roomData.intermissionEnd ? new Date(roomData.intermissionEnd) : null;
+
+		IngameRoom.set(roomData);
 		reply(OK);
 	}
 }

@@ -19,7 +19,7 @@ type HandData = {
 
 };
 
-type IngameRoom = {
+export type IngameRoom = {
 	uuid: string;
 	name: string;
 	goal: number;
@@ -27,6 +27,7 @@ type IngameRoom = {
 	isPublic: boolean;
 
 	state: RoomState;
+	intermissionStart: Date | null;
 	intermissionEnd: Date | null;
 
 	players: OtherPlayerData[];

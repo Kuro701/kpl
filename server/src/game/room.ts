@@ -114,7 +114,7 @@ export class KplRoom {
 
 		// If room doesn't have a host (automated room) and enough players, start game countdown
 		if (this.players.length >= MIN_PLAYERS && !this.hostUUID) {
-			this.setIntermission(TIME_TO_START * 1000, () => {
+			this.setIntermission(TIME_TO_START, () => {
 				// TODO: Start game
 			});
 
@@ -126,7 +126,7 @@ export class KplRoom {
 	}
 
 	public onPlayerLeave(player: KplPlayer): void {
-		console.log(`Player ${player.username} left room ${this.name}`);
+		console.log(`Player ${player.username} (${player.uuid}) left room ${this.name} (${this.uuid})`);
 
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);

@@ -1,41 +1,33 @@
 <script>
-
-  import { ActiveTheme, Theme } from "../../lib/theme";
+  import LayoutFullscreen from "./LayoutFullscreen.svelte";
 
 </script>
-<div class="layout-game" class:dark-theme={$ActiveTheme === Theme.DARK}>
-	<!-- <div class="layout-game__logo">
-		<img src="/img/logo_white.png" alt="Logo" draggable="false" />
-	</div> -->
-	<div class="layout-game__content">
-		<slot />
+<LayoutFullscreen>
+	<div class="layout-game">
+		<div class="layout-game__board">
+			<slot />
+		</div>
+		<div class="layout-game__sidebar">
+			<slot name="sidebar" />
+		</div>
 	</div>
-</div>
+</LayoutFullscreen>
 
 <style>
 	.layout-game {
-		background: var(--blackish);
-		height: 100vh;
-		gap: 1.5rem;
-		padding: 2rem;
-		box-sizing: border-box;
-		color: black;
-	}
-	.layout-game.dark-theme {
-		background: var(--black);
-		color: rgb(255 255 255 / 93%);
-	}
-
-	.layout-game__content {
-		width: 100%;
+		display: flex;
 		height: 100%;
-		background-color: #f0eee6;
-		border-radius: 1rem;
-		box-sizing: border-box;
-	}
-
-	.dark-theme .layout-game__content {
 		background-color: var(--blackish);
 	}
-
+	.layout-game__board {
+		flex: 1;
+		box-sizing: border-box;
+		background-color: #f0eee6;
+	}
+	.layout-game__sidebar {
+		width: 20rem;
+		background-color: #222;
+		box-sizing: border-box;
+		color: white;
+	}
 </style>

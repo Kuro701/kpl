@@ -101,8 +101,6 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 				networkKit.disconnect();
 				return;
 			}
-
-			console.log('Auth complete', data);
 		},
 
 		onIdentityDisconnect() {

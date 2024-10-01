@@ -1,13 +1,16 @@
 <script lang="ts">
+  import { link } from "svelte-routing";
   import { ActiveTheme, Theme } from "../../lib/theme";
 
 	const yearNow = new Date().getFullYear();
 </script>
 
 <div class="layout-menu" class:dark-theme={$ActiveTheme === Theme.DARK}>
-	<div class="layout-menu__logo">
-		<img src="/img/logo_white.png" alt="Logo" draggable="false" />
-	</div>
+	<a href="/" use:link>
+		<div class="layout-menu__logo">
+			<img src="/img/logo_white.png" alt="Logo" draggable="false" />
+		</div>
+	</a>
 	<div class="layout-menu__content">
 		<slot />
 	</div>
