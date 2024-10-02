@@ -6,14 +6,17 @@
   "description": "Server for cards against humanity",
   "scripts": {
     "start": "npx tsx src/index.ts",
-    "dev": "npx tsx watch src/index.ts"
+    "dev": "npx tsx watch src/index.ts",
+    "legacy-card-import": "npx tsx legacy/inport-legacy-cards.ts"
   },
   "license": "ISC",
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
+    "@prisma/client": "5.20.0",
     "@types/node": "^20.12.4",
     "@types/ws": "^8.5.11",
     "dotenv": "^16.4.5",
+    "prisma": "^5.20.0",
     "tsx": "^4.15.8",
     "typescript": "^5.4.3",
     "ws": "^8.18.0"

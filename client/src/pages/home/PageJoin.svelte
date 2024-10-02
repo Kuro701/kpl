@@ -13,6 +13,7 @@
 	import DebugVariable from '../../components/debug/DebugVariable.svelte';
 	import LoginOptions from './LoginOptions.svelte';
 	import RoomPictogram from '../lobby/RoomPictogram.svelte';
+	import { link } from 'svelte-routing';
 
 	export let roomUUID: string;
 	let connecting = false;
@@ -67,7 +68,7 @@
 
 	<ItemList>
 		<TwoColumns>
-			<ItemList slot="left">
+			<ItemList slot="right">
 				<h2>Identita</h2>
 				<ProfileEditor bind:username disabled={connecting} />
 
@@ -76,7 +77,7 @@
 					<LoginOptions />
 				{/if}
 			</ItemList>
-			<ItemList slot="right">
+			<ItemList slot="left">
 				{#if roomInfo}
 					<div class="room">
 						<h2>{roomInfo.name}</h2>
@@ -119,6 +120,10 @@
 						<h2>Místnost neexistuje</h2>
 						<p>Je nám líto, ale místnost do které se snažíte připojit již neexistuje</p>
 					</div>
+					<a href="/" use:link class="button">
+						<img src="/img/icons/leave.png" alt="leave" class="icon invert" />
+						Zpět
+					</a>
 				{/if}
 			</ItemList>
 		</TwoColumns>
