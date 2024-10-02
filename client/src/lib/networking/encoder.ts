@@ -2,6 +2,7 @@ export enum MessageType {
 	PLAIN = 0,
 	RPC_CALL = 1,
 	RPC_RESPONSE = 2,
+	SYSTEM_MESSAGE = 98,
 	ERROR = 99,
 }
 

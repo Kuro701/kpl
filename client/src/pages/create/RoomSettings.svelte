@@ -24,7 +24,7 @@
 			<input type="text" value={value.name} disabled />
 			</div>
 		{:else}
-			<input type="text" bind:value={value.name} />
+			<input type="text" bind:value={value.name} maxlength="40" />
 		{/if}
 		<div aria-label="Náhodný název" data-balloon-pos="up">
 			<button class="button button--random" on:click={() => value.name = randomRoomName()}>

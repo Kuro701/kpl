@@ -5,12 +5,13 @@ import { createRequestResponseManager } from "./req-res-manager.js";
 import { NONCE_EMPTY } from "./nonce.js";
 import { rpcFunctions } from "./rpc-functions.js";
 import { safeAwait } from "../utils/safe-await.js";
+import { getSystemMessage } from "../system-message.js";
 
 
 export type NetworkKit = {
 	sendError: (message: string) => void;
 	sendRaw: (message: string) => void;
-	rpcCall: (fnName: string, data: object, timeout?: number) => Promise<unknown>;
+	rpcCall: <T>(fnName: string, data: object, timeout?: number) => Promise<T>;
 	disconnect: () => void;
 };
 
@@ -84,6 +85,11 @@ export function initSocketConnection(wsClient: WebSocket) {
 	const onOpen = () => {
 		console.log(`Client connected`);
 		identity.requestAuth();
+
+		const systemMessage = getSystemMessage();
+		if (systemMessage) {
+			wsClient.send(encodeNetworkMessage(NONCE_EMPTY, MessageType.SYSTEM_MESSAGE, systemMessage));
+		}
 	};
 
 	if (wsClient.OPEN) {

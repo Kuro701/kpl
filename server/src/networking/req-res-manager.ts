@@ -43,8 +43,8 @@ export function createRequestResponseManager(wsClient: WebSocket) {
 
 	return {
 		sendRequest,
-		rpcCall(fnName: string, data: object = {}, timeout?: number) {
-			return sendRequest({
+		rpcCall<T>(fnName: string, data: object = {}, timeout?: number) {
+			return sendRequest<T>({
 				f: fnName,
 				...data,
 			}, timeout);

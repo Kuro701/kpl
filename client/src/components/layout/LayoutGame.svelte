@@ -20,7 +20,7 @@
 		background-color: var(--blackish);
 	}
 	.layout-game__board {
-		flex: 1;
+		width: calc(100% - 20rem);
 		box-sizing: border-box;
 		background-color: #f0eee6;
 	}

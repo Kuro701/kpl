@@ -18,28 +18,50 @@
   import AccountHome from './AccountHome.svelte';
 
   let connecting = false;
+  let loaders = {
+    randomJoin: false,
+    showLobby: false,
+    createRoom: false,
+  };
+  $: connecting = Object.values(loaders).some(Boolean);
 
   let username = $LocalIdentity.username;
 
   async function randomJoin() {
-    if(!await connectToServer(username)) return;
+    loaders.randomJoin = true;
+    if(!await connectToServer(username)) {
+      loaders.randomJoin = false;
+      return;
+    };
     const [roomId, error] = await safeAwait(rpcCall('joinRandomRoom'));
 
     if (error) {
       console.error('Failed to join random room:', error);
+      loaders.randomJoin = false;
       return;
     }
 
+    loaders.randomJoin = false;
     navigate(`/room/${roomId}`);
   }
 
   async function showLobby() {
-    if(!await connectToServer(username)) return;
+    loaders.showLobby = true;
+    if(!await connectToServer(username)) {
+      loaders.showLobby = false;
+      return;
+    };
+    loaders.showLobby = false;
     navigate('/rooms');
   }
 
   async function createRoom() {
-    if(!await connectToServer(username)) return;
+    loaders.createRoom = true;
+    if(!await connectToServer(username))  {
+      loaders.createRoom = false;
+      return;
+    };
+    loaders.createRoom = false;
     navigate('/create');
   }
 </script>
@@ -67,17 +89,19 @@
 
       <div class="actions">
         <div class="action">
-          <button class="button" on:click={randomJoin} disabled={connecting}>
+          <button class="button" class:button--loading={loaders.randomJoin} on:click={randomJoin} disabled={connecting}>
             Náhodně připojit
           </button>
         </div>
         <div class="action">
-          <button class="button" on:click={showLobby} disabled={connecting}>
+          <button class="button" class:button--loading={loaders.showLobby} on:click={showLobby} disabled={connecting}>
             Místnosti
           </button>
-          <button class="button" aria-label="Vytvořit místnost" data-balloon-pos="right" on:click={createRoom}  disabled={connecting}>
-            <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" draggable="false" />
-          </button>
+          <div aria-label="Vytvořit místnost" data-balloon-pos="right">
+            <button class="button" on:click={createRoom}  disabled={connecting} class:button--loading={loaders.createRoom}>
+              <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" draggable="false" />
+            </button>
+          </div>
         </div>
       </div>
 

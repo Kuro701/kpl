@@ -3,6 +3,7 @@ import { decodeNetworkMessage, encodeNetworkMessage, MessageType } from "./encod
 import { NONCE_EMPTY } from "./nonce";
 import { processIncomingRPCTrafic } from "./req-res-manager";
 import { rpcFunctions } from "./rpc-functions";
+import { SystemMessage } from "./system-message";
 
 export async function handleNetworkMessage(message: string) {
 	const decoded = decodeNetworkMessage(message);
@@ -41,6 +42,11 @@ export async function handleNetworkMessage(message: string) {
 
 	if (decoded.type === MessageType.RPC_RESPONSE) {
 		processIncomingRPCTrafic(decoded);
+		return;
+	}
+
+	if (decoded.type === MessageType.SYSTEM_MESSAGE) {
+		SystemMessage.set(decoded.data as string | null);
 		return;
 	}
 }

@@ -1,6 +1,8 @@
+import { db, queryCardDeckCounts } from "../database.js";
 import { KplPlayer } from "../game/player.js";
 import { createRoom, getRandomJoinableRoom, getRoomByUUID, getRoomLobbyState } from "../game/room-manager.js";
 import { RoomConstructorData } from "../game/room.js";
+import { safeAwait } from "../utils/safe-await.js";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (player: KplPlayer, reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -56,12 +58,18 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			reply(room.uuid);
 			player.joinRoom(room);
 		} else {
+			const defaultDecks = await db.cardDeck.findMany({
+				where: { default: true },
+				select: { id: true },
+			});
+
 			const newRoom = createRoom({
 				goal: 10,
 				isPublic: true,
 				maxPlayers: 10,
 				name: 'Veřejná místnost',
 				host: undefined,
+				decks: defaultDecks.map(deck => deck.id),
 			});
 			reply(newRoom.uuid);
 			player.joinRoom(newRoom);
@@ -85,5 +93,30 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		}
 
 		reply(getRoomLobbyState(room));
+	},
+
+	getAvailableCardDecks: async (player: KplPlayer, reply: ReplyFunction) => {
+		const [decks, error] = await safeAwait(db.cardDeck.findMany({
+			where: {
+				OR: [
+					{ public: true },
+					{ ownerUUID: player.uuid },
+				],
+			},
+		}));
+
+		if (error) {
+			reply([]);
+			return
+		}
+
+		const [result, queryError] = await safeAwait(Promise.all(decks.map(queryCardDeckCounts)));
+
+		if (queryError) {
+			reply([]);
+			return;
+		}
+
+		reply(result);
 	}
 }

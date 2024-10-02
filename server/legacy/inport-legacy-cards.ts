@@ -61,7 +61,7 @@ async function importCards() {
 		if (card.source) {
 			packOriginalCommunity.push(cardImport);
 		} else {
-			packOriginal
+			packOriginal.push(cardImport);
 		}
 	});
 

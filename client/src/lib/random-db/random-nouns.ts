@@ -81,7 +81,6 @@ const randomNouns: [string, WordGender][] = [
     ["Pytel",		WordGender.MASCULINE],
     ["Matrace",		WordGender.FEMININE],
     ["Blázen",		WordGender.MASCULINE],
-    ["Kalhoty",		WordGender.FEMININE],
     ["Výstřik",		WordGender.MASCULINE],
     ["Důchodce",	WordGender.MASCULINE],
     ["Tyčka",		WordGender.FEMININE],

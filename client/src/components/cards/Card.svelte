@@ -30,9 +30,9 @@
 	.card,
 	.card .back,
 	.card .front {
-		width: 13rem;
-		height: 16rem;
-		font-size: 1rem;
+		width: 12em;
+		height: 15em;
+		font-size: 1em;
 	}
 
 	.card {

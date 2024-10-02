@@ -83,6 +83,35 @@ input:disabled, select:disabled {
 	background-color: var(--black);
 	color: var(--white);
 }
+
+.button.button--loading, .button.button--loading:hover {
+	color: transparent;
+	position: relative;
+}
+.button.button--loading::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 1.2rem;
+	height: 1.2rem;
+	border: 2px solid white;
+	border-radius: 50%;
+	border-top-color: transparent;
+	animation: rotate 1s linear infinite;
+}
+.button.button--loading img {
+	opacity: 0;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .button--social, .button--social:hover {
 	background: none;
 	border: none;

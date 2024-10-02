@@ -1,5 +1,5 @@
 import { getAuthCredentials, LobbyRooms, PlayerIdentity, type LobbyRoom } from "./client";
-import { IngameRoom } from "./room";
+import { IngameRoom, ServerResponseFn } from "./room";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -43,5 +43,9 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 
 		IngameRoom.set(roomData);
 		reply(OK);
+	},
+	pickWhiteCards: async (reply, data) => {
+		console.log('Picking white cards:', data);
+		ServerResponseFn.set(reply);
 	}
 }

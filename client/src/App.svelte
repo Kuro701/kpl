@@ -7,6 +7,7 @@
   import PageIngame from "./pages/ingame/PageIngame.svelte";
   import AuthCallback from "./pages/auth/AuthCallback.svelte";
   import PageJoin from "./pages/home/PageJoin.svelte";
+  import SystemMessageWidget from "./components/layout/SystemMessageWidget.svelte";
 
 </script>
 
@@ -20,3 +21,5 @@
   <Route path="/join/:roomUUID" component={PageJoin} />
   <Route path="/auth/callback/:provider" component={AuthCallback} />
 </Router>
+
+<SystemMessageWidget />

@@ -3,6 +3,7 @@ import { handleNetworkMessage } from "./message-handler";
 import { navigate } from "svelte-routing";
 import { safeAwait } from "../../utils/safe-await";
 import { getLoginCredentials } from "../auth/auth";
+import { SystemMessage } from "./system-message";
 export type AuthProvier = 'anonymous' | 'discord';
 
 export type AuthCredentials = {
@@ -34,6 +35,18 @@ export type LobbyRoom = {
 	goal: number,
 	isPublic: boolean,
 	state: string,
+}
+
+export type CardDeck = {
+	id: number;
+	ownerUUID: string;
+	name: string;
+	description: string;
+	public: boolean;
+	default: boolean;
+	whiteCardCount: number;
+	blackCardCount: number;
+	totalCardCount: number;
 }
 
 export const PlayerIdentity = writable<IPlayerIdentity | null>(null);
@@ -127,6 +140,7 @@ export async function connect(credentials: AuthCredentials): Promise<void> {
 
 	connection.addEventListener('close', () => {
 		console.log('Disconnected from server');
+		SystemMessage.set(null);
 		navigate('/');
 	});
 
