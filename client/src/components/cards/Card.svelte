@@ -100,12 +100,14 @@
 		font-size: 1.5em;
 		font-weight: 700;
 		font-family: Calibri;
+		cursor: var(--cursor-pointer);
 	}
 
 	.card .front p {
 		font-family: Calibri;
 		font-size: 1.3em;
 		margin: 0;
+		cursor: var(--cursor-pointer);
 	}
 
 	.card .front img {

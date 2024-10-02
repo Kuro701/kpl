@@ -1,10 +1,12 @@
 import { NetworkKit } from "../networking/socket-connection-client.js";
+import { safeAwait } from "../utils/safe-await.js";
 import { getRoomByUUID } from "./room-manager.js";
 import { KplRoom } from "./room.js";
 
 export class KplPlayer {
 	public readonly uuid: string;
 	public readonly username: string;
+	public readonly image: string;
 
 	private readonly netkit: NetworkKit;
 
@@ -21,11 +23,12 @@ export class KplPlayer {
 		return _room;
 	}
 
-	constructor(username: string, uuid: string, netkit: NetworkKit) {
+	constructor(username: string, uuid: string, image: string, netkit: NetworkKit) {
 		console.log(`Player ${username} (${uuid}) logged in`);
 		this.username = username;
 		this.uuid = uuid;
 		this.netkit = netkit;
+		this.image = image;
 	}
 
 	onDisconnect() {
@@ -40,6 +43,7 @@ export class KplPlayer {
 				room.onPlayerLeave(this);
 			}
 			this.roomUUID = null;
+			safeAwait(this.netkit.rpcCall('room', null, -1));
 		}
 	}
 

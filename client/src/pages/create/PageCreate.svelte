@@ -39,7 +39,7 @@
 
     const [roomUUID, error] = await safeAwait(rpcCall('createRoom', {
       ...settings,
-      decks: [ availablePacks.map(pack => pack.id) ]
+      decks: availablePacks.map(pack => pack.id),
     }));
     working = false;
     if (error || !roomUUID) {

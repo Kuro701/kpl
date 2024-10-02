@@ -1,6 +1,6 @@
 import { derived, writable } from "svelte/store";
 
-enum RoomState {
+export enum RoomState {
 	LOBBY = 'lobby',
 	WAITING = 'waiting',
 	PICK_WHITE = 'pick_white',
@@ -10,7 +10,9 @@ type OtherPlayerData = {
 	uuid: string;
 	username: string;
 	points: number;
+	image: string;
 	isHost: boolean;
+	isCzar: boolean;
 }
 
 type WhiteCard = {

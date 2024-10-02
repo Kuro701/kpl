@@ -65,7 +65,7 @@
     width: 7rem;
     height: 7rem;
     border: 5px solid transparent;
-    border-radius: 1rem;
+    border-radius: 2rem;
   }
 
   .identity {

@@ -9,7 +9,7 @@ import { smartArrayShuffleAtPlace } from "../utils/shuffle.js";
 import { wait } from "../utils/wait.js";
 import { randomElement } from "../utils/random.js";
 
-enum RoomState {
+export enum RoomState {
 	LOBBY = 'lobby',
 	WAITING = 'waiting',
 	PICK_WHITE = 'pick_white',
@@ -21,7 +21,7 @@ type PlayerData = {
 	hand: Card[];
 };
 const MIN_PLAYERS = 3;
-const TIME_TO_START = 30;
+const TIME_TO_START = 45;
 
 export type RoomConstructorData = {
 	name: string;
@@ -93,6 +93,11 @@ export class KplRoom {
 		return this._state;
 	}
 
+	public get hostId(): string | null {
+		return this.hostUUID;
+	}
+
+
 	// #region Game logic
 	public async start() {
 		if (this._state !== RoomState.LOBBY) {
@@ -115,7 +120,9 @@ export class KplRoom {
 
 		this.table.black = this.drawBlackCard();
 		if (!this.table.black) {
-			//TODO: Error, no black cards left, end game
+			// TODO: Send error, no black cards left
+			destroyRoom(this);
+			return;
 		}
 
 		// Let players play cards
@@ -298,6 +305,7 @@ export class KplRoom {
 			console.log(`Player ${player.username} (${player.uuid}) reconnected to room ${this.name} (${this.uuid})`);
 			this.players.push(player);
 			broadcastLobbyUpdate();
+			this.broadcastGameState();
 			return true;
 		}
 
@@ -317,7 +325,7 @@ export class KplRoom {
 		};
 
 		// If room doesn't have a host (automated room) and enough players, start game countdown
-		if (this.players.length >= MIN_PLAYERS && !this.hostUUID) {
+		if (this.players.length >= MIN_PLAYERS && !this.hostUUID && !this.intermissionTimer) {
 			this.setIntermission(TIME_TO_START, () => {
 				this.start();
 			});
@@ -334,7 +342,6 @@ export class KplRoom {
 
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);
-		safeAwait(player.rpc('room', null, -1));
 
 		// If game is not running, remove player data entirely
 		if (this._state === RoomState.LOBBY) {
@@ -353,8 +360,12 @@ export class KplRoom {
 
 		this.broadcastGameState();
 
-		// If room is empty, destroy room
-		if (this.players.length === 0) {
+		if (this._state !== RoomState.LOBBY && this.players.length < MIN_PLAYERS) {
+			// If game is running and not enough players, end game
+			// TODO: Send message to players
+			destroyRoom(this);
+		} else if (this.players.length === 0) {
+			// If room is empty, destroy room
 			destroyRoom(this);
 		}
 	}
@@ -397,6 +408,7 @@ export class KplRoom {
 			players: this.players.map(p => ({
 				uuid: p.uuid,
 				username: p.username,
+				image: p.image,
 				points: this.playerData[p.uuid].points,
 				isHost: this.hostUUID === p.uuid,
 				isCzar: this.czarUUID === p.uuid,

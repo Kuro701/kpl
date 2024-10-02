@@ -1,3 +1,4 @@
+import { navigate } from "svelte-routing";
 import { getAuthCredentials, LobbyRooms, PlayerIdentity, type LobbyRoom } from "./client";
 import { IngameRoom, ServerResponseFn } from "./room";
 
@@ -30,11 +31,17 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(OK);
 	},
 	room: async (reply, data) => {
+		console.log('Room data:', data);
 		const roomData = data as null | IngameRoom;
 
 		if (roomData === null) {
-			IngameRoom.set(null);
 			reply(OK);
+			IngameRoom.set(null);
+
+			if (window.location.pathname.startsWith('/room/')) {
+				navigate('/');
+			}
+
 			return;
 		}
 

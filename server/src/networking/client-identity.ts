@@ -46,7 +46,8 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 			if (data.provider === 'anonymous') {
 				const playerIndentity = tryReviveAnonymousPlayer(data.user_id, data.user_token) || createAnonymousPlayer();
 				console.log(playerIndentity);
-				player = createPlayer(data.username, playerIndentity.user_id, networkKit);
+				const image = `https://api.dicebear.com/9.x/dylan/svg?mood=happy,hopeful,superHappy&seed=${data.username}`;
+				player = createPlayer(data.username, playerIndentity.user_id, image, networkKit);
 
 				if (!player) {
 					networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'ALREADY_LOGGED_IN'));
@@ -73,8 +74,10 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 					return;
 				}
 
+				const name = discordUser.global_name || discordUser.username || data.username;
 				const playerUUID = `discord_${discordUser.id}`;
-				player = createPlayer(data.username, playerUUID, networkKit);
+				const image = discordUser.avatar ? `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/0.png`;
+				player = createPlayer(name, playerUUID, image, networkKit);
 
 				if (!player) {
 					networkKit.sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.ERROR, 'ALREADY_LOGGED_IN'));

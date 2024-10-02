@@ -11,7 +11,7 @@ import { getSystemMessage } from "../system-message.js";
 export type NetworkKit = {
 	sendError: (message: string) => void;
 	sendRaw: (message: string) => void;
-	rpcCall: <T>(fnName: string, data: object, timeout?: number) => Promise<T>;
+	rpcCall: <T>(fnName: string, data: any, timeout?: number) => Promise<T>;
 	disconnect: () => void;
 };
 

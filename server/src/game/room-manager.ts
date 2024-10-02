@@ -28,8 +28,8 @@ export function getRoomByUUID(uuid: string): KplRoom | undefined {
 }
 
 export function destroyRoom(room: KplRoom): void {
-	room.onRoomDestroy();
 	rooms.delete(room.uuid);
+	room.onRoomDestroy();
 
 	if (room.isPublic) {
 		broadcastLobbyUpdate();
@@ -68,4 +68,8 @@ export function getRoomLobbyState(room: KplRoom) {
 		isPublic: room.isPublic,
 		state: room.state,
 	};
+}
+
+export function getAllRooms() {
+	return Array.from(rooms.values());
 }

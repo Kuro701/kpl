@@ -23,11 +23,15 @@ export async function handleNetworkMessage(message: string) {
 			return;
 		}
 
-		const { f, ...rest } = decoded.data as any;
+		let { f, ...rest } = decoded.data as any;
 		const func = rpcFunctions[f];
 		if (!func) {
 			console.error('Unknown RPC function:', f);
 			return;
+		}
+
+		if (rest.__raw !== undefined) {
+			rest = rest.__raw;
 		}
 
 		await func((data: unknown) => {

@@ -4,13 +4,13 @@ import { KplPlayer } from "./player.js";
 
 const players: KplPlayer[] = [];
 
-export function createPlayer(username: string, uuid: string, networkKit: NetworkKit): KplPlayer | null {
+export function createPlayer(username: string, uuid: string, image: string, networkKit: NetworkKit): KplPlayer | null {
 	const existingPlayer = getPlayerById(uuid);
 	if (existingPlayer) {
 		return null;
 	}
 
-	const player = new KplPlayer(username, uuid, networkKit);
+	const player = new KplPlayer(username, uuid, image, networkKit);
 	players.push(player);
 	return player;
 }

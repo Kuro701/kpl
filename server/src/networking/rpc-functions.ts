@@ -1,7 +1,7 @@
 import { db, queryCardDeckCounts } from "../database.js";
 import { KplPlayer } from "../game/player.js";
 import { createRoom, getRandomJoinableRoom, getRoomByUUID, getRoomLobbyState } from "../game/room-manager.js";
-import { RoomConstructorData } from "../game/room.js";
+import { RoomConstructorData, RoomState } from "../game/room.js";
 import { safeAwait } from "../utils/safe-await.js";
 
 type ReplyFunction = (data: unknown) => void;
@@ -74,6 +74,29 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			reply(newRoom.uuid);
 			player.joinRoom(newRoom);
 		}
+	},
+	startGame: async (player: KplPlayer, reply: ReplyFunction) => {
+		if (!player.room) {
+			reply(false);
+
+			// TODO: Send error message
+			return;
+		}
+
+		if (player.room.hostId !== player.uuid) {
+			reply(false);
+			// TODO: Send error message
+			return;
+		}
+
+		if (player.room.state !== RoomState.LOBBY) {
+			reply(false);
+			// TODO: Send error message
+			return;
+		}
+
+		reply(OK);
+		player.room.start();
 	},
 
 	// Returns lobby room info including private rooms
