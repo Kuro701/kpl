@@ -212,10 +212,8 @@ export class KplRoom {
 
 		// End player move
 		this.cancelIntermission();
-		this.broadcastGameState();
 
 		// Prepare czar move
-		await wait(2000);
 		this._state = RoomState.PICK_CZAR;
 		smartArrayShuffleAtPlace(this.table.white);
 		this.setIntermission(this.timings.czarPick, this.cancelIntermission);
@@ -502,6 +500,9 @@ export class KplRoom {
 						})),
 					}
 				}) : [],
+
+
+				lastRoundWinnerGroupId: this.table.lastRoundWinnerGroupId,
 			},
 
 			players: this.players.map(p => ({

@@ -28,6 +28,7 @@
 						text={card.text}
 						shrink={i !== cardGroup.cards.length - 1}
 						noMargin={true}
+						marked={!!$IngameRoom && (cardGroup.id === $IngameRoom.table.lastRoundWinnerGroupId)}
 					/>
 				</div>
 			{/each}

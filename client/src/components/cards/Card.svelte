@@ -4,11 +4,12 @@
 	export let text: string = '';
 	export let shrink: boolean = false;
 	export let noMargin: boolean = false;
+	export let marked: boolean = false;
 </script>
 
 <div class="card" class:black={black} class:long={text.length > 100} class:shrink={shrink} class:no-margin={noMargin}>
 	<div class="flipper" class:show={show}>
-		<div class="front">
+		<div class="front" class:marked={marked}>
 			<slot name="front">
 				<p>{text}</p>
 				<img src={`/img/logo${black ? '_white' : ''}.png`} alt="Karty proti lidskosti" />
@@ -143,5 +144,9 @@
 
 	.card.no-margin {
 		margin: 0;
+	}
+
+	.card .front.marked {
+		background: #ffeb3b;
 	}
 </style>

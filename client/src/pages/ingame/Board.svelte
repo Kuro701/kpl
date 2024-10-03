@@ -2,7 +2,9 @@
   import { PlayerIdentity } from "../../lib/networking/client";
 	import { IngameRoom, RoomState } from "../../lib/networking/room";
 	import BlackCardWidget from "./BlackCardWidget.svelte";
-  import BoardWhiteCards from "./BoardWhiteCards.svelte";
+	import BoardCzar from "./BoardCzar.svelte";
+  import BoardPick from "./BoardPick.svelte";
+	import BoardWhiteCards from "./BoardWhiteCards.svelte";
 	import Hand from "./Hand.svelte";
 	import Intermission from "./Intermission.svelte";
   import LobbyState from "./LobbyState.svelte";
@@ -14,7 +16,14 @@
 		<LobbyState />
 	{:else}
 		<BlackCardWidget />
-		<BoardWhiteCards />
+
+		{#if $IngameRoom?.state === RoomState.PICK_WHITE && $IngameRoom.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid)}
+			<BoardCzar />
+		{:else if $IngameRoom?.state === RoomState.PICK_WHITE}
+			<BoardPick />
+		{:else}
+			<BoardWhiteCards />
+		{/if}
 
 		<div class="hand">
 			<Hand hide={($IngameRoom?.state === RoomState.PICK_CZAR) || ($IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid))} />

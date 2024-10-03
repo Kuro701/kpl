@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { IngameRoom } from "../../../lib/networking/room";
+
+
+	// TODO: Allow host to kick players
 </script>
 <div class="players">
 	{#each $IngameRoom?.players ?? [] as player}

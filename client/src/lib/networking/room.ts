@@ -37,6 +37,7 @@ type CardGroup<T> = {
 type TableData = {
 	black: BlackCard;
 	white: CardGroup<WhiteCard>[];
+	lastRoundWinnerGroupId: string | null;
 };
 
 type HandData = {
