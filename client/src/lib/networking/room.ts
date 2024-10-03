@@ -1,5 +1,4 @@
 import { derived, get, writable } from "svelte/store";
-import { PlayerIdentity } from "./client";
 
 export enum RoomState {
 	LOBBY = 'lobby',
@@ -8,11 +7,14 @@ export enum RoomState {
 	PICK_CZAR = 'pick_czar',
 }
 
-type OtherPlayerData = {
+export type PlayerResults = {
 	uuid: string;
 	username: string;
 	points: number;
 	image: string;
+}
+
+export type OtherPlayerData = PlayerResults & {
 	isHost: boolean;
 	isCzar: boolean;
 }
@@ -57,6 +59,10 @@ export type IngameRoom = {
 	hand: HandData;
 }
 
+export type GameResults = {
+	score: PlayerResults[];
+}
+
 export const IngameRoom = writable<IngameRoom | null>(null);
 export const HandCards = derived(IngameRoom, ($IngameRoom => {
 	if (!$IngameRoom) return [];
@@ -75,6 +81,7 @@ export const BoardCards = derived(IngameRoom, ($IngameRoom => {
 
 export const ServerResponseFn = writable<((data: unknown) => void) | null>(null);
 export const SelectedCards = writable<number[]>([]);
+export const LastGameResults = writable<GameResults | null>(null);
 
 function submitSelectedCards(cards: number[]) {
 	const reponse = get(ServerResponseFn);

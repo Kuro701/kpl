@@ -8,6 +8,7 @@
   import AuthCallback from "./pages/auth/AuthCallback.svelte";
   import PageJoin from "./pages/home/PageJoin.svelte";
   import SystemMessageWidget from "./components/layout/SystemMessageWidget.svelte";
+  import PageResults from "./pages/ingame/PageResults.svelte";
 
 </script>
 
@@ -19,6 +20,7 @@
   <Route path="/rules" component={PageRules} />
   <Route path="/room/:roomUUID" component={PageIngame} />
   <Route path="/join/:roomUUID" component={PageJoin} />
+  <Route path="/game-over" component={PageResults} />
   <Route path="/auth/callback/:provider" component={AuthCallback} />
 </Router>
 

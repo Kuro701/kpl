@@ -72,13 +72,19 @@
 
 <LayoutMenu>
   <LobbyHeader>
+    <div class="social-links" slot="left">
+      <a class="button button--social button--discord" href="https://dsc.gg/kpl-online" target="_blank" aria-label="Discord" data-balloon-pos="down">
+        <img src="/img/provider/discord_black.svg" alt="Discord" draggable="false" />
+      </a>
+    </div>
+
     <h1>Hrát</h1>
 
-    <svelte:fragment slot="right">
+    <div class="social-links" slot="right">
       <a class="button button--social" aria-label="Pravidla" data-balloon-pos="down" href="/rules" use:link>
         <img src="/img/icons/rules.png" alt="Pravidla" draggable="false" />
       </a>
-    </svelte:fragment>
+    </div>
   </LobbyHeader>
 
   <TwoColumns>
@@ -149,5 +155,15 @@
     justify-content: space-between;
     height: 100%;
     padding-bottom: 2rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .button--discord img {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 </style>

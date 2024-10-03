@@ -47,6 +47,12 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		const joined = player.joinRoom(room);
 		reply(joined ? room.uuid : false);
 	},
+	leaveRoom: async (player: KplPlayer, reply: ReplyFunction) => {
+		reply(OK);
+		if (player.room) {
+			player.quitRoom();
+		}
+	},
 	joinRandomRoom: async (player: KplPlayer, reply: ReplyFunction) => {
 		if (player.room) {
 			reply(false);

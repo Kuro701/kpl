@@ -1,11 +1,14 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
 	import Debuger from "../../components/debug/Debuger.svelte";
 	import DebugVariable from "../../components/debug/DebugVariable.svelte";
 	import LayoutGame from "../../components/layout/LayoutGame.svelte";
-  import { PlayerIdentity } from "../../lib/networking/client";
+	import { leaveRoom, PlayerIdentity } from "../../lib/networking/client";
 	import { IngameRoom, SelectedCards, ServerResponseFn } from "../../lib/networking/room";
 	import Board from "./Board.svelte";
+	import IngameSidebar from "./sidebar/IngameSidebar.svelte";
 
+	onDestroy(leaveRoom);
 
 </script>
 
@@ -20,4 +23,5 @@
 	{#if $IngameRoom}
 		<Board />
 	{/if}
+	<IngameSidebar slot="sidebar" />
 </LayoutGame>

@@ -4,6 +4,8 @@ import { navigate } from "svelte-routing";
 import { safeAwait } from "../../utils/safe-await";
 import { getLoginCredentials } from "../auth/auth";
 import { SystemMessage } from "./system-message";
+import { encodeNetworkMessage, MessageType } from "./encoder";
+import { NONCE_EMPTY } from "./nonce";
 export type AuthProvier = 'anonymous' | 'discord';
 
 export type AuthCredentials = {
@@ -91,6 +93,12 @@ export async function disconnect() {
 	}
 
 	PlayerIdentity.set(null);
+}
+
+export async function leaveRoom() {
+	safeAwait(sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, {
+		f: 'leaveRoom',
+	})));
 }
 
 

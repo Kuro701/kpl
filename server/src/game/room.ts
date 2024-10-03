@@ -117,8 +117,28 @@ export class KplRoom {
 		while (true) {
 			await this.nextRound();
 
-			// Todo: Check if game is over
+			if (this.players.some(player => this.playerData[player.uuid].points >= this.goal)) {
+				this.end();
+				return;
+			}
 		}
+	}
+
+	private async end() {
+		const results = {
+			score: this.players.map(player => ({
+				uuid: player.uuid,
+				username: player.username,
+				image: player.image,
+				points: this.playerData[player.uuid].points,
+			})),
+		}
+
+		this.players.forEach(player => {
+			player.rpc('gameResults', results, -1);
+		});
+
+		destroyRoom(this);
 	}
 
 	private async nextRound() {

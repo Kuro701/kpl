@@ -1,6 +1,6 @@
 import { navigate } from "svelte-routing";
 import { getAuthCredentials, LobbyRooms, PlayerIdentity, type LobbyRoom } from "./client";
-import { IngameRoom, RoomState, SelectedCards, ServerResponseFn } from "./room";
+import { IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type GameResults } from "./room";
 import { get } from "svelte/store";
 
 type ReplyFunction = (data: unknown) => void;
@@ -70,5 +70,12 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 	pickCzarCard: async (reply, data) => {
 		console.log('Picking czar card:', data);
 		ServerResponseFn.set(reply);
-	}
+	},
+	gameResults: async (reply, data) => {
+		reply(OK);
+
+		console.log('Game results:', data);
+		LastGameResults.set(data as GameResults);
+		navigate('/game-over');
+	},
 }
