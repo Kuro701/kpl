@@ -4,9 +4,9 @@ import { createNonce, NONCE_EMPTY } from "./nonce.js";
 
 const DEFAULT_TIMEOUT = 2000;
 const NO_WAIT = -1;
-const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 export function createRequestResponseManager(wsClient: WebSocket) {
+	const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 	const sendRequest = <TRes>(data: unknown, timeout: number = DEFAULT_TIMEOUT): Promise<TRes> => {
 		if (timeout < 0) {

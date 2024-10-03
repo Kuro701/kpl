@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `carddeck` ADD COLUMN `description` VARCHAR(191) NULL;
+ALTER TABLE `CardDeck` ADD COLUMN `description` TEXT NULL;

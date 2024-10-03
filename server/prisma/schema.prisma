@@ -17,9 +17,9 @@ model Card {
   id        Int      @id @default(autoincrement())
   deckId    Int
   text      String
-  tip       String?
+  tip       String?  @db.Text
   pick      Int      @default(0)
-  deck      CardDeck @relation(fields: [deckId], references: [id])
+  deck      CardDeck @relation(fields: [deckId], references: [id], onDelete: Cascade)
 }
 
 model CardDeck {

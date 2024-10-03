@@ -3,7 +3,7 @@ import { safeAwait } from "../../utils/safe-await";
 import { setIdentity } from "./auth";
 
 const CLIENT_ID = '1289979640953180221';
-const REDIRECT_URI = 'http://localhost:5173/auth/callback/discord';
+const REDIRECT_URI = `${window.location.origin}/auth/callback/discord`;
 
 export function loginViaDiscord() {
 	const state = btoa(window.location.pathname);

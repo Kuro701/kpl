@@ -61,6 +61,23 @@
 				{/each}
 			{/if}
 		</div>
+
+		<div class="share">
+			<div>
+				Pokud chcete pozvat další hráče, sdílejte tento odkaz:
+			</div>
+			<div>
+				<input type="text" value={`${window.location.origin}/join/${$IngameRoom.uuid}`} readonly on:click={(e) => {
+					// @ts-ignore
+					e.target.select();
+
+					if (navigator.clipboard) {
+						// @ts-ignore
+						navigator.clipboard.writeText(e.target.value || '');
+					}
+				}} />
+			</div>
+		</div>
 	</div>
 {/if}
 
@@ -97,5 +114,21 @@
 	.start-btn-wrapper {
 		height: 3rem;
 		margin-bottom: 2rem;
+	}
+
+	.share {
+		text-align: center;
+		margin-top: 3rem;
+		font-size: .9rem;
+		font-weight: 400;
+	}
+
+	.share input {
+		border: none;
+		background-color: transparent;
+		font-size: 1rem;
+		text-align: center;
+		cursor: var(--cursor-pointer);
+		font-weight: 500;
 	}
 </style>

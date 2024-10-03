@@ -7,7 +7,9 @@
   "scripts": {
     "start": "npx tsx src/index.ts",
     "dev": "npx tsx watch src/index.ts",
-    "legacy-card-import": "npx tsx legacy/inport-legacy-cards.ts"
+    "legacy-card-import": "npx tsx legacy/inport-legacy-cards.ts",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate": "npx prisma migrate deploy"
   },
   "license": "ISC",
   "dependencies": {
