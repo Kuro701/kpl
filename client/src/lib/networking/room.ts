@@ -1,9 +1,11 @@
-import { derived, writable } from "svelte/store";
+import { derived, get, writable } from "svelte/store";
+import { PlayerIdentity } from "./client";
 
 export enum RoomState {
 	LOBBY = 'lobby',
 	WAITING = 'waiting',
 	PICK_WHITE = 'pick_white',
+	PICK_CZAR = 'pick_czar',
 }
 
 type OtherPlayerData = {
@@ -25,8 +27,14 @@ type BlackCard = WhiteCard & {
 	pick: number;
 };
 
+type CardGroup<T> = {
+	id: string;
+	cards: T[];
+}
+
 type TableData = {
 	black: BlackCard;
+	white: CardGroup<WhiteCard>[];
 };
 
 type HandData = {
@@ -50,7 +58,6 @@ export type IngameRoom = {
 }
 
 export const IngameRoom = writable<IngameRoom | null>(null);
-export const ServerResponseFn = writable<((data: unknown) => void) | null>(null);
 export const HandCards = derived(IngameRoom, ($IngameRoom => {
 	if (!$IngameRoom) return [];
 	return $IngameRoom.hand.cards;
@@ -60,3 +67,46 @@ export const BlackCard = derived(IngameRoom, ($IngameRoom => {
 
 	return $IngameRoom.table.black;
 }));
+export const BoardCards = derived(IngameRoom, ($IngameRoom => {
+	if (!$IngameRoom) return [];
+
+	return $IngameRoom.table.white;
+}));
+
+export const ServerResponseFn = writable<((data: unknown) => void) | null>(null);
+export const SelectedCards = writable<number[]>([]);
+
+function submitSelectedCards(cards: number[]) {
+	const reponse = get(ServerResponseFn);
+	if (!reponse) {
+		console.error('No response function');
+		return;
+	}
+
+	ServerResponseFn.set(null);
+	reponse(cards);
+}
+
+export function pushSelectedCard(id: number) {
+
+	SelectedCards.update(cards => {
+		if (cards.includes(id)) {
+			return cards;
+		}
+
+		cards.push(id);
+
+		const ingameRoom = get(IngameRoom);
+
+		if (!ingameRoom) {
+			return [];
+		}
+
+		if (cards.length >= ingameRoom.table.black.pick) {
+			submitSelectedCards(cards);
+			return cards;
+		}
+
+		return cards;
+	});
+}

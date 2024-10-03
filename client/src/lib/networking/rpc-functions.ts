@@ -1,6 +1,7 @@
 import { navigate } from "svelte-routing";
 import { getAuthCredentials, LobbyRooms, PlayerIdentity, type LobbyRoom } from "./client";
-import { IngameRoom, ServerResponseFn } from "./room";
+import { IngameRoom, RoomState, SelectedCards, ServerResponseFn } from "./room";
+import { get } from "svelte/store";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -37,6 +38,8 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		if (roomData === null) {
 			reply(OK);
 			IngameRoom.set(null);
+			ServerResponseFn.set(null);
+			SelectedCards.set([]);
 
 			if (window.location.pathname.startsWith('/room/')) {
 				navigate('/');
@@ -48,11 +51,24 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		roomData.intermissionStart = roomData.intermissionStart ? new Date(roomData.intermissionStart) : null;
 		roomData.intermissionEnd = roomData.intermissionEnd ? new Date(roomData.intermissionEnd) : null;
 
+		const playerIndetity = get(PlayerIdentity);
+		const isCzar = roomData.players.some(p => p.isCzar && p.uuid === playerIndetity?.uuid);
+
+
+		if (!(roomData.state === RoomState.PICK_WHITE && !isCzar) && !(roomData.state === RoomState.PICK_CZAR && isCzar)) {
+			ServerResponseFn.set(null);
+			SelectedCards.set([]);
+		}
+
 		IngameRoom.set(roomData);
 		reply(OK);
 	},
 	pickWhiteCards: async (reply, data) => {
 		console.log('Picking white cards:', data);
+		ServerResponseFn.set(reply);
+	},
+	pickCzarCard: async (reply, data) => {
+		console.log('Picking czar card:', data);
 		ServerResponseFn.set(reply);
 	}
 }

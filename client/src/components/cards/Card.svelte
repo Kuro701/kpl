@@ -2,9 +2,11 @@
 	export let black: boolean = false;
 	export let show: boolean = true;
 	export let text: string = '';
+	export let shrink: boolean = false;
+	export let noMargin: boolean = false;
 </script>
 
-<div class="card" class:black={black} class:long={text.length > 100}>
+<div class="card" class:black={black} class:long={text.length > 100} class:shrink={shrink} class:no-margin={noMargin}>
 	<div class="flipper" class:show={show}>
 		<div class="front">
 			<slot name="front">
@@ -121,5 +123,25 @@
 
 	.card.long .front p {
 		font-size: .9em;
+	}
+
+	.card.shrink {
+		height: auto;
+		margin-bottom: 0;
+	}
+	.card.shrink .front {
+		position: relative;
+		height: auto;
+		border-bottom: none;
+		border-end-end-radius: 0;
+		border-end-start-radius: 0;
+	}
+	.card.shrink .front img {
+		display: none;
+
+	}
+
+	.card.no-margin {
+		margin: 0;
 	}
 </style>

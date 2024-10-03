@@ -81,10 +81,10 @@
 
 	.title {
 		text-align: center;
-		margin-bottom: 5rem;
+		margin-bottom: 7rem;
 	}
 	.title--before-button {
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 	}
 	.title h1 {
 		margin: 0;
@@ -96,6 +96,6 @@
 
 	.start-btn-wrapper {
 		height: 3rem;
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 	}
 </style>

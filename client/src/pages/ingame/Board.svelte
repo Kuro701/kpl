@@ -1,6 +1,8 @@
 <script>
-	import { IngameRoom } from "../../lib/networking/room";
+  import { PlayerIdentity } from "../../lib/networking/client";
+	import { IngameRoom, RoomState } from "../../lib/networking/room";
 	import BlackCardWidget from "./BlackCardWidget.svelte";
+  import BoardWhiteCards from "./BoardWhiteCards.svelte";
 	import Hand from "./Hand.svelte";
 	import Intermission from "./Intermission.svelte";
   import LobbyState from "./LobbyState.svelte";
@@ -8,13 +10,14 @@
 <div class="board">
 	<Intermission />
 
-	{#if $IngameRoom?.state === 'lobby'}
+	{#if $IngameRoom?.state === RoomState.LOBBY}
 		<LobbyState />
 	{:else}
 		<BlackCardWidget />
+		<BoardWhiteCards />
 
 		<div class="hand">
-			<Hand />
+			<Hand hide={($IngameRoom?.state === RoomState.PICK_CZAR) || ($IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid))} />
 		</div>
 	{/if}
 </div>

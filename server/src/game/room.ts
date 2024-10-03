@@ -13,6 +13,7 @@ export enum RoomState {
 	LOBBY = 'lobby',
 	WAITING = 'waiting',
 	PICK_WHITE = 'pick_white',
+	PICK_CZAR = 'pick_czar',
 }
 
 type PlayerData = {
@@ -33,6 +34,7 @@ export type RoomConstructorData = {
 };
 
 type IdentifiedResource<T> = {
+	id: string;
 	playerUUID: string;
 	resource: T;
 }
@@ -63,11 +65,13 @@ export class KplRoom {
 	}
 	private table = {
 		black: null as Card | null,
+		lastRoundWinnerGroupId: null as string | null,
 		white: [] as IdentifiedResource<Card[]>[],
 	}
 
 	private timings = {
 		whitePick: 2 * 60,
+		czarPick: 3 * 60,
 	}
 
 	constructor({ name, goal, maxPlayers, isPublic, host, decks }: RoomConstructorData) {
@@ -109,11 +113,18 @@ export class KplRoom {
 		broadcastLobbyUpdate();
 
 		await this.loadDecks();
-		this.nextRound();
+
+		while (true) {
+			await this.nextRound();
+
+			// Todo: Check if game is over
+		}
 	}
 
 	private async nextRound() {
 		// Init round
+		this.table.lastRoundWinnerGroupId = null;
+		this.table.white = [];
 		this.fillHandForAllPlayers();
 		this.pickNextCzar();
 		this.broadcastGameState();
@@ -151,6 +162,7 @@ export class KplRoom {
 				}
 				this.playerData[player.uuid].hand = playerCards.filter(card => !pickedCards.includes(card));
 				this.table.white.push({
+					id: cuid(),
 					playerUUID: player.uuid,
 					resource: pickedCards,
 				});
@@ -166,16 +178,66 @@ export class KplRoom {
 				return;
 			}
 
-			this.playerData[player.uuid].hand = playerCards.filter(card => !pickedCards.includes(card));
 			this.table.white.push({
+				id: cuid(),
 				playerUUID: player.uuid,
 				resource: pickedCards,
 			});
 
+			// Wait for card animations to finish and remove cards from player hands
+			await wait(1000);
+			this.playerData[player.uuid].hand = playerCards.filter(card => !pickedCards.includes(card));
 			this.sendGameState(player);
 		}));
+
+		// End player move
 		this.cancelIntermission();
 		this.broadcastGameState();
+
+		// Prepare czar move
+		await wait(2000);
+		this._state = RoomState.PICK_CZAR;
+		smartArrayShuffleAtPlace(this.table.white);
+		this.setIntermission(this.timings.czarPick, this.cancelIntermission);
+		this.broadcastGameState();
+		const czar = this.players.find(player => player.uuid === this.czarUUID);
+		if (!czar) {
+			//TODO: Error, czar left (skip round and maybe give cards back to players)
+			return;
+		}
+
+		if (this.table.white.length === 0) {
+			//TODO: Error, no white cards to pick from
+		}
+
+		const [ czarSelection, error ] = await safeAwait(czar.rpc('pickCzarCard', this.table.white, this.timings.czarPick * 1000));
+		this.cancelIntermission();
+
+		if (error || !czarSelection) {
+			// TODO: Czar didn't pick card in time (skip round and maybe give cards back to players)
+			return;
+		}
+
+		const winningCardGroup = this.table.white.find(cardGroup => cardGroup.id === czarSelection);
+		if (!winningCardGroup) {
+			//TODO: Error, invalid card group
+			return;
+		}
+
+
+		// Show winner and give points
+		this.table.lastRoundWinnerGroupId = winningCardGroup.id;
+		const winnerUUID = winningCardGroup.playerUUID;
+		this.playerData[winnerUUID].points++;
+		this.broadcastGameState();
+
+		// Move used cards to used pile
+		this.table.white.forEach(cardGroup => {
+			this.decks.whiteUsed.push(...cardGroup.resource);
+		});
+
+		// Wait before starting next round
+		await wait(5000);
 	}
 
 	private pickNextCzar(): void {
@@ -228,6 +290,12 @@ export class KplRoom {
 				deckId: {
 					in: this.deckIds,
 				},
+				deck: {
+					OR: [
+						{ public: true },
+						{ ownerUUID: this.hostUUID || '' },
+					],
+				}
 			},
 		}));
 
@@ -403,6 +471,17 @@ export class KplRoom {
 					tip: this.table.black.tip,
 					pick: this.table.black.pick,
 				} : null,
+
+				white: this.state === RoomState.PICK_CZAR ? this.table.white.map(cardGroup => {
+					return {
+						id: cardGroup.id,
+						cards: cardGroup.resource.map(card => ({
+							id: card.id,
+							text: card.text,
+							tip: card.tip,
+						})),
+					}
+				}) : [],
 			},
 
 			players: this.players.map(p => ({
