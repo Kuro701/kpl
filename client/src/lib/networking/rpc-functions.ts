@@ -1,5 +1,5 @@
 import { navigate } from "svelte-routing";
-import { getAuthCredentials, LobbyRooms, PlayerIdentity, type LobbyRoom } from "./client";
+import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, type LobbyRoom } from "./client";
 import { IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type GameResults } from "./room";
 import { get } from "svelte/store";
 
@@ -77,5 +77,12 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		console.log('Game results:', data);
 		LastGameResults.set(data as GameResults);
 		navigate('/game-over');
+	},
+	playerCount: async (reply, data) => {
+		reply(OK);
+
+		PlayerCount.set((data as {
+			count: number;
+		}).count ?? 0);
 	},
 }

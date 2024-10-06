@@ -53,6 +53,8 @@ export type CardDeck = {
 
 export const PlayerIdentity = writable<IPlayerIdentity | null>(null);
 export const LobbyRooms = writable<LobbyRoom[]>([]);
+export const RoomCount = writable(0);
+export const PlayerCount = writable(0);
 
 export async function sendRaw(message: string) {
 	if (!connection || connection.readyState !== WebSocket.OPEN) {

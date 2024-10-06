@@ -3,7 +3,7 @@
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import LobbyBackButton from "../../components/layout/LobbyBackButton.svelte";
   import LobbyHeader from "../../components/layout/LobbyHeader.svelte";
-  import { LobbyRooms, type LobbyRoom } from "../../lib/networking/client";
+  import { LobbyRooms, PlayerCount, RoomCount, type LobbyRoom } from "../../lib/networking/client";
   import RoomWidget from "./RoomWidget.svelte";
   import Debuger from "../../components/debug/Debuger.svelte";
   import DebugVariable from "../../components/debug/DebugVariable.svelte";
@@ -52,6 +52,9 @@
       {/each}
     </div>
   {/if}
+  <div class="stats">
+    Online <b>{$PlayerCount} hráčů</b> ve {$RoomCount} místnostech
+  </div>
 </LayoutMenu>
 
 
@@ -83,5 +86,12 @@
     color: var(--blackish);
     font-weight: 300;
     text-align: center;
+  }
+
+  .stats {
+    padding: .5rem 2rem;
+    text-align: center;
+    color: var(--blackish);
+    font-weight: 300;
   }
 </style>
