@@ -49,6 +49,7 @@ export function getLobbyStateNetworkMessage() {
 	return encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, {
 		f: 'lobby',
 		rooms: lobbyState,
+		roomCount: rooms.size,
 	});
 }
 
