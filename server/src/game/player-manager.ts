@@ -7,7 +7,7 @@ const players: KplPlayer[] = [];
 export function createPlayer(username: string, uuid: string, image: string, networkKit: NetworkKit): KplPlayer | null {
 	const existingPlayer = getPlayerById(uuid);
 	if (existingPlayer) {
-		return null;
+		existingPlayer.disconnect('ANOTHER_DEVICE_LOGGED_IN');
 	}
 
 	const player = new KplPlayer(username, uuid, image, networkKit);

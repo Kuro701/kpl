@@ -27,7 +27,7 @@
 <LayoutMenu>
   <LobbyHeader>
     <LobbyBackButton slot="left" action={() => navigate('/')} />
-    <h1>Místnosti</h1>
+    <h1>Veřejné místnosti</h1>
     <svelte:fragment slot="right">
       <a class="button" href="/rooms/create" use:link>
         <img src="/img/icons/plus.png" alt="Plus" draggable="false" class="icon invert" />

@@ -56,7 +56,11 @@ export class KplPlayer {
 		return joined;
 	}
 
-	public disconnect() {
+	public disconnect(error?: string) {
+		if (error) {
+			this.netkit.sendError(error);
+		}
+
 		this.netkit.disconnect();
 	}
 
