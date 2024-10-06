@@ -57,6 +57,8 @@ export class KplRoom {
 	private intermissionEnd: Date | null = null;
 	private intermissionTimer: NodeJS.Timeout | null = null;
 
+	private isDestroyed = false;
+
 	private deckIds: number[] = [];
 	private decks = {
 		white: [] as Card[],
@@ -114,7 +116,7 @@ export class KplRoom {
 
 		await this.loadDecks();
 
-		while (true) {
+		while (this.players.length >= MIN_PLAYERS) {
 			await this.nextRound();
 
 			if (this.players.some(player => this.playerData[player.uuid].points >= this.goal)) {
@@ -191,7 +193,13 @@ export class KplRoom {
 			}
 
 			//Validate card selection and add to table
-			const pickedCards = playerCards.filter((card) => cardSelection.includes(card.id));
+			const pickedCards: Card[] = [];
+			cardSelection.forEach(cardId => {
+				const card = playerCards.find(card => card.id === cardId);
+				if (card) {
+					pickedCards.push(card);
+				}
+			});
 			if (pickedCards.length !== pickCount) {
 				//Invalid card selection, skip player round
 				//TODO: Send error to player
@@ -374,12 +382,23 @@ export class KplRoom {
 	// #endregion
 
 	public onRoomDestroy(): void {
+		if (this.isDestroyed) {
+			return;
+		}
+
+		this.isDestroyed = true;
 		console.log(`Room ${this.name} (${this.uuid}) destroyed`);
+		this.cancelIntermission();
 		this.players.forEach(player => player.quitRoom());
 	}
 
 	// #region Player join/leave
 	public onPlayerJoin(player: KplPlayer): boolean {
+		if (this.isDestroyed) {
+			// TODO: Send room is destroyed error
+			return false;
+		}
+
 		// If room is full, refuse to join
 		if (this.players.length >= this.maxPlayers) {
 			// TODO: Send room is full error
@@ -428,6 +447,10 @@ export class KplRoom {
 
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);
+
+		if (this.isDestroyed) {
+			return;
+		}
 
 		// If game is not running, remove player data entirely
 		if (this._state === RoomState.LOBBY) {

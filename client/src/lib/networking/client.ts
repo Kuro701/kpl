@@ -15,7 +15,7 @@ export type AuthCredentials = {
 	user_token: string;
 };
 
-const SERVER_URL = 'wss://wss.cz1.helkor.eu/40004'; // TODO: Load from env or let user specify
+const SERVER_URL = import.meta.env.MODE === 'development' ? 'ws://localhost:3001' : 'wss://wss.cz1.helkor.eu/40004'; // TODO: Load from env or let user specify
 
 let connection: WebSocket | null = null;
 let authCredentials: AuthCredentials | null = null;
