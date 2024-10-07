@@ -1,5 +1,5 @@
 import { navigate } from "svelte-routing";
-import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, type LobbyRoom } from "./client";
+import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, RoomCount, type LobbyRoom } from "./client";
 import { IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type GameResults } from "./room";
 import { get } from "svelte/store";
 
@@ -28,7 +28,8 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(OK);
 	},
 	lobby: async (reply, data) => {
-		LobbyRooms.set((data as any).rooms ?? []);
+		LobbyRooms.set((data as any).rooms || []);
+		RoomCount.set((data as any).roomCount || 0);
 		reply(OK);
 	},
 	room: async (reply, data) => {

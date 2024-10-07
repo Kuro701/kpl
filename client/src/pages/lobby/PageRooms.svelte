@@ -53,7 +53,7 @@
     </div>
   {/if}
   <div class="stats">
-    Online <b>{$PlayerCount} hráčů</b> ve {$RoomCount} místnostech
+    Online <b>{$PlayerCount} hráčů</b> v {$RoomCount} místnostech
   </div>
 </LayoutMenu>
 
