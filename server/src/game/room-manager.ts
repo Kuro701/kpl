@@ -17,9 +17,7 @@ export function generateUniqueJoinCode(): string {
 export function createRoom(data: RoomConstructorData) {
 	const room = new KplRoom(data);
 	rooms.set(room.uuid, room);
-	if (room.isPublic) {
-		broadcastLobbyUpdate();
-	}
+	broadcastLobbyUpdate();
 	return room;
 }
 
@@ -31,9 +29,7 @@ export function destroyRoom(room: KplRoom): void {
 	rooms.delete(room.uuid);
 	room.onRoomDestroy();
 
-	if (room.isPublic) {
-		broadcastLobbyUpdate();
-	}
+	broadcastLobbyUpdate();
 }
 
 export function getRandomJoinableRoom(): KplRoom | undefined {
