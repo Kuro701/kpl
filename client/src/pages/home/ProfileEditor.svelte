@@ -18,9 +18,11 @@
     <div class="pfp-editor">
       <img
         class:provider--discord={$LocalIdentity.provider === 'discord'}
+        class:provider--google={$LocalIdentity.provider === 'google'}
         src={$LocalIdentity.image || `https://api.dicebear.com/9.x/dylan/svg?mood=happy,hopeful,superHappy&seed=${username}`}
         alt="Profile"
         draggable="false"
+        referrerpolicy="no-referrer"
       />
     </div>
     {#if $LocalIdentity.provider !== 'anonymous'}
@@ -88,7 +90,14 @@
   }
 
   .pfp-editor img.provider--discord {
-    border: 5px solid  #7289da;
+    border: 5px solid #7289da;
+  }
+  .pfp-editor img.provider--google {
+    border: 5px solid black;
+    border-right-color: #4285f4;
+    border-top-color: #ea4335;
+    border-left-color: #fbbc05;
+    border-bottom-color: #34A853;
   }
 
   .button--logout {

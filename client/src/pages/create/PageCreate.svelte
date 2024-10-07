@@ -24,7 +24,7 @@
   let settings = {
     name: randomRoomName(),
     maxPlayers: 10,
-    goal: 10,
+    goal: 7,
     isPublic: false,
   };
 

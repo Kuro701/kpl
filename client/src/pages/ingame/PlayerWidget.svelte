@@ -5,7 +5,7 @@
 
 <div class="player-widget">
 	{#if image}
-		<img class="player-widget__image" src={image} alt={name} draggable="false" />
+		<img class="player-widget__image" src={image} alt={name} draggable="false" referrerpolicy="no-referrer" />
 	{:else}
 		<div class="player-widget__image player-widget__image--placeholder">{'?'}</div>
 	{/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IngameRoom } from "../../../lib/networking/room";
+	import { IngameRoom, RoomState } from "../../../lib/networking/room";
 
 
 	// TODO: Allow host to kick players
@@ -7,11 +7,13 @@
 <div class="players">
 	{#each $IngameRoom?.players ?? [] as player}
 		<div class="player">
-			<img class="player__avatar" src={player.image} alt={player.username} draggable="false" />
+			<img class="player__avatar" src={player.image} alt={player.username} draggable="false" referrerpolicy="no-referrer" />
 			<div class="player__name">
 				<div class="role">
-					{#if player.isCzar}
+					{#if player.isCzar && $IngameRoom?.state !== RoomState.LOBBY}
 						<span>Císař</span>
+					{:else if player.isHost && $IngameRoom?.state === RoomState.LOBBY}
+						<span>Hostitel</span>
 					{/if}
 				</div>
 				<div class="name">{player.username}</div>

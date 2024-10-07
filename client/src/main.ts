@@ -13,6 +13,7 @@ const allowedPaths = [
   '/',
   '/rules',
   '/auth/callback/discord',
+  '/auth/callback/google',
 ];
 
 if (!path.startsWith('/join/') && !allowedPaths.includes(path)) {

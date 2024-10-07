@@ -70,7 +70,7 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			});
 
 			const newRoom = createRoom({
-				goal: 10,
+				goal: 7,
 				isPublic: true,
 				maxPlayers: 10,
 				name: 'Veřejná místnost',

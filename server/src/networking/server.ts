@@ -1,6 +1,7 @@
 /* WebSocket server */
 import { WebSocketServer } from 'ws';
 import { initSocketConnection } from './socket-connection-client.js';
+import chalk from 'chalk';
 
 export function runServer(port: number) {
 	const server = new WebSocketServer({
@@ -21,7 +22,7 @@ export function runServer(port: number) {
 
 	});
 
-	console.log(`Server started on port ${port}`);
+	console.log(`Server started on port ${chalk.bold.greenBright( port)}`);
 }
 
 

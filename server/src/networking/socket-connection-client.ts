@@ -29,7 +29,6 @@ export function initSocketConnection(wsClient: WebSocket) {
 	const identity = createClientIdentity(networkKit, reqResMan.sendRequest);
 
 	wsClient.on('close', () => {
-		console.log('Client disconnected');
 		reqResMan.rejectAllPromises('DISCONNECTED');
 		identity.onIdentityDisconnect();
 	});
@@ -83,7 +82,6 @@ export function initSocketConnection(wsClient: WebSocket) {
 	});
 
 	const onOpen = () => {
-		console.log(`Client connected`);
 		identity.requestAuth();
 
 		const systemMessage = getSystemMessage();

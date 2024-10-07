@@ -10,8 +10,6 @@
 		const isClickable = playerIsCzar && isCzarRound && !!reply;
 		if (!isClickable) return;
 
-		console.log("Clicked on card group", id);
-
 		reply(id);
 	}
 

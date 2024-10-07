@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { NetworkKit } from "../networking/socket-connection-client.js";
 import { safeAwait } from "../utils/safe-await.js";
 import { getRoomByUUID } from "./room-manager.js";
@@ -24,7 +25,7 @@ export class KplPlayer {
 	}
 
 	constructor(username: string, uuid: string, image: string, netkit: NetworkKit) {
-		console.log(`Player ${username} (${uuid}) logged in`);
+		console.log(`${chalk.bold.greenBright('+')} Player ${chalk.bold(username)} (${chalk.gray(uuid)}) ${chalk.greenBright('connected')}`);
 		this.username = username;
 		this.uuid = uuid;
 		this.netkit = netkit;
@@ -32,7 +33,7 @@ export class KplPlayer {
 	}
 
 	onDisconnect() {
-		console.log(`Player ${this.username} (${this.uuid}) logged out`);
+		console.log(`${chalk.bold.redBright('-')} Player ${chalk.bold(this.username)} (${chalk.gray(this.uuid)}) ${chalk.redBright('disconnected')}`);
 		this.quitRoom();
 	}
 

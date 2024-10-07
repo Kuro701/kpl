@@ -14,7 +14,6 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 	},
 	identity: async (reply, data) => {
 		const { uuid, token, username, anonymous } = data as { uuid: string, token: string, username: string, anonymous: boolean };
-		console.log('Identity:', { uuid, token, username });
 
 		if (anonymous) {
 			localStorage.setItem('identity_provider', 'anonymous');
@@ -33,7 +32,6 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(OK);
 	},
 	room: async (reply, data) => {
-		console.log('Room data:', data);
 		const roomData = data as null | IngameRoom;
 
 		if (roomData === null) {
@@ -65,17 +63,14 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(OK);
 	},
 	pickWhiteCards: async (reply, data) => {
-		console.log('Picking white cards:', data);
 		ServerResponseFn.set(reply);
 	},
 	pickCzarCard: async (reply, data) => {
-		console.log('Picking czar card:', data);
 		ServerResponseFn.set(reply);
 	},
 	gameResults: async (reply, data) => {
 		reply(OK);
 
-		console.log('Game results:', data);
 		LastGameResults.set(data as GameResults);
 		navigate('/game-over');
 	},

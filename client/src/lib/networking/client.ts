@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
+import { get, writable } from "svelte/store";
 import { handleNetworkMessage } from "./message-handler";
 import { navigate } from "svelte-routing";
 import { safeAwait } from "../../utils/safe-await";
@@ -6,7 +6,7 @@ import { getLoginCredentials } from "../auth/auth";
 import { SystemMessage } from "./system-message";
 import { encodeNetworkMessage, MessageType } from "./encoder";
 import { NONCE_EMPTY } from "./nonce";
-export type AuthProvier = 'anonymous' | 'discord';
+export type AuthProvier = 'anonymous' | 'discord' | 'google';
 
 export type AuthCredentials = {
 	provider: AuthProvier;
@@ -104,7 +104,15 @@ export async function leaveRoom() {
 }
 
 
+
+
 export function waitForIdentity(timeout: number = 2000): Promise<IPlayerIdentity> {
+
+	const identity = get(PlayerIdentity);
+	if (identity) {
+		return Promise.resolve(identity);
+	}
+
 	return new Promise((resolve, reject) => {
 		let rejected = false;
 		let timeoutId: number | null = null;
@@ -116,8 +124,8 @@ export function waitForIdentity(timeout: number = 2000): Promise<IPlayerIdentity
 				}
 
 				if (!rejected) {
-					unsubscribe();
 					resolve(identity);
+					unsubscribe();
 				}
 			}
 		});
@@ -131,8 +139,16 @@ export function waitForIdentity(timeout: number = 2000): Promise<IPlayerIdentity
 }
 
 export async function connect(credentials: AuthCredentials): Promise<void> {
-	authCredentials = credentials;
+	const canReuseOldIdentity = authCredentials && authCredentials.provider === credentials.provider && authCredentials.user_id === credentials.user_id && authCredentials.username === credentials.username;
+	const canReuseOldConnection = connection && (connection.readyState === WebSocket.OPEN || connection.readyState === WebSocket.CONNECTING);
+	const oldIdentity = get(PlayerIdentity);
+	const canSkipAuth = canReuseOldIdentity && canReuseOldConnection && oldIdentity;
+	if (canSkipAuth) {
+		PlayerIdentity.set(oldIdentity);
+		return;
+	}
 
+	authCredentials = credentials;
 	if (connection && (connection.readyState === WebSocket.OPEN  || connection.readyState === WebSocket.CONNECTING)) {
 		connection.close();
 	}
@@ -161,7 +177,6 @@ export async function connect(credentials: AuthCredentials): Promise<void> {
 	connection.addEventListener('message', (e) => {
 		try {
 			const message = e.data;
-			console.log('Received message:', message);
 			handleNetworkMessage(message);
 		} catch (error) {
 			console.error('Failed to handle message:', error);

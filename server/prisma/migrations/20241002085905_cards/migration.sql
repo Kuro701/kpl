@@ -12,8 +12,8 @@ CREATE TABLE `Card` (
 -- CreateTable
 CREATE TABLE `CardDeck` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `ownerUUID` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
+    `ownerUUID` VARCHAR(191) NOT NULL,
     `public` BOOLEAN NOT NULL DEFAULT false,
     `default` BOOLEAN NOT NULL DEFAULT false,
 

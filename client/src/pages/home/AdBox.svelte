@@ -1,57 +1,5 @@
 <script>
-  import { connect, sendRaw, waitForIdentity } from '../../lib/networking/client';
-  import { randomUsername } from '../../lib/random';
-  import { navigate } from 'svelte-routing';
-  import { safeAwait } from '../../utils/safe-await';
-  import { encodeNetworkMessage, MessageType } from '../../lib/networking/encoder';
   import KartyBezCenzury from '../../components/ad/KartyBezCenzury.svelte';
-
-  let connecting = false;
-
-  let username = window.localStorage.getItem('username') || randomUsername();
-
-  async function connectToServer() {
-    if (connecting) return false;
-
-    connecting = true;
-    const [_, connectionError] = await safeAwait(connect({
-      provider: 'anonymous',
-      username: username,
-      user_id: window.localStorage.getItem('uuid') || '',
-      user_token: window.localStorage.getItem('token') || '',
-    }));
-
-    if (connectionError) {
-      connecting = false;
-      console.error('Failed to connect:', connectionError);
-      return false;
-    }
-
-    const [_identity, identityError] = await safeAwait(waitForIdentity())
-
-    if (identityError) {
-      connecting = false;
-      console.error('Failed to get identity:', identityError);
-      return false;
-    }
-
-    return true;
-  }
-
-  async function randomJoin() {
-    if(!await connectToServer()) return;
-    sendRaw(encodeNetworkMessage('', MessageType.PLAIN, 'join_random'));
-  }
-
-  async function showLobby() {
-    if(!await connectToServer()) return;
-    navigate('/lobby');
-  }
-
-  async function createRoom() {
-    if(!await connectToServer()) return;
-    navigate('/create');
-  }
 </script>
 
 <div class="sponsor-wrap">

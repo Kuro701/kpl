@@ -1,34 +1,40 @@
 <script>
 
   import { loginViaDiscord } from "../../lib/auth/discord";
+  import { loginViaGoogle } from "../../lib/auth/google";
 
 </script>
-<div>
-	<button class="button button--discord" on:click={loginViaDiscord}>
-		Přihlášení přes Discord
-	</button>
+<div class="login-options">
+	<div class="login-provider" aria-label="Přihlásit se přes Discord" data-balloon-pos="up">
+		<button on:click={loginViaDiscord}>
+			<img src="/img/provider/discord.svg" alt="Discord" />
+		</button>
+	</div>
+
+	<div class="login-provider">
+		<button on:click={loginViaGoogle} aria-label="Přihlásit se přes Google" data-balloon-pos="up">
+			<img src="/img/provider/google.svg" alt="Discord" />
+		</button>
+	</div>
 </div>
 
 <style>
-	/* .button {
-		width: 10rem;
-	} */
-
-	.button--discord {
-		background-color: #7289da;
-		border: 1px solid #7289da;
-	}
-	.button--discord:hover {
-		background-color: #677bc4;
-		border: 1px solid #677bc4;
+	.login-options {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: .5rem;
 	}
 
-	/* .button--google {
-		background-color: #db4437;
-		border: 1px solid #db4437;
+	.login-provider button {
+		padding: none;
+		border: none;
+		background: none;
+		font-size: inherit;
 	}
-	.button--google:hover {
-		background-color: #c23321;
-		border: 1px solid #c23321;
-	} */
+	.login-provider img {
+		height: 2rem;
+		width: 2rem;
+		object-fit: contain;
+	}
 </style>

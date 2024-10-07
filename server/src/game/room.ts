@@ -8,6 +8,7 @@ import { Card } from "@prisma/client";
 import { smartArrayShuffleAtPlace } from "../utils/shuffle.js";
 import { wait } from "../utils/wait.js";
 import { randomElement } from "../utils/random.js";
+import chalk from "chalk";
 
 export enum RoomState {
 	LOBBY = 'lobby',
@@ -88,7 +89,7 @@ export class KplRoom {
 			this.hostUUID = host.uuid;
 		}
 
-		console.log(`Room ${this.name} (${this.uuid}) created by ${host ? `${host.username} (${host.uuid})` : 'system'}`);
+		console.log(`${chalk.bold.greenBright('+')} New room ${chalk.bold( this.name)} (${chalk.gray(this.uuid)}) ${chalk.greenBright('created by')} ${host ? `${chalk.bold(host.username)} (${chalk.gray(host.uuid)})` : 'system'}`);
 	}
 
 	public get playerCount(): number {
@@ -387,7 +388,7 @@ export class KplRoom {
 		}
 
 		this.isDestroyed = true;
-		console.log(`Room ${this.name} (${this.uuid}) destroyed`);
+		console.log(`${chalk.bold.redBright('-')} Room ${chalk.bold(this.name)} (${chalk.gray(this.uuid)}) ${chalk.redBright('destroyed')}`);
 		this.cancelIntermission();
 		this.players.forEach(player => player.quitRoom());
 	}
@@ -407,7 +408,7 @@ export class KplRoom {
 
 		// If player already was in the room before but disconnected (reconnect)
 		if (this.playerData[player.uuid]) {
-			console.log(`Player ${player.username} (${player.uuid}) reconnected to room ${this.name} (${this.uuid})`);
+			console.log(`Player ${chalk.bold(player.username)} (${chalk.gray(player.uuid)}) ${chalk.yellowBright('rejoined room')} ${chalk.bold(this.name)} (${chalk.gray(this.uuid)})`);
 			this.players.push(player);
 			broadcastLobbyUpdate();
 			this.broadcastGameState();
@@ -421,7 +422,7 @@ export class KplRoom {
 		}
 
 		// Add player to room
-		console.log(`Player ${player.username} (${player.uuid}) joined room ${this.name} (${this.uuid})`);
+		console.log(`Player ${chalk.bold(player.username)} (${chalk.gray(player.uuid)}) ${chalk.greenBright('joined room')} ${chalk.bold(this.name)} (${chalk.gray(this.uuid)})`);
 		this.players.push(player);
 		this.playerData[player.uuid] = {
 			points: 0,
@@ -443,7 +444,7 @@ export class KplRoom {
 	}
 
 	public onPlayerLeave(player: KplPlayer): void {
-		console.log(`Player ${player.username} (${player.uuid}) left room ${this.name} (${this.uuid})`);
+		console.log(`Player ${chalk.bold(player.username)} (${chalk.gray(player.uuid)}) ${chalk.red('left room')} ${chalk.bold(this.name)} (${chalk.gray(this.uuid)})`);
 
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);

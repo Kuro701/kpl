@@ -19,7 +19,7 @@ const commands = {
 		},
 		list: () => {
 			const rooms = getAllRooms();
-			console.log(`Rooms (${rooms.length}):\n${rooms.map(room => `  ${room.uuid} - ${room.name} (${room.playerCount}/${room.maxPlayers})`).join('\n')}`);
+			console.log(`\nRooms (${rooms.length}):\n${rooms.map(room => `  ${room.uuid} - ${room.name} (${room.playerCount}/${room.maxPlayers})`).join('\n')}\n`);
 
 		},
 	},
@@ -51,7 +51,7 @@ export async function runCLI() {
 			const part = parts.shift();
 
 			// @ts-ignore
-			if (!cmdPointer[part]) {
+			if (!part || !cmdPointer[part]) {
 				console.log(`Command not found`);
 				break;
 			}
