@@ -1,28 +1,11 @@
 <script lang="ts">
-  import { link } from "svelte-routing";
+	import { link } from "svelte-routing";
 	import Debuger from "../../components/debug/Debuger.svelte";
 	import DebugVariable from "../../components/debug/DebugVariable.svelte";
 	import { PlayerIdentity } from "../../lib/networking/client";
-	import { LastGameResults, type PlayerResults } from "../../lib/networking/room";
+	import { LastGameResults } from "../../lib/networking/room";
 	import PlayerWidget from "./PlayerWidget.svelte";
-
-	function scoreSorter(a: PlayerResults, b: PlayerResults) {
-		// If score is different, sort by score
-		if (a.points !== b.points) {
-			return b.points - a.points;
-		}
-
-		// If score is the same, prefer me :)
-		if (a.uuid === $PlayerIdentity?.uuid) {
-			return -1;
-		}
-		if (b.uuid === $PlayerIdentity?.uuid) {
-			return 1;
-		}
-
-		// If score is the same and neither is me, sort by username
-		return a.username.localeCompare(b.username);
-	}
+  import { scoreSorter } from "../../lib/score-sorter";
 </script>
 
 <Debuger>
@@ -33,7 +16,7 @@
 	<h1 class="game-over__title">Konec hry</h1>
 	<div class="podium">
 		{#if $LastGameResults}
-			{#each $LastGameResults.score.sort(scoreSorter).slice(0, 3) as result, i}
+			{#each $LastGameResults.score.sort(scoreSorter($PlayerIdentity?.uuid || '')).slice(0, 3) as result, i}
 				<div class="podium-player">
 					<div class="podium-player__player-widget">
 						<PlayerWidget name={result.username} image={result.image} />
@@ -53,7 +36,7 @@
 	</div>
 	<div class="score">
 		{#if $LastGameResults}
-			{#each $LastGameResults.score.sort(scoreSorter) as result, i}
+			{#each $LastGameResults.score.sort(scoreSorter($PlayerIdentity?.uuid || '')) as result, i}
 				<div class="player-score" class:me={result.uuid === $PlayerIdentity?.uuid}>
 					<div class="player-score__place">{i + 1}.</div>
 					<div class="player-score__name">{result.username}</div>

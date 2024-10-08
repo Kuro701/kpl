@@ -1,12 +1,15 @@
 <script lang="ts">
+  import { flip } from "svelte/animate";
+  import { PlayerIdentity } from "../../../lib/networking/client";
 	import { IngameRoom, RoomState } from "../../../lib/networking/room";
+  import { scoreSorter } from "../../../lib/score-sorter";
 
 
 	// TODO: Allow host to kick players
 </script>
 <div class="players">
-	{#each $IngameRoom?.players ?? [] as player}
-		<div class="player">
+	{#each ($IngameRoom?.players ?? []).sort(scoreSorter($PlayerIdentity?.uuid || '')) as player (player.uuid)}
+		<div class="player" animate:flip={{ duration: 500 }}>
 			<img class="player__avatar" src={player.image} alt={player.username} draggable="false" referrerpolicy="no-referrer" />
 			<div class="player__name">
 				<div class="role">

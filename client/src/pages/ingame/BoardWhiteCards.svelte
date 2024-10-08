@@ -15,6 +15,11 @@
 
 </script>
 
+{#if $IngameRoom?.state === RoomState.PICK_CZAR}
+	<div class="czar">
+		Císař <b>{$IngameRoom?.players.find(x => x.isCzar)?.username || ''}</b> vybírá vítěznou kartu
+	</div>
+{/if}
 <div class="cards">
 	{#each $BoardCards as cardGroup (cardGroup.id)}
 		<button class="card-group" on:click={() => onCardGroupClick(cardGroup.id)}>
@@ -43,7 +48,7 @@
 		gap: .5rem;
 		padding-bottom: .5rem;
 		height: fit-content;
-		margin-top: 2rem;
+		margin-top: 1rem;
 		justify-content: center;
 	}
 
@@ -67,5 +72,10 @@
 
 	.card {
 		cursor: var(--cursor-pointer);
+	}
+
+	.czar {
+		text-align: center;
+		margin-top: 1rem;
 	}
 </style>

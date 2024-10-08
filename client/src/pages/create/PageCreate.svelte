@@ -12,6 +12,7 @@
   import type { CardDeck } from "../../lib/networking/client";
   import CardDeckWidget from "./CardDeckWidget.svelte";
   import Card from "../../components/cards/Card.svelte";
+  import CardDeckSelector from "./CardDeckSelector.svelte";
 
   export let backTo = '/';
 
@@ -29,6 +30,7 @@
   };
 
   let availablePacks: CardDeck[] = [];
+  let selectedPacks: number[] = [];
 
   let working = true;
   async function createRoom() {
@@ -39,7 +41,7 @@
 
     const [roomUUID, error] = await safeAwait(rpcCall('createRoom', {
       ...settings,
-      decks: availablePacks.map(pack => pack.id),
+      decks: selectedPacks,
     }));
     working = false;
     if (error || !roomUUID) {
@@ -63,6 +65,13 @@
     }
 
     availablePacks = packs;
+
+    availablePacks.forEach(pack => {
+      if (pack.default) {
+        selectedPacks.push(pack.id);
+      }
+    })
+
     working = false;
   }
   getAvailablePacks();
@@ -73,6 +82,7 @@
   <DebugVariable name="working" variable={working} />
   <DebugVariable name="settings" variable={settings} />
   <DebugVariable name="availablePacks" variable={availablePacks} />
+  <DebugVariable name="selectedPacks" variable={selectedPacks} />
 </Debuger>
 
 <LayoutMenu>
@@ -83,23 +93,12 @@
   <div class="room-creator">
     <RoomSettings bind:value={settings} />
     <div class="card-packs">
-      <h3>Balíčky karet</h3>
-      <div class="card-packs__packs">
-        {#each availablePacks as pack}
-          <CardDeckWidget value={pack} />
-        {:else}
-          <p>Načítání...</p>
-        {/each}
-        <Card>
-          <p slot="front" style="font-size: .75rem; opacity: .75;text-align:center;">
-            Vlastní balíčky karet již brzy
-          </p>
-        </Card>
-      </div>
+      <CardDeckSelector bind:value={selectedPacks} options={availablePacks} />
     </div>
 
+
     <div class="actions">
-      <button class="button" on:click={createRoom}>
+      <button class="button" on:click={createRoom} disabled={selectedPacks.length === 0}>
         <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" />
         Vytvořit místnost
       </button>
@@ -117,9 +116,5 @@
 
   .card-packs {
     padding: 0 2rem;
-  }
-
-  .card-packs__packs {
-    display: flex;
   }
 </style>
