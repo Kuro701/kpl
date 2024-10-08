@@ -488,6 +488,8 @@ export class KplRoom {
 	}
 
 	private async sendGameState(player: KplPlayer) {
+		const playerData = this.playerData[player.uuid];
+
 		const roomData = {
 			uuid: this.uuid,
 			name: this.name,
@@ -500,7 +502,7 @@ export class KplRoom {
 			intermissionEnd: this.intermissionEnd,
 
 			hand: {
-				cards: this.playerData[player.uuid].hand.map(card => ({
+				cards: (playerData?.hand ?? []).map(card => ({
 					id: card.id,
 					text: card.text,
 					tip: card.tip,
