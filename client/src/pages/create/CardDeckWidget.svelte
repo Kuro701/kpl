@@ -23,7 +23,7 @@
 <style>
 	.deck {
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		gap: .75rem;
 		border: 1px solid #ccc;
 		padding: .5rem;
