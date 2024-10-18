@@ -72,6 +72,7 @@
       }
     })
 
+    selectedPacks = selectedPacks; //Trigger reactivity
     working = false;
   }
   getAvailablePacks();
