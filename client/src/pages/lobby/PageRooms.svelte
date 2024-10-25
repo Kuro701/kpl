@@ -7,6 +7,7 @@
   import RoomWidget from "./RoomWidget.svelte";
   import Debuger from "../../components/debug/Debuger.svelte";
   import DebugVariable from "../../components/debug/DebugVariable.svelte";
+  import RoomWidgetPlaceholder from "./RoomWidgetPlaceholder.svelte";
 
   let roomsByState: Record<string, LobbyRoom[]> = {
     lobby: [],
@@ -27,7 +28,7 @@
 <LayoutMenu>
   <LobbyHeader>
     <LobbyBackButton slot="left" action={() => navigate('/')} />
-    <h1>Veřejné místnosti</h1>
+    <h1>Místnosti</h1>
     <svelte:fragment slot="right">
       <a class="button" href="/rooms/create" use:link>
         <img src="/img/icons/plus.png" alt="Plus" draggable="false" class="icon invert" />
@@ -37,7 +38,7 @@
   </LobbyHeader>
 
 
-  {#if $LobbyRooms.length === 0}
+  {#if $LobbyRooms.length === 0 && $RoomCount === 0}
     <div class="empty">
       Je tu nějak prázdno :c <br />
       Svolej svoje kámoše a pojďte to tady oživit!
@@ -49,6 +50,9 @@
       {/each}
       {#each roomsByState.ingame as room (room.uuid)}
         <RoomWidget value={room} />
+      {/each}
+      {#each Array($RoomCount - $LobbyRooms.length) as _}
+        <RoomWidgetPlaceholder />
       {/each}
     </div>
   {/if}

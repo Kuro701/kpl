@@ -6,6 +6,7 @@ import { getLoginCredentials } from "../auth/auth";
 import { SystemMessage } from "./system-message";
 import { encodeNetworkMessage, MessageType } from "./encoder";
 import { NONCE_EMPTY } from "./nonce";
+import cookie from 'cookiejs';
 export type AuthProvier = 'anonymous' | 'discord' | 'google';
 
 export type AuthCredentials = {
@@ -15,7 +16,7 @@ export type AuthCredentials = {
 	user_token: string;
 };
 
-const SERVER_URL = import.meta.env.MODE === 'development' ? 'ws://localhost:3001' : 'wss://wss.cz1.helkor.eu/40004'; // TODO: Load from env or let user specify
+const SERVER_URL = cookie.get('server-ip') ||  (import.meta.env.MODE === 'development' ? 'ws://localhost:3001' : 'wss://wss.cz1.helkor.eu/40004'); // TODO: Load from env or let user specify
 
 let connection: WebSocket | null = null;
 let authCredentials: AuthCredentials | null = null;

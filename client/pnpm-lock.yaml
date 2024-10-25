@@ -14,6 +14,9 @@ importers:
       balloon-css:
         specifier: ^1.2.0
         version: 1.2.0
+      cookiejs:
+        specifier: ^2.1.3
+        version: 2.1.3
       svelte-routing:
         specifier: ^2.13.0
         version: 2.13.0
@@ -360,6 +363,9 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  cookiejs@2.1.3:
+    resolution: {integrity: sha512-pA/nRQVka2eTXm1/Dq8pNt1PN+e1PJNItah0vL15qwpet81/tUfrAp8e0iiVM8WEAzDcTGK5/1hDyR6BdBZMVg==}
 
   css-tree@2.3.1:
     resolution: {integrity: sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==}
@@ -874,6 +880,8 @@ snapshots:
       periscopic: 3.1.0
 
   concat-map@0.0.1: {}
+
+  cookiejs@2.1.3: {}
 
   css-tree@2.3.1:
     dependencies:
