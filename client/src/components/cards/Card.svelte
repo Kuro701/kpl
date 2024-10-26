@@ -26,7 +26,7 @@
       {/if}
 
       <slot name="front">
-        <p>{text.replaceAll(/_+/, '______')}</p>
+        <p>{text.replaceAll(/_+/g, '______')}</p>
         <img
           src={`/img/logo${black ? "_white" : ""}.png`}
           alt="Karty proti lidskosti"
