@@ -7,7 +7,6 @@ import { SystemMessage } from "./system-message";
 import { encodeNetworkMessage, MessageType } from "./encoder";
 import { NONCE_EMPTY } from "./nonce";
 import cookie from 'cookiejs';
-import { tooltip } from "../tooltip";
 export type AuthProvier = 'anonymous' | 'discord' | 'google';
 
 export type AuthCredentials = {
@@ -100,7 +99,6 @@ export async function disconnect() {
 }
 
 export async function leaveRoom() {
-	tooltip.set(null);
 	safeAwait(sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, {
 		f: 'leaveRoom',
 	})));

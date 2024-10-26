@@ -1,4 +1,5 @@
 import { derived, get, writable } from "svelte/store";
+import { playSound } from "../sounds";
 
 export enum RoomState {
 	LOBBY = 'lobby',
@@ -96,7 +97,7 @@ function submitSelectedCards(cards: number[]) {
 }
 
 export function pushSelectedCard(id: number) {
-
+	playSound('pick');
 	SelectedCards.update(cards => {
 		if (cards.includes(id)) {
 			return cards;

@@ -2,6 +2,7 @@ import { navigate } from "svelte-routing";
 import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, RoomCount, type LobbyRoom } from "./client";
 import { IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type GameResults } from "./room";
 import { get } from "svelte/store";
+import { playSound } from "../sounds";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -59,7 +60,21 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			SelectedCards.set([]);
 		}
 
-		IngameRoom.set(roomData);
+		IngameRoom.update((oldRoomData) => {
+			const isEvent_CzarSelected = oldRoomData?.table.lastRoundWinnerGroupId === null && roomData.table.lastRoundWinnerGroupId !== null;
+			if (isEvent_CzarSelected) {
+				const oldPoints = oldRoomData?.players.find(p => p.uuid === playerIndetity?.uuid)?.points || 0;
+				const newPoints = roomData.players.find(p => p.uuid === playerIndetity?.uuid)?.points || 0;
+				const isMine = newPoints > oldPoints;
+				if (isMine) {
+					playSound('point')
+				} else {
+					playSound('selected');
+				}
+			}
+
+			return roomData;
+		});
 		reply(OK);
 	},
 	pickWhiteCards: async (reply, data) => {
@@ -73,6 +88,7 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 
 		LastGameResults.set(data as GameResults);
 		navigate('/game-over');
+		playSound('gameover');
 	},
 	playerCount: async (reply, data) => {
 		reply(OK);
