@@ -1,4 +1,4 @@
-enum SoundCategory {
+export enum SoundCategory {
 	SFX = 'sfx',
 	MUSIC = 'music',
 }
@@ -51,6 +51,10 @@ export function setVolume(category: SoundCategory, volume: number) {
 			sound.updateVolume();
 		}
 	});
+}
+
+export function getVolume(category: SoundCategory) {
+	return volumes[category];
 }
 
 export function playSound(sound: keyof typeof sounds) {
