@@ -8,12 +8,13 @@
 		{@const pickCount = $IngameRoom.table.black.pick}
 		{#each Array($IngameRoom.table.black.pick) as _, i}
 			{#if i < $SelectedCards.length}
-				{@const text = $IngameRoom.hand.cards.find(c => c.id === $SelectedCards[i])?.text}
+				{@const card = $IngameRoom.hand.cards.find(c => c.id === $SelectedCards[i])}
 				<Card
 					black={false}
-					show={!!text}
+					show={!!card?.text}
 					marked={false}
-					text={text ?? ''}
+					text={card?.text ?? ''}
+					tip={card?.tip ?? null}
 				/>
 			{:else}
 				<div class="card-shim">

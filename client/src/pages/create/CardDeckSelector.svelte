@@ -15,6 +15,8 @@
 			<CardDeckWidget value={deck} on:click={() => {
 				value = [...value, deck.id];
 			}} />
+		{:else}
+			<p class="info">Žádné další balíčky</p>
 		{/each}
 	</div>
 	<div class="decks-selected">
@@ -23,6 +25,8 @@
 			<CardDeckWidget value={deck} isSelected={true} on:click={() => {
 				value = value.filter(id => id !== deck.id);
 			}} />
+		{:else}
+			<p class="info">Vyberte alespoň jeden balíček</p>
 		{/each}
 	</div>
 </div>
@@ -45,5 +49,28 @@
 	}
 	.decks > div.decks-selected {
 		padding: 0 0 0 1rem;
+	}
+
+	.info {
+		text-align: center;
+		color: #999;
+		margin: 0;
+	}
+
+	@media (max-width: 50rem) {
+		.decks {
+			flex-direction: column-reverse;
+			height: auto;
+		}
+		.decks > div {
+			padding: 0 !important;
+		}
+		.decks > div:first-child {
+			padding-bottom: 1rem;
+		}
+
+		h3 {
+			text-align: center;
+		}
 	}
 </style>

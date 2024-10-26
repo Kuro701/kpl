@@ -11,12 +11,13 @@
 		<div class="deck__name">
 			{value.name}
 		</div>
-		<div class="deck__description">
-			{value.description}
+		<div class="deck__card-count">
+			<PackCardCount white={value.whiteCardCount} black={value.blackCardCount} />
 		</div>
 	</div>
-	<div class="deck__card-count">
-		<PackCardCount white={value.whiteCardCount} black={value.blackCardCount} />
+
+	<div class="deck__description">
+		{value.description}
 	</div>
 </button>
 
@@ -36,6 +37,7 @@
 		word-spacing: inherit;
 		text-align: inherit;
 		transition: transform .2s ease-out;
+		flex-direction: column;
 	}
 
 	.deck:hover {
@@ -47,15 +49,25 @@
 
 	.deck__header {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
+		gap: .5rem;
+		width: 100%;
 	}
 	.deck__name {
 		font-weight: 500;
 		font-size: .9rem;
+		flex: 1;
 	}
 	.deck__description {
 		font-size: 0.9rem;
 		font-weight: 300;
+	}
+
+	@media (max-width: 50rem) {
+		.deck:hover, .deck.deck--selected {
+			transform: none;
+		}
 	}
 </style>

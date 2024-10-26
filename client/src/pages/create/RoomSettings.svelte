@@ -35,7 +35,7 @@
 	</div>
 	<div class="property">
 		<div class="property__title">
-		Max. počet hráčů:
+			Max. počet hráčů:
 		</div>
 		<div class="property__input">
 		<select bind:value={value.maxPlayers}>
@@ -57,7 +57,7 @@
 		</select>
 		</div>
 	</div>
-	<div class="property">
+	<div class="property property--checkbox">
 		<div class="property__title">
 		Veřejná místnost:
 		</div>
@@ -103,5 +103,22 @@
 	}
 	.button--random:hover img {
 		opacity: 1;
+	}
+
+	@media (max-width: 50rem) {
+		.settings .property {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.settings .property__input {
+			width: 100%;
+		}
+		.settings .property.property--checkbox {
+			flex-direction: row;
+		}
+		.settings .property.property--checkbox .property__input{
+			width: fit-content;
+			flex: 0;
+		}
 	}
 </style>

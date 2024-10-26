@@ -7,6 +7,7 @@
 	import { IngameRoom, SelectedCards, ServerResponseFn } from "../../lib/networking/room";
 	import Board from "./Board.svelte";
 	import IngameSidebar from "./sidebar/IngameSidebar.svelte";
+	import TooltipDisplay from "../../components/layout/TooltipDisplay.svelte";
 
 	onDestroy(leaveRoom);
 
@@ -25,3 +26,5 @@
 	{/if}
 	<IngameSidebar slot="sidebar" />
 </LayoutGame>
+
+<TooltipDisplay />

@@ -18,18 +18,19 @@
 		align-items: center;
 	}
 	.lobby-header > div {
-		flex: 1;
 		display: flex;
 		align-items: center;
 	}
 	.lobby-header > div:first-child {
 		justify-content: flex-start;
+		flex: 1;
 	}
 	.lobby-header > div:nth-child(2) {
 		justify-content: center;
 	}
 	.lobby-header > div:last-child {
 		justify-content: flex-end;
+		flex: 1;
 	}
 
 	.lobby-header :global(h1)  {

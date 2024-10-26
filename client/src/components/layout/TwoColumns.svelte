@@ -17,4 +17,10 @@
 	.columns > div {
 		flex: 1;
 	}
+
+	@media (max-width: 50rem) {
+		.columns {
+			flex-direction: column;
+		}
+	}
 </style>

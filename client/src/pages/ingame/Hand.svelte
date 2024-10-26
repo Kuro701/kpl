@@ -65,6 +65,7 @@
 						black={false}
 						show={!hide}
 						text={card.text}
+						tip={card.tip}
 					/>
 				</button>
 			{/if}
@@ -84,6 +85,7 @@
 					black={false}
 					show={!hide}
 					text={card.text}
+					tip={card.tip}
 				/>
 			</button>
 		</div>

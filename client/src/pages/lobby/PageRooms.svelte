@@ -8,6 +8,7 @@
   import Debuger from "../../components/debug/Debuger.svelte";
   import DebugVariable from "../../components/debug/DebugVariable.svelte";
   import RoomWidgetPlaceholder from "./RoomWidgetPlaceholder.svelte";
+  import { formatPlural } from "../../utils/format-plural";
 
   let roomsByState: Record<string, LobbyRoom[]> = {
     lobby: [],
@@ -30,9 +31,9 @@
     <LobbyBackButton slot="left" action={() => navigate('/')} />
     <h1>Místnosti</h1>
     <svelte:fragment slot="right">
-      <a class="button" href="/rooms/create" use:link>
+      <a class="button button--room-create" href="/rooms/create" use:link>
         <img src="/img/icons/plus.png" alt="Plus" draggable="false" class="icon invert" />
-        Vytvořit místnost
+        <span>Vytvořit místnost</span>
       </a>
     </svelte:fragment>
   </LobbyHeader>
@@ -57,7 +58,7 @@
     </div>
   {/if}
   <div class="stats">
-    Online <b>{$PlayerCount} hráčů</b> v {$RoomCount} místnostech
+    Online <b>{$PlayerCount} {formatPlural($PlayerCount, 'hráč', 'hárči', 'hráčů')}</b> v {$RoomCount} {formatPlural($RoomCount, 'místnosti', 'místnostech', 'místnostech')}.
   </div>
 </LayoutMenu>
 
@@ -97,5 +98,11 @@
     text-align: center;
     color: var(--blackish);
     font-weight: 300;
+  }
+
+  @media (max-width: 50rem) {
+    .button--room-create > span {
+      display: none;
+    }
   }
 </style>

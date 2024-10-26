@@ -8,6 +8,7 @@
 		black={true}
 		show={$BlackCard !== null}
 		text={$BlackCard?.text ?? ""}
+		tip={$BlackCard?.tip ?? null}
 	/>
 </div>
 

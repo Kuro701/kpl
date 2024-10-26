@@ -3,8 +3,8 @@
 	import { PlayerIdentity } from "../../lib/networking/client";
 	import { BoardCards, IngameRoom, RoomState, ServerResponseFn } from "../../lib/networking/room";
 
+	$: playerIsCzar = $IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid);
 	function onCardGroupClick(id: string) {
-		const playerIsCzar = $IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid);
 		const isCzarRound = $IngameRoom?.state === RoomState.PICK_CZAR;
 		const reply = $ServerResponseFn;
 		const isClickable = playerIsCzar && isCzarRound && !!reply;
@@ -17,7 +17,11 @@
 
 {#if $IngameRoom?.state === RoomState.PICK_CZAR}
 	<div class="czar">
-		Císař <b>{$IngameRoom?.players.find(x => x.isCzar)?.username || ''}</b> vybírá vítěznou kartu
+		{#if playerIsCzar}
+			Vaše veličensto, <b>vyberte vítěznou kartu</b>
+		{:else}
+			Císař <b>{$IngameRoom?.players.find(x => x.isCzar)?.username || ''}</b> vybírá vítěznou kartu
+		{/if}
 	</div>
 {/if}
 <div class="cards">
@@ -32,6 +36,7 @@
 						shrink={i !== cardGroup.cards.length - 1}
 						noMargin={true}
 						marked={!!$IngameRoom && (cardGroup.id === $IngameRoom.table.lastRoundWinnerGroupId)}
+						tip={card.tip}
 					/>
 				</div>
 			{/each}
