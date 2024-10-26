@@ -135,6 +135,9 @@ input:disabled, select:disabled {
 .button.button--loading img {
 	opacity: 0;
 }
+.button span {
+	cursor: var(--cursor-pointer);
+}
 
 @keyframes rotate {
 	0% {
