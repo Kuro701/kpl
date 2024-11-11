@@ -24,7 +24,7 @@
 <div class="leave-wrapper">
 	<button class="button button--leave" on:click={leaveRoom}>
 		<img src="/img/icons/leave.png" alt="Odhlásit se" class="icon invert" draggable="false" />
-		Opustit místnost
+		<span>Opustit místnost</span>
 	</button>
 </div>
 

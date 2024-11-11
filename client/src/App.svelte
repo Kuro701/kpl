@@ -9,8 +9,13 @@
   import PageJoin from "./pages/home/PageJoin.svelte";
   import SystemMessageWidget from "./components/layout/SystemMessageWidget.svelte";
   import PageResults from "./pages/ingame/PageResults.svelte";
+  import { phoneMode } from "./lib/phone-mode";
 
 </script>
+
+<svelte:body
+  on:touchstart={() => phoneMode.set(true)}
+/>
 
 <Router>
   <Route path="/" component={PageEntry} />

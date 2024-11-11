@@ -2,6 +2,7 @@
 	import Card from "../../components/cards/Card.svelte";
 	import { PlayerIdentity } from "../../lib/networking/client";
 	import { BoardCards, IngameRoom, RoomState, ServerResponseFn } from "../../lib/networking/room";
+	import { phoneMode } from "../../lib/phone-mode";
 
 	$: playerIsCzar = $IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid);
 	function onCardGroupClick(id: string) {
@@ -24,7 +25,7 @@
 		{/if}
 	</div>
 {/if}
-<div class="cards">
+<div class="cards" class:cards--touchmode={$phoneMode}>
 	{#each $BoardCards as cardGroup (cardGroup.id)}
 		<button class="card-group" on:click={() => onCardGroupClick(cardGroup.id)}>
 			{#each cardGroup.cards as card, i (card.id)}
@@ -55,6 +56,12 @@
 		height: fit-content;
 		margin-top: 1rem;
 		justify-content: center;
+	}
+	.cards--touchmode {
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+		overflow: visible;
 	}
 
 	.card-group {

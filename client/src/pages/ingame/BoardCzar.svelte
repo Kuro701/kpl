@@ -1,4 +1,7 @@
-<div class="czar-board">
+<script lang="ts">
+	import { phoneMode } from "../../lib/phone-mode";
+</script>
+<div class="czar-board" class:touchscreen={$phoneMode}>
 	<h2>Jsi karetní císař</h2>
 	<p>
 		Tví poddaní právě vybírají karty, o kterých za malou chvilku rozhodneš
@@ -16,5 +19,11 @@
 	}
 	.czar-board p {
 		margin: 0;
+	}
+
+	.czar-board.touchscreen {
+		transform: none;
+		text-align: center;
+		justify-content: flex-start;
 	}
 </style>

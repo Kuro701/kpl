@@ -1,20 +1,24 @@
 <script>
-  import { PlayerIdentity } from "../../lib/networking/client";
+	import { PlayerIdentity } from "../../lib/networking/client";
 	import { IngameRoom, RoomState } from "../../lib/networking/room";
+	import { phoneMode } from "../../lib/phone-mode";
 	import BlackCardWidget from "./BlackCardWidget.svelte";
 	import BoardCzar from "./BoardCzar.svelte";
-  import BoardPick from "./BoardPick.svelte";
+	import BoardPick from "./BoardPick.svelte";
 	import BoardWhiteCards from "./BoardWhiteCards.svelte";
 	import Hand from "./Hand.svelte";
+	import HandTouchscreen from "./HandTouchscreen.svelte";
 	import Intermission from "./Intermission.svelte";
-  import LobbyState from "./LobbyState.svelte";
+	import LobbyState from "./LobbyState.svelte";
 </script>
-<div class="board">
+<div class="board" class:board--touchscreen={$phoneMode}>
 	<Intermission />
 
 	{#if $IngameRoom?.state === RoomState.LOBBY}
 		<LobbyState />
 	{:else}
+		{@const hideHand = ($IngameRoom?.state === RoomState.PICK_CZAR) || ($IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid))}
+
 		<BlackCardWidget />
 
 		{#if $IngameRoom?.state === RoomState.PICK_WHITE && $IngameRoom.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid)}
@@ -25,9 +29,12 @@
 			<BoardWhiteCards />
 		{/if}
 
-		<div class="hand">
-			<Hand hide={($IngameRoom?.state === RoomState.PICK_CZAR) || ($IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid))} />
-		</div>
+
+		{#if !$phoneMode || !hideHand}
+			<div class="hand">
+				<svelte:component this={$phoneMode ? HandTouchscreen : Hand} hide={hideHand} />
+			</div>
+		{/if}
 	{/if}
 </div>
 
@@ -39,6 +46,9 @@
 		padding: 1rem;
 		box-sizing: border-box;
 
+	}
+	.board--touchscreen {
+		overflow: auto;
 	}
 	.hand {
 		display: flex;

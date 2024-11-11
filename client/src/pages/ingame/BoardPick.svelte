@@ -1,21 +1,28 @@
 <script>
-  import Card from "../../components/cards/Card.svelte";
-  import { IngameRoom, SelectedCards } from "../../lib/networking/room";
+	import Card from "../../components/cards/Card.svelte";
+	import { IngameRoom, SelectedCards } from "../../lib/networking/room";
+	import { phoneMode } from "../../lib/phone-mode";
 
 </script>
-<div class="picker">
+<div class="picker" class:touchscreen={$phoneMode}>
 	{#if $IngameRoom}
 		{@const pickCount = $IngameRoom.table.black.pick}
 		{#each Array($IngameRoom.table.black.pick) as _, i}
 			{#if i < $SelectedCards.length}
-				{@const card = $IngameRoom.hand.cards.find(c => c.id === $SelectedCards[i])}
-				<Card
-					black={false}
-					show={!!card?.text}
-					marked={false}
-					text={card?.text ?? ''}
-					tip={card?.tip ?? null}
-				/>
+				{#if $phoneMode}
+					<div class="card-shim">
+						Karta vybrána
+					</div>
+				{:else}
+					{@const card = $IngameRoom.hand.cards.find(c => c.id === $SelectedCards[i])}
+					<Card
+						black={false}
+						show={!!card?.text}
+						marked={false}
+						text={card?.text ?? ''}
+						tip={card?.tip ?? null}
+					/>
+				{/if}
 			{:else}
 				<div class="card-shim">
 					Vyber kartu {i + 1}/{pickCount}
@@ -33,6 +40,11 @@
 		flex-direction: row;
 		gap: .5rem;
 	}
+	.picker.touchscreen {
+		flex-direction: column;
+		padding-bottom: 1rem;
+		align-items: center;
+	}
 
 	.card-shim {
 		width: 12em;
@@ -43,5 +55,11 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.picker.touchscreen .card-shim {
+		height: fit-content;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
 	}
 </style>

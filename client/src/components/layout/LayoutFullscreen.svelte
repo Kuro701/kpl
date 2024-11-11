@@ -37,4 +37,12 @@
 		background-color: var(--blackish);
 	}
 
+	@media screen and (max-width:1199px) {
+		.layout-fullscreen {
+			padding: 0rem;
+		}
+		.layout-fullscreen__content {
+			border-radius: 0;
+		}
+	}
 </style>
