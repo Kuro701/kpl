@@ -9,6 +9,7 @@ import { smartArrayShuffleAtPlace } from "../utils/shuffle.js";
 import { wait } from "../utils/wait.js";
 import { randomElement } from "../utils/random.js";
 import chalk from "chalk";
+import { GameErrors } from "../errors.js";
 
 export enum RoomState {
 	LOBBY = 'lobby',
@@ -327,7 +328,7 @@ export class KplRoom {
 		}));
 
 		if (error || !cards) {
-			// TODO: Send room initialization error
+			this.players.forEach(player => player.sendError(GameErrors.ROOM_NOT_INITED));
 			destroyRoom(this);
 			return;
 		}
@@ -396,13 +397,13 @@ export class KplRoom {
 	// #region Player join/leave
 	public onPlayerJoin(player: KplPlayer): boolean {
 		if (this.isDestroyed) {
-			// TODO: Send room is destroyed error
+			player.sendError(GameErrors.ROOM_NOT_FOUND);
 			return false;
 		}
 
 		// If room is full, refuse to join
 		if (this.players.length >= this.maxPlayers) {
-			// TODO: Send room is full error
+			player.sendError(GameErrors.ROOM_FULL);
 			return false;
 		}
 
@@ -417,7 +418,7 @@ export class KplRoom {
 
 		// If player is new and game is already running, refuse to join
 		if (this._state !== RoomState.LOBBY) {
-			// TODO: Send game has already started error
+			player.sendError(GameErrors.ROOM_ALREADY_STARTED);
 			return false;
 		}
 
@@ -472,7 +473,7 @@ export class KplRoom {
 
 		if (this._state !== RoomState.LOBBY && this.players.length < MIN_PLAYERS) {
 			// If game is running and not enough players, end game
-			// TODO: Send message to players
+			this.players.forEach(p => p.sendError(GameErrors.ROOM_DESTROYED_PLAYER_QUIT));
 			destroyRoom(this);
 		} else if (this.players.length === 0) {
 			// If room is empty, destroy room

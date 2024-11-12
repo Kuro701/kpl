@@ -3,6 +3,7 @@ import { NetworkKit } from "../networking/socket-connection-client.js";
 import { safeAwait } from "../utils/safe-await.js";
 import { getRoomByUUID } from "./room-manager.js";
 import { KplRoom } from "./room.js";
+import { GameErrors } from "../errors.js";
 
 export class KplPlayer {
 	public readonly uuid: string;
@@ -67,6 +68,10 @@ export class KplPlayer {
 
 	public sendRaw(message: string) {
 		this.netkit.sendRaw(message);
+	}
+
+	public sendError(error: typeof GameErrors[keyof typeof GameErrors]) {
+		this.netkit.sendError(error);
 	}
 
 	public rpc<T>(method: string, data: any, timeout?: number) {
