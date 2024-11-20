@@ -58,7 +58,7 @@
     </div>
   {/if}
   <div class="stats">
-    Online <b>{$PlayerCount} {formatPlural($PlayerCount, 'hráč', 'hárči', 'hráčů')}</b> v {$RoomCount} {formatPlural($RoomCount, 'místnosti', 'místnostech', 'místnostech')}.
+    Online <b>{$PlayerCount} {formatPlural($PlayerCount, 'hráč', 'hráči', 'hráčů')}</b> v {$RoomCount} {formatPlural($RoomCount, 'místnosti', 'místnostech', 'místnostech')}.
   </div>
 </LayoutMenu>
 
