@@ -15,7 +15,6 @@
 		<slot />
 	</div>
 	<div class="layout-menu__footer">
-		<div>Hosted by <a href="https://link.helkor.eu/from-kpl" target="_blank">Helkor.eu</a></div>
 		<div>By <a href="https://sarahyzova.cz/" target="_blank">Sára Hýžová</a> with ❤️ and a lot of ☕</div>
 		<div>2018 - {yearNow}</div>
 	</div>
