@@ -8,5 +8,5 @@ V průběhu let získala má stránka neočekávanou popularitu na kterou původ
 Následovalo několik přepisů stránky, které se snažili tyto potíže řešit a zároveň jsem chtěla do hry přidávat nové funkce (jako editor vlastních karet, účty a další).
 Bohužel každý můj pokus o jakékoliv vylepšení této hry končil výhružnými a neslušnými e-maily v mé schránce a při sebemenším výpadku hry jsem okamžitě zahrnuta zprávavi proč hra nefunguje a ať tí okamžitě opravím, což mi práci na tomto projektu značně znechutilo.
 
-Tento projekt zdaleka není tím, čím jsem ho chtěla mít, ale již nemám v plánu nadále v tomto projektu pokračovat. Servery budu ještě nějakou dobu držet online.
+Tento projekt zdaleka není tím, čím jsem ho chtěla mít, ale již nemám v plánu nadále v tomto projektu pokračovat.
 Kód hry je zvěřejněn na mém GitHub profilu a otevřen komunitnímu vývoji.
