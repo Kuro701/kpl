@@ -9,6 +9,3 @@ Bohužel každý můj pokus o jakékoliv vylepšení této hry končil výhružn
 
 Tento projekt zdaleka není tím, čím jsem ho chtěla mít, ale již nemám v plánu nadále v tomto projektu pokračovat.
 Kód hry je zvěřejněn na mém GitHub profilu a otevřen komunitnímu vývoji.
-
-## Kde jinde si můžu zahrát?
-- https://kartyprotivsem.eu
