@@ -213,7 +213,7 @@ export async function leaveRoom() {
 
 
 
-export function waitForIdentity(timeout: number = 2000): Promise<IPlayerIdentity> {
+export function waitForIdentity(timeout: number = 10000): Promise<IPlayerIdentity> {
 
 	const identity = get(PlayerIdentity);
 	if (identity) {

@@ -2,7 +2,9 @@ import { sendRaw } from "./client.js";
 import { encodeNetworkMessage, MessageType, type NetworkMessage } from "./encoder.js";
 import { createNonce, NONCE_EMPTY } from "./nonce.js";
 
-const DEFAULT_TIMEOUT = 2000;
+// Sized for a real network with a possibly-sleeping free-tier server on the
+// other end, not for localhost.
+const DEFAULT_TIMEOUT = 10000;
 const promises = new Map<string, { resolve: (value: unknown) => void, reject: (reason: any) => void }>();
 
 

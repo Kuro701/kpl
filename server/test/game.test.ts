@@ -32,7 +32,8 @@ class TestClient {
 	connect(): Promise<void> {
 		return new Promise((resolve, reject) => {
 			this.ws = new WebSocket(URL);
-			const t = setTimeout(() => reject(new Error(`${this.name}: connect timeout`)), 8000);
+			// A sleeping free-tier server can take about a minute to wake up.
+			const t = setTimeout(() => reject(new Error(`${this.name}: connect timeout`)), 90000);
 
 			this.ws.onmessage = (ev) => this.onMessage(String(ev.data), resolve, t);
 			this.ws.onerror = () => { clearTimeout(t); reject(new Error(`${this.name}: socket error`)); };
@@ -134,7 +135,20 @@ async function main() {
 	const host = new TestClient('Kuro');
 	const b = new TestClient('Terka');
 	const c = new TestClient('Marek');
-	await host.connect(); await b.connect(); await c.connect();
+
+	async function connectWithRetry(client: TestClient) {
+		try {
+			await client.connect();
+		} catch (e) {
+			log(`   ${client.name} failed once (${(e as Error).message}) — retrying`);
+			await sleep(2000);
+			await client.connect();
+		}
+	}
+
+	await connectWithRetry(host);
+	await connectWithRetry(b);
+	await connectWithRetry(c);
 	assert(host.uuid && b.uuid && c.uuid, 'all three players got an identity');
 
 	log('\n--- host creates a room ---');

@@ -8,7 +8,15 @@ import { createAnonymousPlayer, tryReviveAnonymousPlayer } from "./anonymous-pla
 import { NetworkKit } from "./socket-connection-client.js";
 import { getLobbyStateNetworkMessage } from "../game/room-manager.js";
 
-const LOGIN_TIMEOUT = 1000;
+/*
+ * How long the server waits for a client to answer the auth handshake.
+ *
+ * This was 1000ms, which is generous on localhost and far too tight across the
+ * internet — a cold free-tier instance behind a proxy can take longer than that
+ * for a single round trip, and the connection was dropped as AUTH_TIMEOUT
+ * before the player ever saw the game.
+ */
+const LOGIN_TIMEOUT = 15000;
 const USERNAME_MAX_LENGTH = 24;
 
 /*
