@@ -9,7 +9,6 @@
 	let copyTimer: ReturnType<typeof setTimeout> | null = null;
 
 	$: joinCode = $IngameRoom?.uuid ?? '';
-	$: joinLink = joinCode ? `${window.location.origin}/join/${joinCode}` : '';
 
 	/*
 	 * navigator.clipboard only exists in a secure context, and some browsers
@@ -56,10 +55,10 @@
 		selection.addRange(range);
 	}
 
-	async function copyLink() {
-		if (!joinLink) return;
+	async function copyCode() {
+		if (!joinCode) return;
 
-		const ok = await writeToClipboard(joinLink);
+		const ok = await writeToClipboard(joinCode);
 
 		if (!ok) {
 			selectCode();
@@ -81,10 +80,10 @@
 		{$IngameRoom?.name ?? "Místnost"}
 	</div>
 
-	<button class="code" on:click={copyLink} title="Zkopírovat odkaz na místnost">
+	<button class="code" on:click={copyCode} title="Zkopírovat kód místnosti">
 		<span class="code__value" id="join-code-value">{joinCode}</span>
 		<span class="code__action">
-			{#if state === 'copied'}zkopírováno ✓{:else if state === 'manual'}zkopíruj ručně{:else}kopírovat odkaz{/if}
+			{#if state === 'copied'}zkopírováno ✓{:else if state === 'manual'}zkopíruj ručně{:else}kopírovat kód{/if}
 		</span>
 	</button>
 
