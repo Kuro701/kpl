@@ -115,6 +115,27 @@
     margin-bottom: 1rem;
   }
 
+  .actions .button {
+    min-width: 15rem;
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-contrast);
+    font-weight: 600;
+    box-shadow: var(--accent-glow);
+  }
+  .actions .button:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--accent-contrast);
+    box-shadow: var(--accent-glow-strong);
+  }
+  .actions .button[disabled] {
+    background-color: var(--surface);
+    border-color: var(--border);
+    color: var(--muted);
+    box-shadow: none;
+  }
+
   .card-packs {
     padding: 0 2rem;
   }

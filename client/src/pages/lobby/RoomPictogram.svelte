@@ -32,5 +32,13 @@
 	.pictogram img {
 		height: 2.5rem;
 		width: 2.5rem;
+		filter: invert(1);
+		opacity: .85;
+	}
+
+	.pictogram__name {
+		font-size: .85rem;
+		font-weight: 500;
+		color: var(--fg);
 	}
 </style>

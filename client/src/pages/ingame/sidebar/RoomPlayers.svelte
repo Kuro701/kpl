@@ -3,7 +3,6 @@
 	import { PlayerIdentity } from "../../../lib/networking/client";
 	import { IngameRoom, RoomState } from "../../../lib/networking/room";
 	import { scoreSorter } from "../../../lib/score-sorter";
-	import { specialUsers } from "../../../lib/special-users";
 
 
 	// TODO: Allow host to kick players
@@ -22,26 +21,6 @@
 				</div>
 				<div class="name">
 					<div>{player.username}</div>
-
-					{#if specialUsers[player.uuid]}
-						<button
-							class="special-icon"
-							aria-label={specialUsers[player.uuid].text}
-							data-balloon-pos="up"
-							on:click={() => {
-								if (specialUsers[player.uuid].link) {
-									window.open(specialUsers[player.uuid].link, '_blank');
-								}
-							}}
-						>
-							<img
-								class="special-icon"
-								class:invert={specialUsers[player.uuid].iconInverted}
-								src={specialUsers[player.uuid].icon}
-								alt={specialUsers[player.uuid].text}
-							/>
-						</button>
-					{/if}
 				</div>
 			</div>
 			<div class="player__score">
@@ -63,6 +42,24 @@
 		display: flex;
 		align-items: center;
 		gap: .5rem;
+		padding: .35rem .5rem;
+		margin: -.35rem -.5rem;
+		border-radius: var(--radius);
+		border: 1px solid transparent;
+		transition: background-color .15s ease, border-color .15s ease;
+	}
+	.player:hover {
+		background-color: var(--surface-hover);
+	}
+
+	/* The czar (in game) and the host (in the lobby) are the only rows that
+	   render a role label — give them a faint purple wash. */
+	.player:has(.role span) {
+		background-color: rgba(180, 108, 245, .14);
+		border-color: var(--accent-dim);
+	}
+	.player:has(.role span):hover {
+		background-color: rgba(180, 108, 245, .2);
 	}
 
 	.player__avatar {
@@ -70,10 +67,16 @@
 		width: 2.5rem;
 		object-fit: cover;
 		border-radius: .75rem;
+		background-color: var(--avatar-bg);
+		border: 1px solid var(--border);
+		box-sizing: border-box;
 	}
 
 	.player__score {
 		margin-left: auto;
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		color: var(--accent-text);
 	}
 
 	.player__name {
@@ -84,12 +87,15 @@
 
 	.player__name .name {
 		font-size: 1rem;
+		color: var(--fg);
 	}
 
 	.player__name .role {
-		font-size: .75rem;
-		color: var(--gray);
-		font-weight: 200;
+		font-size: .7rem;
+		color: var(--accent-text);
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: .08em;
 		transform: translateY(.2rem);
 	}
 

@@ -7,7 +7,7 @@ import { SystemMessage } from "./system-message";
 import { encodeNetworkMessage, MessageType } from "./encoder";
 import { NONCE_EMPTY } from "./nonce";
 import cookie from 'cookiejs';
-export type AuthProvier = 'anonymous' | 'discord' | 'google';
+export type AuthProvier = 'anonymous';
 
 export type AuthCredentials = {
 	provider: AuthProvier;
@@ -16,7 +16,19 @@ export type AuthCredentials = {
 	user_token: string;
 };
 
-const SERVER_URL = cookie.get('server-ip') ||  (import.meta.env.MODE === 'development' ? 'ws://localhost:3001' : 'wss://kpl-backend.by-sh.eu/'); // TODO: Load from env or let user specify
+/*
+ * Where the game server lives. Set VITE_SERVER_URL at build time (e.g.
+ * wss://your-backend.onrender.com) so the same source can be pointed at any
+ * host. The `server-ip` cookie still wins, which is handy for debugging against
+ * a local server from the deployed site.
+ */
+const SERVER_URL = (cookie.get('server-ip') as string | undefined)
+	|| import.meta.env.VITE_SERVER_URL
+	|| 'ws://localhost:3000';
+
+if (!import.meta.env.VITE_SERVER_URL && import.meta.env.MODE !== 'development') {
+	console.error('VITE_SERVER_URL is not set — this build has no game server to talk to.');
+}
 
 let connection: WebSocket | null = null;
 let authCredentials: AuthCredentials | null = null;

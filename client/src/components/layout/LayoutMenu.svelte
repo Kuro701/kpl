@@ -15,14 +15,19 @@
 		<slot />
 	</div>
 	<div class="layout-menu__footer">
-		<div>By <a href="https://sarahyzova.cz/" target="_blank">Sára Hýžová</a> with ❤️ and a lot of ☕</div>
-		<div>2018 - {yearNow}</div>
+		<div><a href="/rules" use:link>Pravidla</a></div>
+		<div>{yearNow}</div>
 	</div>
 </div>
 
 <style>
 	.layout-menu {
-		background: var(--blackish);
+		background-color: var(--bg);
+		background-image:
+			radial-gradient(60rem 38rem at 50% 32%, rgba(180, 108, 245, .18), transparent 70%),
+			radial-gradient(34rem 26rem at 82% 92%, rgba(236, 72, 153, .08), transparent 72%);
+		background-repeat: no-repeat;
+		color: var(--fg);
 		height: 100vh;
 		min-height: 100vh;
 		display: flex;
@@ -32,13 +37,18 @@
 		gap: 1.5rem;
 	}
 	.layout-menu.dark-theme {
-		background: var(--black);
-		color: rgb(255 255 255 / 93%);
+		background-color: var(--bg-deep);
+		color: var(--fg);
 	}
 
 	.layout-menu__content {
-		background: white;
-		border-radius: .5rem;
+		background: var(--panel);
+		border: 1px solid var(--accent-dim);
+		border-radius: var(--radius-lg);
+		box-shadow:
+			0 0 0 1px rgba(0, 0, 0, .35),
+			0 1.5rem 3.5rem rgba(0, 0, 0, .55),
+			var(--accent-glow);
 		width: 60rem;
 		max-width: calc(100% - 1rem);
 		max-height: calc(100vh - 14.5rem); /* 2*1,5rem (gaps) 5rem (logo) 1,5rem (footer padding) 5ren (foorer) */
@@ -52,13 +62,14 @@
 		max-width: calc(100% - 2rem);
 		width: 100%;
 		margin-top: 1rem;
+		filter: drop-shadow(0 0 18px rgba(180, 108, 245, .35));
 	}
 	.dark-theme .layout-menu__content {
-		background: var(--blackish);
+		background: var(--panel);
 	}
 
 	.layout-menu__footer {
-		color: var(--white-transparency);
+		color: var(--muted);
 		font-size: .9rem;
 		display: flex;
 		gap: 1rem;
@@ -67,7 +78,7 @@
 		flex-wrap: wrap;
 	}
 	.layout-menu__footer > div {
-		border-right: 1px solid var(--white-transparency);
+		border-right: 1px solid var(--border);
 		padding-right: 1rem;
 	}
 	.layout-menu__footer > div:last-child {
@@ -76,11 +87,13 @@
 	}
 
 	.layout-menu__footer a {
-		color: var(--white-transparency);
+		color: var(--muted);
 		text-decoration: underline;
+		text-underline-offset: .18em;
+		transition: color .16s ease;
 	}
 	.layout-menu__footer a:hover {
-		color: var(--white);
+		color: var(--accent-text);
 	}
 
 	@media (max-width: 60rem) {

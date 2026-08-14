@@ -1,17 +1,49 @@
-<script>
+<script lang="ts">
 	import { leaveRoom } from "../../../lib/networking/client";
 	import { IngameRoom } from "../../../lib/networking/room";
 
+	let copied = false;
+	let copyTimer: ReturnType<typeof setTimeout> | null = null;
+
+	$: joinCode = $IngameRoom?.uuid ?? '';
+	$: joinLink = joinCode ? `${window.location.origin}/join/${joinCode}` : '';
+
+	async function copyLink() {
+		if (!joinLink) return;
+
+		try {
+			await navigator.clipboard.writeText(joinLink);
+		} catch {
+			// Clipboard is blocked outside https and in some mobile browsers.
+			// Select the text instead so the player can copy it by hand.
+			const selection = window.getSelection();
+			const node = document.getElementById('join-code-value');
+			if (selection && node) {
+				const range = document.createRange();
+				range.selectNodeContents(node);
+				selection.removeAllRanges();
+				selection.addRange(range);
+			}
+			return;
+		}
+
+		copied = true;
+		if (copyTimer) clearTimeout(copyTimer);
+		copyTimer = setTimeout(() => { copied = false; }, 1600);
+	}
 </script>
 
 <div class="room-info-wraper">
 	<div class="room-name">
 		{$IngameRoom?.name ?? "Místnost"}
 	</div>
+
+	<button class="code" on:click={copyLink} title="Zkopírovat odkaz na místnost">
+		<span class="code__value" id="join-code-value">{joinCode}</span>
+		<span class="code__action">{copied ? 'zkopírováno ✓' : 'kopírovat odkaz'}</span>
+	</button>
+
 	<div class="room-info">
-		<div class="room-visibility">
-			{$IngameRoom?.isPublic ? "Veřejná" : "Soukromá"} hra
-		</div>
 		<div class="room-players">
 			{$IngameRoom?.players.length ?? 0}/{$IngameRoom?.maxPlayers ?? 0} hráčů
 		</div>
@@ -49,7 +81,47 @@
 	.room-name {
 		text-transform: capitalize;
 		text-align: center;
+		margin-bottom: .75rem;
 	}
+
+	.code {
+		display: flex;
+		align-items: center;
+		gap: .75rem;
+		width: 100%;
+		padding: .6rem .75rem;
+		margin-bottom: .75rem;
+		box-sizing: border-box;
+		font: inherit;
+		text-align: left;
+		border-radius: var(--radius);
+		background: var(--chip-bg);
+		border: 1px solid var(--chip-border);
+		color: inherit;
+		cursor: var(--cursor-pointer);
+		transition: border-color .15s, background-color .15s;
+	}
+	.code:hover {
+		border-color: var(--accent);
+		background: var(--chip-bg-hover);
+	}
+
+	.code__value {
+		flex: 1;
+		font-family: var(--font-mono);
+		font-size: 1.2rem;
+		font-weight: 800;
+		letter-spacing: .2em;
+		color: var(--accent-text);
+		user-select: all;
+	}
+
+	.code__action {
+		font-size: .7rem;
+		color: var(--muted);
+		white-space: nowrap;
+	}
+
 	.room-info {
 		display: flex;
 		justify-content: center;

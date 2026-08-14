@@ -52,7 +52,8 @@
 
 	.intermission-bar {
 		border-radius: 1rem;
-		background-color: #ccc;
+		background-color: var(--surface);
+		box-shadow: inset 0 0 0 1px var(--border);
 		width: 100%;
 		height: 0.375rem;
 		overflow: hidden;
@@ -60,6 +61,7 @@
 	.intermission-bar__progress {
 		height: 100%;
 		width: var(--progress, 0%);
-		background-color: #03a9f4;
+		background-color: var(--accent);
+		box-shadow: var(--accent-glow);
 	}
 </style>

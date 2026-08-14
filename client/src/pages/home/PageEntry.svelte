@@ -1,67 +1,64 @@
-<script>
-  import AdBox from './AdBox.svelte';
+<script lang="ts">
   import ProfileEditor from './ProfileEditor.svelte';
   import ItemList from "../../components/layout/ItemList.svelte";
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import TwoColumns from "../../components/layout/TwoColumns.svelte";
-  import { connect, connectToServer, sendRaw, waitForIdentity } from '../../lib/networking/client';
-  import { randomUsername } from '../../lib/random';
+  import { connectToServer } from '../../lib/networking/client';
   import { navigate, link } from 'svelte-routing';
-  import { safeAwait } from '../../utils/safe-await';
-  import { encodeNetworkMessage, MessageType } from '../../lib/networking/encoder';
-  import Login from './Login.svelte';
   import LobbyHeader from '../../components/layout/LobbyHeader.svelte';
-  import { rpcCall } from '../../lib/networking/req-res-manager';
-  import { getLoginCredentials, LocalIdentity } from '../../lib/auth/auth';
+  import { LocalIdentity } from '../../lib/auth/auth';
   import Debuger from '../../components/debug/Debuger.svelte';
   import DebugVariable from '../../components/debug/DebugVariable.svelte';
-  import AccountHome from './AccountHome.svelte';
+
+  const CODE_LENGTH = 5;
 
   let connecting = false;
-  let loaders = {
-    randomJoin: false,
-    showLobby: false,
-    createRoom: false,
-  };
-  $: connecting = Object.values(loaders).some(Boolean);
-
   let username = $LocalIdentity.username;
 
-  async function randomJoin() {
-    loaders.randomJoin = true;
-    if(!await connectToServer(username)) {
-      loaders.randomJoin = false;
-      return;
-    };
-    const [roomId, error] = await safeAwait(rpcCall('joinRandomRoom'));
+  let code = '';
+  let codeError = '';
 
-    if (error) {
-      console.error('Failed to join random room:', error);
-      loaders.randomJoin = false;
+  // Codes are shared out loud and over chat, so be forgiving: lowercase, spaces,
+  // dashes, and the classic O/0 and I/L/1 mix-ups all resolve to the same room.
+  function cleanCode(raw: string): string {
+    return raw
+      .toUpperCase()
+      .replace(/[\s\-_]/g, '')
+      .replace(/O/g, '0')
+      .replace(/[IL]/g, '1')
+      .replace(/[^0-9A-Z]/g, '')
+      .slice(0, CODE_LENGTH);
+  }
+
+  function onCodeInput(event: Event) {
+    code = cleanCode((event.target as HTMLInputElement).value);
+    codeError = '';
+  }
+
+  function joinByCode() {
+    const clean = cleanCode(code);
+
+    if (clean.length !== CODE_LENGTH) {
+      codeError = `Kód má ${CODE_LENGTH} znaků.`;
       return;
     }
 
-    loaders.randomJoin = false;
-    navigate(`/room/${roomId}`);
+    navigate(`/join/${clean}`);
   }
 
-  async function showLobby() {
-    loaders.showLobby = true;
-    if(!await connectToServer(username)) {
-      loaders.showLobby = false;
-      return;
-    };
-    loaders.showLobby = false;
-    navigate('/rooms');
+  function onCodeKey(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      joinByCode();
+    }
   }
 
   async function createRoom() {
-    loaders.createRoom = true;
-    if(!await connectToServer(username))  {
-      loaders.createRoom = false;
+    connecting = true;
+    if (!await connectToServer(username)) {
+      connecting = false;
       return;
-    };
-    loaders.createRoom = false;
+    }
+    connecting = false;
     navigate('/create');
   }
 </script>
@@ -72,60 +69,73 @@
 
 <LayoutMenu>
   <LobbyHeader>
-    <div class="social-links" slot="left">
-      <a class="button button--social button--discord" href="https://dsc.gg/kpl-online" target="_blank" aria-label="Discord" data-balloon-pos="down">
-        <img src="/img/provider/discord_black.svg" alt="Discord" draggable="false" />
-      </a>
-    </div>
-
     <h1>Hrát</h1>
-
-    <div class="social-links" slot="right">
-      <a class="button button--social" aria-label="Pravidla" data-balloon-pos="down" href="/rules" use:link>
-        <img src="/img/icons/rules.png" alt="Pravidla" draggable="false" />
+    <div class="header-actions" slot="right">
+      <a class="button button--ghost" aria-label="Pravidla" data-balloon-pos="down" href="/rules" use:link>
+        <img src="/img/icons/rules.png" alt="Pravidla" draggable="false" class="icon invert" />
       </a>
     </div>
   </LobbyHeader>
 
   <TwoColumns>
     <ItemList slot="left">
-      <h2>Rychlá hra</h2>
+      <h2>Nová hra</h2>
+      <p class="sub">Vyber si přezdívku, založ místnost a pošli kámošům kód.</p>
 
       <ProfileEditor bind:username disabled={connecting} />
 
       <div class="actions">
-        <div class="action">
-          <button class="button" class:button--loading={loaders.randomJoin} on:click={randomJoin} disabled={connecting}>
-            Náhodně připojit
-          </button>
-        </div>
-        <div class="action">
-          <button class="button" class:button--loading={loaders.showLobby} on:click={showLobby} disabled={connecting}>
-            Místnosti
-          </button>
-          <div aria-label="Vytvořit místnost" data-balloon-pos="right">
-            <button class="button" on:click={createRoom}  disabled={connecting} class:button--loading={loaders.createRoom}>
-              <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" draggable="false" />
-            </button>
-          </div>
-        </div>
+        <button class="button button--primary" class:button--loading={connecting} on:click={createRoom} disabled={connecting}>
+          <img src="/img/icons/plus.png" alt="" class="icon invert" draggable="false" />
+          Vytvořit místnost
+        </button>
       </div>
-
-
     </ItemList>
-    <div class="how-to-play" slot="right">
-      <!-- <HowToPlay /> -->
-      {#if $LocalIdentity.provider === 'anonymous'}
-        <Login />
-      {:else}
-        <AccountHome />
-      {/if}
-      <AdBox />
+
+    <div class="join" slot="right">
+      <div class="joinbox">
+        <h2>Připojit se kódem</h2>
+        <p class="sub">Kámoš ti poslal kód místnosti? Hoď ho sem.</p>
+
+        <input
+          class="code-input"
+          type="text"
+          inputmode="latin"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          maxlength={CODE_LENGTH}
+          placeholder="•••••"
+          value={code}
+          on:input={onCodeInput}
+          on:keydown={onCodeKey}
+        />
+
+        {#if codeError}
+          <div class="code-error">{codeError}</div>
+        {:else}
+          <div class="code-hint">nebo klikni na odkaz, který ti poslal</div>
+        {/if}
+
+        <button class="button button--primary button--wide" on:click={joinByCode} disabled={code.length !== CODE_LENGTH}>
+          Připojit se
+        </button>
+      </div>
     </div>
   </TwoColumns>
 </LayoutMenu>
 
 <style>
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .sub {
+    margin: .25rem 0 1rem 0;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+
   .actions {
     display: flex;
     flex-direction: column;
@@ -133,37 +143,59 @@
     gap: .5rem;
     margin: 1rem 0 2rem 0;
   }
-  .action {
-    display: flex;
-    justify-content: space-between;
-    gap: .25rem;
-  }
-  .action > .button:first-child {
-    flex: 1;
-  }
 
-  h1 {
-    margin-bottom: 0;
-  }
-
-  .how-to-play {
+  .join {
     display: flex;
-    box-sizing: border-box;
-    flex-direction: column;
-    gap: 1rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
-    padding-bottom: 2rem;
+    padding: 1rem 0 2rem 0;
+    box-sizing: border-box;
   }
 
-  .social-links {
+  .joinbox {
+    width: 100%;
+    max-width: 20rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    background: var(--joinbox-bg);
+    border: 1px solid var(--accent-dim);
+    box-sizing: border-box;
+  }
+
+  .joinbox h2 {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+
+  .code-input {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: .34em;
+    text-align: center;
+    text-transform: uppercase;
+    height: 3rem;
+    text-indent: .34em;
+  }
+
+  .code-hint,
+  .code-error {
+    margin: .5rem 0 .85rem 0;
+    font-size: .7rem;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .code-error {
+    color: var(--danger);
+  }
+
+  .header-actions {
     display: flex;
     gap: 1rem;
-  }
-
-  .button--discord img {
-    width: 2.5rem;
-    height: 2.5rem;
   }
 </style>

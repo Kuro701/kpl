@@ -15,13 +15,17 @@
 
 <style>
 	.tooltip {
-		background-color: rgb(32, 32, 32);
-		color: white;
+		background-color: var(--panel-raised);
+		border: 1px solid var(--border-strong);
+		color: var(--fg);
 		padding: 0.75em;
-		border-radius: .75rem;
+		border-radius: var(--radius);
+		box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .55);
 		position: absolute;
 		font-size: 0.75rem;
+		line-height: 1.35;
 		max-width: 15rem;
+		pointer-events: none;
 		transform: translate(-50%, calc(-100% - .5rem));
 	}
 </style>

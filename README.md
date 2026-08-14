@@ -1,11 +1,84 @@
 # Karty proti lidskosti
 
-Tento projekt vnikl v době, kdy jsem byla na střední škole a chtěla jsem si s kamarády zahrát karetní hru karty proti lidskosti.
-Hra byla v průběhu let postupně vylepšována a několikrát přepsána. Tento repozitář obsahuje její poslední přepis. 
+Česká online verze karetní hry. Založíš místnost, dostaneš pětiznakový kód, pošleš ho kámošům — a hrajete. Žádné účty, žádné reklamy, žádný veřejný seznam místností.
 
-V průběhu let získala má stránka neočekávanou popularitu na kterou původní stránka ovšem nebyla stavěná a potýkala se s opakovanými výpadky.
-Následovalo několik přepisů stránky, které se snažili tyto potíže řešit a zároveň jsem chtěla do hry přidávat nové funkce (jako editor vlastních karet, účty a další).
-Bohužel každý můj pokus o jakékoliv vylepšení této hry končil výhružnými a neslušnými e-maily v mé schránce a při sebemenším výpadku hry jsem okamžitě zahrnuta zprávavi proč hra nefunguje a ať tí okamžitě opravím, což mi práci na tomto projektu značně znechutilo.
+Fork původní hry od **Sáry Hýžové**, která projekt v roce 2024 ukončila a zveřejnila kód pro komunitní vývoj. Původní autorství viz [LICENSE](LICENSE).
 
-Tento projekt zdaleka není tím, čím jsem ho chtěla mít, ale již nemám v plánu nadále v tomto projektu pokračovat.
-Kód hry je zvěřejněn na mém GitHub profilu a otevřen komunitnímu vývoji.
+---
+
+## Co se v tomhle forku změnilo
+
+- **Žádná databáze.** Původní build držel karty v MySQL přes Prismu, ale hra do nich nikdy nezapisuje — jen čte. Karty (1016 kusů) se teď načtou při startu ze souborů v `server/cards/`. Odpadl tím celý databázový server.
+- **Jen soukromé místnosti.** Veřejný seznam místností a "náhodně připojit" jsou pryč. Dovnitř se dostaneš kódem nebo odkazem.
+- **Čitelné kódy.** Pětiznakový kód místo osmiznakového hexu. Písmena `O`/`I`/`L` se automaticky převádí na `0`/`1`, velikost písmen a pomlčky nevadí — `k7-f2q` otevře stejnou místnost jako `K7F2Q`.
+- **Bez účtů.** Přihlašování přes Google a Discord bylo odstraněné (bez původních API klíčů stejně nefungovalo). Hraje se pod přezdívkou.
+- **Nový vzhled.** Tmavé neonové téma.
+- **HTTP + WebSocket.** Server odpovídá na `/health`, takže se dá hostovat na platformách, které kontrolují běh služby.
+
+## Jak to rozjet lokálně
+
+Potřebuješ Node 20+.
+
+**Server** (PowerShell):
+
+```powershell
+cd server
+npm install
+npm run dev
+```
+
+Poslouchá na portu 3000. Otevři `http://localhost:3000/health` — musí odpovědět `{"status":"ok",...}`.
+
+**Klient** (druhé okno PowerShellu):
+
+```powershell
+cd client
+npm install
+npm run dev
+```
+
+Klient si v dev režimu sám sáhne na `ws://localhost:3000`.
+
+> Hra potřebuje **3 hráče**, aby šla spustit. Na testování otevři tři okna prohlížeče (aspoň jedno anonymní — identita se drží v `localStorage`).
+
+## Nasazení zdarma
+
+Server a web se hostují zvlášť.
+
+### 1. Server → Render
+
+1. [render.com](https://render.com) → **New** → **Blueprint** → vyber tenhle repozitář.
+2. Render si přečte [`render.yaml`](render.yaml) a službu vytvoří sám. Nic nevyplňuj.
+3. Až doběhne, zkopíruj adresu služby, např. `https://kpl-server.onrender.com`.
+
+Na free plánu server po 15 minutách ticha usne a probouzí se asi minutu. Provoz z rozehrané hry ho drží vzhůru — čeká jen ten, kdo přijde jako první.
+
+### 2. Web → Cloudflare Pages
+
+1. [pages.cloudflare.com](https://pages.cloudflare.com) → **Create a project** → připoj tenhle repozitář.
+2. Nastav:
+   - **Framework preset:** none
+   - **Build command:** `npm install && npm run build`
+   - **Build output directory:** `dist`
+   - **Root directory:** `client`
+3. Přidej proměnnou prostředí:
+   - **`VITE_SERVER_URL`** = `wss://kpl-server.onrender.com`
+
+   Adresa serveru z kroku 1, ale s **`wss://`** místo `https://`. Stránka na https nesmí otevřít nešifrovaný WebSocket — prohlížeč to zablokuje.
+4. Deploy.
+
+Změna proměnné `VITE_SERVER_URL` se projeví až po novém buildu — je zapečená do JS.
+
+## Struktura
+
+```
+server/          Node + WebSocket herní server (TypeScript, spouští se přes tsx)
+  src/game/      místnosti, hráči, kola
+  src/networking/ protokol, RPC, identita
+  cards/         balíčky karet (JSON)
+client/          Svelte + Vite
+  src/pages/     obrazovky
+  src/lib/       síť, identita, pomocné věci
+```
+
+Protokol mezi klientem a serverem je JSON pole `[nonce, type, data]` přes WebSocket, obousměrné RPC.

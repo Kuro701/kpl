@@ -11,7 +11,6 @@
 	import { LocalIdentity } from '../../lib/auth/auth';
 	import Debuger from '../../components/debug/Debuger.svelte';
 	import DebugVariable from '../../components/debug/DebugVariable.svelte';
-	import LoginOptions from './LoginOptions.svelte';
 	import RoomPictogram from '../lobby/RoomPictogram.svelte';
 	import { link } from 'svelte-routing';
 
@@ -71,11 +70,6 @@
 			<ItemList slot="right">
 				<h2>Identita</h2>
 				<ProfileEditor bind:username disabled={connecting} />
-
-				{#if $LocalIdentity.provider === 'anonymous'}
-					<div class="or">nebo</div>
-					<LoginOptions />
-				{/if}
 			</ItemList>
 			<ItemList slot="left">
 				{#if roomInfo}

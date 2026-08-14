@@ -26,18 +26,24 @@
 		width: 5rem;
 		height: 5rem;
 		border-radius: 2rem;
+		object-fit: cover;
+		background-color: var(--avatar-bg);
+		border: 1px solid var(--border);
+		box-sizing: border-box;
 	}
 	.player-widget__image--placeholder {
-		background-color: #ccc;
+		background-color: var(--avatar-bg);
+		border: 1px dashed var(--border-strong);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		font-size: 2rem;
-		color: #333;
+		color: var(--muted);
 	}
 
 	.player-widget__name {
 		font-size: 1rem;
+		color: var(--fg);
 	}
 	/* .player-widget__name.long {
 		font-size: 0.8rem;

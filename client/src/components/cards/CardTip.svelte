@@ -30,5 +30,13 @@
 		top: 3px;
 		border: none;
 		right: 3px;
+		border-radius: 50%;
+		opacity: .7;
+		transition: opacity .15s ease, filter .15s ease;
+	}
+	.tooltip:hover,
+	.tooltip:focus-visible {
+		opacity: 1;
+		filter: drop-shadow(0 0 4px rgba(180, 108, 245, .8));
 	}
 </style>

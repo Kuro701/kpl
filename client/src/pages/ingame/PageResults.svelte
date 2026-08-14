@@ -55,18 +55,28 @@
 
 <style>
 	.game-over {
-		background-color: var(--blackish);
+		background-color: var(--bg);
+		background-image: radial-gradient(120% 80% at 50% 0%, rgba(180, 108, 245, .18), transparent 70%);
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		color: white;
+		color: var(--fg);
 		gap: 2rem;
 		overflow: auto;
 	}
 	.game-over__title {
 		font-size: 3rem;
 		margin-top: 2rem;
+		color: var(--fg);
+		text-shadow: var(--accent-glow-strong);
+	}
+
+	/* The leave link carries the legacy `invert` class, which used to flip the
+	   whole button white on the old dark results page. The themed .button
+	   already reads correctly on dark, so only the icon stays inverted. */
+	.game-over .button {
+		filter: none;
 	}
 
 	.podium {
@@ -84,10 +94,14 @@
 	}
 
 	.player-podium__pedestal {
-		background-color: white;
+		background-color: var(--panel-raised);
+		border: 1px solid var(--border);
+		border-bottom: none;
+		border-radius: var(--radius) var(--radius) 0 0;
+		box-sizing: border-box;
 		width: 5rem;
 		height: 3rem;
-		color: black;
+		color: var(--fg);
 		text-align: center;
 		line-height: 3rem;
 		font-size: 1.2rem;
@@ -100,8 +114,10 @@
 		order: 2;
 	}
 	.podium-player:nth-child(1) .player-podium__pedestal {
-		background-color: gold;
-		color: rgb(61, 51, 0);
+		background-color: var(--accent);
+		border-color: var(--accent);
+		color: var(--accent-contrast);
+		box-shadow: var(--accent-glow-strong);
 		height: 8rem;
 	}
 
@@ -110,8 +126,9 @@
 		order: 1;
 	}
 	.podium-player:nth-child(2) .player-podium__pedestal {
-		background-color: silver;
-		color: rgb(51, 51, 51);
+		background-color: rgba(180, 108, 245, .22);
+		border-color: var(--accent-dim);
+		color: var(--fg);
 		height: 6rem;
 	}
 
@@ -121,8 +138,9 @@
 		order: 3;
 	}
 	.podium-player:nth-child(3) .player-podium__pedestal {
-		background-color: #cd7f32;
-		color: #311e0b;
+		background-color: var(--surface-hover);
+		border-color: var(--border-strong);
+		color: var(--fg);
 		height: 4rem;
 	}
 
@@ -131,27 +149,39 @@
 		flex-direction: column;
 		font-size: 1.1rem;
 		width: 40rem;
+		max-width: 100%;
+		background-color: var(--panel);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		box-sizing: border-box;
+		overflow: hidden;
 	}
 	.player-score {
 		display: flex;
 		flex-direction: row;
 		gap: 1rem;
-		border-bottom: 1px solid rgb(255, 255, 255, 0.1);
+		border-bottom: 1px solid var(--border);
 		padding: 1rem .75rem;
+		color: var(--fg);
 
 	}
 	.player-score__place {
 		width: 1.5rem;
+		color: var(--muted);
 	}
 	.player-score__name {
 		flex-grow: 1;
 	}
 	.player-score__points {
 		text-align: right;
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		color: var(--accent-text);
 	}
 
 	.player-score.me {
-		background-color: rgb(255, 255, 255, 0.85);
-		color: black;
+		background-color: rgba(180, 108, 245, .14);
+		color: var(--fg);
+		box-shadow: inset 3px 0 0 var(--accent);
 	}
 </style>

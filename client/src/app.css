@@ -1,30 +1,79 @@
+/* ============================================================
+   Karty proti lidskosti — Neon theme
+   ============================================================ */
+
 @font-face {
 	font-family: '7tA114RsvV';
-	src: url('/font/destroy.ttf')
+	src: url('/font/destroy.ttf');
+	font-display: swap;
 }
 
 html,
 body {
 	padding: 0;
 	margin: 0;
+	min-height: 100%;
 
-	--blackish: #101010;
-	--black: #000;
-	--white: #fff;
-	--white-transparency: rgba(255, 255, 255, 0.75);
+	/* --- palette --- */
+	--bg: #08060e;
+	--bg-deep: #050409;
+	--panel: #140f20;
+	--panel-raised: #1b1528;
+	--surface: rgba(255, 255, 255, .045);
+	--surface-hover: rgba(255, 255, 255, .09);
+	--border: rgba(255, 255, 255, .1);
+	--border-strong: rgba(255, 255, 255, .17);
 
-	--font-text: "Poppins", sans-serif;
+	--accent: #b46cf5;
+	--accent-hover: #c68bff;
+	--accent-dim: rgba(180, 108, 245, .32);
+	--accent-text: #d9bcff;
+	--accent-contrast: #0b0714;
+	--accent-glow: 0 0 22px rgba(180, 108, 245, .42);
+	--accent-glow-strong: 0 0 34px rgba(180, 108, 245, .62);
+
+	--fg: #ece9f5;
+	--muted: #8b83a3;
+	--danger: #ff6b81;
+	--ok: #4ade80;
+
+	--chip-bg: rgba(255, 255, 255, .045);
+	--chip-bg-hover: rgba(180, 108, 245, .12);
+	--chip-border: rgba(255, 255, 255, .1);
+	--joinbox-bg: linear-gradient(150deg, rgba(180, 108, 245, .14), rgba(236, 72, 153, .07));
+	--avatar-bg: rgba(255, 255, 255, .06);
+
+	/* Kept for components that still reference the original names. */
+	--blackish: #0d0918;
+	--black: #05040a;
+	--white: #ffffff;
+	--white-transparency: rgba(255, 255, 255, .6);
+	--gray: #8b83a3;
+
+	/* --- shape --- */
+	--radius: .65rem;
+	--radius-lg: .9rem;
+
+	/* --- type --- */
+	--font-text: "Poppins", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 	--font-karty-bez-cenzury: '7tA114RsvV', sans-serif;
 
-	--cursor-normal: url('/img/cursor/pixel/tile_0168.png'), auto;
-	--cursor-pointer: url('/img/cursor/pixel/tile_0137.png'), auto;
-	--cursor-text: url('/img/cursor/pixel/tile_0140.png'), auto;
-	--cursor-not-allowed: url('/img/cursor/pixel/tile_0015.png'), auto;
+	/* The original build shipped pixel-art cursors. The names stay so every
+	   component that references them keeps working — they just resolve to the
+	   normal system cursors now. */
+	--cursor-normal: auto;
+	--cursor-pointer: pointer;
+	--cursor-text: text;
+	--cursor-not-allowed: not-allowed;
 
 	cursor: var(--cursor-normal);
 	font-family: var(--font-text);
 	font-weight: 400;
 	font-style: normal;
+	color: var(--fg);
+	background: var(--bg);
+	-webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, label {
@@ -35,53 +84,118 @@ button, a {
 	cursor: var(--cursor-pointer);
 }
 
+a {
+	color: var(--accent-text);
+}
+
+::selection {
+	background: var(--accent);
+	color: var(--accent-contrast);
+}
+
+/* --- form controls --- */
 input, select {
 	cursor: var(--cursor-text);
 	font-family: var(--font-text);
-	height: 2rem;
+	height: 2.5rem;
 	box-sizing: border-box;
-	padding: 0.5rem;
+	padding: 0.5rem 0.75rem;
 	font-size: 1rem;
-	border: 1px solid var(--blackish);
-	border-radius: 0.25rem;
+	color: var(--fg);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
 	width: 100%;
+	outline: none;
+	transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+input::placeholder {
+	color: var(--muted);
+	opacity: .7;
+}
+
+input:focus, select:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px rgba(180, 108, 245, .2);
 }
 
 select {
-	padding: 0 .25rem;
+	padding: 0 .5rem;
+	background: var(--panel-raised);
 }
 
 select, option {
 	cursor: var(--cursor-pointer);
 }
 
-input:disabled, select:disabled {
-	cursor: var(--cursor-not-allowed);
+option {
+	background: var(--panel-raised);
+	color: var(--fg);
 }
 
+input:disabled, select:disabled {
+	cursor: var(--cursor-not-allowed);
+	opacity: .55;
+}
+
+/* --- buttons --- */
 .button {
 	height: 2.5rem;
 	box-sizing: border-box;
 	margin: 0;
-	padding: .5rem 1rem;
+	padding: .5rem 1.15rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 1rem;
-	font-weight: 400;
+	font-weight: 500;
 	font-family: var(--font-text);
 	text-align: center;
 	gap: 0.5rem;
-	border: 1px solid var(--blackish);
-	border-radius: 0.5rem;
-	background-color: var(--blackish);
-	color: var(--white);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background-color: var(--surface);
+	color: var(--fg);
 	cursor: var(--cursor-pointer);
 	text-decoration: none;
+	transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .12s ease;
 }
 .button:hover {
-	background-color: var(--black);
+	background-color: var(--surface-hover);
+	border-color: var(--border-strong);
 	color: var(--white);
+	transform: translateY(-1px);
+}
+.button:active {
+	transform: translateY(0);
+}
+
+.button--primary {
+	background-color: var(--accent);
+	border-color: var(--accent);
+	color: var(--accent-contrast);
+	font-weight: 600;
+	box-shadow: var(--accent-glow);
+}
+.button--primary:hover {
+	background-color: var(--accent-hover);
+	border-color: var(--accent-hover);
+	color: var(--accent-contrast);
+	box-shadow: var(--accent-glow-strong);
+}
+
+.button--ghost, .button--ghost:hover {
+	background: none;
+	border: 1px solid transparent;
+	padding: 0 .5rem;
+}
+.button--ghost:hover {
+	border-color: var(--border);
+}
+
+.button--wide {
+	width: 100%;
 }
 
 .button--social, .button--social:hover {
@@ -89,6 +203,7 @@ input:disabled, select:disabled {
 	border: none;
 	padding: 0;
 	opacity: 0.8;
+	transform: none;
 }
 .button--social:hover {
 	opacity: 1;
@@ -112,9 +227,12 @@ input:disabled, select:disabled {
 }
 
 .button[disabled] {
-	background-color: var(--blackish);
-	color: var(--white-transparency);
+	background-color: var(--surface);
+	border-color: var(--border);
+	color: var(--muted);
 	cursor: var(--cursor-not-allowed);
+	box-shadow: none;
+	transform: none;
 }
 
 .button.button--loading, .button.button--loading:hover {
@@ -127,10 +245,11 @@ input:disabled, select:disabled {
 	position: absolute;
 	width: 1.2rem;
 	height: 1.2rem;
-	border: 2px solid white;
+	border: 2px solid currentColor;
 	border-radius: 50%;
 	border-top-color: transparent;
 	animation: rotate 1s linear infinite;
+	color: var(--accent-contrast);
 }
 .button.button--loading img {
 	opacity: 0;
@@ -146,4 +265,21 @@ input:disabled, select:disabled {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+/* --- scrollbars --- */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+	background: var(--border-strong);
+	border-radius: 99px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
 }

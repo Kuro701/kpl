@@ -105,10 +105,17 @@
 	}
 	.title h1 {
 		margin: 0;
+		color: var(--fg);
+		text-shadow: var(--accent-glow);
 	}
 	.title p {
 		margin: 0;
 		font-weight: 300;
+		color: var(--muted);
+	}
+	.title p b {
+		color: var(--accent-text);
+		font-weight: 500;
 	}
 
 	.start-btn-wrapper {
@@ -121,14 +128,21 @@
 		margin-top: 3rem;
 		font-size: .9rem;
 		font-weight: 400;
+		color: var(--muted);
 	}
 
 	.share input {
-		border: none;
-		background-color: transparent;
+		border: 1px solid var(--border);
+		background-color: var(--surface);
+		border-radius: var(--radius);
+		color: var(--accent-text);
 		font-size: 1rem;
 		text-align: center;
 		cursor: var(--cursor-pointer);
 		font-weight: 500;
+		margin-top: .5rem;
+	}
+	.share input:hover {
+		border-color: var(--accent);
 	}
 </style>

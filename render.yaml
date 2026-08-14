@@ -1,0 +1,18 @@
+# Render blueprint for the game server.
+# Render → New → Blueprint → pick this repo, and it reads this file.
+#
+# The free plan sleeps after 15 minutes with no traffic and takes about a minute
+# to wake up. WebSocket messages count as traffic, so a game in progress keeps
+# the server awake — only the first person to arrive after a quiet spell waits.
+services:
+  - type: web
+    name: kpl-server
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"

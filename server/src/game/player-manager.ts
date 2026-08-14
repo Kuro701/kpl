@@ -18,6 +18,10 @@ export function createPlayer(username: string, uuid: string, image: string, netw
 	return player;
 }
 
+export function getPlayerCount(): number {
+	return players.length;
+}
+
 export function getPlayerById(uuid: string): KplPlayer | undefined {
 	return players.find(player => player.uuid === uuid);
 }

@@ -92,14 +92,18 @@
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid grey;
-    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 13px;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 12px;
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, .6),
+      0 0 0 1px rgba(180, 108, 245, .1);
   }
 
   .card .front {
-    background: #fff;
+    background: #f7f5fb;
+    color: #12101a;
     z-index: 2;
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
@@ -113,25 +117,32 @@
   .card .back {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    background: #fff;
+    background: #f7f5fb;
+    color: #12101a;
   }
 
+  /* Black cards keep the deep-black face of the physical game, but pick up a
+     purple edge so they read as lit on the dark board. */
   .card.black .back,
   .card.black .front {
-    background: #000;
-    color: #fff;
+    background: #0f0b1a;
+    color: #f3f0fa;
+    border: 1px solid rgba(180, 108, 245, .42);
+    box-shadow:
+      0 14px 44px rgba(0, 0, 0, .75),
+      0 0 46px rgba(180, 108, 245, .28);
   }
 
   .card .back p {
     margin: 0;
     font-size: 1.5em;
     font-weight: 700;
-    font-family: Calibri;
+    font-family: var(--font-text);
     cursor: var(--cursor-pointer);
   }
 
   .card .front p {
-    font-family: Calibri;
+    font-family: var(--font-text);
     font-size: 1.3em;
     margin: 0;
     cursor: var(--cursor-pointer);
@@ -170,6 +181,10 @@
   }
 
   .card .front.marked {
-    background: #ffeb3b;
+    background: #efe0ff;
+    border-color: var(--accent);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, .65),
+      0 0 34px rgba(180, 108, 245, .6);
   }
 </style>

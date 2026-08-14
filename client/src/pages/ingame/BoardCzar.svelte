@@ -16,9 +16,17 @@
 		justify-content: center;
 		flex: 1;
 		transform: translateY(-15%);
+		color: var(--fg);
+		text-align: center;
+	}
+	.czar-board h2 {
+		margin: 0 0 .5rem;
+		color: var(--accent-text);
+		text-shadow: var(--accent-glow);
 	}
 	.czar-board p {
 		margin: 0;
+		color: var(--muted);
 	}
 
 	.czar-board.touchscreen {

@@ -16,6 +16,8 @@
 		justify-content: center;
 		padding: 1rem;
 		align-items: center;
+		border-bottom: 1px solid var(--border);
+		color: var(--fg);
 	}
 	.lobby-header > div {
 		display: flex;
@@ -35,5 +37,6 @@
 
 	.lobby-header :global(h1)  {
 		margin: 0;
+		color: var(--fg);
 	}
 </style>

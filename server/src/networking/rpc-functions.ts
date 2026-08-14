@@ -1,13 +1,40 @@
-import { db, queryCardDeckCounts } from "../database.js";
+import { getAvailableDecks, getDefaultDeckIds } from "../database.js";
 import { KplPlayer } from "../game/player.js";
-import { createRoom, getRandomJoinableRoom, getRoomByUUID, getRoomLobbyState } from "../game/room-manager.js";
-import { RoomConstructorData, RoomState } from "../game/room.js";
-import { safeAwait } from "../utils/safe-await.js";
+import { createRoom, getRoomByUUID, getRoomLobbyState, normalizeJoinCode } from "../game/room-manager.js";
+import { RoomState } from "../game/room.js";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (player: KplPlayer, reply: ReplyFunction, data: unknown) => Promise<void>;
 
 const OK = true;
+
+const ROOM_LIMITS = {
+	nameMaxLength: 40,
+	goal: { min: 3, max: 20, fallback: 8 },
+	maxPlayers: { min: 3, max: 12, fallback: 8 },
+};
+
+function clampInt(value: unknown, { min, max, fallback }: { min: number; max: number; fallback: number }): number {
+	const n = Math.floor(Number(value));
+	if (!Number.isFinite(n)) return fallback;
+	return Math.min(max, Math.max(min, n));
+}
+
+function cleanRoomName(value: unknown): string {
+	const name = typeof value === 'string' ? value.trim() : '';
+	if (!name) return 'Místnost';
+	return name.slice(0, ROOM_LIMITS.nameMaxLength);
+}
+
+function cleanDeckIds(value: unknown): number[] {
+	if (!Array.isArray(value)) return getDefaultDeckIds();
+
+	const ids = value
+		.map(id => Math.floor(Number(id)))
+		.filter(id => Number.isFinite(id));
+
+	return ids.length > 0 ? ids : getDefaultDeckIds();
+}
 
 export const rpcFunctions: Record<string, RequestFunction> = {
 	createRoom: async (player: KplPlayer, reply: ReplyFunction, data) => {
@@ -16,29 +43,36 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			return;
 		}
 
-		// TODO: Validate data
+		const input = (data ?? {}) as Record<string, unknown>;
 
 		const room = createRoom({
-			...data as RoomConstructorData,
+			name: cleanRoomName(input.name),
+			goal: clampInt(input.goal, ROOM_LIMITS.goal),
+			maxPlayers: clampInt(input.maxPlayers, ROOM_LIMITS.maxPlayers),
+			// Every room is private: this build has no public lobby, you get in
+			// with the code or you don't get in.
+			isPublic: false,
+			decks: cleanDeckIds(input.decks),
 			host: player,
 		});
+
 		player.joinRoom(room);
 		reply(room.uuid);
 	},
+
 	joinRoom: async (player: KplPlayer, reply: ReplyFunction, data) => {
 		if (player.room) {
 			reply(false);
 			return;
 		}
 
-		const roomId = (data as any).roomUUID;
+		const roomId = normalizeJoinCode((data as any)?.roomUUID);
 		if (!roomId) {
 			reply(false);
 			return;
 		}
 
 		const room = getRoomByUUID(roomId);
-
 		if (!room) {
 			reply(false);
 			return;
@@ -47,57 +81,27 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		const joined = player.joinRoom(room);
 		reply(joined ? room.uuid : false);
 	},
+
 	leaveRoom: async (player: KplPlayer, reply: ReplyFunction) => {
 		reply(OK);
 		if (player.room) {
 			player.quitRoom();
 		}
 	},
-	joinRandomRoom: async (player: KplPlayer, reply: ReplyFunction) => {
-		if (player.room) {
-			reply(false);
-			return;
-		}
 
-		const room = getRandomJoinableRoom();
-		if (room) {
-			reply(room.uuid);
-			player.joinRoom(room);
-		} else {
-			const defaultDecks = await db.cardDeck.findMany({
-				where: { default: true },
-				select: { id: true },
-			});
-
-			const newRoom = createRoom({
-				goal: 7,
-				isPublic: true,
-				maxPlayers: 10,
-				name: 'Veřejná místnost',
-				host: undefined,
-				decks: defaultDecks.map(deck => deck.id),
-			});
-			reply(newRoom.uuid);
-			player.joinRoom(newRoom);
-		}
-	},
 	startGame: async (player: KplPlayer, reply: ReplyFunction) => {
 		if (!player.room) {
 			reply(false);
-
-			// TODO: Send error message
 			return;
 		}
 
 		if (player.room.hostId !== player.uuid) {
 			reply(false);
-			// TODO: Send error message
 			return;
 		}
 
 		if (player.room.state !== RoomState.LOBBY) {
 			reply(false);
-			// TODO: Send error message
 			return;
 		}
 
@@ -105,9 +109,10 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		player.room.start();
 	},
 
-	// Returns lobby room info including private rooms
+	// Room info for the join-by-code screen. Works for private rooms on purpose —
+	// knowing the code is what grants you the preview.
 	getRoomInfo: async (player: KplPlayer, reply: ReplyFunction, data) => {
-		const roomId = (data as any).roomUUID;
+		const roomId = normalizeJoinCode((data as any)?.roomUUID);
 
 		if (!roomId) {
 			reply(false);
@@ -115,7 +120,6 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		}
 
 		const room = getRoomByUUID(roomId);
-
 		if (!room) {
 			reply(false);
 			return;
@@ -125,27 +129,6 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 	},
 
 	getAvailableCardDecks: async (player: KplPlayer, reply: ReplyFunction) => {
-		const [decks, error] = await safeAwait(db.cardDeck.findMany({
-			where: {
-				OR: [
-					{ public: true },
-					{ ownerUUID: player.uuid },
-				],
-			},
-		}));
-
-		if (error) {
-			reply([]);
-			return
-		}
-
-		const [result, queryError] = await safeAwait(Promise.all(decks.map(queryCardDeckCounts)));
-
-		if (queryError) {
-			reply([]);
-			return;
-		}
-
-		reply(result);
-	}
-}
+		reply(getAvailableDecks(player.uuid));
+	},
+};

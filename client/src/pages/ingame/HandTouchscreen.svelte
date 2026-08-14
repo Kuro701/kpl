@@ -136,7 +136,8 @@
 		flex-direction: column;
 		gap: .25rem;
 		align-items: center;
-		background-color: rgb(0, 0, 0, .5);
+		background-color: rgb(5, 4, 10, .78);
+		backdrop-filter: blur(3px);
 		width: 100%;
 		height: 100%;
 		top: 0;

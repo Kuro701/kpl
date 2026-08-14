@@ -55,12 +55,26 @@
 <style>
 	.rules {
 		padding: 0 2rem 1rem 2rem;
+		color: var(--fg);
 	}
 
 	h2 {
 		margin-bottom: 0;
+		font-size: 1.05rem;
+		letter-spacing: .04em;
+		text-transform: uppercase;
+		color: var(--accent-text);
 	}
 	h2 + p {
 		margin-top: .25rem;
+	}
+
+	.rules p {
+		line-height: 1.6;
+		color: var(--fg);
+	}
+
+	.rules b {
+		color: var(--accent-text);
 	}
 </style>

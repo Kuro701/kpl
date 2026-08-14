@@ -3,8 +3,7 @@ import { KplPlayer } from "./player.js";
 import { randomBytes } from "crypto";
 import { broadcastLobbyUpdate, destroyRoom, generateUniqueJoinCode } from "./room-manager.js";
 import { safeAwait } from "../utils/safe-await.js";
-import { db } from "../database.js";
-import { Card } from "@prisma/client";
+import { Card, getCardsForDecks } from "../database.js";
 import { smartArrayShuffleAtPlace } from "../utils/shuffle.js";
 import { wait } from "../utils/wait.js";
 import { randomElement } from "../utils/random.js";
@@ -313,21 +312,11 @@ export class KplRoom {
 
 	// #region Decks
 	private async loadDecks(): Promise<void> {
-		const [cards, error] = await safeAwait(db.card.findMany({
-			where: {
-				deckId: {
-					in: this.deckIds,
-				},
-				deck: {
-					OR: [
-						{ public: true },
-						{ ownerUUID: this.hostUUID || '' },
-					],
-				}
-			},
-		}));
+		const [cards, error] = await safeAwait(
+			Promise.resolve(getCardsForDecks(this.deckIds, this.hostUUID || ''))
+		);
 
-		if (error || !cards) {
+		if (error || !cards || cards.length === 0) {
 			this.players.forEach(player => player.sendError(GameErrors.ROOM_NOT_INITED));
 			destroyRoom(this);
 			return;

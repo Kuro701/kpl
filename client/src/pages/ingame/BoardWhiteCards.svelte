@@ -81,6 +81,11 @@
 		text-align: inherit;
 		background-color: transparent;
 	}
+	.card-group:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+		border-radius: var(--radius);
+	}
 
 	.card {
 		cursor: var(--cursor-pointer);
@@ -89,5 +94,9 @@
 	.czar {
 		text-align: center;
 		margin-top: 1rem;
+		color: var(--fg);
+	}
+	.czar b {
+		color: var(--accent-text);
 	}
 </style>

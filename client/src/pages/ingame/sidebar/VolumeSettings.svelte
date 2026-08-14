@@ -24,12 +24,19 @@
 	.volume-settings {
 		background-color: rgb(0, 0, 0, .25);
 		padding: .5rem 1.5rem;
+		color: var(--fg);
 	}
 
 	.volume-category {
 		display: flex;
 		gap: 1rem;
 		align-items: center;
+	}
+	.volume-category__name {
+		font-size: .7rem;
+		text-transform: uppercase;
+		letter-spacing: .1em;
+		color: var(--muted);
 	}
 	.volume-category__slider {
 		position: relative;
@@ -38,10 +45,21 @@
 	.volume-category__slider input {
 		cursor: var(--cursor-pointer);
 		opacity: 1;
+		accent-color: var(--accent);
+		height: auto;
+		padding: 0;
+		background: none;
+		border: none;
+	}
+	.volume-category__slider input:focus {
+		box-shadow: none;
 	}
 	.volume-category__value {
 		width: 2rem;
 		text-align: right;
+		font-size: .8rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--muted);
 	}
 
 	.slider-skin {
@@ -51,8 +69,8 @@
 		left: 0;
 		width: 100%;
 		height: .5rem;
-		--c1: red;
-		--c2: green;
+		--c1: var(--accent);
+		--c2: var(--surface);
 		background: linear-gradient(to right, var(--c1) 0, var(--c1) var(--p), var(--c2) var(--p), var(--c2) 100%);
 		pointer-events: none;
 		border-radius: 1rem;

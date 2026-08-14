@@ -23,8 +23,11 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    background: var(--bg-deep);
+    color: var(--fg);
   }
   .down {
     margin-top: auto;
+    border-top: 1px solid var(--border);
   }
 </style>

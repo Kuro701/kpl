@@ -139,6 +139,7 @@
 
 	.hand .card:hover {
 		width: var(--card-width);
+		filter: drop-shadow(0 0 26px rgba(180, 108, 245, .45));
 	}
 	.card--last {
 		width: var(--card-width);
@@ -148,6 +149,9 @@
 
 	.card.selected {
 		transform: translateY(-1.5rem);
+	}
+	.card.selected {
+		filter: drop-shadow(0 0 30px rgba(180, 108, 245, .6));
 	}
 	.card.selected::before {
 		content: "Kliknutím znovu potvrdíš výběr";

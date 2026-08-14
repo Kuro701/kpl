@@ -26,25 +26,34 @@
 		display: flex;
 		justify-content: space-between;
 		gap: .75rem;
-		border: 1px solid #ccc;
+		border: 1px solid var(--border);
 		padding: .5rem;
-		border-radius: .5rem;
-		background-color: transparent;
+		border-radius: var(--radius);
+		background-color: var(--surface);
 		font: inherit;
 		text-rendering: inherit;
-		color: inherit;
+		color: var(--fg);
 		letter-spacing: inherit;
 		word-spacing: inherit;
 		text-align: inherit;
-		transition: transform .2s ease-out;
+		transition: transform .2s ease-out, background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
 		flex-direction: column;
 	}
 
 	.deck:hover {
 		transform: translateX(.5rem);
+		background-color: var(--surface-hover);
+		border-color: var(--border-strong);
+	}
+
+	.deck.deck--selected {
+		background-color: var(--chip-bg-hover);
+		border-color: var(--accent);
+		box-shadow: var(--accent-glow);
 	}
 	.deck.deck--selected:hover {
 		transform: translateX(-.5rem);
+		border-color: var(--accent-hover);
 	}
 
 	.deck__header {
@@ -59,10 +68,15 @@
 		font-weight: 500;
 		font-size: .9rem;
 		flex: 1;
+		color: var(--fg);
+	}
+	.deck.deck--selected .deck__name {
+		color: var(--accent-text);
 	}
 	.deck__description {
 		font-size: 0.9rem;
 		font-weight: 300;
+		color: var(--muted);
 	}
 
 	@media (max-width: 50rem) {

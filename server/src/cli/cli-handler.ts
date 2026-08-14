@@ -38,6 +38,12 @@ const commands = {
 };
 
 export async function runCLI() {
+	// On a hosting platform stdin is not a terminal — there is nobody to type
+	// commands, and attaching readline just holds a stream open forever.
+	if (!process.stdin.isTTY) {
+		return;
+	}
+
 	const rl = readline.createInterface({
 		input: process.stdin,
 	});

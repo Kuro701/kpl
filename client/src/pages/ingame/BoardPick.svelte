@@ -49,9 +49,13 @@
 	.card-shim {
 		width: 12em;
 		height: 15em;
-		border: 2px dashed #888;
-		border-radius: 5px;
-		color: #888;
+		border: 2px dashed var(--accent-dim);
+		border-radius: var(--radius);
+		color: var(--accent-text);
+		background-color: rgba(180, 108, 245, .06);
+		box-sizing: border-box;
+		text-align: center;
+		padding: 0 1rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;

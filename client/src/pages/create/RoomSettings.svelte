@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Switch from "../../components/form/Switch.svelte";
 	import { PlayerIdentity } from "../../lib/networking/client";
 	import { randomRoomName } from "../../lib/random";
 
@@ -57,13 +56,8 @@
 		</select>
 		</div>
 	</div>
-	<div class="property property--checkbox">
-		<div class="property__title">
-		Veřejná místnost:
-		</div>
-		<div class="property__input">
-		<Switch bind:value={value.isPublic} />
-		</div>
+	<div class="property property--note">
+		Místnost je soukromá — dovnitř se dostane jen ten, komu pošleš kód.
 	</div>
 </div>
 
@@ -90,6 +84,21 @@
 		width: 100%;
 	}
 
+	.settings .property__tile,
+	.settings .property__title {
+		color: var(--fg);
+		font-size: .9rem;
+	}
+
+	.settings .property.property--note {
+		display: block;
+		margin-top: -.25rem;
+		color: var(--muted);
+		font-size: .8rem;
+		font-style: italic;
+		line-height: 1.4;
+	}
+
 	.button--random {
 		background: none;
 		border: none;
@@ -99,7 +108,9 @@
 	.button--random img {
 		width: 2rem;
 		height: 2rem;
-		opacity: .8;
+		opacity: .7;
+		filter: invert(1);
+		transition: opacity .16s ease;
 	}
 	.button--random:hover img {
 		opacity: 1;
