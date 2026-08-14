@@ -86,18 +86,26 @@
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid rgba(255, 255, 255, .5);
+    border: 1px solid rgba(140, 110, 90, .55);
     border-radius: 13px;
     box-sizing: border-box;
-    padding: 12px;
+    padding: 14px;
     box-shadow:
       0 10px 30px rgba(0, 0, 0, .6),
       0 0 0 1px rgba(229, 50, 45, .1);
   }
 
   .card .front {
-    background: #f7f5fb;
-    color: #12101a;
+    /* Ash paper, not white. Seven of these in a hand against a black board is
+       a glare panel at #f7f5fb. */
+    background: #d8cec2;
+    color: #1a1310;
+    /* The trim: a dark card edge with an ember rule just inside it, echoing the
+       frame on the back without crowding the text. */
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, .6),
+      inset 0 0 0 2px #b8371f,
+      inset 0 0 12px rgba(229, 50, 45, .3);
     z-index: 2;
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
@@ -136,6 +144,10 @@
      ember edge so they read as lit on the dark board. */
   .card.black .back,
   .card.black .front {
+    box-shadow:
+      0 14px 44px rgba(0, 0, 0, .75),
+      0 0 46px rgba(229, 50, 45, .28),
+      inset 0 0 0 2px rgba(184, 55, 31, .55);
     background: #120806;
     color: #f7efe9;
     border: 1px solid rgba(229, 50, 45, .42);
@@ -184,7 +196,7 @@
   }
 
   .card .front.marked {
-    background: #ffe7d8;
+    background: #f2e4d2;
     border-color: var(--accent);
     box-shadow:
       0 14px 36px rgba(0, 0, 0, .65),
