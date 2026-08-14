@@ -35,13 +35,7 @@
     </div>
     <div class="back">
       <slot name="back">
-        <p>
-          Karty
-          <br />
-          proti
-          <br />
-          lidskosti
-        </p>
+        <span class="back-art" role="img" aria-label="HELLFIRE CZ/SK"></span>
       </slot>
     </div>
   </div>
@@ -61,7 +55,7 @@
     perspective: 1000px;
     float: left;
     margin: 5px;
-    background: #fff;
+    background: transparent;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -98,7 +92,7 @@
     padding: 12px;
     box-shadow:
       0 10px 30px rgba(0, 0, 0, .6),
-      0 0 0 1px rgba(180, 108, 245, .1);
+      0 0 0 1px rgba(229, 50, 45, .1);
   }
 
   .card .front {
@@ -117,28 +111,37 @@
   .card .back {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    background: #f7f5fb;
-    color: #12101a;
+    /* The house deck. Black so the artwork's own background disappears into
+       the card and the letterboxing at the sides is invisible. */
+    background: #050303;
+    color: var(--fg);
+    border: 1px solid var(--accent-dim);
+    padding: 0;
+    overflow: hidden;
   }
 
-  /* Black cards keep the deep-black face of the physical game, but pick up a
-     purple edge so they read as lit on the dark board. */
+  .card .back-art {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/card-back.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    /* contain, not cover — cover would crop the ornate frame off the top and
+       bottom edges of the artwork. */
+    background-size: contain;
+  }
+
+  /* Black cards keep the deep-black face of the physical game, but pick up an
+     ember edge so they read as lit on the dark board. */
   .card.black .back,
   .card.black .front {
-    background: #0f0b1a;
-    color: #f3f0fa;
-    border: 1px solid rgba(180, 108, 245, .42);
+    background: #120806;
+    color: #f7efe9;
+    border: 1px solid rgba(229, 50, 45, .42);
     box-shadow:
       0 14px 44px rgba(0, 0, 0, .75),
-      0 0 46px rgba(180, 108, 245, .28);
-  }
-
-  .card .back p {
-    margin: 0;
-    font-size: 1.5em;
-    font-weight: 700;
-    font-family: var(--font-text);
-    cursor: var(--cursor-pointer);
+      0 0 46px rgba(229, 50, 45, .28);
   }
 
   .card .front p {
@@ -181,10 +184,10 @@
   }
 
   .card .front.marked {
-    background: #efe0ff;
+    background: #ffe7d8;
     border-color: var(--accent);
     box-shadow:
       0 14px 36px rgba(0, 0, 0, .65),
-      0 0 34px rgba(180, 108, 245, .6);
+      0 0 34px rgba(229, 50, 45, .6);
   }
 </style>

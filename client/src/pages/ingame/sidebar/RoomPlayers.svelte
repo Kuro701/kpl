@@ -53,13 +53,13 @@
 	}
 
 	/* The czar (in game) and the host (in the lobby) are the only rows that
-	   render a role label — give them a faint purple wash. */
+	   render a role label — give them a faint ember wash. */
 	.player:has(.role span) {
-		background-color: rgba(180, 108, 245, .14);
+		background-color: rgba(229, 50, 45, .14);
 		border-color: var(--accent-dim);
 	}
 	.player:has(.role span):hover {
-		background-color: rgba(180, 108, 245, .2);
+		background-color: rgba(229, 50, 45, .2);
 	}
 
 	.player__avatar {

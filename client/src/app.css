@@ -1,5 +1,5 @@
 /* ============================================================
-   Karty proti lidskosti — Neon theme
+   Karty proti lidskosti — HELLFIRE CZ/SK theme
    ============================================================ */
 
 @font-face {
@@ -15,40 +15,40 @@ body {
 	min-height: 100%;
 
 	/* --- palette --- */
-	--bg: #08060e;
-	--bg-deep: #050409;
-	--panel: #140f20;
-	--panel-raised: #1b1528;
+	--bg: #0a0605;
+	--bg-deep: #060302;
+	--panel: #18100d;
+	--panel-raised: #21160f;
 	--surface: rgba(255, 255, 255, .045);
 	--surface-hover: rgba(255, 255, 255, .09);
 	--border: rgba(255, 255, 255, .1);
 	--border-strong: rgba(255, 255, 255, .17);
 
-	--accent: #b46cf5;
-	--accent-hover: #c68bff;
-	--accent-dim: rgba(180, 108, 245, .32);
-	--accent-text: #d9bcff;
-	--accent-contrast: #0b0714;
-	--accent-glow: 0 0 22px rgba(180, 108, 245, .42);
-	--accent-glow-strong: 0 0 34px rgba(180, 108, 245, .62);
+	--accent: #e5322d;
+	--accent-hover: #ff4a3a;
+	--accent-dim: rgba(229, 50, 45, .34);
+	--accent-text: #ffa24d;
+	--accent-contrast: #170503;
+	--accent-glow: 0 0 22px rgba(229, 50, 45, .5);
+	--accent-glow-strong: 0 0 34px rgba(255, 106, 26, .68);
 
-	--fg: #ece9f5;
-	--muted: #8b83a3;
+	--fg: #f2ebe6;
+	--muted: #9c8a80;
 	--danger: #ff6b81;
 	--ok: #4ade80;
 
 	--chip-bg: rgba(255, 255, 255, .045);
-	--chip-bg-hover: rgba(180, 108, 245, .12);
+	--chip-bg-hover: rgba(229, 50, 45, .14);
 	--chip-border: rgba(255, 255, 255, .1);
-	--joinbox-bg: linear-gradient(150deg, rgba(180, 108, 245, .14), rgba(236, 72, 153, .07));
-	--avatar-bg: rgba(255, 255, 255, .06);
+	--joinbox-bg: linear-gradient(150deg, rgba(229, 50, 45, .16), rgba(255, 138, 31, .08));
+	--avatar-bg: rgba(255, 255, 255, .07);
 
 	/* Kept for components that still reference the original names. */
-	--blackish: #0d0918;
-	--black: #05040a;
+	--blackish: #120a07;
+	--black: #060302;
 	--white: #ffffff;
 	--white-transparency: rgba(255, 255, 255, .6);
-	--gray: #8b83a3;
+	--gray: #9c8a80;
 
 	/* --- shape --- */
 	--radius: .65rem;
@@ -117,7 +117,7 @@ input::placeholder {
 
 input:focus, select:focus {
 	border-color: var(--accent);
-	box-shadow: 0 0 0 3px rgba(180, 108, 245, .2);
+	box-shadow: 0 0 0 3px rgba(229, 50, 45, .22);
 }
 
 select {

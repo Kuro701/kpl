@@ -12,7 +12,7 @@
 <style>
 	.layout-fullscreen {
 		background-color: var(--bg);
-		background-image: radial-gradient(70rem 44rem at 50% 0%, rgba(180, 108, 245, .13), transparent 70%);
+		background-image: radial-gradient(70rem 44rem at 50% 0%, rgba(229, 50, 45, .13), transparent 70%);
 		background-repeat: no-repeat;
 		height: 100vh;
 		gap: 1.5rem;

@@ -24,8 +24,8 @@
 	.layout-menu {
 		background-color: var(--bg);
 		background-image:
-			radial-gradient(60rem 38rem at 50% 32%, rgba(180, 108, 245, .18), transparent 70%),
-			radial-gradient(34rem 26rem at 82% 92%, rgba(236, 72, 153, .08), transparent 72%);
+			radial-gradient(60rem 38rem at 50% 32%, rgba(229, 50, 45, .18), transparent 70%),
+			radial-gradient(34rem 26rem at 82% 92%, rgba(255, 138, 31, .08), transparent 72%);
 		background-repeat: no-repeat;
 		color: var(--fg);
 		height: 100vh;
@@ -62,7 +62,7 @@
 		max-width: calc(100% - 2rem);
 		width: 100%;
 		margin-top: 1rem;
-		filter: drop-shadow(0 0 18px rgba(180, 108, 245, .35));
+		filter: drop-shadow(0 0 18px rgba(229, 50, 45, .35));
 	}
 	.dark-theme .layout-menu__content {
 		background: var(--panel);

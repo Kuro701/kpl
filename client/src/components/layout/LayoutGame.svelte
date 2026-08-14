@@ -25,10 +25,10 @@
 		width: calc(100% - var(--sidebar-size));
 		box-sizing: border-box;
 		color: var(--fg);
-		background-color: #0d0918;
+		background-color: #100806;
 		background-image:
-			radial-gradient(120% 90% at 12% 0%, rgba(84, 42, 150, .55), transparent 55%),
-			radial-gradient(80% 70% at 95% 100%, rgba(236, 72, 153, .16), transparent 60%);
+			radial-gradient(120% 90% at 12% 0%, rgba(122, 24, 12, .55), transparent 55%),
+			radial-gradient(80% 70% at 95% 100%, rgba(255, 138, 31, .16), transparent 60%);
 		background-repeat: no-repeat;
 	}
 	.layout-game__sidebar {

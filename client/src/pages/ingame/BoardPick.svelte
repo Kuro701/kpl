@@ -52,7 +52,7 @@
 		border: 2px dashed var(--accent-dim);
 		border-radius: var(--radius);
 		color: var(--accent-text);
-		background-color: rgba(180, 108, 245, .06);
+		background-color: rgba(229, 50, 45, .06);
 		box-sizing: border-box;
 		text-align: center;
 		padding: 0 1rem;
