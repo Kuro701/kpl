@@ -7,6 +7,7 @@ import { SystemMessage } from "./system-message";
 import { encodeNetworkMessage, MessageType } from "./encoder";
 import { NONCE_EMPTY } from "./nonce";
 import cookie from 'cookiejs';
+import { IngameRoom } from "./room";
 export type AuthProvier = 'anonymous';
 
 export type AuthCredentials = {
@@ -32,6 +33,26 @@ if (!import.meta.env.VITE_SERVER_URL && import.meta.env.MODE !== 'development') 
 
 let connection: WebSocket | null = null;
 let authCredentials: AuthCredentials | null = null;
+
+/*
+ * Reconnection.
+ *
+ * The original client treated a closed socket as the end of the session and
+ * bounced you to the home page. In practice sockets close for boring reasons —
+ * a hibernated background tab, wifi dropping for two seconds, a laptop lid —
+ * and on a three-player game that ended everyone's round.
+ *
+ * The server already supports coming back: it revives the anonymous identity
+ * from the uuid+token in localStorage and rejoins you to your room with your
+ * points intact. Nothing was asking it to.
+ */
+const RECONNECT_DELAYS_MS = [400, 1000, 2000, 4000, 8000, 12000];
+const RECONNECT_MAX_ATTEMPTS = 12;
+
+let lastUsername = '';
+let closingOnPurpose = false;
+let reconnectAttempt = 0;
+let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 export function getAuthCredentials() {
 	return { ...authCredentials };
 }
@@ -103,11 +124,84 @@ export async function connectToServer(username: string): Promise<boolean> {
 }
 
 export async function disconnect() {
+	closingOnPurpose = true;
+	cancelReconnect();
+
 	if (connection && (connection.readyState === WebSocket.OPEN  || connection.readyState === WebSocket.CONNECTING)) {
 		connection.close();
 	}
 
 	PlayerIdentity.set(null);
+}
+
+function cancelReconnect() {
+	if (reconnectTimer) {
+		clearTimeout(reconnectTimer);
+		reconnectTimer = null;
+	}
+	reconnectAttempt = 0;
+}
+
+function scheduleReconnect() {
+	if (reconnectTimer) {
+		return;
+	}
+
+	if (reconnectAttempt >= RECONNECT_MAX_ATTEMPTS) {
+		SystemMessage.set('Nepodařilo se připojit zpátky k serveru.');
+		navigate('/');
+		return;
+	}
+
+	const delay = RECONNECT_DELAYS_MS[Math.min(reconnectAttempt, RECONNECT_DELAYS_MS.length - 1)];
+	reconnectAttempt++;
+
+	SystemMessage.set('Spojení vypadlo — zkouším se připojit zpátky…');
+
+	reconnectTimer = setTimeout(async () => {
+		reconnectTimer = null;
+
+		// Remember the room before reconnecting; the socket carries no state.
+		const roomUUID = get(IngameRoom)?.uuid ?? null;
+
+		const [, connectionError] = await safeAwait(connect(getLoginCredentials(lastUsername)));
+		if (connectionError) {
+			scheduleReconnect();
+			return;
+		}
+
+		const [, identityError] = await safeAwait(waitForIdentity(6000));
+		if (identityError) {
+			scheduleReconnect();
+			return;
+		}
+
+		reconnectAttempt = 0;
+		SystemMessage.set(null);
+
+		// Fire-and-forget: the server answers by pushing the room state back.
+		if (roomUUID) {
+			safeAwait(sendRaw(encodeNetworkMessage(NONCE_EMPTY, MessageType.RPC_CALL, {
+				f: 'joinRoom',
+				roomUUID,
+			})));
+		}
+	}, delay);
+}
+
+// A tab that was hibernated wakes up here — retry at once instead of sitting
+// out the backoff the user never saw.
+if (typeof document !== 'undefined') {
+	document.addEventListener('visibilitychange', () => {
+		if (document.visibilityState !== 'visible') {
+			return;
+		}
+
+		if (!closingOnPurpose && connection && connection.readyState === WebSocket.CLOSED) {
+			cancelReconnect();
+			scheduleReconnect();
+		}
+	});
 }
 
 export async function leaveRoom() {
@@ -162,6 +256,8 @@ export async function connect(credentials: AuthCredentials): Promise<void> {
 	}
 
 	authCredentials = credentials;
+	lastUsername = credentials.username;
+
 	if (connection && (connection.readyState === WebSocket.OPEN  || connection.readyState === WebSocket.CONNECTING)) {
 		connection.close();
 	}
@@ -173,21 +269,36 @@ export async function connect(credentials: AuthCredentials): Promise<void> {
 		throw new Error('Failed to create WebSocket connection');
 	}
 
-	connection.addEventListener('open', () => {
+	// Captured so a superseded socket's events cannot act on the live one.
+	const socket = connection;
+
+	socket.addEventListener('open', () => {
 		console.log('Connected to server');
 	});
 
-	connection.addEventListener('close', () => {
+	socket.addEventListener('close', () => {
+		// This socket was already replaced by a newer one — its death is noise.
+		if (socket !== connection) {
+			return;
+		}
+
 		console.log('Disconnected from server');
-		SystemMessage.set(null);
-		navigate('/');
+
+		if (closingOnPurpose) {
+			closingOnPurpose = false;
+			SystemMessage.set(null);
+			navigate('/');
+			return;
+		}
+
+		scheduleReconnect();
 	});
 
-	connection.addEventListener('error', (error) => {
+	socket.addEventListener('error', (error) => {
 		console.error('WebSocket error:', error);
 	});
 
-	connection.addEventListener('message', (e) => {
+	socket.addEventListener('message', (e) => {
 		try {
 			const message = e.data;
 			handleNetworkMessage(message);

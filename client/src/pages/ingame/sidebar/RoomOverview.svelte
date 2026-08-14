@@ -1,36 +1,79 @@
 <script lang="ts">
+	import { onDestroy } from "svelte";
 	import { leaveRoom } from "../../../lib/networking/client";
 	import { IngameRoom } from "../../../lib/networking/room";
 
-	let copied = false;
+	type CopyState = 'idle' | 'copied' | 'manual';
+
+	let state: CopyState = 'idle';
 	let copyTimer: ReturnType<typeof setTimeout> | null = null;
 
 	$: joinCode = $IngameRoom?.uuid ?? '';
 	$: joinLink = joinCode ? `${window.location.origin}/join/${joinCode}` : '';
 
+	/*
+	 * navigator.clipboard only exists in a secure context, and some browsers
+	 * refuse it even there. Fall back to the old textarea + execCommand trick,
+	 * and if even that fails, select the code so it can be copied by hand —
+	 * never leave the button looking like it did nothing.
+	 */
+	async function writeToClipboard(text: string): Promise<boolean> {
+		try {
+			if (navigator.clipboard && window.isSecureContext) {
+				await navigator.clipboard.writeText(text);
+				return true;
+			}
+		} catch {
+			// fall through to the legacy path
+		}
+
+		try {
+			const scratch = document.createElement('textarea');
+			scratch.value = text;
+			scratch.setAttribute('readonly', '');
+			scratch.style.position = 'fixed';
+			scratch.style.top = '-1000px';
+			scratch.style.opacity = '0';
+			document.body.appendChild(scratch);
+			scratch.select();
+			scratch.setSelectionRange(0, text.length);
+			const ok = document.execCommand('copy');
+			document.body.removeChild(scratch);
+			return ok;
+		} catch {
+			return false;
+		}
+	}
+
+	function selectCode() {
+		const node = document.getElementById('join-code-value');
+		const selection = window.getSelection();
+		if (!node || !selection) return;
+
+		const range = document.createRange();
+		range.selectNodeContents(node);
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
+
 	async function copyLink() {
 		if (!joinLink) return;
 
-		try {
-			await navigator.clipboard.writeText(joinLink);
-		} catch {
-			// Clipboard is blocked outside https and in some mobile browsers.
-			// Select the text instead so the player can copy it by hand.
-			const selection = window.getSelection();
-			const node = document.getElementById('join-code-value');
-			if (selection && node) {
-				const range = document.createRange();
-				range.selectNodeContents(node);
-				selection.removeAllRanges();
-				selection.addRange(range);
-			}
-			return;
+		const ok = await writeToClipboard(joinLink);
+
+		if (!ok) {
+			selectCode();
 		}
 
-		copied = true;
+		state = ok ? 'copied' : 'manual';
+
 		if (copyTimer) clearTimeout(copyTimer);
-		copyTimer = setTimeout(() => { copied = false; }, 1600);
+		copyTimer = setTimeout(() => { state = 'idle'; }, 2000);
 	}
+
+	onDestroy(() => {
+		if (copyTimer) clearTimeout(copyTimer);
+	});
 </script>
 
 <div class="room-info-wraper">
@@ -40,7 +83,9 @@
 
 	<button class="code" on:click={copyLink} title="Zkopírovat odkaz na místnost">
 		<span class="code__value" id="join-code-value">{joinCode}</span>
-		<span class="code__action">{copied ? 'zkopírováno ✓' : 'kopírovat odkaz'}</span>
+		<span class="code__action">
+			{#if state === 'copied'}zkopírováno ✓{:else if state === 'manual'}zkopíruj ručně{:else}kopírovat odkaz{/if}
+		</span>
 	</button>
 
 	<div class="room-info">
@@ -113,7 +158,7 @@
 		font-weight: 800;
 		letter-spacing: .2em;
 		color: var(--accent-text);
-		user-select: all;
+		user-select: text;
 	}
 
 	.code__action {

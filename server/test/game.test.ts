@@ -20,6 +20,7 @@ class TestClient {
 	ws!: WebSocket;
 	name: string;
 	uuid = '';
+	token = '';
 	room: any = null;
 	results: any = null;
 	chat: any[] = [];
@@ -57,11 +58,12 @@ class TestClient {
 
 		switch (data.f) {
 			case 'auth':
-				reply({ provider: 'anonymous', username: this.name, user_id: '', user_token: '' });
+				reply({ provider: 'anonymous', username: this.name, user_id: this.uuid, user_token: this.token });
 				return;
 
 			case 'identity':
 				this.uuid = data.uuid;
+				this.token = data.token ?? '';
 				clearTimeout(connectTimer);
 				resolveConnect();
 				return;
@@ -100,6 +102,12 @@ class TestClient {
 				this.results = data;
 				return;
 		}
+	}
+
+	kill() {
+		this.pending.forEach(() => {});
+		this.pending.clear();
+		this.ws.close();
 	}
 
 	rpc<T>(f: string, data: Record<string, unknown> = {}, timeoutMs = 8000): Promise<T> {
@@ -250,7 +258,49 @@ async function main() {
 	const lateErrors = [...host.errors, ...b.errors, ...c.errors];
 	assert(lateErrors.length === 0, `still no server errors (${lateErrors.join(', ') || 'none'})`);
 
-	log('\n🎉 everything passed: two full games, themed packs, chat, no database.\n');
+	// ---------------------------------------------------------------------
+	// A dropped player used to end the game for everyone: the client never
+	// reconnected, and the server destroyed any running room that fell under
+	// three players. Kill a socket mid-game and make sure the room survives and
+	// the player comes back with their points.
+	// ---------------------------------------------------------------------
+	log('\n--- a player drops mid-game and comes back ---');
+	host.results = null; b.results = null; c.results = null;
+
+	const code3 = await host.rpc<string>('createRoom', { name: 'Výpadek', goal: 3, maxPlayers: 8, decks: [5] });
+	await b.rpc('joinRoom', { roomUUID: code3 });
+	await c.rpc('joinRoom', { roomUUID: code3 });
+	await host.rpc<boolean>('startGame');
+	await sleep(2500);
+	assert(host.room?.state !== 'lobby', 'the game is running');
+
+	const pointsBefore = host.room.players.find((p: any) => p.uuid === c.uuid)?.points ?? 0;
+	log(`   killing ${c.name}'s socket (had ${pointsBefore} points)`);
+	c.kill();
+	await sleep(3000);
+
+	assert(host.room && host.room.uuid === code3, 'the room survived the drop');
+	assert(host.room.players.length === 2, 'the dropped player is gone from the list');
+	const stillThere = await host.rpc<any>('getRoomInfo', { roomUUID: code3 });
+	assert(stillThere && stillThere.uuid === code3, 'the server still has the room, not destroyed');
+
+	log(`   ${c.name} reconnects and rejoins`);
+	await c.connect();
+	await c.rpc('joinRoom', { roomUUID: code3 });
+	await sleep(1500);
+
+	assert(host.room.players.length === 3, 'the returning player is back in the room');
+	const back = host.room.players.find((p: any) => p.uuid === c.uuid);
+	assert(back, 'they came back as the SAME player, not a new one');
+	assert((back?.points ?? -1) >= pointsBefore, 'their points survived the round trip');
+
+	const deadline3 = Date.now() + 200_000;
+	while (Date.now() < deadline3 && !host.results && !b.results && !c.results) {
+		await sleep(400);
+	}
+	assert(host.results ?? b.results ?? c.results, 'the game finished normally after the reconnect');
+
+	log('\n🎉 everything passed: three games, a mid-game reconnect, themed packs, chat, no database.\n');
 	process.exit(0);
 }
 

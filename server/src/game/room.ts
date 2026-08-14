@@ -25,6 +25,14 @@ type PlayerData = {
 const MIN_PLAYERS = 3;
 const TIME_TO_START = 45;
 
+/*
+ * How long a running game waits for a dropped player before giving up. The
+ * client reconnects and rejoins automatically, so a tab that got hibernated or
+ * a few seconds of bad wifi should not end everyone's game — which is what
+ * happened before, the moment a drop took the room under MIN_PLAYERS.
+ */
+const RECONNECT_GRACE_SECONDS = 90;
+
 export type ChatMessage = {
 	id: string;
 	kind: 'player' | 'system';
@@ -135,10 +143,24 @@ export class KplRoom {
 
 		await this.loadDecks();
 
-		while (this.players.length >= MIN_PLAYERS) {
+		while (!this.isDestroyed) {
+			if (this.players.length < MIN_PLAYERS) {
+				const recovered = await this.waitForPlayers();
+
+				if (!recovered) {
+					this.players.forEach(player => player.sendError(GameErrors.ROOM_DESTROYED_PLAYER_QUIT));
+					destroyRoom(this);
+					return;
+				}
+			}
+
 			await this.nextRound();
 
-			if (this.players.some(player => this.playerData[player.uuid].points >= this.goal)) {
+			if (this.isDestroyed) {
+				return;
+			}
+
+			if (this.players.some(player => this.playerData[player.uuid]?.points >= this.goal)) {
 				this.end();
 				return;
 			}
@@ -160,6 +182,30 @@ export class KplRoom {
 		});
 
 		destroyRoom(this);
+	}
+
+	/** Hold the game open while a dropped player reconnects. */
+	private async waitForPlayers(): Promise<boolean> {
+		this.postSystemMessage(
+			`Čekám na návrat hráče — hra pokračuje, jakmile vás bude zase ${MIN_PLAYERS}.`
+		);
+
+		const deadline = Date.now() + RECONNECT_GRACE_SECONDS * 1000;
+
+		while (Date.now() < deadline) {
+			if (this.isDestroyed) {
+				return false;
+			}
+
+			if (this.players.length >= MIN_PLAYERS) {
+				this.postSystemMessage('Jsme zpátky v plném počtu, pokračujeme.');
+				return true;
+			}
+
+			await wait(1000);
+		}
+
+		return false;
 	}
 
 	private async nextRound() {
@@ -564,13 +610,18 @@ export class KplRoom {
 
 		this.broadcastGameState();
 
+		// An empty room is over, no question.
+		if (this.players.length === 0) {
+			destroyRoom(this);
+			return;
+		}
+
+		// Otherwise a running game holds itself open — the loop in start() waits
+		// out RECONNECT_GRACE_SECONDS and only then gives up.
 		if (this._state !== RoomState.LOBBY && this.players.length < MIN_PLAYERS) {
-			// If game is running and not enough players, end game
-			this.players.forEach(p => p.sendError(GameErrors.ROOM_DESTROYED_PLAYER_QUIT));
-			destroyRoom(this);
-		} else if (this.players.length === 0) {
-			// If room is empty, destroy room
-			destroyRoom(this);
+			this.postSystemMessage(
+				`${player.username} vypadl ze hry — držím místnost ${RECONNECT_GRACE_SECONDS} s, ať se stihne vrátit.`
+			);
 		}
 	}
 	//#endregion
