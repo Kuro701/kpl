@@ -1,6 +1,6 @@
 import { navigate } from "svelte-routing";
 import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, RoomCount, type LobbyRoom } from "./client";
-import { IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type GameResults } from "./room";
+import { ChatMessages, IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type ChatMessage, type GameResults } from "./room";
 import { get } from "svelte/store";
 import { playSound } from "../sounds";
 
@@ -40,6 +40,7 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			IngameRoom.set(null);
 			ServerResponseFn.set(null);
 			SelectedCards.set([]);
+			ChatMessages.set([]);
 
 			if (window.location.pathname.startsWith('/room/')) {
 				navigate('/');
@@ -89,6 +90,28 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		LastGameResults.set(data as GameResults);
 		navigate('/game-over');
 		playSound('gameover');
+	},
+	chat: async (reply, data) => {
+		reply(OK);
+
+		const message = data as ChatMessage;
+		if (!message?.id) {
+			return;
+		}
+
+		ChatMessages.update(messages => {
+			// The server also sends history on join, so guard against a repeat.
+			if (messages.some(m => m.id === message.id)) {
+				return messages;
+			}
+
+			return [...messages, message].slice(-80);
+		});
+	},
+	chatHistory: async (reply, data) => {
+		reply(OK);
+
+		ChatMessages.set(((data as { messages?: ChatMessage[] })?.messages ?? []));
 	},
 	playerCount: async (reply, data) => {
 		reply(OK);

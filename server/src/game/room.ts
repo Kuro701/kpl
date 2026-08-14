@@ -25,6 +25,20 @@ type PlayerData = {
 const MIN_PLAYERS = 3;
 const TIME_TO_START = 45;
 
+export type ChatMessage = {
+	id: string;
+	kind: 'player' | 'system';
+	uuid: string | null;
+	username: string | null;
+	text: string;
+	at: string;
+};
+
+/** Enough backlog that someone joining mid-game sees the last few jokes. */
+const CHAT_HISTORY_LIMIT = 60;
+const CHAT_MAX_LENGTH = 300;
+const CHAT_MIN_INTERVAL_MS = 500;
+
 export type RoomConstructorData = {
 	name: string;
 	goal: number;
@@ -59,6 +73,9 @@ export class KplRoom {
 	private intermissionTimer: NodeJS.Timeout | null = null;
 
 	private isDestroyed = false;
+
+	private chatLog: ChatMessage[] = [];
+	private lastChatAt: Record<string, number> = {};
 
 	private deckIds: number[] = [];
 	private decks = {
@@ -258,6 +275,11 @@ export class KplRoom {
 		this.playerData[winnerUUID].points++;
 		this.broadcastGameState();
 
+		const winner = this.players.find(p => p.uuid === winnerUUID);
+		if (winner) {
+			this.postSystemMessage(`${winner.username} bere bod.`);
+		}
+
 		// Move used cards to used pile
 		this.table.white.forEach(cardGroup => {
 			this.decks.whiteUsed.push(...cardGroup.resource);
@@ -294,6 +316,68 @@ export class KplRoom {
 			this.broadcastGameState();
 		}
 	}
+
+	// #region Chat
+	private pushChat(message: ChatMessage): void {
+		this.chatLog.push(message);
+
+		if (this.chatLog.length > CHAT_HISTORY_LIMIT) {
+			this.chatLog.splice(0, this.chatLog.length - CHAT_HISTORY_LIMIT);
+		}
+
+		this.players.forEach(player => safeAwait(player.rpc('chat', message, -1)));
+	}
+
+	/** A line from the room itself: joins, leaves, who took the point. */
+	public postSystemMessage(text: string): void {
+		if (this.isDestroyed) {
+			return;
+		}
+
+		this.pushChat({
+			id: cuid(),
+			kind: 'system',
+			uuid: null,
+			username: null,
+			text,
+			at: new Date().toISOString(),
+		});
+	}
+
+	/** Returns false when the message was rejected (empty, too fast, wrong type). */
+	public postPlayerMessage(player: KplPlayer, rawText: unknown): boolean {
+		if (this.isDestroyed || typeof rawText !== 'string') {
+			return false;
+		}
+
+		const text = rawText.replace(/\s+/g, ' ').trim().slice(0, CHAT_MAX_LENGTH);
+		if (!text) {
+			return false;
+		}
+
+		// Cheap flood guard — one message per half second per player.
+		const now = Date.now();
+		if (now - (this.lastChatAt[player.uuid] ?? 0) < CHAT_MIN_INTERVAL_MS) {
+			return false;
+		}
+		this.lastChatAt[player.uuid] = now;
+
+		this.pushChat({
+			id: cuid(),
+			kind: 'player',
+			uuid: player.uuid,
+			username: player.username,
+			text,
+			at: new Date().toISOString(),
+		});
+
+		return true;
+	}
+
+	public sendChatHistory(player: KplPlayer): void {
+		safeAwait(player.rpc('chatHistory', { messages: this.chatLog }, -1));
+	}
+	// #endregion
 
 	private setIntermission(duration: number, callback: () => void = () => {}): void {
 		if (this.intermissionTimer) {
@@ -402,6 +486,8 @@ export class KplRoom {
 			this.players.push(player);
 			broadcastLobbyUpdate();
 			this.broadcastGameState();
+			this.sendChatHistory(player);
+			this.postSystemMessage(`${player.username} se vrátil do hry.`);
 			return true;
 		}
 
@@ -430,6 +516,8 @@ export class KplRoom {
 
 		this.broadcastGameState();
 		broadcastLobbyUpdate();
+		this.sendChatHistory(player);
+		this.postSystemMessage(`${player.username} se připojil.`);
 		return true;
 	}
 
@@ -442,6 +530,8 @@ export class KplRoom {
 		if (this.isDestroyed) {
 			return;
 		}
+
+		this.postSystemMessage(`${player.username} odešel.`);
 
 		// If game is not running, remove player data entirely
 		if (this._state === RoomState.LOBBY) {

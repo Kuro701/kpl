@@ -128,6 +128,17 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(getRoomLobbyState(room));
 	},
 
+	sendChatMessage: async (player: KplPlayer, reply: ReplyFunction, data) => {
+		const room = player.room;
+
+		if (!room) {
+			reply(false);
+			return;
+		}
+
+		reply(room.postPlayerMessage(player, (data as any)?.text));
+	},
+
 	getAvailableCardDecks: async (player: KplPlayer, reply: ReplyFunction) => {
 		reply(getAvailableDecks(player.uuid));
 	},

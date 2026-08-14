@@ -12,6 +12,7 @@ Fork původní hry od **Sáry Hýžové**, která projekt v roce 2024 ukončila 
 - **Jen soukromé místnosti.** Veřejný seznam místností a "náhodně připojit" jsou pryč. Dovnitř se dostaneš kódem nebo odkazem.
 - **Čitelné kódy.** Pětiznakový kód místo osmiznakového hexu. Písmena `O`/`I`/`L` se automaticky převádí na `0`/`1`, velikost písmen a pomlčky nevadí — `k7-f2q` otevře stejnou místnost jako `K7F2Q`.
 - **Bez účtů.** Přihlašování přes Google a Discord bylo odstraněné (bez původních API klíčů stejně nefungovalo). Hraje se pod přezdívkou.
+- **Chat.** Původní `RoomChat.svelte` byl prázdný soubor — hra chat nikdy neměla. Teď má: zprávy, historie pro toho, kdo přijde později, systémové hlášky (kdo přišel, kdo odešel, kdo bere bod) a ochrana proti spamu.
 - **Nový vzhled.** Tmavé neonové téma.
 - **HTTP + WebSocket.** Server odpovídá na `/health`, takže se dá hostovat na platformách, které kontrolují běh služby.
 
@@ -40,6 +41,26 @@ npm run dev
 Klient si v dev režimu sám sáhne na `ws://localhost:3000`.
 
 > Hra potřebuje **3 hráče**, aby šla spustit. Na testování otevři tři okna prohlížeče (aspoň jedno anonymní — identita se drží v `localStorage`).
+
+## Test
+
+V repozitáři je integrační test: připojí tři hráče, projde chat a odehraje celou hru do konce.
+
+```powershell
+# v jednom okně
+cd server
+npm run dev
+
+# ve druhém
+cd server
+npm run test
+```
+
+Proti nasazenému serveru:
+
+```powershell
+$env:TEST_SERVER_URL="wss://kpl-server.onrender.com"; npm run test
+```
 
 ## Nasazení zdarma
 

@@ -65,6 +65,19 @@ export type GameResults = {
 	score: PlayerResults[];
 }
 
+export type ChatMessage = {
+	id: string;
+	kind: 'player' | 'system';
+	uuid: string | null;
+	username: string | null;
+	text: string;
+	at: string;
+}
+
+/** Chat for the room the player is currently in. Cleared on leave. */
+export const ChatMessages = writable<ChatMessage[]>([]);
+export const CHAT_MAX_LENGTH = 300;
+
 export const IngameRoom = writable<IngameRoom | null>(null);
 export const HandCards = derived(IngameRoom, ($IngameRoom => {
 	if (!$IngameRoom) return [];
