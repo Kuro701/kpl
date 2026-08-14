@@ -25,6 +25,7 @@ class TestClient {
 	results: any = null;
 	chat: any[] = [];
 	errors: string[] = [];
+	closed = false;
 	pending = new Map<string, (v: any) => void>();
 
 	constructor(name: string) { this.name = name; }
@@ -37,7 +38,10 @@ class TestClient {
 
 			this.ws.onmessage = (ev) => this.onMessage(String(ev.data), resolve, t);
 			this.ws.onerror = () => { clearTimeout(t); reject(new Error(`${this.name}: socket error`)); };
-			this.ws.onclose = () => { /* server may close us at game end */ };
+			this.ws.onclose = (ev: any) => {
+				this.closed = true;
+				console.error(`   ⚠ ${this.name}: socket closed (code ${ev?.code ?? '?'}${ev?.reason ? ', ' + ev.reason : ''})`);
+			};
 		});
 	}
 
@@ -122,6 +126,21 @@ class TestClient {
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+// The suite exited silently once against a live server. Anything that kills the
+// process now has to announce itself first.
+process.on('unhandledRejection', (reason) => {
+	console.error('\n❌ unhandled rejection:', reason);
+	process.exit(1);
+});
+process.on('uncaughtException', (error) => {
+	console.error('\n❌ uncaught exception:', error);
+	process.exit(1);
+});
+process.on('exit', (code) => {
+	if (code === 0) return;
+	console.error(`\n❌ process exited early with code ${code}`);
+});
 
 function assert(cond: unknown, label: string) {
 	if (!cond) { console.error(`\n❌ FAIL: ${label}`); process.exit(1); }
@@ -229,6 +248,11 @@ async function main() {
 	}
 
 	const results = host.results ?? b.results ?? c.results;
+	if (!results && (host.closed || b.closed || c.closed)) {
+		console.error('\n❌ the game never finished because the connection dropped —');
+		console.error('   the server restarted or went away mid-game, this is not a game-logic failure.');
+		process.exit(1);
+	}
 	assert(results, 'game reached a result');
 
 	log('\n--- final score ---');
