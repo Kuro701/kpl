@@ -47,12 +47,21 @@ function toWebSocketUrl(value: unknown): string | null {
 	return `${insecure ? 'ws' : 'wss'}://${trimmed}`;
 }
 
+/*
+ * Fallback so a deployed build still works if VITE_SERVER_URL was never set —
+ * forgetting a build variable would otherwise ship a site that loads and then
+ * silently never connects. Change this if the server ever moves.
+ */
+const DEFAULT_SERVER_HOST = 'kpl-server.onrender.com';
+
 const SERVER_URL = toWebSocketUrl(cookie.get('server-ip'))
 	|| toWebSocketUrl(import.meta.env.VITE_SERVER_URL)
-	|| 'ws://localhost:3000';
+	|| (import.meta.env.MODE === 'development'
+		? 'ws://localhost:3000'
+		: toWebSocketUrl(DEFAULT_SERVER_HOST)!);
 
 if (!import.meta.env.VITE_SERVER_URL && import.meta.env.MODE !== 'development') {
-	console.error('VITE_SERVER_URL is not set — this build has no game server to talk to.');
+	console.warn(`VITE_SERVER_URL is not set — falling back to ${DEFAULT_SERVER_HOST}`);
 }
 
 let connection: WebSocket | null = null;

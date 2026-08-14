@@ -1,0 +1,18 @@
+{
+  // Cloudflare deployment for the website.
+  //
+  // This is an assets-only Worker: no server code, just the built Svelte app
+  // served from the edge. The game server is a separate long-lived process on
+  // Render — a Worker cannot hold a WebSocket game open.
+  "name": "hellfirecards",
+  "compatibility_date": "2026-08-01",
+
+  "assets": {
+    // Produced by `npm run build` inside client/.
+    "directory": "./client/dist",
+
+    // /join/K7F2Q is a client-side route, not a file. Without this, opening a
+    // shared code link directly returns 404 instead of the game.
+    "not_found_handling": "single-page-application"
+  }
+}
