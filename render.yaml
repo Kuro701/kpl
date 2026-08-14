@@ -1,6 +1,10 @@
 # Render blueprint for the game server.
 # Render → New → Blueprint → pick this repo, and it reads this file.
 #
+# The website is NOT here — it lives on Cloudflare Pages. The game server has to
+# be a long-lived process because of the WebSocket, which is what Render is for;
+# the site is static files, which a CDN does better and cheaper.
+#
 # The free plan sleeps after 15 minutes with no traffic and takes about a minute
 # to wake up. WebSocket messages count as traffic, so a game in progress keeps
 # the server awake — only the first person to arrive after a quiet spell waits.

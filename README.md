@@ -98,8 +98,11 @@ Na free plánu server po 15 minutách ticha usne a probouzí se asi minutu. Prov
 3. Přidej proměnnou prostředí:
    - **`VITE_SERVER_URL`** = `wss://kpl-server.onrender.com`
 
-   Adresa serveru z kroku 1, ale s **`wss://`** místo `https://`. Stránka na https nesmí otevřít nešifrovaný WebSocket — prohlížeč to zablokuje.
+   Stačí adresa serveru z kroku 1. Klient si doplní `wss://` sám, takže se to nedá splést.
 4. Deploy.
+
+Adresa serveru se dá zadat jakkoliv — `kpl-server.onrender.com`, `https://kpl-server.onrender.com`
+i `wss://kpl-server.onrender.com` fungují stejně, klient si `wss://` doplní sám.
 
 Změna proměnné `VITE_SERVER_URL` se projeví až po novém buildu — je zapečená do JS.
 

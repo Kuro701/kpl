@@ -18,13 +18,37 @@ export type AuthCredentials = {
 };
 
 /*
- * Where the game server lives. Set VITE_SERVER_URL at build time (e.g.
- * wss://your-backend.onrender.com) so the same source can be pointed at any
- * host. The `server-ip` cookie still wins, which is handy for debugging against
- * a local server from the deployed site.
+ * Where the game server lives. Set VITE_SERVER_URL at build time. The
+ * `server-ip` cookie still wins, which is handy for pointing the deployed site
+ * at a local server while debugging.
+ *
+ * Anything sensible is accepted, because "did you write wss:// and not https://"
+ * was the single easiest way to break a deploy: a page served over https cannot
+ * open an insecure socket, and the failure looks like the site simply not
+ * working. All of these end up in the right place:
+ *
+ *   kpl-server.onrender.com          -> wss://kpl-server.onrender.com
+ *   https://kpl-server.onrender.com  -> wss://kpl-server.onrender.com
+ *   http://localhost:3000            -> ws://localhost:3000
+ *   wss://kpl-server.onrender.com    -> unchanged
  */
-const SERVER_URL = (cookie.get('server-ip') as string | undefined)
-	|| import.meta.env.VITE_SERVER_URL
+function toWebSocketUrl(value: unknown): string | null {
+	if (typeof value !== 'string') return null;
+
+	const trimmed = value.trim().replace(/\/+$/, '');
+	if (!trimmed) return null;
+
+	if (/^wss?:\/\//i.test(trimmed)) return trimmed;
+	if (/^https:\/\//i.test(trimmed)) return `wss://${trimmed.slice(8)}`;
+	if (/^http:\/\//i.test(trimmed)) return `ws://${trimmed.slice(7)}`;
+
+	// A bare host. Loopback is the only case that can't be encrypted.
+	const insecure = /^(localhost|127\.0\.0\.1|\[::1\])(:|$)/i.test(trimmed);
+	return `${insecure ? 'ws' : 'wss'}://${trimmed}`;
+}
+
+const SERVER_URL = toWebSocketUrl(cookie.get('server-ip'))
+	|| toWebSocketUrl(import.meta.env.VITE_SERVER_URL)
 	|| 'ws://localhost:3000';
 
 if (!import.meta.env.VITE_SERVER_URL && import.meta.env.MODE !== 'development') {
