@@ -13,6 +13,7 @@ Fork původní hry od **Sáry Hýžové**, která projekt v roce 2024 ukončila 
 - **Čitelné kódy.** Pětiznakový kód místo osmiznakového hexu. Písmena `O`/`I`/`L` se automaticky převádí na `0`/`1`, velikost písmen a pomlčky nevadí — `k7-f2q` otevře stejnou místnost jako `K7F2Q`.
 - **Bez účtů.** Přihlašování přes Google a Discord bylo odstraněné (bez původních API klíčů stejně nefungovalo). Hraje se pod přezdívkou.
 - **Chat.** Původní `RoomChat.svelte` byl prázdný soubor — hra chat nikdy neměla. Teď má: zprávy, historie pro toho, kdo přijde později, systémové hlášky (kdo přišel, kdo odešel, kdo bere bod) a ochrana proti spamu.
+- **Tematické balíčky.** Místo dvou historických balíčků je jich pět podle témat: *Sex a erotika*, *Hnus a tělesnosti*, *Politika a dějiny*, *Popkultura*, *Absurdní humor*. Karta nese štítky, ne příslušnost k jednomu balíčku — většina karet patří do víc témat najednou. Když vybereš víc balíčků, karty se sloučí a nedublují.
 - **Nový vzhled.** Tmavé neonové téma.
 - **HTTP + WebSocket.** Server odpovídá na `/health`, takže se dá hostovat na platformách, které kontrolují běh služby.
 
@@ -41,6 +42,18 @@ npm run dev
 Klient si v dev režimu sám sáhne na `ws://localhost:3000`.
 
 > Hra potřebuje **3 hráče**, aby šla spustit. Na testování otevři tři okna prohlížeče (aspoň jedno anonymní — identita se drží v `localStorage`).
+
+### Vlastní karty
+
+Karty jsou obyčejný JSON v `server/cards/`. Bílá karta:
+
+```json
+{ "id": 784, "text": "Tvoje vlastní karta", "tags": ["absurdni"] }
+```
+
+Černá karta má navíc `pick` (kolik bílých karet se doplňuje). Štítky jsou
+`sex`, `hnus`, `politika`, `popkultura`, `absurdni` — karta jich může mít víc.
+Přidat karty = upravit soubor a restartovat server. Žádné migrace.
 
 ## Test
 
