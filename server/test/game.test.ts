@@ -187,11 +187,12 @@ async function main() {
 	const bad = await nobody.rpc<string | false>('joinRoom', { roomUUID: 'ZZZZZ' });
 	assert(bad === false, 'unknown code is refused');
 
-	log('\n--- decks ---');
+	log('\n--- themed packs ---');
 	const decks = await host.rpc<any[]>('getAvailableCardDecks');
-	const totalCards = decks.reduce((n, d) => n + d.totalCardCount, 0);
-	log(`   ${decks.length} decks, ${totalCards} cards total`);
-	assert(decks.length === 2 && totalCards === 1016, 'both card decks loaded (1016 cards, no database)');
+	for (const d of decks) log(`   ${d.name}: ${d.whiteCardCount} white, ${d.blackCardCount} black`);
+	assert(decks.length === 5, 'five themed packs are offered');
+	assert(decks.every(d => d.whiteCardCount > 0 && d.blackCardCount > 0),
+		'every pack has both white AND black cards, so it is playable alone');
 
 	log('\n--- starting the game (first to 2 points) ---');
 	const started = await host.rpc<boolean>('startGame');
@@ -216,7 +217,40 @@ async function main() {
 	const allErrors = [...host.errors, ...b.errors, ...c.errors];
 	assert(allErrors.length === 0, `no server errors were sent (${allErrors.join(', ') || 'none'})`);
 
-	log('\n🎉 full game played end to end, no database involved.\n');
+	// ---------------------------------------------------------------------
+	// The smallest pack holds about a dozen black cards. A game past that
+	// length used to run the pile dry and destroy the room mid-play, so play
+	// a long game on one small pack and make sure it survives the wrap-around.
+	// This is the slow part of the suite — roughly a minute.
+	// ---------------------------------------------------------------------
+	log('\n--- long game on the smallest pack (black-card recycling) ---');
+	const smallest = decks.reduce((min, d) => d.blackCardCount < min.blackCardCount ? d : min, decks[0]);
+	log(`   using "${smallest.name}" — only ${smallest.blackCardCount} black cards`);
+
+	host.results = null; b.results = null; c.results = null;
+	const goal = smallest.blackCardCount + 2;
+
+	const code2 = await host.rpc<string>('createRoom', {
+		name: 'Recyklace', goal, maxPlayers: 8, decks: [smallest.id],
+	});
+	await b.rpc('joinRoom', { roomUUID: code2 });
+	await c.rpc('joinRoom', { roomUUID: code2 });
+	await host.rpc<boolean>('startGame');
+
+	log(`   playing to ${goal} points — must outlast the ${smallest.blackCardCount}-card black pile`);
+	const deadline2 = Date.now() + 240_000;
+	while (Date.now() < deadline2 && !host.results && !b.results && !c.results) {
+		await sleep(500);
+	}
+
+	const results2 = host.results ?? b.results ?? c.results;
+	assert(results2, 'the long game finished instead of dying when black cards ran out');
+	assert(results2?.score.some((p: any) => p.points >= goal), `somebody reached ${goal} points`);
+
+	const lateErrors = [...host.errors, ...b.errors, ...c.errors];
+	assert(lateErrors.length === 0, `still no server errors (${lateErrors.join(', ') || 'none'})`);
+
+	log('\n🎉 everything passed: two full games, themed packs, chat, no database.\n');
 	process.exit(0);
 }
 

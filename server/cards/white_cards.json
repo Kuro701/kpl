@@ -1,3347 +1,5834 @@
 [
-    {
-        "id": "1",
-        "text": "Ho\u0159\u00edc\u00ed \u010dlov\u011bk"
-    },
-    {
-        "id": "2",
-        "text": "Rasismus"
-    },
-    {
-        "id": "3",
-        "text": "Sta\u0159eck\u00fd pach"
-    },
-    {
-        "id": "4",
-        "text": "Mikropenis"
-    },
-    {
-        "id": "5",
-        "text": "\u00dapln\u011b norm\u00e1ln\u00ed kol\u00e1\u010d"
-    },
-    {
-        "id": "6",
-        "text": "Sexting"
-    },
-    {
-        "id": "7",
-        "text": "Kol\u00e1\u010d"
-    },
-    {
-        "id": "8",
-        "text": "Tablety Rohypnolu",
-        "tooltip": "Rohypnol: pr\u00e1\u0161ky na span\u00ed"
-    },
-    {
-        "id": "9",
-        "text": "Vomitivum",
-        "tooltip": "Vomitivum: pr\u00e1\u0161ky vyvol\u00e1vaj\u00edc\u00ed zvracen\u00ed"
-    },
-    {
-        "id": "10",
-        "text": "V\u011btrn\u00fd ml\u00fdn nap\u011bchovan\u00fd mrtvolami"
-    },
-    {
-        "id": "11",
-        "text": "Buzny"
-    },
-    {
-        "id": "12",
-        "text": "P\u0159ehnan\u011b velk\u00e9 l\u00edz\u00e1tko"
-    },
-    {
-        "id": "13",
-        "text": "D\u011bti v Africe"
-    },
-    {
-        "id": "14",
-        "text": "Nesoum\u011brn\u00e1 plastika prsou"
-    },
-    {
-        "id": "15",
-        "text": "P\u0159ej\u00edd\u00e1n\u00ed a n\u00e1sledn\u00e9 zvracen\u00ed"
-    },
-    {
-        "id": "16",
-        "text": "Tvrd\u011b pracuj\u00edc\u00ed cik\u00e1n"
-    },
-    {
-        "id": "17",
-        "text": "Stockholmsk\u00fd syndrom",
-        "tooltip": "Stockholmsk\u00fd syndrom je specifick\u00e1 pozitivn\u00ed emo\u010dn\u00ed i afektivn\u00ed vazba a z\u00e1vislost ob\u011bti (nap\u0159. rukojm\u00ed) na pachateli"
-    },
-    {
-        "id": "18",
-        "text": "Napoleonsk\u00fd komplex",
-        "tooltip": "Deprese z mal\u00e9 v\u00fd\u0161ky (p\u0159\u00edpadn\u011b jin\u00e9 fyzick\u00e9 indispozice)"
-    },
-    {
-        "id": "19",
-        "text": "Mali\u010dk\u00fd kon\u00edk"
-    },
-    {
-        "id": "20",
-        "text": "\u0160u\u0161n\u011b"
-    },
-    {
-        "id": "21",
-        "text": "Z\u00e1vist penisu"
-    },
-    {
-        "id": "22",
-        "text": "Barack Obama"
-    },
-    {
-        "id": "23",
-        "text": "Sladk\u00e9 m\u00e1men\u00ed"
-    },
-    {
-        "id": "24",
-        "text": "Komfortn\u00ed \u0161v\u00e9dsk\u00e9 matrace TEMPUR\u00ae"
-    },
-    {
-        "id": "25",
-        "text": "Scientologie",
-        "tooltip": "Scientologie: N\u00e1bo\u017eensk\u00e9 hnut\u00ed. Ka\u017ed\u00fd \u010dlov\u011bk skl\u00e1d\u00e1 z t\u011bla, mysli a ducha."
-    },
-    {
-        "id": "26",
-        "text": "D\u00e1viv\u00e9 k\u0159e\u010de"
-    },
-    {
-        "id": "27",
-        "text": "Vesm\u00edrn\u00ed lid\u00e9"
-    },
-    {
-        "id": "28",
-        "text": "Darth Vader"
-    },
-    {
-        "id": "29",
-        "text": "F\u00edkov\u00fd kol\u00e1\u010d"
-    },
-    {
-        "id": "30",
-        "text": "Ilumin\u00e1ti",
-        "tooltip": "Ilumin\u00e1ti: Tajn\u00e1 sekta ovl\u00e1daj\u00edc\u00ed sv\u011bt"
-    },
-    {
-        "id": "31",
-        "text": "Rada od moudr\u00e9ho starce"
-    },
-    {
-        "id": "32",
-        "text": "Ban\u00edk Py\u010do!"
-    },
-    {
-        "id": "33",
-        "text": "Postar\u0161\u00ed Japonec"
-    },
-    {
-        "id": "34",
-        "text": "Ochutn\u00e1vky zdarma"
-    },
-    {
-        "id": "35",
-        "text": "Estrogen",
-        "tooltip": "Estrogen: \u017densk\u00e9 pohlavn\u00ed hormony"
-    },
-    {
-        "id": "36",
-        "text": "Sexu\u00e1ln\u00ed pnut\u00ed"
-    },
-    {
-        "id": "37",
-        "text": "Hladomor"
-    },
-    {
-        "id": "38",
-        "text": "Deprese"
-    },
-    {
-        "id": "39",
-        "text": "Bobr"
-    },
-    {
-        "id": "40",
-        "text": "Mu\u017ei"
-    },
-    {
-        "id": "41",
-        "text": "Sexy sirotci"
-    },
-    {
-        "id": "42",
-        "text": "Genit\u00e1ln\u00ed piercingy"
-    },
-    {
-        "id": "43",
-        "text": "Andrej Babi\u0161"
-    },
-    {
-        "id": "44",
-        "text": "Represe",
-        "tooltip": "Represe: potla\u010den\u00ed tvorby genetick\u00e9 informace"
-    },
-    {
-        "id": "45",
-        "text": "Jarom\u00edr Soukup"
-    },
-    {
-        "id": "46",
-        "text": "M\u016fj rodinn\u00fd stav"
-    },
-    {
-        "id": "47",
-        "text": "P\u0159\u00edli\u0161n\u00e1 kompenzace"
-    },
-    {
-        "id": "48",
-        "text": "Ucvrnknut\u00ed si"
-    },
-    {
-        "id": "49",
-        "text": "Hovno nav\u017edy zaseknut\u00e9 v \u0159itn\u00edm sv\u011bra\u010di"
-    },
-    {
-        "id": "50",
-        "text": "Lhostejnost vl\u00e1dnouc\u00edch elit k hrozb\u011b glob\u00e1ln\u00edho oteplov\u00e1n\u00ed"
-    },
-    {
-        "id": "51",
-        "text": "Torze varlat",
-        "tooltip": "Torze varlete je superakutn\u00ed stav vyvolan\u00fd oto\u010den\u00edm varlete kolem c\u00e9vn\u00ed stopky a strangulac\u00ed p\u0159\u00edvodn\u00fdch tepen. P\u0159i \u00fapln\u00e9m za\u0161krcen\u00ed c\u00e9v v ch\u00e1movodu vznik\u00e1 isch\u00e9mie a n\u00e1sledn\u00e1 nekr\u00f3za p\u0159i \u010d\u00e1ste\u010dn\u00e9 infarzaci. Aby mohlo doj\u00edt k z\u00e1chran\u011b varlete, stav mus\u00ed b\u00fdt vy\u0159e\u0161en do \u0161esti hodin od vzniku pot\u00ed\u017e\u00ed. Torze je zp\u016fsobena silnou kontrakc\u00ed musculus cremaster. K torzi predisponuje del\u0161\u00ed a voln\u011bj\u0161\u00ed c\u00e9vn\u00ed stopka, kryptorchismus, \u0161irok\u00e1 tunica vaginalis, dlouh\u00e9 mezorchium a chab\u00fd z\u00e1v\u011bsn\u00fd apar\u00e1t varlete na tunica dartos."
-    },
-    {
-        "id": "52",
-        "text": "S\u00e1m \u010e\u00e1bel"
-    },
-    {
-        "id": "53",
-        "text": "World of Warcraft"
-    },
-    {
-        "id": "54",
-        "text": "Sexu\u00e1ln\u00ed orientace V\u00e1clava Klause"
-    },
-    {
-        "id": "55",
-        "text": "Robotick\u00fd Hitler"
-    },
-    {
-        "id": "56",
-        "text": "Objektivizace \u017eensk\u00e9ho t\u011bla"
-    },
-    {
-        "id": "57",
-        "text": "Obr\u00e1zky prsou"
-    },
-    {
-        "id": "58",
-        "text": "N\u011b\u017en\u00e9 pohlazen\u00ed po vnit\u0159n\u00ed stran\u011b stehna"
-    },
-    {
-        "id": "59",
-        "text": "Bud\u011bjovick\u00fd Budvar"
-    },
-    {
-        "id": "60",
-        "text": "Pedofilov\u00e9"
-    },
-    {
-        "id": "61",
-        "text": "Pape\u017e"
-    },
-    {
-        "id": "62",
-        "text": "Venu\u0161iny kuli\u010dky"
-    },
-    {
-        "id": "63",
-        "text": "Emma Watson"
-    },
-    {
-        "id": "64",
-        "text": "Moje b\u00fdval\u00e1 \u017eena"
-    },
-    {
-        "id": "65",
-        "text": "Sexy pol\u0161t\u00e1\u0159ov\u00e9 bitvy"
-    },
-    {
-        "id": "66",
-        "text": "Dal\u0161\u00ed pitom\u00fd film o up\u00edrech"
-    },
-    {
-        "id": "67",
-        "text": "Kybernetick\u00e9 implant\u00e1ty"
-    },
-    {
-        "id": "68",
-        "text": "Civiln\u00ed ob\u011bti"
-    },
-    {
-        "id": "69",
-        "text": "Karel Gott"
-    },
-    {
-        "id": "70",
-        "text": "\u017densk\u00fd orgasmus"
-    },
-    {
-        "id": "71",
-        "text": "D\u011bvky"
-    },
-    {
-        "id": "72",
-        "text": "Skauti"
-    },
-    {
-        "id": "73",
-        "text": "Osv\u011btim"
-    },
-    {
-        "id": "74",
-        "text": "Koronavirus"
-    },
-    {
-        "id": "75",
-        "text": "Michal David"
-    },
-    {
-        "id": "76",
-        "text": "\u017didi"
-    },
-    {
-        "id": "77",
-        "text": "Vytla\u010dov\u00e1n\u00ed na okraj spole\u010dnosti"
-    },
-    {
-        "id": "78",
-        "text": "Kristova krev"
-    },
-    {
-        "id": "79",
-        "text": "Mrtv\u00ed rodi\u010de"
-    },
-    {
-        "id": "80",
-        "text": "Ve\u010dern\u00ed\u010dek"
-    },
-    {
-        "id": "81",
-        "text": "Smrt na \u00faplavici"
-    },
-    {
-        "id": "82",
-        "text": "Mr. Proper",
-        "tooltip": "P\u0159\u00edpravek na myt\u00ed oken, tak\u00e9 zn\u00e1m\u00fd jako Mr. Clean"
-    },
-    {
-        "id": "83",
-        "text": "Masakr v americk\u00e9 \u0161kole"
-    },
-    {
-        "id": "84",
-        "text": "\u017didovsk\u00e1 bratrstva"
-    },
-    {
-        "id": "85",
-        "text": "Ham\u00e9"
-    },
-    {
-        "id": "86",
-        "text": "Fale\u0161n\u00fd prorok"
-    },
-    {
-        "id": "87",
-        "text": "Zem\u011bd\u011blstv\u00ed"
-    },
-    {
-        "id": "88",
-        "text": "Mirek Du\u0161\u00edn",
-        "tooltip": "Mirek Du\u0161\u00edn: Jedna z postav z komiksu \"Rychl\u00e9 \u0161\u00edpy\""
-    },
-    {
-        "id": "89",
-        "text": "P\u0159ekv\u00e1pko sex!"
-    },
-    {
-        "id": "90",
-        "text": "Diskriminace heterosexu\u00e1l\u016f"
-    },
-    {
-        "id": "91",
-        "text": "Milo\u0161 Zeman"
-    },
-    {
-        "id": "92",
-        "text": "Mimibazar"
-    },
-    {
-        "id": "93",
-        "text": "Z\u00e1\u0159e miliardy slunc\u00ed"
-    },
-    {
-        "id": "94",
-        "text": "Lid\u00e9 po amputaci"
-    },
-    {
-        "id": "95",
-        "text": "Vr\u017een\u00ed panny do vulk\u00e1nu"
-    },
-    {
-        "id": "96",
-        "text": "Italov\u00e9"
-    },
-    {
-        "id": "97",
-        "text": "V\u00fdbuchy"
-    },
-    {
-        "id": "98",
-        "text": "Po\u0159\u00e1dn\u00e9 \u0161\u0148upnut\u00ed"
-    },
-    {
-        "id": "99",
-        "text": "Zbaven\u00ed se d\u016fkaz\u016f"
-    },
-    {
-        "id": "100",
-        "text": "D\u011bti na vod\u00edtk\u00e1ch"
-    },
-    {
-        "id": "101",
-        "text": "Katapulty"
-    },
-    {
-        "id": "102",
-        "text": "Biliony dolar\u016f"
-    },
-    {
-        "id": "103",
-        "text": "Upev\u0148ov\u00e1n\u00ed nadvl\u00e1dy"
-    },
-    {
-        "id": "104",
-        "text": "Um\u00edr\u00e1n\u00ed"
-    },
-    {
-        "id": "105",
-        "text": "Ticho"
-    },
-    {
-        "id": "106",
-        "text": "\u017didozedn\u00e1\u0159sko-ilumin\u00e1tsk\u00e9 spiknut\u00ed"
-    },
-    {
-        "id": "107",
-        "text": "BISka",
-        "tooltip": "Bezpe\u010dnostn\u00ed Informa\u010dn\u00ed Slu\u017eba \u010cesk\u00e9 Republiky"
-    },
-    {
-        "id": "108",
-        "text": "Justin Bieber"
-    },
-    {
-        "id": "109",
-        "text": "P\u00edsmo svat\u00e9"
-    },
-    {
-        "id": "110",
-        "text": "Koule"
-    },
-    {
-        "id": "111",
-        "text": "Modlitba na zahn\u00e1n\u00ed teplou\u0161\u016f"
-    },
-    {
-        "id": "112",
-        "text": "Nezletil\u00e9 t\u011bhotenstv\u00ed"
-    },
-    {
-        "id": "113",
-        "text": "N\u011bmeck\u00e9 fekal porno"
-    },
-    {
-        "id": "114",
-        "text": "Neviditeln\u00e1 ruka trhu",
-        "tooltip": "Teorie v ekonomice, kdy snaha jednotlivc\u016f dos\u00e1hnout vlastn\u00edho z\u00e1jmu m\u016f\u017ee b\u00fdt v\u00edce prosp\u011b\u0161n\u00e1, ne\u017e kdyby jim \u0161lo o spole\u010dnost."
-    },
-    {
-        "id": "115",
-        "text": "Moji vnit\u0159n\u00ed d\u00e9moni"
-    },
-    {
-        "id": "116",
-        "text": "Velk\u00e1 stehna"
-    },
-    {
-        "id": "117",
-        "text": "Svl\u00e9k\u00e1n\u00ed se p\u0159i sledov\u00e1n\u00ed Ve\u010dern\u00ed\u010dku"
-    },
-    {
-        "id": "118",
-        "text": "Zdrcuj\u00edc\u00ed dluh"
-    },
-    {
-        "id": "119",
-        "text": "Piloti kamikaze",
-        "tooltip": "Kamikaze: Japon\u0161t\u00ed sebevra\u017eedn\u00ed piloti na konci druh\u00e9 sv\u011btov\u00e9 v\u00e1lky."
-    },
-    {
-        "id": "120",
-        "text": "Ocas"
-    },
-    {
-        "id": "121",
-        "text": "Ob\u00e9zn\u00ed syn \u017eij\u00edc\u00ed ve sklep\u011b"
-    },
-    {
-        "id": "122",
-        "text": "Policejn\u00ed brutalita"
-    },
-    {
-        "id": "123",
-        "text": "Ko\u0148sk\u00e9 maso"
-    },
-    {
-        "id": "124",
-        "text": "N\u00e1siln\u00e1 rekatolizace"
-    },
-    {
-        "id": "125",
-        "text": "Smysl \u017eivota"
-    },
-    {
-        "id": "126",
-        "text": "\u0160pan\u011blsk\u00e1 inkvizice",
-        "tooltip": "Inkvizice: Pr\u00e1vn\u00ed instituce katolick\u00e9 c\u00edrkve, kter\u00e1 se vypo\u0159\u00e1d\u00e1vala s kac\u00ed\u0159stv\u00edm (ten, kdo se neshoduje s c\u00edrkv\u00ed)."
-    },
-    {
-        "id": "127",
-        "text": "Michael Jackson"
-    },
-    {
-        "id": "128",
-        "text": "Fakt bo\u017e\u00ed klobou\u010dek"
-    },
-    {
-        "id": "129",
-        "text": "O\u0161ah\u00e1v\u00e1n\u00ed"
-    },
-    {
-        "id": "130",
-        "text": "Odsun sudetsk\u00fdch N\u011bmc\u016f"
-    },
-    {
-        "id": "131",
-        "text": "Vlkodlaci"
-    },
-    {
-        "id": "132",
-        "text": "Prst\u011bn\u00ed"
-    },
-    {
-        "id": "133",
-        "text": "Nudn\u00fd narozeninov\u00fd ve\u010d\u00edrek"
-    },
-    {
-        "id": "134",
-        "text": "Moje du\u0161e"
-    },
-    {
-        "id": "135",
-        "text": "Nezastaviteln\u00fd p\u0159\u00edliv isl\u00e1mu"
-    },
-    {
-        "id": "136",
-        "text": "Neviditeln\u00e1 ruka trhu"
-    },
-    {
-        "id": "137",
-        "text": "Eugenika",
-        "tooltip": "Eugenika: soci\u00e1ln\u011b-filosofick\u00fd sm\u011br zam\u011b\u0159en\u00fd na studium metod, kter\u00e9 usiluj\u00ed o dosa\u017een\u00ed co nejlep\u0161\u00edho genetick\u00e9ho fondu \u010dlov\u011bka"
-    },
-    {
-        "id": "138",
-        "text": "RoboCop",
-        "tooltip": "RoboCop: ak\u010dn\u00ed sci-fi film z roku 1987 s robotick\u00fdm policistou."
-    },
-    {
-        "id": "139",
-        "text": "Nevolnictv\u00ed",
-        "tooltip": "Nevolnictv\u00ed: vztah mezi roln\u00edkem (nevoln\u00edkem) a majitelem p\u016fdy v p\u0159edmodern\u00ed Evrop\u011b."
-    },
-    {
-        "id": "140",
-        "text": "Stephen Hawking \u0161eptaj\u00edc\u00ed chl\u00edpn\u00e1 sl\u016fvka"
-    },
-    {
-        "id": "141",
-        "text": "Zamotan\u00e1 sluch\u00e1tka"
-    },
-    {
-        "id": "142",
-        "text": "Sadismus",
-        "tooltip": "Sadismus: Sexu\u00e1ln\u00ed pot\u011b\u0161en\u00ed p\u0159i zp\u016fsobov\u00e1n\u00ed bolesti jin\u00e9mu jedinci."
-    },
-    {
-        "id": "143",
-        "text": "P\u00e1liv\u00e1 hov\u00ednka"
-    },
-    {
-        "id": "144",
-        "text": "Ve\u0159ejn\u00e9 zesm\u011b\u0161n\u011bn\u00ed"
-    },
-    {
-        "id": "145",
-        "text": "Takov\u00e1 ta v\u011bc, co d\u00e1v\u00e1 elektro\u0161oky do b\u0159i\u0161n\u00edch sval\u016f."
-    },
-    {
-        "id": "146",
-        "text": "Nabalov\u00e1n\u00ed holek na potratov\u00e9 klinice"
-    },
-    {
-        "id": "147",
-        "text": "Mikrofon v an\u00e1ln\u00edm otvoru"
-    },
-    {
-        "id": "148",
-        "text": "Cik\u00e1nsk\u00e1 kletba"
-    },
-    {
-        "id": "149",
-        "text": "Tetanus"
-    },
-    {
-        "id": "150",
-        "text": "Nerealistick\u00e1 o\u010dek\u00e1v\u00e1n\u00ed v\u016f\u010di \u017eensk\u00e9mu t\u011blu"
-    },
-    {
-        "id": "151",
-        "text": "Uch\u00e1zej\u00edc\u00ed transvestit\u00e9",
-        "tooltip": "Transvestita dosahuje sexu\u00e1ln\u00edho vzru\u0161en\u00ed \u010di jen psychick\u00e9ho uspokojen\u00ed t\u00edm, \u017ee se p\u0159evl\u00e9k\u00e1 do \u0161at\u016f opa\u010dn\u00e9ho pohlav\u00ed."
-    },
-    {
-        "id": "152",
-        "text": "Mokr\u00e9 sny"
-    },
-    {
-        "id": "153",
-        "text": "Masochismus",
-        "tooltip": "Masochismus: Sexu\u00e1ln\u00ed pot\u011b\u0161en\u00ed p\u0159i pro\u017e\u00edv\u00e1n\u00ed bolesti."
-    },
-    {
-        "id": "154",
-        "text": "St\u0159\u00edlen\u00ed z pu\u0161ky do vzduchu, zat\u00edmco jste a\u017e po koule vra\u017een\u00ed v pi\u0161t\u00edc\u00edm praseti"
-    },
-    {
-        "id": "155",
-        "text": "Ve\u0159ejn\u00e1 nahota"
-    },
-    {
-        "id": "156",
-        "text": "Nekrofilie"
-    },
-    {
-        "id": "157",
-        "text": "Vykr\u00e1d\u00e1n\u00ed hrob\u016f"
-    },
-    {
-        "id": "158",
-        "text": "Odbarven\u00e1 \u0159i\u0165"
-    },
-    {
-        "id": "159",
-        "text": "Mohamed (budi\u017e mu sl\u00e1va)"
-    },
-    {
-        "id": "160",
-        "text": "N\u011bkolik bodn\u00fdch ran"
-    },
-    {
-        "id": "161",
-        "text": "Esemeskov\u00e1n\u00ed v opilosti"
-    },
-    {
-        "id": "162",
-        "text": "Opice kou\u0159\u00edc\u00ed cigaretu"
-    },
-    {
-        "id": "163",
-        "text": "Smegma"
-    },
-    {
-        "id": "164",
-        "text": "\u017div\u00e9 obecenstvo ve studiu"
-    },
-    {
-        "id": "165",
-        "text": "Znechucen\u00e9 ohrnut\u00ed rt\u016f."
-    },
-    {
-        "id": "166",
-        "text": "Ur\u00e1\u017eka na\u0161ich nejz\u00e1kladn\u011bj\u0161\u00edch lidsk\u00fdch pr\u00e1v"
-    },
-    {
-        "id": "167",
-        "text": "Nepochopiteln\u00e1 hloupost"
-    },
-    {
-        "id": "168",
-        "text": "Slun\u00ed\u010dko a duhy"
-    },
-    {
-        "id": "169",
-        "text": "A\u0161tar \u0160eran",
-        "tooltip": "V\u016fdce vesm\u00edrn\u00fdch lid\u00ed. Duchobn\u00ed bytost vy\u0161\u0161\u00edho v\u011bdom\u00ed"
-    },
-    {
-        "id": "170",
-        "text": "F\u00edzlokracie"
-    },
-    {
-        "id": "171",
-        "text": "Teroristi"
-    },
-    {
-        "id": "172",
-        "text": "\u010cern\u00e1 smrt"
-    },
-    {
-        "id": "173",
-        "text": "\u017delva kajmanka ukusuj\u00edc\u00ed ti \u0161pi\u010dku penisu",
-        "tooltip": "Kajmanka drav\u00e1: Vodn\u00ed \u017eelva, kter\u00e1 ob\u00fdv\u00e1 m\u011blk\u00e1 sladkovodn\u00ed jezera a rybn\u00edky ve St\u0159edn\u00ed a Severn\u00ed Americe"
-    },
-    {
-        "id": "174",
-        "text": "Zabit\u00ed motorov\u00fdm vozidlem"
-    },
-    {
-        "id": "175",
-        "text": "Velk\u00e1 hospod\u00e1\u0159sk\u00e1 krize"
-    },
-    {
-        "id": "176",
-        "text": "Emoce"
-    },
-    {
-        "id": "177",
-        "text": "Takov\u00fd vztek, \u017ee se ti z toho postav\u00ed"
-    },
-    {
-        "id": "178",
-        "text": "Krasobrusla\u0159sk\u00fd p\u00e1r stejn\u00e9ho pohlav\u00ed"
-    },
-    {
-        "id": "179",
-        "text": "\u00dato\u010dn\u00e1 pu\u0161ka M-16"
-    },
-    {
-        "id": "180",
-        "text": "Lidsk\u00e9 maso"
-    },
-    {
-        "id": "181",
-        "text": "Incest"
-    },
-    {
-        "id": "182",
-        "text": "Ko\u0165\u00e1tko p\u0159ejet\u00e9 parn\u00edm v\u00e1lcem"
-    },
-    {
-        "id": "183",
-        "text": "Nel\u00e9tav\u00fd pt\u00e1k"
-    },
-    {
-        "id": "184",
-        "text": "Spr\u00e1vn\u00e9 rozhodnut\u00ed"
-    },
-    {
-        "id": "185",
-        "text": "Kdy\u017e si prdne\u0161 a kous\u00ed\u010dek vyleze ven"
-    },
-    {
-        "id": "186",
-        "text": "Skota\u010den\u00ed"
-    },
-    {
-        "id": "187",
-        "text": "Hovadsk\u00e9 chov\u00e1n\u00ed k d\u011btem"
-    },
-    {
-        "id": "188",
-        "text": "Pokakan\u00e9 plenky"
-    },
-    {
-        "id": "189",
-        "text": "Lecht\u00e1n\u00ed Miroslava Kalouska, i kdy\u017e ti u\u017e \u0159\u00edkal, a\u0165 toho nech\u00e1\u0161"
-    },
-    {
-        "id": "190",
-        "text": "Velocirapto\u0159\u00ed \u00fatoky"
-    },
-    {
-        "id": "191",
-        "text": "Vlastizr\u00e1dn\u00ed zlo\u010dinci mongolsko-rusk\u00fdch tajn\u00fdch slu\u017eeb KGBGRU ultra satansk\u00e9 \u0158\u00ed\u0161e Zla Ruska! Volte Prav\u00fd Blok www.cibulka.net!"
-    },
-    {
-        "id": "192",
-        "text": "Skr\u00fdv\u00e1n\u00ed erekce"
-    },
-    {
-        "id": "193",
-        "text": "\u00dapln\u00e1 \u010deln\u00ed nahota"
-    },
-    {
-        "id": "194",
-        "text": "P\u0159edst\u00edr\u00e1n\u00ed z\u00e1jmu"
-    },
-    {
-        "id": "195",
-        "text": "\u010cepele z bradavek"
-    },
-    {
-        "id": "196",
-        "text": "Univerz\u00e1ln\u00ed trojjedin\u00e1 c\u00edrkev Vodn\u00e1\u0159sk\u00e9ho evangelia Je\u017e\u00ed\u0161e Krista, Rudolfa Steinera a \u0158\u00e1du ryt\u00ed\u0159\u016f Jedi"
-    },
-    {
-        "id": "197",
-        "text": "Ruce Michelle Obamov\u00e9"
-    },
-    {
-        "id": "198",
-        "text": "\u00dastn\u00ed opar"
-    },
-    {
-        "id": "199",
-        "text": "Robustn\u00ed mongoloid"
-    },
-    {
-        "id": "200",
-        "text": "Vz\u00e1jemn\u011b zaru\u010den\u00e1 hrozba zni\u010den\u00ed"
-    },
-    {
-        "id": "201",
-        "text": "Bo\u017e\u00ed z\u00fa\u010dtov\u00e1n\u00ed"
-    },
-    {
-        "id": "202",
-        "text": "Ku\u0159ba"
-    },
-    {
-        "id": "203",
-        "text": "Stalin"
-    },
-    {
-        "id": "204",
-        "text": "Laktace",
-        "tooltip": "Laktace: Proces tvorby a vylu\u010dov\u00e1n\u00ed ml\u00e9ka t\u011blem matky po porodu"
-    },
-    {
-        "id": "205",
-        "text": "Hurik\u00e1n Katrina"
-    },
-    {
-        "id": "206",
-        "text": "Prav\u00fd v\u00fdznam V\u00e1noc"
-    },
-    {
-        "id": "207",
-        "text": "Sebepohrd\u00e1n\u00ed"
-    },
-    {
-        "id": "208",
-        "text": "Mozkov\u00fd n\u00e1dor"
-    },
-    {
-        "id": "209",
-        "text": "Mrtv\u00e1 nemluv\u0148ata"
-    },
-    {
-        "id": "210",
-        "text": "New Age hudba",
-        "tooltip": "New Age je instrument\u00e1ln\u00ed \u010di elektronick\u00fd hudebn\u00ed \u017e\u00e1nr s opitimistick\u00fdm pohledem na budoucnost."
-    },
-    {
-        "id": "211",
-        "text": "Termonukle\u00e1rn\u00ed detonace"
-    },
-    {
-        "id": "212",
-        "text": "Husy"
-    },
-    {
-        "id": "213",
-        "text": "Kanye West"
-    },
-    {
-        "id": "214",
-        "text": "B\u016fh"
-    },
-    {
-        "id": "215",
-        "text": "Prom\u011bna v bor\u016fvku"
-    },
-    {
-        "id": "216",
-        "text": "Erotick\u00e9 pov\u00eddky s Harrym Potterem"
-    },
-    {
-        "id": "217",
-        "text": "D\u011bti s rakovinou zadku"
-    },
-    {
-        "id": "218",
-        "text": "Du\u0161en\u00ed se penisem"
-    },
-    {
-        "id": "219",
-        "text": "Americk\u00fd sen"
-    },
-    {
-        "id": "220",
-        "text": "Puberta"
-    },
-    {
-        "id": "221",
-        "text": "Sladk\u00e1, p\u0159esladk\u00e1 pomsta"
-    },
-    {
-        "id": "222",
-        "text": "Pomrk\u00e1v\u00e1n\u00ed na starce"
-    },
-    {
-        "id": "223",
-        "text": "Slabost na zaj\u00ed\u010dky"
-    },
-    {
-        "id": "224",
-        "text": "Umpalumpov\u00e9"
-    },
-    {
-        "id": "225",
-        "text": "Prav\u00e1 mexick\u00e1 kuchyn\u011b"
-    },
-    {
-        "id": "226",
-        "text": "Prepubert\u00e1ln\u00ed ml\u00e1de\u017e"
-    },
-    {
-        "id": "227",
-        "text": "Poh\u00e1dky o ma\u0161ink\u00e1ch"
-    },
-    {
-        "id": "228",
-        "text": "Kluci co u\u017e nezavolaj\u00ed"
-    },
-    {
-        "id": "229",
-        "text": "Erektiln\u00ed dysfunkce"
-    },
-    {
-        "id": "230",
-        "text": "Rozestoupen\u00ed Rud\u00e9ho mo\u0159e"
-    },
-    {
-        "id": "231",
-        "text": "Diskop\u0159\u00edb\u011bh z obecn\u00edho rozhlasu"
-    },
-    {
-        "id": "232",
-        "text": "S\u00f3lo na saxofon"
-    },
-    {
-        "id": "233",
-        "text": "Pozemn\u00ed miny"
-    },
-    {
-        "id": "234",
-        "text": "Pl\u00e1n, jak zajmout Petra Cibulku a p\u0159inutit ho tan\u010dit v opi\u010d\u00edm kost\u00fdmku"
-    },
-    {
-        "id": "235",
-        "text": "\u010cas na sebe"
-    },
-    {
-        "id": "236",
-        "text": "Nickelback",
-        "tooltip": "Kanadsk\u00e1 rockov\u00e1 skupina, proslaven\u00e1 singlem How You Remind Me."
-    },
-    {
-        "id": "237",
-        "text": "Vl\u00e1da domobrany",
-        "tooltip": "Domobrana: Rezervn\u00ed arm\u00e1da"
-    },
-    {
-        "id": "238",
-        "text": "\u010cestn\u00e9 \u010dlenstv\u00ed v Socialistick\u00e9m svazu ml\u00e1de\u017ee"
-    },
-    {
-        "id": "239",
-        "text": "Protistojn\u00e9 palce"
-    },
-    {
-        "id": "240",
-        "text": "Duchov\u00e9"
-    },
-    {
-        "id": "241",
-        "text": "Alkoholismus"
-    },
-    {
-        "id": "242",
-        "text": "\u0160patn\u011b na\u010dasovan\u00fd vtip o holokaustu"
-    },
-    {
-        "id": "243",
-        "text": "Nevkusn\u00e9 j\u00f3dlov\u00e1n\u00ed"
-    },
-    {
-        "id": "244",
-        "text": "Amputace na boji\u0161ti"
-    },
-    {
-        "id": "245",
-        "text": "P\u0159esn\u011b to, co bys \u010dekal"
-    },
-    {
-        "id": "246",
-        "text": "Paradox cestov\u00e1n\u00ed \u010dasem"
-    },
-    {
-        "id": "247",
-        "text": "Deodorant AXE"
-    },
-    {
-        "id": "248",
-        "text": "Kraden\u00ed l\u00edz\u00e1tek bezbrann\u00fdm d\u011btem"
-    },
-    {
-        "id": "249",
-        "text": "Trapn\u00fd vzkaz do hlasov\u00e9 schr\u00e1nky"
-    },
-    {
-        "id": "250",
-        "text": "Drz\u00e1 \u010derno\u0161ka"
-    },
-    {
-        "id": "251",
-        "text": "Ty dny, kdy jsi namakan\u00fd \u010dernokn\u011b\u017en\u00edk"
-    },
-    {
-        "id": "252",
-        "text": "Skl\u00ed\u010den\u00fd lev v ZOO"
-    },
-    {
-        "id": "253",
-        "text": "Nejzavr\u017een\u00edhodn\u011bj\u0161\u00ed vra\u017eda"
-    },
-    {
-        "id": "254",
-        "text": "Sokol s \u010depi\u010dkou na hlav\u011b"
-    },
-    {
-        "id": "255",
-        "text": "Uprdnut\u00ed si a odkr\u00e1\u010den\u00ed pry\u010d"
-    },
-    {
-        "id": "256",
-        "text": "Namlouvac\u00ed ritu\u00e1l"
-    },
-    {
-        "id": "257",
-        "text": "\u010c\u00ednsk\u00fd gymnastick\u00fd t\u00fdm"
-    },
-    {
-        "id": "258",
-        "text": "T\u0159enice"
-    },
-    {
-        "id": "259",
-        "text": "Asiati, kter\u00fdm nejde matika"
-    },
-    {
-        "id": "260",
-        "text": "Strach"
-    },
-    {
-        "id": "261",
-        "text": "Ministranti",
-        "tooltip": "Ministrant: Sv\u011btsk\u00fd slu\u017eebn\u00edk, kter\u00fd pom\u00e1h\u00e1 kn\u011b\u017e\u00edm b\u011bhem bohoslu\u017eby."
-    },
-    {
-        "id": "262",
-        "text": "Kvasinky"
-    },
-    {
-        "id": "263",
-        "text": "Pop\u00edr\u00e1n\u00ed glob\u00e1ln\u00edho oteplov\u00e1n\u00ed"
-    },
-    {
-        "id": "264",
-        "text": "Olizov\u00e1n\u00ed v\u011bc\u00ed, abyste si je pak mohli p\u0159ivlastnit"
-    },
-    {
-        "id": "265",
-        "text": "Vikingov\u00e9"
-    },
-    {
-        "id": "266",
-        "text": "Glob\u00e1ln\u00ed zloideologie islamismu a homosexualismu"
-    },
-    {
-        "id": "267",
-        "text": "Hork\u00fd s\u00fdr"
-    },
-    {
-        "id": "268",
-        "text": "Glob\u00e1ln\u00ed oteplov\u00e1n\u00ed"
-    },
-    {
-        "id": "269",
-        "text": "Vadn\u00fd kondom"
-    },
-    {
-        "id": "270",
-        "text": "Nevyhnuteln\u00fd \u017ehav\u00fd z\u00e1nik vesm\u00edru"
-    },
-    {
-        "id": "271",
-        "text": "Republik\u00e1ni",
-        "tooltip": "Republik\u00e1ni jsou jedna ze dvou hlavn\u00edch politick\u00fdch stran USA. Prosazuj\u00ed svobodu jednotlivce, dr\u017een\u00ed zbran\u00ed \u010di tvrd\u0161\u00ed imigra\u010dn\u00ed z\u00e1kony. Jeden z jejich prezident\u016f byl Donald Trump."
-    },
-    {
-        "id": "272",
-        "text": "V\u00e1clav Havel, slu\u017eebn\u00edk Satana"
-    },
-    {
-        "id": "273",
-        "text": "Porno s chobotnic\u00ed"
-    },
-    {
-        "id": "274",
-        "text": "Vorvani"
-    },
-    {
-        "id": "275",
-        "text": "Lady Gaga"
-    },
-    {
-        "id": "276",
-        "text": "Extra velk\u00e9 kousky mrtv\u00e9 prostitutky"
-    },
-    {
-        "id": "277",
-        "text": "Gloryholes",
-        "tooltip": "Gloryhole: D\u00edra ve zdu nebo v jin\u00e9 p\u0159ep\u00e1\u017ece, slou\u017e\u00edc\u00ed pro zapojen\u00ed do sexu\u00e1ln\u00edch aktivit s osobou na druh\u00e9 stran\u011b."
-    },
-    {
-        "id": "278",
-        "text": "Fixace na otce"
-    },
-    {
-        "id": "279",
-        "text": "Mim v z\u00e1chvatu mrtvice"
-    },
-    {
-        "id": "280",
-        "text": "B\u011blo\u0161i"
-    },
-    {
-        "id": "281",
-        "text": "\u017divot napln\u011bn\u00fd \u017ealem"
-    },
-    {
-        "id": "282",
-        "text": "Lahodn\u00fd bo\u010dn\u00ed pohled na prso"
-    },
-    {
-        "id": "283",
-        "text": "Mo\u0159e probl\u00e9m\u016f"
-    },
-    {
-        "id": "284",
-        "text": "N\u00e1cci"
-    },
-    {
-        "id": "285",
-        "text": "Chladic\u00ed box pln\u00fd org\u00e1n\u016f"
-    },
-    {
-        "id": "286",
-        "text": "Op\u0159en\u00ed se do toho na 110 %"
-    },
-    {
-        "id": "287",
-        "text": "An\u00e1l"
-    },
-    {
-        "id": "288",
-        "text": "Vymazlen\u00fd osobn\u00ed profil na White Media",
-        "tooltip": "White Media: Neonacistick\u00fd, pravicov\u011b extremistick\u00fd a xenofobn\u00ed web, kter\u00fd publikoval nen\u00e1vistn\u00e9, ur\u00e1\u017eliv\u00e9, \u00fato\u010dn\u00e9 a \u0161tvav\u00e9 \u010dl\u00e1nky a videa proti imigrant\u016fm, sexu\u00e1ln\u00edm men\u0161in\u00e1m a multikulturalist\u016fm"
-    },
-    {
-        "id": "289",
-        "text": "Obezita"
-    },
-    {
-        "id": "290",
-        "text": "Homoerotick\u00e1 volejbalov\u00e1 mont\u00e1\u017e"
-    },
-    {
-        "id": "291",
-        "text": "\u0160t\u011b\u0148\u00e1tka!"
-    },
-    {
-        "id": "292",
-        "text": "P\u0159\u00edrodn\u00ed v\u00fdrobek pro zlep\u0161en\u00ed erekce"
-    },
-    {
-        "id": "293",
-        "text": "Hn\u011bdo\u0161i"
-    },
-    {
-        "id": "294",
-        "text": "Shozen\u00ed lustru na nep\u0159\u00e1tele a vy\u0161vihnut\u00ed se po provazu vzh\u016fru"
-    },
-    {
-        "id": "295",
-        "text": "P\u0159\u00edli\u0161 hork\u00e1 pol\u00e9vka"
-    },
-    {
-        "id": "296",
-        "text": "Pornohv\u011bzdy"
-    },
-    {
-        "id": "297",
-        "text": "Hormon\u00e1ln\u00ed injekce"
-    },
-    {
-        "id": "298",
-        "text": "Po\u0161ta pro tebe"
-    },
-    {
-        "id": "299",
-        "text": "Velk\u00fd t\u0159esk"
-    },
-    {
-        "id": "300",
-        "text": "Diskriminace b\u00edl\u00fdch heterosexu\u00e1ln\u00edch k\u0159es\u0165ansk\u00fdch mu\u017e\u016f"
-    },
-    {
-        "id": "301",
-        "text": "No\u0161en\u00ed spodn\u00edho pr\u00e1dla naruby, abyste nemuseli pr\u00e1t"
-    },
-    {
-        "id": "302",
-        "text": "Odvyka\u010dka"
-    },
-    {
-        "id": "303",
-        "text": "Na\u0159\u00edzen\u00ed Evropsk\u00e9 unie"
-    },
-    {
-        "id": "304",
-        "text": "Hrab\u011b \u010cokula"
-    },
-    {
-        "id": "305",
-        "text": "V\u016fn\u011b spla\u0161k\u016f po r\u00e1nu"
-    },
-    {
-        "id": "306",
-        "text": "Neop\u011btovan\u00fd or\u00e1ln\u00ed sex"
-    },
-    {
-        "id": "307",
-        "text": "Mraz\u00edk"
-    },
-    {
-        "id": "308",
-        "text": "Sexy lidi"
-    },
-    {
-        "id": "309",
-        "text": "P\u0159edko\u017eka"
-    },
-    {
-        "id": "310",
-        "text": "T\u00fdpci bez zadku"
-    },
-    {
-        "id": "311",
-        "text": "Z\u00e1zrak lidsk\u00e9ho zrozen\u00ed"
-    },
-    {
-        "id": "312",
-        "text": "\u010cek\u00e1n\u00ed a\u017e po svatb\u011b"
-    },
-    {
-        "id": "313",
-        "text": "Dva skr\u010dci, kte\u0159\u00ed serou do kybl\u00edku"
-    },
-    {
-        "id": "314",
-        "text": "Stigmatizace transsexu\u00e1l\u016f",
-        "tooltip": "Stigma: Specifick\u00fd rys osobnosti \u010dlov\u011bka, kter\u00fd m\u016f\u017ee b\u00fdt okol\u00edm ch\u00e1p\u00e1n jako ne\u017e\u00e1douc\u00ed."
-    },
-    {
-        "id": "315",
-        "text": "Smutn\u00e9 hon\u011bn\u00ed"
-    },
-    {
-        "id": "316",
-        "text": "Podv\u00e1d\u011bn\u00ed v paralympi\u00e1d\u011b"
-    },
-    {
-        "id": "317",
-        "text": "Kvalitn\u00ed MEME"
-    },
-    {
-        "id": "318",
-        "text": "Olizov\u00e1n\u00ed lid\u00ed v tramvaji"
-    },
-    {
-        "id": "319",
-        "text": "Op\u00edjen\u00ed se \u00fastn\u00ed vodou"
-    },
-    {
-        "id": "320",
-        "text": "Swag"
-    },
-    {
-        "id": "321",
-        "text": "Propuknut\u00ed v tanec a zp\u011bv"
-    },
-    {
-        "id": "322",
-        "text": "St\u0159\u00edkac\u00ed pistolka napln\u011bn\u00e1 ko\u010di\u010d\u00ed mo\u010d\u00ed."
-    },
-    {
-        "id": "323",
-        "text": "Metro"
-    },
-    {
-        "id": "324",
-        "text": "Xena, princezna v\u00e1le\u010dnice"
-    },
-    {
-        "id": "325",
-        "text": "Tom\u00e1\u0161 Garrigue Masaryk"
-    },
-    {
-        "id": "326",
-        "text": "Extr\u00e9mn\u011b t\u011bsn\u00e9 kalhoty"
-    },
-    {
-        "id": "327",
-        "text": "T\u0159et\u00ed meta"
-    },
-    {
-        "id": "328",
-        "text": "Probuzen\u00ed se polonah\u00fd na parkovi\u0161ti p\u0159ed Lidlem"
-    },
-    {
-        "id": "329",
-        "text": "Piko"
-    },
-    {
-        "id": "330",
-        "text": "B\u011blo\u0161sk\u00e1 privilegia"
-    },
-    {
-        "id": "331",
-        "text": "Nad\u011bje"
-    },
-    {
-        "id": "332",
-        "text": "Svl\u00e9knut\u00ed si ko\u0161ile"
-    },
-    {
-        "id": "333",
-        "text": "Pe\u0159iny s ne\u0161tovicemi"
-    },
-    {
-        "id": "334",
-        "text": "Etnick\u00e1 \u010distka"
-    },
-    {
-        "id": "335",
-        "text": "Vagin\u00e1ln\u00ed prd\u011bn\u00ed"
-    },
-    {
-        "id": "336",
-        "text": "Nezastaviteln\u00e9 hih\u0148\u00e1n\u00ed p\u0159i zm\u00ednce o Hutu\u00edch a Tutsi\u00edch"
-    },
-    {
-        "id": "337",
-        "text": "Po\u0159\u00e1dn\u00e9 zhulen\u00ed"
-    },
-    {
-        "id": "338",
-        "text": "P\u0159irozen\u00fd v\u00fdb\u011br"
-    },
-    {
-        "id": "339",
-        "text": "Plynat\u00e1 antilopa"
-    },
-    {
-        "id": "340",
-        "text": "M\u016fj pohlavn\u00ed \u017eivot"
-    },
-    {
-        "id": "341",
-        "text": "Arnold Schwarzenegger",
-        "tooltip": "Arnold Schwarzenegger: Jeden z nejzn\u00e1mn\u011bj\u0161\u00edch kulturist\u016f v historii."
-    },
-    {
-        "id": "342",
-        "text": "\u010cech, kter\u00fd nesk\u00e1\u010de"
-    },
-    {
-        "id": "343",
-        "text": "Ronald Reagan",
-        "tooltip": "Ronald Reagan: 40. prezident USA."
-    },
-    {
-        "id": "344",
-        "text": "Vag\u00edna Heleny Vondr\u00e1\u010dkov\u00e9"
-    },
-    {
-        "id": "345",
-        "text": "Ohyzdn\u00e1 tv\u00e1\u0159"
-    },
-    {
-        "id": "346",
-        "text": "Paprsek smrti"
-    },
-    {
-        "id": "347",
-        "text": "BATMAN!!!"
-    },
-    {
-        "id": "348",
-        "text": "Bezdomovci"
-    },
-    {
-        "id": "349",
-        "text": "\u00dasporn\u00e9 \u017e\u00e1rovky"
-    },
-    {
-        "id": "350",
-        "text": "Kentau\u0159i"
-    },
-    {
-        "id": "351",
-        "text": "Slan\u00e9 p\u0159ekvapen\u00ed"
-    },
-    {
-        "id": "352",
-        "text": "72 panen"
-    },
-    {
-        "id": "353",
-        "text": "Embryon\u00e1ln\u00ed kmenov\u00e9 bu\u0148ky"
-    },
-    {
-        "id": "354",
-        "text": "Rozpixelovan\u00e9 bukkake",
-        "tooltip": "Bukkake: Sexu\u00e1ln\u00ed praktika, p\u0159i n\u00ed\u017e n\u011bkolik mu\u017e\u016f masturbuje a ejakuluje na t\u011blo \u017eeny (nebo mu\u017ee), v\u011bt\u0161inou na obli\u010dej a \u00fasta"
-    },
-    {
-        "id": "355",
-        "text": "Seppuku",
-        "tooltip": "Seppuku: Japonsk\u00e1 ritu\u00e1ln\u00ed sebevra\u017eda"
-    },
-    {
-        "id": "356",
-        "text": "Lobotomie sek\u00e1\u010dkem na led"
-    },
-    {
-        "id": "357",
-        "text": "Klonov\u00ed voj\u00e1ci"
-    },
-    {
-        "id": "358",
-        "text": "Menstrua\u010dn\u00ed zu\u0159ivost"
-    },
-    {
-        "id": "359",
-        "text": "Zlat\u00e9 vlasy d\u011bda V\u0161ev\u011bda"
-    },
-    {
-        "id": "360",
-        "text": "Eskalace konfikt\u016f na Bl\u00edzk\u00e9m v\u00fdchod\u011b"
-    },
-    {
-        "id": "361",
-        "text": "Str\u00e1\u017eci vesm\u00edru"
-    },
-    {
-        "id": "362",
-        "text": "Stra\u0161liv\u00e1 nehoda p\u0159i laserov\u00e9m odstra\u0148ov\u00e1n\u00ed ochlupen\u00ed"
-    },
-    {
-        "id": "363",
-        "text": "Autokanibalismus"
-    },
-    {
-        "id": "364",
-        "text": "Embryo"
-    },
-    {
-        "id": "365",
-        "text": "Odj\u00ed\u017ed\u011bn\u00ed za zapadaj\u00edc\u00edm sluncem"
-    },
-    {
-        "id": "366",
-        "text": "Goblini"
-    },
-    {
-        "id": "367",
-        "text": "Sn\u011bzen\u00ed posledn\u00edho zn\u00e1m\u00e9ho bizona"
-    },
-    {
-        "id": "368",
-        "text": "Leskl\u00e9 p\u0159edm\u011bty"
-    },
-    {
-        "id": "369",
-        "text": "Nechutn\u00e9 zbohatnut\u00ed"
-    },
-    {
-        "id": "370",
-        "text": "Nejasn\u00e1 rasov\u00e1 identita Tomia Okamury"
-    },
-    {
-        "id": "371",
-        "text": "Lepra"
-    },
-    {
-        "id": "372",
-        "text": "Sv\u011btov\u00fd m\u00edr"
-    },
-    {
-        "id": "373",
-        "text": "Penisoprsty"
-    },
-    {
-        "id": "374",
-        "text": "Motorov\u00e9 pily m\u00edsto rukou"
-    },
-    {
-        "id": "375",
-        "text": "M\u011bstsk\u00fd penis Brno",
-        "tooltip": "Brn\u011bnsk\u00fd orloj"
-    },
-    {
-        "id": "376",
-        "text": "Britney Spears v p\u011btapades\u00e1ti"
-    },
-    {
-        "id": "377",
-        "text": "Snesen\u00ed vaj\u00ed\u010dka"
-    },
-    {
-        "id": "378",
-        "text": "Lidsk\u00e1 po\u0161etilost"
-    },
-    {
-        "id": "379",
-        "text": "Moje genit\u00e1lie"
-    },
-    {
-        "id": "380",
-        "text": "Babi\u010dka"
-    },
-    {
-        "id": "381",
-        "text": "Maso\u017erav\u00e9 bakterie"
-    },
-    {
-        "id": "382",
-        "text": "\u017debr\u00e1ci"
-    },
-    {
-        "id": "383",
-        "text": "50 000 volt\u016f p\u0159\u00edmo do bradavek"
-    },
-    {
-        "id": "384",
-        "text": "Aktivn\u00ed naslouch\u00e1n\u00ed"
-    },
-    {
-        "id": "385",
-        "text": "V\u00fdrazn\u00e9 \u017eensk\u00e9 postavy ve filmech"
-    },
-    {
-        "id": "386",
-        "text": "Mizern\u00e1 \u017eivotn\u00ed rozhodnut\u00ed"
-    },
-    {
-        "id": "387",
-        "text": "\u0158et\u011bzovky, kv\u016fli kter\u00fdm v\u00e1m zem\u0159e pejsek a nenajdete \u017eivotn\u00ed l\u00e1sku"
-    },
-    {
-        "id": "388",
-        "text": "Moje vag\u00edna"
-    },
-    {
-        "id": "389",
-        "text": "Pac-Man neovladateln\u011b se p\u0159ecp\u00e1vaj\u00edc\u00ed spermatem"
-    },
-    {
-        "id": "390",
-        "text": "\u0160\u0148up\u00e1n\u00ed lepidla"
-    },
-    {
-        "id": "391",
-        "text": "Placenta"
-    },
-    {
-        "id": "392",
-        "text": "V\u00e1\u017en\u011b posti\u017een\u00ed"
-    },
-    {
-        "id": "393",
-        "text": "Spont\u00e1nn\u00ed samovzn\u00edcen\u00ed \u010dlov\u011bka"
-    },
-    {
-        "id": "394",
-        "text": "Ku-klux-klan",
-        "tooltip": "Ku-klux-klan: Rasistick\u00e1 sekta z 2. poloviny 19. stolet\u00ed"
-    },
-    {
-        "id": "395",
-        "text": "Klitoris"
-    },
-    {
-        "id": "396",
-        "text": "Neno\u0161en\u00ed kalhot"
-    },
-    {
-        "id": "397",
-        "text": "Sex"
-    },
-    {
-        "id": "398",
-        "text": "\u010cerno\u0161i"
-    },
-    {
-        "id": "399",
-        "text": "K\u00fdbl ryb\u00edch hlav"
-    },
-    {
-        "id": "400",
-        "text": "P\u00e9\u010de v hospicu"
-    },
-    {
-        "id": "401",
-        "text": "Pasivn\u011b agresivn\u00ed n\u00e1lepky na ledni\u010dce"
-    },
-    {
-        "id": "402",
-        "text": "Zp\u016fsob, jak\u00fdm James Bond zach\u00e1z\u00ed se \u017eenami"
-    },
-    {
-        "id": "403",
-        "text": "D\u011btsk\u00e9 srdce"
-    },
-    {
-        "id": "404",
-        "text": "P\u016fj\u010dov\u00e1n\u00ed si jehel"
-    },
-    {
-        "id": "405",
-        "text": "Skalpov\u00e1n\u00ed"
-    },
-    {
-        "id": "406",
-        "text": "Tlust\u00ed a hloup\u00ed z\u00e1rove\u0148"
-    },
-    {
-        "id": "407",
-        "text": "J\u00e1ra Cimrman"
-    },
-    {
-        "id": "408",
-        "text": "Comic Sans"
-    },
-    {
-        "id": "409",
-        "text": "Sean Connery"
-    },
-    {
-        "id": "410",
-        "text": "\u0158\u00edhnut\u00ed, kter\u00e9 se p\u0159\u00edli\u0161 pozd\u011b uk\u00e1\u017ee b\u00fdt zvracen\u00edm na podlahu"
-    },
-    {
-        "id": "411",
-        "text": "Man\u017eel\u010diny povinnosti"
-    },
-    {
-        "id": "412",
-        "text": "Pyramida zmrza\u010den\u00fdch hlav"
-    },
-    {
-        "id": "413",
-        "text": "\u010cingisch\u00e1n",
-        "tooltip": "\u010cingisch\u00e1n: Sjednotitel a vojev\u016fdce mongolsk\u00fdch kmen\u016f ze 13. stolet\u00ed."
-    },
-    {
-        "id": "414",
-        "text": "Pevnost Boyard"
-    },
-    {
-        "id": "415",
-        "text": "Uk\u0159i\u017eov\u00e1n\u00ed"
-    },
-    {
-        "id": "416",
-        "text": "P\u0159edplatn\u00e9 sportovn\u00edho \u010dasopisu"
-    },
-    {
-        "id": "417",
-        "text": "Ml\u00e9ka\u0159"
-    },
-    {
-        "id": "418",
-        "text": "Friendly-fire",
-        "tooltip": "Friendly-fire: Palba do vlastn\u00edch \u0159ad."
-    },
-    {
-        "id": "419",
-        "text": "\u017densk\u00e9 volebn\u00ed pr\u00e1vo"
-    },
-    {
-        "id": "420",
-        "text": "AIDS"
-    },
-    {
-        "id": "421",
-        "text": "B\u00fdval\u00fd americk\u00fd prezident George W. Bush"
-    },
-    {
-        "id": "422",
-        "text": "\u010ctvrt kila sla\u010fou\u010dk\u00e9ho mexick\u00e9ho her\u00e1ku"
-    },
-    {
-        "id": "423",
-        "text": "Odf\u00e1knut\u00e1 p\u0159edehra"
-    },
-    {
-        "id": "424",
-        "text": "Jedl\u00e9 spodn\u00ed pr\u00e1dlo"
-    },
-    {
-        "id": "425",
-        "text": "Moje sb\u00edrka hightech sexu\u00e1ln\u00edch pom\u016fcek"
-    },
-    {
-        "id": "426",
-        "text": "S\u00edla, Luku"
-    },
-    {
-        "id": "427",
-        "text": "V\u010dely?"
-    },
-    {
-        "id": "428",
-        "text": "Aspo\u0148 chvilku zatracen\u00e9ho klidu a ticha"
-    },
-    {
-        "id": "429",
-        "text": "Vyhon\u011bn\u00ed si do jezera d\u011btsk\u00fdch slz"
-    },
-    {
-        "id": "430",
-        "text": "Mini pras\u00e1tko s pr\u0165avou pl\u00e1\u0161t\u011bnkou a gum\u00e1\u010dkama"
-    },
-    {
-        "id": "431",
-        "text": "Stahov\u00e1n\u00ed z Torrent\u016f"
-    },
-    {
-        "id": "432",
-        "text": "Masturbace"
-    },
-    {
-        "id": "433",
-        "text": "Tom Cruise"
-    },
-    {
-        "id": "434",
-        "text": "Vyv\u00e1\u017een\u00e1 sn\u00eddan\u011b"
-    },
-    {
-        "id": "435",
-        "text": "An\u00e1ln\u00ed kor\u00e1lky"
-    },
-    {
-        "id": "436",
-        "text": "Pit\u00ed o samot\u011b"
-    },
-    {
-        "id": "437",
-        "text": "Karty proti lidskosti"
-    },
-    {
-        "id": "438",
-        "text": "Potraty ram\u00ednkem na \u0161aty"
-    },
-    {
-        "id": "439",
-        "text": "No\u0161en\u00e9 kalhotky"
-    },
-    {
-        "id": "440",
-        "text": "Mazlen\u00ed se"
-    },
-    {
-        "id": "441",
-        "text": "Ut\u00edr\u00e1n\u00ed jej\u00edho zadku"
-    },
-    {
-        "id": "442",
-        "text": "Ho\u0159k\u00e1 melancholie, kdy\u017e chyt\u00ed\u0161 v\u0161echny pok\u00e9mony"
-    },
-    {
-        "id": "443",
-        "text": "Politick\u00fd proces"
-    },
-    {
-        "id": "444",
-        "text": "Hlas Morgana Freemana"
-    },
-    {
-        "id": "445",
-        "text": "Mu\u017e ve st\u0159edn\u00edch letech na kole\u010dkov\u00fdch brusl\u00edch"
-    },
-    {
-        "id": "446",
-        "text": "G\u00e1ndh\u00ed",
-        "tooltip": "Mah\u00e1tma G\u00e1ndh\u00ed: Jeden z nejv\u011bt\u0161\u00edch politick\u00fdch a duchovn\u00edch v\u016fdc\u016f Indie a indick\u00e9ho hnut\u00ed za nez\u00e1vislost."
-    },
-    {
-        "id": "447",
-        "text": "S\u00f3lo na irskou f\u00e9tnu z \u201eMy Heart Will Go On\u201c"
-    },
-    {
-        "id": "448",
-        "text": "Hrab\u00e1n\u00ed se na koul\u00edch"
-    },
-    {
-        "id": "449",
-        "text": "Keanu Reeves"
-    },
-    {
-        "id": "450",
-        "text": "D\u011btsk\u00e1 p\u0159ehl\u00eddka kr\u00e1sy"
-    },
-    {
-        "id": "451",
-        "text": "Zneu\u017e\u00edv\u00e1n\u00ed d\u011bt\u00ed"
-    },
-    {
-        "id": "452",
-        "text": "Bill Nye the Science Guy",
-        "tooltip": "Bill Nye the Science Guy: Americk\u00fd populariz\u00e1tor v\u011bdy moderuj\u00edc\u00ed televizn\u00ed v\u011bdeck\u00fd po\u0159ad pro d\u011bti."
-    },
-    {
-        "id": "453",
-        "text": "V\u011bda"
-    },
-    {
-        "id": "454",
-        "text": "Kmen \u017eensk\u00fdch v\u00e1le\u010dnic"
-    },
-    {
-        "id": "455",
-        "text": "Viagra\u00ae"
-    },
-    {
-        "id": "456",
-        "text": "Jej\u00ed v\u00fdsost kr\u00e1lovna Al\u017eb\u011bta II"
-    },
-    {
-        "id": "457",
-        "text": "Vyko\u0159is\u0165ov\u00e1n\u00ed chud\u00fdch Asiat\u016f obuvnick\u00fdm pr\u016fmyslem"
-    },
-    {
-        "id": "458",
-        "text": "Mrtv\u00ed par\u0165\u00e1ci Semira Gerkhana",
-        "tooltip": "Semir Gerkhan: N\u011bmeck\u00fd herec ze seri\u00e1lu Kobra 11."
-    },
-    {
-        "id": "459",
-        "text": "\u017dalobn\u00ed\u010dci"
-    },
-    {
-        "id": "460",
-        "text": "Erekce trvaj\u00edc\u00ed p\u0159es n\u011bkolik hodin"
-    },
-    {
-        "id": "461",
-        "text": "Ji\u0159\u00ed Ov\u010d\u00e1\u010dek"
-    },
-    {
-        "id": "462",
-        "text": "Sklon k samovoln\u00fdm potrat\u016fm"
-    },
-    {
-        "id": "463",
-        "text": "Rakovina"
-    },
-    {
-        "id": "464",
-        "text": "Fla\u0161ka methanolu"
-    },
-    {
-        "id": "465",
-        "text": "Celono\u010dn\u00ed pr\u016fjem"
-    },
-    {
-        "id": "466",
-        "text": "Zasran\u00fd \u010d\u016fr\u00e1k"
-    },
-    {
-        "id": "467",
-        "text": "Komunisti"
-    },
-    {
-        "id": "468",
-        "text": "Dr\u00e1t\u011bnka v \u0159iti"
-    },
-    {
-        "id": "469",
-        "text": "Studentsk\u00e9 st\u00e1vky za klima"
-    },
-    {
-        "id": "470",
-        "text": "Svatby homosexu\u00e1l\u016f"
-    },
-    {
-        "id": "471",
-        "text": "\u0160patn\u00e9 rozhodnut\u00ed"
-    },
-    {
-        "id": "472",
-        "text": "Jolanda"
-    },
-    {
-        "id": "473",
-        "text": "Vlasta Plam\u00ednek"
-    },
-    {
-        "id": "474",
-        "text": "Matrix"
-    },
-    {
-        "id": "475",
-        "text": "Grammar Nazi",
-        "tooltip": "Grammar Nazis: Internetov\u00e1 komunitn\u00ed skupina usiluj\u00edc\u00ed o dodr\u017eov\u00e1n\u00ed pravopisu a gramatiky."
-    },
-    {
-        "id": "476",
-        "text": "Pos\u00edl\u00e1n\u00ed nah\u00fdch fotek p\u0159es Messenger"
-    },
-    {
-        "id": "477",
-        "text": "Black Friday"
-    },
-    {
-        "id": "478",
-        "text": "Alz\u00e1k"
-    },
-    {
-        "id": "479",
-        "text": "Sn\u00eddan\u011b v KFC"
-    },
-    {
-        "id": "480",
-        "text": "Microsoft Explorer"
-    },
-    {
-        "id": "481",
-        "text": "Zku\u0161ebn\u00ed verze WinRARu"
-    },
-    {
-        "id": "482",
-        "text": "Ordinace v r\u016f\u017eov\u00e9 zahrad\u011b"
-    },
-    {
-        "id": "483",
-        "text": "Milion chvilek pro demokracii"
-    },
-    {
-        "id": "484",
-        "text": "Nacismus"
-    },
-    {
-        "id": "485",
-        "text": "N\u00e1bytek z IKEA"
-    },
-    {
-        "id": "486",
-        "text": "P\u016flno\u010dn\u00ed sva\u010dinka"
-    },
-    {
-        "id": "487",
-        "text": "BDSM",
-        "tooltip": "BDSM: Erotick\u00e9 praktiky, kter\u00e9 zahrnuj\u00ed svazov\u00e1n\u00ed, otroctv\u00ed, discipl\u00ednu, dominanci, sadomasochismus a podobn\u00e9 praktiky."
-    },
-    {
-        "id": "488",
-        "text": "Celib\u00e1t",
-        "tooltip": "Celib\u00e1t: Z\u00e1vazek \u017e\u00edt bez man\u017eelstv\u00ed a bez pohlavn\u00edho styku."
-    },
-    {
-        "id": "489",
-        "text": "30 dn\u00ed p\u0159edplatn\u00e9ho na Netflixu zdarma"
-    },
-    {
-        "id": "490",
-        "text": "\u00danos nev\u011bsty je\u0161t\u011b p\u0159ed ob\u0159adem"
-    },
-    {
-        "id": "491",
-        "text": "Nepl\u00e1novan\u00e9 po\u010det\u00ed"
-    },
-    {
-        "id": "492",
-        "text": "Ji\u017en\u00ed spojka"
-    },
-    {
-        "id": "493",
-        "text": "M\u00fddlo v piso\u00e1ru"
-    },
-    {
-        "id": "494",
-        "text": "Ko\u0165\u00e1tko v epileptick\u00e9m z\u00e1chvatu"
-    },
-    {
-        "id": "495",
-        "text": "Kohout kokrhaj\u00edc\u00ed ka\u017ed\u00e9 r\u00e1no"
-    },
-    {
-        "id": "496",
-        "text": "P\u0159ed\u010dasn\u00fd porod"
-    },
-    {
-        "id": "497",
-        "text": "Bu\u0159tp\u00e1rty"
-    },
-    {
-        "id": "498",
-        "text": "V\u011b\u0161tkyn\u011b na \u00d3\u010dku"
-    },
-    {
-        "id": "499",
-        "text": "T\u011bhotn\u00e1 puber\u0165a\u010dka"
-    },
-    {
-        "id": "500",
-        "text": "Dominik Feri a jeho \u017elut\u00e9 vyk\u0159i\u010dn\u00edky"
-    },
-    {
-        "id": "501",
-        "text": "Cyklista na D1"
-    },
-    {
-        "id": "502",
-        "text": "M\u016fj vztah"
-    },
-    {
-        "id": "503",
-        "text": "Spr\u00e1vn\u00fd pion\u00fdr"
-    },
-    {
-        "id": "504",
-        "text": "Podivn\u011b p\u0159ita\u017eliv\u00e9 kravsk\u00e9 semeno"
-    },
-    {
-        "id": "505",
-        "text": "L\u00e1ska"
-    },
-    {
-        "id": "506",
-        "text": "D\u00edt\u011b v mikrovlnce"
-    },
-    {
-        "id": "507",
-        "text": "Ignorace probl\u00e9m\u016f t\u0159et\u00edho sv\u011bta",
-        "tooltip": "Zem\u011b t\u0159et\u00edho sv\u011bta: Ekonomicky m\u00e1lo rozvinut\u00e9 zem\u011b."
-    },
-    {
-        "id": "508",
-        "text": "Pand\u00ed sex"
-    },
-    {
-        "id": "509",
-        "text": "Zamotan\u00e9 v\u00e1no\u010dn\u00ed \u017e\u00e1rovi\u010dky"
-    },
-    {
-        "id": "510",
-        "text": "Odfkl\u00e1knut\u00e1 p\u0159edehra"
-    },
-    {
-        "id": "511",
-        "text": "P\u0159\u00edli\u0161n\u00fd tlak na klitoris"
-    },
-    {
-        "id": "512",
-        "text": "Bulimie",
-        "tooltip": "Bulimie: Porucha p\u0159\u00edjmu potravy spojen\u00e1 s p\u0159\u00edli\u0161n\u00fdm p\u0159ej\u00edd\u00e1n\u00edm a n\u00e1sledn\u00fdm zvracen\u00edm."
-    },
-    {
-        "id": "513",
-        "text": "Tvoje m\u00e1ma"
-    },
-    {
-        "id": "514",
-        "text": "Nagelovan\u00fd borec"
-    },
-    {
-        "id": "515",
-        "text": "D\u00e9lka m\u00e9ho p\u0159irozen\u00ed"
-    },
-    {
-        "id": "516",
-        "text": "Propad tunelu Blanka"
-    },
-    {
-        "id": "517",
-        "text": "D\u011btsk\u00e9 srd\u00ed\u010dko"
-    },
-    {
-        "id": "518",
-        "text": "Kamar\u00e1dstv\u00ed s v\u00fdhodami"
-    },
-    {
-        "id": "519",
-        "text": "Bo\u017esk\u00fd K\u00e1ja"
-    },
-    {
-        "id": "520",
-        "text": "Zapalov\u00e1n\u00ed desinfekce"
-    },
-    {
-        "id": "521",
-        "text": "Sto tablet\u016f t\u00fddn\u011b"
-    },
-    {
-        "id": "522",
-        "text": "Strk\u00e1n\u00ed tu\u017eky do zadku"
-    },
-    {
-        "id": "523",
-        "text": "Pukl\u00fd hemeroid"
-    },
-    {
-        "id": "524",
-        "text": "Nezadr\u017eiteln\u00fd sm\u00edch p\u0159i zm\u00ednce o Homo Erectus"
-    },
-    {
-        "id": "525",
-        "text": "Svatba, dv\u011b d\u011bti, n\u00e1kupy, d\u016fchod, smrt."
-    },
-    {
-        "id": "526",
-        "text": "Slu\u0161n\u00e9 vychov\u00e1n\u00ed"
-    },
-    {
-        "id": "527",
-        "text": "Pra\u017e\u00e1k"
-    },
-    {
-        "id": "528",
-        "text": "Br\u0148\u00e1k"
-    },
-    {
-        "id": "529",
-        "text": "Ostrav\u00e1k"
-    },
-    {
-        "id": "530",
-        "text": "Bod G"
-    },
-    {
-        "id": "531",
-        "text": "Eva a Va\u0161ek"
-    },
-    {
-        "id": "532",
-        "text": "Rozp\u00e1len\u00e1 \u017eehli\u010dka"
-    },
-    {
-        "id": "533",
-        "text": "P\u0159eru\u0161ovan\u00e1 soulo\u017e"
-    },
-    {
-        "id": "534",
-        "text": "Otc\u016fv sklep"
-    },
-    {
-        "id": "535",
-        "text": "R\u00e1kosn\u00ed\u010dek"
-    },
-    {
-        "id": "536",
-        "text": "Klyst\u00fdr",
-        "tooltip": "Klyst\u00fdr: V\u00fdplach tlust\u00e9ho st\u0159eva."
-    },
-    {
-        "id": "537",
-        "text": "\u0160vejk"
-    },
-    {
-        "id": "538",
-        "text": "Kulervouc\u00ed fraje\u0159ina"
-    },
-    {
-        "id": "539",
-        "text": "Celulitida"
-    },
-    {
-        "id": "540",
-        "text": "T\u0159i kl\u00e1dy najednou"
-    },
-    {
-        "id": "541",
-        "text": "Sledov\u00e1n\u00ed porna na n\u00e1v\u0161t\u011bv\u011b u babi\u010dky"
-    },
-    {
-        "id": "542",
-        "text": "P\u0159ed\u010dasn\u00e9 vyvrcholen\u00ed"
-    },
-    {
-        "id": "543",
-        "text": "11. z\u00e1\u0159\u00ed"
-    },
-    {
-        "id": "544",
-        "text": "Mas\u00e1\u017e se \u0161\u0165astn\u00fdm koncem"
-    },
-    {
-        "id": "545",
-        "text": "Vir\u00f3za"
-    },
-    {
-        "id": "546",
-        "text": "\u0160ikana"
-    },
-    {
-        "id": "547",
-        "text": "Antidepresiva"
-    },
-    {
-        "id": "548",
-        "text": "Matriarch\u00e1t",
-        "tooltip": "Matriarch\u00e1t: Forma spole\u010dnosti, kter\u00e9 vl\u00e1dne \u017eena (matka). Opakem je patriarch\u00e1t."
-    },
-    {
-        "id": "549",
-        "text": "J\u00e1"
-    },
-    {
-        "id": "550",
-        "text": "Kuli\u010dka mazu, semene a okousan\u00fdch neht\u016f"
-    },
-    {
-        "id": "551",
-        "text": "Shrek"
-    },
-    {
-        "id": "552",
-        "text": "Sedm trpasl\u00edk\u016f"
-    },
-    {
-        "id": "553",
-        "text": "Erotick\u00e1 verze Bible"
-    },
-    {
-        "id": "554",
-        "text": "Nah\u00e1\u010d ve spar\u0165ansk\u00e9m kotli"
-    },
-    {
-        "id": "555",
-        "text": "Pohled na nahou babi\u010dku"
-    },
-    {
-        "id": "556",
-        "text": "Hra na ukulele"
-    },
-    {
-        "id": "557",
-        "text": "Dycky Most!"
-    },
-    {
-        "id": "558",
-        "text": "Kdy\u017e p\u0159i hran\u00ed na p\u00edsku zjist\u00ed\u0161, \u017ee to hn\u011bd\u00e9 nen\u00ed p\u00edsek"
-    },
-    {
-        "id": "559",
-        "text": "Distan\u010dn\u00ed v\u00fduka"
-    },
-    {
-        "id": "560",
-        "text": "Mini ma\u0148\u00e1sek na prost\u0159edn\u00ed\u010dku prav\u00e9 ruky"
-    },
-    {
-        "id": "561",
-        "text": "\u0160achovnice zaseknut\u00e1 v \u0159itn\u00edm otvoru"
-    },
-    {
-        "id": "562",
-        "text": "Trojit\u00fd hamburger"
-    },
-    {
-        "id": "563",
-        "text": "Uranov\u00e9 ty\u010de"
-    },
-    {
-        "id": "564",
-        "text": "Karp\u00e1ln\u00ed tunel",
-        "tooltip": "Karp\u00e1ln\u00ed tunel: K\u0159e\u010dovit\u00e9 namo\u017een\u00ed z\u00e1p\u011bst\u00ed nap\u0159\u00edklad z p\u0159\u00edli\u0161en\u00e9ho klik\u00e1n\u00ed na po\u010d\u00edta\u010dov\u00e9 my\u0161i."
-    },
-    {
-        "id": "565",
-        "text": "Zava\u0159ovac\u00ed sklenice, do kter\u00e9 jsem si uprdnul"
-    },
-    {
-        "id": "566",
-        "text": "Od\u010dervov\u00e1n\u00ed zachycen\u00e9 v p\u0159\u00edm\u00e9m p\u0159enosu"
-    },
-    {
-        "id": "567",
-        "text": "Coonda",
-        "tooltip": "Coonda: \u010cesk\u00e1 n\u00e1rodn\u00ed ply\u0161ov\u00e1 hra\u010dka vytvo\u0159en\u00e1 v r\u00e1mci Kazmovy OMS."
-    },
-    {
-        "id": "568",
-        "text": "Porcel\u00e1nov\u00e9 st\u0159epy zara\u017een\u00e9 ve vag\u00edn\u011b"
-    },
-    {
-        "id": "569",
-        "text": "Necht\u011bn\u00fd v\u00e1no\u010dn\u00ed d\u00e1rek"
-    },
-    {
-        "id": "570",
-        "text": "Skautsk\u00fd t\u00e1bor"
-    },
-    {
-        "id": "571",
-        "text": "Koncentra\u010dn\u00ed t\u00e1bor"
-    },
-    {
-        "id": "572",
-        "text": "Romantick\u00e9 vypu\u0161t\u011bn\u00ed b\u00edl\u00fdch holubic"
-    },
-    {
-        "id": "573",
-        "text": "Pl\u00e1c\u00e1n\u00ed se v baz\u00e9nku mrtv\u00fdch t\u011bl"
-    },
-    {
-        "id": "574",
-        "text": "Sta\u0159\u00ed lid\u00e9 nat\u00e1\u010dej\u00edc\u00ed videa na TikTok"
-    },
-    {
-        "id": "575",
-        "text": "Babi\u0161ova poezie",
-        "tooltip": "Soubor kr\u00e1tk\u00fdch b\u00e1sn\u00ed vytvo\u0159en\u00fdch z projev\u016f Andreje Babi\u0161e p\u0159i koronavirov\u00e9 krizi na podzim 2020."
-    },
-    {
-        "id": "576",
-        "text": "Obna\u017eov\u00e1n\u00ed na ve\u0159ejnosti"
-    },
-    {
-        "id": "577",
-        "text": "Pou\u017e\u00edv\u00e1n\u00ed erotick\u00fdch pom\u016fcek, kter\u00e9 nebyly schv\u00e1leny Evropskou komis\u00ed"
-    },
-    {
-        "id": "578",
-        "text": "Svarta jump",
-        "tooltip": "Svarto, je ti n\u011bco? No je mu hodn\u011b!"
-    },
-    {
-        "id": "579",
-        "text": "Vegansk\u00e1 bistra"
-    },
-    {
-        "id": "580",
-        "text": "Nat\u00e1\u010den\u00ed porna se sest\u0159enic\u00ed"
-    },
-    {
-        "id": "581",
-        "text": "PES ve trojce",
-        "tooltip": "PES: Protiepidemick\u00fd syst\u00e9m \u010cR ve 3. stupni NEBO soulo\u017een\u00ed t\u0159\u00ed ps\u016f"
-    },
-    {
-        "id": "582",
-        "text": "S\u00f3lo Adama Vojt\u011bcha v Superstar"
-    },
-    {
-        "id": "583",
-        "text": "Kousav\u00fd svetr, kter\u00fd stejn\u011b nos\u00ed\u0161, proto\u017ee ti ho upletla babi\u010dka s rakovinou"
-    },
-    {
-        "id": "584",
-        "text": "Sraz anonymn\u00edch alkoholik\u016f v hospod\u011b"
-    },
-    {
-        "id": "585",
-        "text": "Such\u00e9 kv\u00edt\u00ed na hrobu tv\u00e9 m\u00e1ti"
-    },
-    {
-        "id": "586",
-        "text": "Slevomat"
-    },
-    {
-        "id": "587",
-        "text": "Agraelus"
-    },
-    {
-        "id": "588",
-        "text": "P\u011btihodinov\u00e1 reakce od CzechClouda"
-    },
-    {
-        "id": "589",
-        "text": "Obepisov\u00e1n\u00ed dvan\u00e1ctilet\u00fdch holkek na Lid\u00e9.cz",
-        "tooltip": "12? Tak to je pohoda."
-    },
-    {
-        "id": "590",
-        "text": "OSTRAVA!!!"
-    },
-    {
-        "id": "591",
-        "text": "Zni\u010duj\u00edc\u00ed 5G \u010dip ve vakc\u00edn\u011b proti koronaviru"
-    },
-    {
-        "id": "592",
-        "text": "Lehce exploduj\u00edc\u00ed ko\u0165\u00e1tko"
-    },
-    {
-        "id": "593",
-        "text": "\u017deny s velk\u00fdm poprs\u00edm"
-    },
-    {
-        "id": "594",
-        "text": "Mu\u017ei s velk\u00fdm poprs\u00edm"
-    },
-    {
-        "id": "595",
-        "text": "Nebin\u00e1rn\u00ed okurka"
-    },
-    {
-        "id": "596",
-        "text": "Oz\u00e1\u0159en\u00ed v\u00fdbuchem atomov\u00e9 bomby"
-    },
-    {
-        "id": "597",
-        "text": "Zn\u00e1sil\u0148ov\u00e1n\u00ed USB hubu"
-    },
-    {
-        "id": "598",
-        "text": "Zlomen\u00fd kaktus v \u0159itn\u00edm otvoru"
-    },
-    {
-        "id": "599",
-        "text": "Alena Schillerov\u00e1"
-    },
-    {
-        "id": "600",
-        "text": "Hr\u016fzostra\u0161n\u00e1 nehoda p\u0159i laserov\u00e9 depilaci"
-    },
-    {
-        "id": "601",
-        "text": "Moje \u00fachylky"
-    },
-    {
-        "id": "602",
-        "text": "Komplikovan\u00e1 oprava slovensk\u00e9ho Lesn\u00edho Kolov\u00e9ho Traktoru \r\nLKT-81 Turbo"
-    },
-    {
-        "id": "603",
-        "text": "An\u00e1ln\u00ed zn\u00e1siln\u011bn\u00ed, zat\u00edmco jste uv\u00edzl\/a hlavou ve sb\u011brn\u00e9m zvonu na sklo"
-    },
-    {
-        "id": "604",
-        "text": "Pr\u00e1ce v mal\u00e9 fabrice za kr\u00e1sn\u00fdch 13 000 k\u010d v hrub\u00e9m"
-    },
-    {
-        "id": "605",
-        "text": "Ne\u00faprosn\u00fd BAN od Tomia Okamury- SPD ofici\u00e1ln\u00ed str\u00e1nka"
-    },
-    {
-        "id": "606",
-        "text": "P\u011bstov\u00e1n\u00ed brambor na Marsu z vlastn\u00edch v\u00fdkal\u016f"
-    },
-    {
-        "id": "607",
-        "text": "Menstrua\u010dn\u00ed kal\u00ed\u0161ek"
-    },
-    {
-        "id": "608",
-        "text": "Kdy\u017e po sran\u00ed na WC po sob\u011b zanech\u00e1\u0161 brut\u00e1ln\u00ed smrad, ale ty jsi v klidu, proto\u017ee jsi tam nast\u0159\u00edkal hodn\u011b osv\u011b\u017eova\u010de s v\u016fn\u00ed levandule"
-    },
-    {
-        "id": "609",
-        "text": "Kdy\u017e se t\u011b p\u0159i sexu partnerka do\u017eaduje o hlub\u0161\u00ed penetraci, ale tob\u011b u\u017e do\u0161el penis"
-    },
-    {
-        "id": "610",
-        "text": "Plesniv\u00fd lilek"
-    },
-    {
-        "id": "611",
-        "text": "Ochlupen\u00ed o\u017eral\u00e9ho \u0159idi\u010de autobusu"
-    },
-    {
-        "id": "612",
-        "text": "Labu\u017en\u00edci"
-    },
-    {
-        "id": "613",
-        "text": "S\u00fdrov\u00fd mlsoun"
-    },
-    {
-        "id": "614",
-        "text": "Pono\u017eky v sand\u00e1lech"
-    },
-    {
-        "id": "615",
-        "text": "Ta podivn\u011b vypadaj\u00edc\u00ed bradavice na prav\u00e9m varleti"
-    },
-    {
-        "id": "616",
-        "text": "Pizza s ananasem"
-    },
-    {
-        "id": "617",
-        "text": "Velk\u00fd koberec a spousta izola\u010dn\u00ed p\u00e1sky"
-    },
-    {
-        "id": "618",
-        "text": "Latex"
-    },
-    {
-        "id": "619",
-        "text": "Ikonick\u00e9 duo Ov\u010d\u00e1\u010dek a Zeman"
-    },
-    {
-        "id": "620",
-        "text": "D\u00e1da Patrasov\u00e1"
-    },
-    {
-        "id": "621",
-        "text": "\u010cernobyl"
-    },
-    {
-        "id": "622",
-        "text": "Hromada nekvalitn\u00edho porna"
-    },
-    {
-        "id": "632",
-        "text": "Sledov\u00e1n\u00ed porna s va\u0161\u00edm EX"
-    },
-    {
-        "id": "633",
-        "text": "Soudn\u00ed z\u00e1kaz p\u0159ibl\u00ed\u017een\u00ed"
-    },
-    {
-        "id": "634",
-        "text": "Zap\u00edjen\u00ed pr\u00e1\u0161k\u016f na p\u0159edpis alkoholem"
-    },
-    {
-        "id": "635",
-        "text": "Superhrdinov\u00e9 v d\u016fchodov\u00e9m v\u011bku"
-    },
-    {
-        "id": "636",
-        "text": "Mod\u0159ina na ruce a \u0161lajs na noze",
-        "source": "community"
-    },
-    {
-        "id": "637",
-        "text": "Smysl \u017eivota",
-        "source": "community"
-    },
-    {
-        "id": "638",
-        "text": "Dogmatil",
-        "source": "community"
-    },
-    {
-        "id": "639",
-        "text": "Jeden velkej tekutej",
-        "source": "community"
-    },
-    {
-        "id": "640",
-        "text": "Diskriminativn\u00ed monogamie",
-        "source": "community"
-    },
-    {
-        "id": "641",
-        "text": "\u0160norchl p\u0159ipojen\u00fd na v\u00fdfuk auta",
-        "source": "community"
-    },
-    {
-        "id": "642",
-        "text": "Tetris pro chud\u00e9",
-        "source": "community"
-    },
-    {
-        "id": "643",
-        "text": "Mysliveck\u00fd posed",
-        "source": "community"
-    },
-    {
-        "id": "644",
-        "text": "Antigravita\u010dn\u00ed ka\u0161e",
-        "source": "community"
-    },
-    {
-        "id": "645",
-        "text": "Hromadn\u00e9 zvracen\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "646",
-        "text": "Okukov\u00e1n\u00ed pacient\u016f na psychiatrii",
-        "source": "community"
-    },
-    {
-        "id": "647",
-        "text": "Kdy\u017e t\u011b l\u00e1ska tv\u00e9ho \u017eivota nechce",
-        "source": "community"
-    },
-    {
-        "id": "648",
-        "text": "Kytarou po hlav\u011b",
-        "source": "community"
-    },
-    {
-        "id": "649",
-        "text": "Rum s colou",
-        "source": "community"
-    },
-    {
-        "id": "650",
-        "text": "Jirka Babica",
-        "source": "community"
-    },
-    {
-        "id": "651",
-        "text": "Slzy tv\u00fd m\u00e1my \u0161ediv\u00fd",
-        "source": "community"
-    },
-    {
-        "id": "652",
-        "text": "Homer Simpson",
-        "source": "community"
-    },
-    {
-        "id": "653",
-        "text": "iPhone",
-        "source": "community"
-    },
-    {
-        "id": "654",
-        "text": "Tetov\u00e1n\u00ed na zadku",
-        "source": "community"
-    },
-    {
-        "id": "655",
-        "text": "LGBT",
-        "source": "community"
-    },
-    {
-        "id": "656",
-        "text": "Uv\u011bzn\u011bn\u00ed ve v\u00fdtahu",
-        "source": "community"
-    },
-    {
-        "id": "657",
-        "text": "St\u0159ed vesm\u00edru",
-        "source": "community"
-    },
-    {
-        "id": "658",
-        "text": "A\u017e moc podojen\u00e1 kr\u00e1va",
-        "source": "community"
-    },
-    {
-        "id": "659",
-        "text": "Toi Toi Story",
-        "source": "community"
-    },
-    {
-        "id": "660",
-        "text": "Mr. Bean",
-        "source": "community"
-    },
-    {
-        "id": "661",
-        "text": "Rad\u011bji knihu!",
-        "source": "community"
-    },
-    {
-        "id": "662",
-        "text": "Profesion\u00e1ln\u00ed truchl\u00edc\u00ed na poh\u0159bech",
-        "source": "community"
-    },
-    {
-        "id": "663",
-        "text": "Archeolog fek\u00e1li\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "664",
-        "text": "Obo\u010d\u00ed Leonida Ilji\u010de Bre\u017en\u011bva",
-        "source": "community"
-    },
-    {
-        "id": "665",
-        "text": "Kondom po z\u00e1ru\u010dn\u00ed dob\u011b",
-        "source": "community"
-    },
-    {
-        "id": "666",
-        "text": "Krte\u010dek bez kalhotek",
-        "source": "community"
-    },
-    {
-        "id": "667",
-        "text": "K\u0159e\u010dek Mire\u010dek",
-        "source": "community"
-    },
-    {
-        "id": "668",
-        "text": "That's what she said!",
-        "source": "community"
-    },
-    {
-        "id": "669",
-        "text": "P\u00e1rov\u00fd profil na facebooku",
-        "source": "community"
-    },
-    {
-        "id": "670",
-        "text": "Sma\u017e\u00e1k v housce",
-        "source": "community"
-    },
-    {
-        "id": "671",
-        "text": "B\u00fdval\u00fd vala\u0161sk\u00fd kn\u00ed\u017ee Vlad III. Dracula, zvan\u00fd t\u00e9\u017e Napichova\u010d \u010di Nara\u017ee\u010d",
-        "source": "community"
-    },
-    {
-        "id": "672",
-        "text": "\u0160mejd\u011bn\u00ed\u010dko \u0161mejd\u011bn\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "673",
-        "text": "Babi\u010d\u010din popel",
-        "source": "community"
-    },
-    {
-        "id": "674",
-        "text": "hromadn\u00e9 orgie",
-        "source": "community"
-    },
-    {
-        "id": "675",
-        "text": "mas\u00e1\u017e se \u0161\u0165astn\u00fdm koncem",
-        "source": "community"
-    },
-    {
-        "id": "676",
-        "text": "prokrastinace",
-        "source": "community"
-    },
-    {
-        "id": "677",
-        "text": "sex z l\u00edtosti",
-        "source": "community"
-    },
-    {
-        "id": "678",
-        "text": "\u0160v\u00e9dsk\u00e1 trojka",
-        "source": "community"
-    },
-    {
-        "id": "679",
-        "text": "Lehk\u00e9 ublinknut\u00ed p\u0159i pouh\u00e9 zm\u00ednce o bylinn\u00e9m lik\u00e9ru",
-        "source": "community"
-    },
-    {
-        "id": "680",
-        "text": "Bolestiv\u00e1 ejakulace",
-        "source": "community"
-    },
-    {
-        "id": "681",
-        "text": "Ko\u010dkoholky",
-        "source": "community"
-    },
-    {
-        "id": "682",
-        "text": "Sta\u0159enka v baz\u00e9nu",
-        "source": "community"
-    },
-    {
-        "id": "683",
-        "text": "Swingersparty",
-        "source": "community"
-    },
-    {
-        "id": "684",
-        "text": "Vysok\u00fd jalovec",
-        "source": "community"
-    },
-    {
-        "id": "685",
-        "text": "Eva a Va\u0161ek",
-        "source": "community"
-    },
-    {
-        "id": "686",
-        "text": "B\u00e1ba pod ko\u0159enem",
-        "source": "community"
-    },
-    {
-        "id": "687",
-        "text": "Ji\u0159ina Bohdalov\u00e1 v latexov\u00e9m oble\u010dku",
-        "source": "community"
-    },
-    {
-        "id": "688",
-        "text": "D\u00e1da Patrasov\u00e1",
-        "source": "community"
-    },
-    {
-        "id": "689",
-        "text": "Nesnesiteln\u00e9 sv\u011bd\u011bn\u00ed zad",
-        "source": "community"
-    },
-    {
-        "id": "690",
-        "text": "Cel\u00fd den str\u00e1ven\u00fd sledov\u00e1n\u00edm porna",
-        "source": "community"
-    },
-    {
-        "id": "691",
-        "text": "P\u00e1r Pa\u0159men\u016f",
-        "source": "community"
-    },
-    {
-        "id": "692",
-        "text": "Ta nesnesiteln\u00e1 kr\u00e1va sed\u00edc\u00ed vedle m\u011b v autobuse",
-        "source": "community"
-    },
-    {
-        "id": "693",
-        "text": "Pytel mrtv\u00fdch batolat u m\u011b ve sklep\u011b",
-        "source": "community"
-    },
-    {
-        "id": "694",
-        "text": "Nemo\u017en\u00e1 p\u0159eprava a n\u00e1sledn\u00e9 sestaven\u00ed \u0161estn\u00e1ctikolov\u00e9ho americk\u00e9ho traktoru BigBud o v\u00fdkonu 1000 kon\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "695",
-        "text": "Tch\u00fdn\u011b z man\u017eel\u010diny strany",
-        "source": "community"
-    },
-    {
-        "id": "696",
-        "text": "Miniaturn\u00ed vibr\u00e1tor",
-        "source": "community"
-    },
-    {
-        "id": "697",
-        "text": "Dub\u00ednek",
-        "source": "community"
-    },
-    {
-        "id": "698",
-        "text": "Jemnostp\u00e1n Trautenberk",
-        "source": "community"
-    },
-    {
-        "id": "699",
-        "text": "Zpov\u011bdnice",
-        "source": "community"
-    },
-    {
-        "id": "700",
-        "text": "Sk\u0159\u00edtek s dvoumetrov\u00fdm p\u00e9rem",
-        "source": "community"
-    },
-    {
-        "id": "701",
-        "text": "Rakovina d\u011blo\u017en\u00edho \u010d\u00edpku",
-        "source": "community"
-    },
-    {
-        "id": "702",
-        "text": "Lidice",
-        "source": "community"
-    },
-    {
-        "id": "703",
-        "text": "Spont\u00e1nn\u00ed samovzn\u00edcen\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "704",
-        "text": "Zka\u017een\u00fd bramborov\u00fd sal\u00e1t",
-        "source": "community"
-    },
-    {
-        "id": "705",
-        "text": "Pardubick\u00fd \"pern\u00edk\" podle origin\u00e1ln\u00edho kolumbijsk\u00e9ho receptu",
-        "source": "community"
-    },
-    {
-        "id": "706",
-        "text": "Recepty p\u0159elo\u017een\u00e9 Google Translatorem",
-        "source": "community"
-    },
-    {
-        "id": "707",
-        "text": "P\u0159\u00edjezdov\u00e1 tra\u0165 do schroma\u017e\u010fovac\u00edho t\u00e1bora Terez\u00edn",
-        "source": "community"
-    },
-    {
-        "id": "709",
-        "text": "Ko\u0165\u00e1tko v asijsk\u00e9 restauraci",
-        "source": "community"
-    },
-    {
-        "id": "710",
-        "text": "Anonymn\u00ed sex",
-        "source": "community"
-    },
-    {
-        "id": "711",
-        "text": "Pravideln\u00fd klyst\u00fdr",
-        "source": "community"
-    },
-    {
-        "id": "712",
-        "text": "Ta holka odvedle",
-        "source": "community"
-    },
-    {
-        "id": "713",
-        "text": "Lahodn\u00e9 ml\u00e9ko z poprs\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "714",
-        "text": "Analn\u00ed Kol\u00edk",
-        "source": "community"
-    },
-    {
-        "id": "715",
-        "text": "Facebook",
-        "source": "community"
-    },
-    {
-        "id": "716",
-        "text": "Mar\u0165\u00e1nci",
-        "source": "community"
-    },
-    {
-        "id": "717",
-        "text": "Pikachu",
-        "source": "community"
-    },
-    {
-        "id": "718",
-        "text": "Penisov\u00e9 \u0161\u00edlenstv\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "719",
-        "text": "Furry",
-        "source": "community"
-    },
-    {
-        "id": "720",
-        "text": "Nep\u0159\u00edjemn\u011b \u0161pi\u010dat\u00fd dopravn\u00ed ku\u017eel",
-        "source": "community"
-    },
-    {
-        "id": "721",
-        "text": "Plesniv\u00e1 vag\u00edna",
-        "source": "community"
-    },
-    {
-        "id": "722",
-        "text": "Nafukovac\u00ed pana",
-        "source": "community"
-    },
-    {
-        "id": "723",
-        "text": "Natrhnut\u00fd \u0159itn\u00ed otvor",
-        "source": "community"
-    },
-    {
-        "id": "724",
-        "text": "Nedobrovoln\u00e1 zm\u011bna pohlav\u00ed",
-        "source": "community"
-    },
-    {
-        "id": "725",
-        "text": "Elmo",
-        "source": "community"
-    },
-    {
-        "id": "726",
-        "text": "Agresivn\u00ed k\u0159e\u010dek",
-        "source": "community"
-    },
-    {
-        "id": "727",
-        "text": "Plesniv\u00fd s\u00fdr",
-        "source": "community"
-    },
-    {
-        "id": "728",
-        "text": "Teroristick\u00fd \u00fatok",
-        "source": "community"
-    },
-    {
-        "id": "729",
-        "text": "Pedofil",
-        "source": "community"
-    },
-    {
-        "id": "730",
-        "text": "Domin\u00e1tor",
-        "source": "community"
-    },
-    {
-        "id": "731",
-        "text": "Aristoteles",
-        "source": "community"
-    },
-    {
-        "id": "732",
-        "text": "Cracknut\u00fd Windows 10",
-        "source": "community"
-    },
-    {
-        "id": "733",
-        "text": "M\u011bstsk\u00e1 policie",
-        "source": "community"
-    },
-    {
-        "id": "734",
-        "text": "Spadl\u00fd kope\u010dek zmrzliny",
-        "source": "community"
-    },
-    {
-        "id": "735",
-        "text": "\u010cern\u00e1 d\u00edra",
-        "source": "community"
-    },
-    {
-        "id": "736",
-        "text": "Tramvaj pln\u00e1 bezdomovc\u016f",
-        "source": "community"
-    },
-    {
-        "id": "737",
-        "text": "Pedofiln\u00ed str\u00fd\u010dek",
-        "source": "community"
-    },
-    {
-        "id": "738",
-        "text": "Vlhk\u00e1 t\u0159in\u00e1ctka",
-        "source": "community"
-    },
-    {
-        "id": "739",
-        "text": "20 cm plus",
-        "source": "community"
-    },
-    {
-        "id": "740",
-        "text": "Chleba s m\u00e1slem se sal\u00e1mem",
-        "source": "community"
-    },
-    {
-        "id": "741",
-        "text": "M\u016fj milostn\u00fd \u017eivot",
-        "source": "community"
-    },
-    {
-        "id": "742",
-        "text": "Rou\u0161ka",
-        "source": "community"
-    },
-    {
-        "id": "743",
-        "text": "e-girl",
-        "source": "community"
-    },
-    {
-        "id": "744",
-        "text": "Str\u00e1nka pro dosp\u011bl\u00e9",
-        "source": "community"
-    },
-    {
-        "id": "745",
-        "text": "Hn\u011bd\u00e1 v\u011bc, co nechutn\u00e1 jako \u010dokol\u00e1da",
-        "source": "community"
-    },
-    {
-        "id": "746",
-        "text": "Ko\u010di\u010d\u00ed gul\u00e1\u0161",
-        "source": "community"
-    },
-    {
-        "id": "747",
-        "text": "Zmrzlina rozt\u00e1vaj\u00edc\u00ed v an\u00e1ln\u00edm otvoru",
-        "source": "community"
-    },
-    {
-        "id": "748",
-        "text": "Dopravn\u00ed ku\u017eel",
-        "source": "community"
-    },
-    {
-        "id": "749",
-        "text": "Sv\u011bteln\u00fd me\u010d",
-        "source": "community"
-    },
-    {
-        "id": "750",
-        "text": "Moje thajsk\u00e1 p\u0159\u00edtelkyn\u011b",
-        "source": "community"
-    },
-    {
-        "id": "751",
-        "text": "Gul\u00e1\u0161",
-        "source": "community"
-    },
-    {
-        "id": "752",
-        "text": "Filozofuj\u00edc\u00ed bezdomovec",
-        "source": "community"
-    },
-    {
-        "id": "753",
-        "text": "3 pr\u016fm\u011brn\u00ed sleduj\u00edc\u00ed na Twitchi",
-        "source": "community"
-    },
-    {
-        "id": "754",
-        "text": "Zorro mstitel",
-        "source": "community"
-    },
-    {
-        "id": "755",
-        "text": "My Little Pony",
-        "source": "community"
-    },
-    {
-        "id": "756",
-        "text": "Gumov\u00e1 p\u011bst",
-        "source": "community"
-    },
-    {
-        "id": "757",
-        "text": "Na to nebudu odpov\u00eddat",
-        "source": "community"
-    },
-    {
-        "id": "758",
-        "text": "Dob\u0159e rozjet\u00e1 informatick\u00e1 p\u00e1rty",
-        "source": "community"
-    },
-    {
-        "id": "759",
-        "text": "R\u00e1mus skrze kter\u00fd nesly\u0161\u00ed\u0161 ani vlastn\u00ed my\u0161lenky",
-        "source": "community"
-    },
-    {
-        "id": "760",
-        "text": "Franc Josef II.",
-        "source": "community"
-    },
-    {
-        "id": "761",
-        "text": "Karl\u00edk a tov\u00e1rna na \u010dokol\u00e1du",
-        "source": "community"
-    },
-    {
-        "id": "762",
-        "text": "Milosrdn\u00e9 oslepnut\u00ed na nuda pl\u00e1\u017ei pln\u00e9 d\u016fchodc\u016f",
-        "source": "community"
-    },
-    {
-        "id": "763",
-        "text": "Tatranka v trojobalu",
-        "source": "community"
-    },
-    {
-        "id": "764",
-        "text": "Proma\u0161t\u011bn\u00e1 husi\u010dka",
-        "source": "community"
-    },
-    {
-        "id": "765",
-        "text": "DDOS Attack",
-        "source": "community"
-    },
-    {
-        "id": "766",
-        "text": "Siamsk\u00e1 dvoj\u010data",
-        "source": "community"
-    },
-    {
-        "id": "767",
-        "text": "Pro\u0161l\u00e1 antikoncepce",
-        "source": "community"
-    },
-    {
-        "id": "768",
-        "text": "Elon Musk",
-        "source": "community"
-    },
-    {
-        "id": "769",
-        "text": "Ps\u00ed\u010dkov\u00e1",
-        "source": "community"
-    },
-    {
-        "id": "770",
-        "text": "Takeshiho hrad",
-        "source": "community"
-    },
-    {
-        "id": "771",
-        "text": "Rasistick\u00fd \u010c\u00ed\u0148an",
-        "source": "community"
-    },
-    {
-        "id": "772",
-        "text": "Vzestup t\u0159et\u00ed \u0159\u00ed\u0161e",
-        "source": "community"
-    },
-    {
-        "id": "773",
-        "text": "nadr\u017eenej d\u011bda",
-        "source": "community"
-    },
-    {
-        "id": "774",
-        "text": "Insulin",
-        "source": "community"
-    },
-    {
-        "id": "775",
-        "text": "P\u00e1d ze schod\u016f",
-        "source": "community"
-    },
-    {
-        "id": "776",
-        "text": "Dildo m\u00edsto kladiva.",
-        "source": "community"
-    },
-    {
-        "id": "777",
-        "text": "\u010cty\u0159icetilet\u00fd panic",
-        "source": "community"
-    },
-    {
-        "id": "778",
-        "text": "Tank T-34",
-        "source": "community"
-    },
-    {
-        "id": "779",
-        "text": "Nevlastn\u00ed bratranec z druh\u00e9ho kolene",
-        "source": "community"
-    },
-    {
-        "id": "780",
-        "text": "Po\u0159\u00e1dn\u00e1 nakl\u00e1da\u010dka",
-        "source": "community"
-    },
-    {
-        "id": "781",
-        "text": "T\u0159et\u00ed sv\u011btov\u00e1",
-        "source": "community"
-    },
-    {
-        "id": "782",
-        "text": "Sliny onkologick\u00e9ho pacienta",
-        "source": "community"
-    },
-    {
-        "id": "783",
-        "text": "Pen\u00edze",
-        "source": "community"
-    },
-    {
-        "id": "784",
-        "text": "Po\u0159\u00e1dn\u00e1 lajna kokainu",
-        "source": "community"
-    },
-    {
-        "id": "785",
-        "text": "\u017dran\u00ed mrtvol",
-        "source": "community"
-    },
-    {
-        "id": "786",
-        "text": "Cik\u00e1n, co tah\u00e1 tank traktorem",
-        "source": "community"
-    },
-    {
-        "id": "787",
-        "text": "Zvracen\u00ed v autobuse",
-        "source": "community"
-    },
-    {
-        "id": "788",
-        "text": "Z\u00fa\u017een\u00e1 p\u0159edko\u017eka",
-        "source": "community"
-    },
-    {
-        "id": "789",
-        "text": "Z\u00e1stup \u010dern\u00fdch lid\u00ed \u017e\u00e1daj\u00edc\u00edch pr\u00e1va.",
-        "source": "community"
-    },
-    {
-        "id": "790",
-        "text": "fake taxi",
-        "source": "community"
-    },
-    {
-        "id": "791",
-        "text": "Rick Astley",
-        "source": "community"
-    },
-    {
-        "id": "792",
-        "text": "Dvoumetrov\u00fd zweihander.",
-        "source": "community"
-    },
-    {
-        "id": "793",
-        "text": "2L Bran\u00edka v PET",
-        "source": "community"
-    }
+ {
+  "id": 1,
+  "text": "Hořící člověk",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 2,
+  "text": "Rasismus",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 3,
+  "text": "Stařecký pach",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 4,
+  "text": "Mikropenis",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 5,
+  "text": "Úplně normální koláč",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 6,
+  "text": "Sexting",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 7,
+  "text": "Koláč",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 8,
+  "text": "Tablety Rohypnolu",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "tip": "Rohypnol: prášky na spaní"
+ },
+ {
+  "id": 9,
+  "text": "Vomitivum",
+  "tags": [
+   "hnus"
+  ],
+  "tip": "Vomitivum: prášky vyvolávající zvracení"
+ },
+ {
+  "id": 10,
+  "text": "Větrný mlýn napěchovaný mrtvolami",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 11,
+  "text": "Buzny",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 12,
+  "text": "Přehnaně velké lízátko",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 13,
+  "text": "Děti v Africe",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 14,
+  "text": "Nesouměrná plastika prsou",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 15,
+  "text": "Přejídání a následné zvracení",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 16,
+  "text": "Tvrdě pracující cikán",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 17,
+  "text": "Stockholmský syndrom",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Stockholmský syndrom je specifická pozitivní emoční i afektivní vazba a závislost oběti (např. rukojmí) na pachateli"
+ },
+ {
+  "id": 18,
+  "text": "Napoleonský komplex",
+  "tags": [
+   "absurdni"
+  ],
+  "tip": "Deprese z malé výšky (případně jiné fyzické indispozice)"
+ },
+ {
+  "id": 19,
+  "text": "Maličký koník",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 20,
+  "text": "Šušně",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 21,
+  "text": "Závist penisu",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 22,
+  "text": "Barack Obama",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 23,
+  "text": "Sladké mámení",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 24,
+  "text": "Komfortní švédské matrace TEMPUR®",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 25,
+  "text": "Scientologie",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Scientologie: Náboženské hnutí. Každý člověk skládá z těla, mysli a ducha."
+ },
+ {
+  "id": 26,
+  "text": "Dávivé křeče",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 27,
+  "text": "Vesmírní lidé",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 28,
+  "text": "Darth Vader",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 29,
+  "text": "Fíkový koláč",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 30,
+  "text": "Ilumináti",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Ilumináti: Tajná sekta ovládající svět"
+ },
+ {
+  "id": 31,
+  "text": "Rada od moudrého starce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 32,
+  "text": "Baník Pyčo!",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 33,
+  "text": "Postarší Japonec",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 34,
+  "text": "Ochutnávky zdarma",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 35,
+  "text": "Estrogen",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Estrogen: Ženské pohlavní hormony"
+ },
+ {
+  "id": 36,
+  "text": "Sexuální pnutí",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 37,
+  "text": "Hladomor",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 38,
+  "text": "Deprese",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 39,
+  "text": "Bobr",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 40,
+  "text": "Muži",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 41,
+  "text": "Sexy sirotci",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 42,
+  "text": "Genitální piercingy",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 43,
+  "text": "Andrej Babiš",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 44,
+  "text": "Represe",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Represe: potlačení tvorby genetické informace"
+ },
+ {
+  "id": 45,
+  "text": "Jaromír Soukup",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 46,
+  "text": "Můj rodinný stav",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 47,
+  "text": "Přílišná kompenzace",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 48,
+  "text": "Ucvrnknutí si",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 49,
+  "text": "Hovno navždy zaseknuté v řitním svěrači",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 50,
+  "text": "Lhostejnost vládnoucích elit k hrozbě globálního oteplování",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 51,
+  "text": "Torze varlat",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "tip": "Torze varlete je superakutní stav vyvolaný otočením varlete kolem cévní stopky a strangulací přívodných tepen. Při úplném zaškrcení cév v chámovodu vzniká ischémie a následná nekróza při částečné infarzaci. Aby mohlo dojít k záchraně varlete, stav musí být vyřešen do šesti hodin od vzniku potíží. Torze je způsobena silnou kontrakcí musculus cremaster. K torzi predisponuje delší a volnější cévní stopka, kryptorchismus, široká tunica vaginalis, dlouhé mezorchium a chabý závěsný aparát varlete na tunica dartos."
+ },
+ {
+  "id": 52,
+  "text": "Sám Ďábel",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 53,
+  "text": "World of Warcraft",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 54,
+  "text": "Sexuální orientace Václava Klause",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 55,
+  "text": "Robotický Hitler",
+  "tags": [
+   "absurdni",
+   "politika"
+  ]
+ },
+ {
+  "id": 56,
+  "text": "Objektivizace ženského těla",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 57,
+  "text": "Obrázky prsou",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 58,
+  "text": "Něžné pohlazení po vnitřní straně stehna",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 59,
+  "text": "Budějovický Budvar",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 60,
+  "text": "Pedofilové",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 61,
+  "text": "Papež",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 62,
+  "text": "Venušiny kuličky",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 63,
+  "text": "Emma Watson",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 64,
+  "text": "Moje bývalá žena",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 65,
+  "text": "Sexy polštářové bitvy",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 66,
+  "text": "Další pitomý film o upírech",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 67,
+  "text": "Kybernetické implantáty",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 68,
+  "text": "Civilní oběti",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 69,
+  "text": "Karel Gott",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 70,
+  "text": "Ženský orgasmus",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 71,
+  "text": "Děvky",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 72,
+  "text": "Skauti",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 73,
+  "text": "Osvětim",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 74,
+  "text": "Koronavirus",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 75,
+  "text": "Michal David",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 76,
+  "text": "Židi",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 77,
+  "text": "Vytlačování na okraj společnosti",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 78,
+  "text": "Kristova krev",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 79,
+  "text": "Mrtví rodiče",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 80,
+  "text": "Večerníček",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 81,
+  "text": "Smrt na úplavici",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 82,
+  "text": "Mr. Proper",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Přípravek na mytí oken, také známý jako Mr. Clean"
+ },
+ {
+  "id": 83,
+  "text": "Masakr v americké škole",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 84,
+  "text": "Židovská bratrstva",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 85,
+  "text": "Hamé",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 86,
+  "text": "Falešný prorok",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 87,
+  "text": "Zemědělství",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 88,
+  "text": "Mirek Dušín",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Mirek Dušín: Jedna z postav z komiksu \"Rychlé šípy\""
+ },
+ {
+  "id": 89,
+  "text": "Překvápko sex!",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 90,
+  "text": "Diskriminace heterosexuálů",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 91,
+  "text": "Miloš Zeman",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 92,
+  "text": "Mimibazar",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 93,
+  "text": "Záře miliardy sluncí",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 94,
+  "text": "Lidé po amputaci",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 95,
+  "text": "Vržení panny do vulkánu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 96,
+  "text": "Italové",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 97,
+  "text": "Výbuchy",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 98,
+  "text": "Pořádné šňupnutí",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 99,
+  "text": "Zbavení se důkazů",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 100,
+  "text": "Děti na vodítkách",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 101,
+  "text": "Katapulty",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 102,
+  "text": "Biliony dolarů",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 103,
+  "text": "Upevňování nadvlády",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 104,
+  "text": "Umírání",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 105,
+  "text": "Ticho",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 106,
+  "text": "Židozednářsko-iluminátské spiknutí",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 107,
+  "text": "BISka",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Bezpečnostní Informační Služba České Republiky"
+ },
+ {
+  "id": 108,
+  "text": "Justin Bieber",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 109,
+  "text": "Písmo svaté",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 110,
+  "text": "Koule",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 111,
+  "text": "Modlitba na zahnání teploušů",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 112,
+  "text": "Nezletilé těhotenství",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 113,
+  "text": "Německé fekal porno",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 114,
+  "text": "Neviditelná ruka trhu",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Teorie v ekonomice, kdy snaha jednotlivců dosáhnout vlastního zájmu může být více prospěšná, než kdyby jim šlo o společnost."
+ },
+ {
+  "id": 115,
+  "text": "Moji vnitřní démoni",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 116,
+  "text": "Velká stehna",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 117,
+  "text": "Svlékání se při sledování Večerníčku",
+  "tags": [
+   "popkultura",
+   "sex"
+  ]
+ },
+ {
+  "id": 118,
+  "text": "Zdrcující dluh",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 119,
+  "text": "Piloti kamikaze",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Kamikaze: Japonští sebevražední piloti na konci druhé světové války."
+ },
+ {
+  "id": 120,
+  "text": "Ocas",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 121,
+  "text": "Obézní syn žijící ve sklepě",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 122,
+  "text": "Policejní brutalita",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 123,
+  "text": "Koňské maso",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 124,
+  "text": "Násilná rekatolizace",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 125,
+  "text": "Smysl života",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 126,
+  "text": "Španělská inkvizice",
+  "tags": [
+   "politika",
+   "popkultura"
+  ],
+  "tip": "Inkvizice: Právní instituce katolické církve, která se vypořádávala s kacířstvím (ten, kdo se neshoduje s církví)."
+ },
+ {
+  "id": 127,
+  "text": "Michael Jackson",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 128,
+  "text": "Fakt boží klobouček",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 129,
+  "text": "Ošahávání",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 130,
+  "text": "Odsun sudetských Němců",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 131,
+  "text": "Vlkodlaci",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 132,
+  "text": "Prstění",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 133,
+  "text": "Nudný narozeninový večírek",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 134,
+  "text": "Moje duše",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 135,
+  "text": "Nezastavitelný příliv islámu",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 136,
+  "text": "Neviditelná ruka trhu",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 137,
+  "text": "Eugenika",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Eugenika: sociálně-filosofický směr zaměřený na studium metod, které usilují o dosažení co nejlepšího genetického fondu člověka"
+ },
+ {
+  "id": 138,
+  "text": "RoboCop",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "RoboCop: akční sci-fi film z roku 1987 s robotickým policistou."
+ },
+ {
+  "id": 139,
+  "text": "Nevolnictví",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Nevolnictví: vztah mezi rolníkem (nevolníkem) a majitelem půdy v předmoderní Evropě."
+ },
+ {
+  "id": 140,
+  "text": "Stephen Hawking šeptající chlípná slůvka",
+  "tags": [
+   "popkultura",
+   "sex"
+  ]
+ },
+ {
+  "id": 141,
+  "text": "Zamotaná sluchátka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 142,
+  "text": "Sadismus",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Sadismus: Sexuální potěšení při způsobování bolesti jinému jedinci."
+ },
+ {
+  "id": 143,
+  "text": "Pálivá hovínka",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 144,
+  "text": "Veřejné zesměšnění",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 145,
+  "text": "Taková ta věc, co dává elektrošoky do břišních svalů.",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 146,
+  "text": "Nabalování holek na potratové klinice",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 147,
+  "text": "Mikrofon v análním otvoru",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 148,
+  "text": "Cikánská kletba",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 149,
+  "text": "Tetanus",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 150,
+  "text": "Nerealistická očekávání vůči ženskému tělu",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 151,
+  "text": "Ucházející transvestité",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Transvestita dosahuje sexuálního vzrušení či jen psychického uspokojení tím, že se převléká do šatů opačného pohlaví."
+ },
+ {
+  "id": 152,
+  "text": "Mokré sny",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 153,
+  "text": "Masochismus",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Masochismus: Sexuální potěšení při prožívání bolesti."
+ },
+ {
+  "id": 154,
+  "text": "Střílení z pušky do vzduchu, zatímco jste až po koule vražení v pištícím praseti",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 155,
+  "text": "Veřejná nahota",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 156,
+  "text": "Nekrofilie",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 157,
+  "text": "Vykrádání hrobů",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 158,
+  "text": "Odbarvená řiť",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 159,
+  "text": "Mohamed (budiž mu sláva)",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 160,
+  "text": "Několik bodných ran",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 161,
+  "text": "Esemeskování v opilosti",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 162,
+  "text": "Opice kouřící cigaretu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 163,
+  "text": "Smegma",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 164,
+  "text": "Živé obecenstvo ve studiu",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 165,
+  "text": "Znechucené ohrnutí rtů.",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 166,
+  "text": "Urážka našich nejzákladnějších lidských práv",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 167,
+  "text": "Nepochopitelná hloupost",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 168,
+  "text": "Sluníčko a duhy",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 169,
+  "text": "Aštar Šeran",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Vůdce vesmírných lidí. Duchobní bytost vyššího vědomí"
+ },
+ {
+  "id": 170,
+  "text": "Fízlokracie",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 171,
+  "text": "Teroristi",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 172,
+  "text": "Černá smrt",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 173,
+  "text": "Želva kajmanka ukusující ti špičku penisu",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "tip": "Kajmanka dravá: Vodní želva, která obývá mělká sladkovodní jezera a rybníky ve Střední a Severní Americe"
+ },
+ {
+  "id": 174,
+  "text": "Zabití motorovým vozidlem",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 175,
+  "text": "Velká hospodářská krize",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 176,
+  "text": "Emoce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 177,
+  "text": "Takový vztek, že se ti z toho postaví",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 178,
+  "text": "Krasobruslařský pár stejného pohlaví",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 179,
+  "text": "Útočná puška M-16",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 180,
+  "text": "Lidské maso",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 181,
+  "text": "Incest",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 182,
+  "text": "Koťátko přejeté parním válcem",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 183,
+  "text": "Nelétavý pták",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 184,
+  "text": "Správné rozhodnutí",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 185,
+  "text": "Když si prdneš a kousíček vyleze ven",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 186,
+  "text": "Skotačení",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 187,
+  "text": "Hovadské chování k dětem",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 188,
+  "text": "Pokakané plenky",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 189,
+  "text": "Lechtání Miroslava Kalouska, i když ti už říkal, ať toho necháš",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 190,
+  "text": "Velociraptoří útoky",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 191,
+  "text": "Vlastizrádní zločinci mongolsko-ruských tajných služeb KGBGRU ultra satanské Říše Zla Ruska! Volte Pravý Blok www.cibulka.net!",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 192,
+  "text": "Skrývání erekce",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 193,
+  "text": "Úplná čelní nahota",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 194,
+  "text": "Předstírání zájmu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 195,
+  "text": "Čepele z bradavek",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 196,
+  "text": "Univerzální trojjediná církev Vodnářského evangelia Ježíše Krista, Rudolfa Steinera a Řádu rytířů Jedi",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 197,
+  "text": "Ruce Michelle Obamové",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 198,
+  "text": "Ústní opar",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 199,
+  "text": "Robustní mongoloid",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 200,
+  "text": "Vzájemně zaručená hrozba zničení",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 201,
+  "text": "Boží zúčtování",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 202,
+  "text": "Kuřba",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 203,
+  "text": "Stalin",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 204,
+  "text": "Laktace",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Laktace: Proces tvorby a vylučování mléka tělem matky po porodu"
+ },
+ {
+  "id": 205,
+  "text": "Hurikán Katrina",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 206,
+  "text": "Pravý význam Vánoc",
+  "tags": [
+   "absurdni",
+   "politika"
+  ]
+ },
+ {
+  "id": 207,
+  "text": "Sebepohrdání",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 208,
+  "text": "Mozkový nádor",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 209,
+  "text": "Mrtvá nemluvňata",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 210,
+  "text": "New Age hudba",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "New Age je instrumentální či elektronický hudební žánr s opitimistickým pohledem na budoucnost."
+ },
+ {
+  "id": 211,
+  "text": "Termonukleární detonace",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 212,
+  "text": "Husy",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 213,
+  "text": "Kanye West",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 214,
+  "text": "Bůh",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 215,
+  "text": "Proměna v borůvku",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 216,
+  "text": "Erotické povídky s Harrym Potterem",
+  "tags": [
+   "popkultura",
+   "sex"
+  ]
+ },
+ {
+  "id": 217,
+  "text": "Děti s rakovinou zadku",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 218,
+  "text": "Dušení se penisem",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 219,
+  "text": "Americký sen",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 220,
+  "text": "Puberta",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 221,
+  "text": "Sladká, přesladká pomsta",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 222,
+  "text": "Pomrkávání na starce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 223,
+  "text": "Slabost na zajíčky",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 224,
+  "text": "Umpalumpové",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 225,
+  "text": "Pravá mexická kuchyně",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 226,
+  "text": "Prepubertální mládež",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 227,
+  "text": "Pohádky o mašinkách",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 228,
+  "text": "Kluci co už nezavolají",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 229,
+  "text": "Erektilní dysfunkce",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 230,
+  "text": "Rozestoupení Rudého moře",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 231,
+  "text": "Diskopříběh z obecního rozhlasu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 232,
+  "text": "Sólo na saxofon",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 233,
+  "text": "Pozemní miny",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 234,
+  "text": "Plán, jak zajmout Petra Cibulku a přinutit ho tančit v opičím kostýmku",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 235,
+  "text": "Čas na sebe",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 236,
+  "text": "Nickelback",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Kanadská rocková skupina, proslavená singlem How You Remind Me."
+ },
+ {
+  "id": 237,
+  "text": "Vláda domobrany",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Domobrana: Rezervní armáda"
+ },
+ {
+  "id": 238,
+  "text": "Čestné členství v Socialistickém svazu mládeže",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 239,
+  "text": "Protistojné palce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 240,
+  "text": "Duchové",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 241,
+  "text": "Alkoholismus",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 242,
+  "text": "Špatně načasovaný vtip o holokaustu",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 243,
+  "text": "Nevkusné jódlování",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 244,
+  "text": "Amputace na bojišti",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 245,
+  "text": "Přesně to, co bys čekal",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 246,
+  "text": "Paradox cestování časem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 247,
+  "text": "Deodorant AXE",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 248,
+  "text": "Kradení lízátek bezbranným dětem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 249,
+  "text": "Trapný vzkaz do hlasové schránky",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 250,
+  "text": "Drzá černoška",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 251,
+  "text": "Ty dny, kdy jsi namakaný černokněžník",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 252,
+  "text": "Sklíčený lev v ZOO",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 253,
+  "text": "Nejzavrženíhodnější vražda",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 254,
+  "text": "Sokol s čepičkou na hlavě",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 255,
+  "text": "Uprdnutí si a odkráčení pryč",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 256,
+  "text": "Namlouvací rituál",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 257,
+  "text": "Čínský gymnastický tým",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 258,
+  "text": "Třenice",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 259,
+  "text": "Asiati, kterým nejde matika",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 260,
+  "text": "Strach",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 261,
+  "text": "Ministranti",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Ministrant: Světský služebník, který pomáhá kněžím během bohoslužby."
+ },
+ {
+  "id": 262,
+  "text": "Kvasinky",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 263,
+  "text": "Popírání globálního oteplování",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 264,
+  "text": "Olizování věcí, abyste si je pak mohli přivlastnit",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 265,
+  "text": "Vikingové",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 266,
+  "text": "Globální zloideologie islamismu a homosexualismu",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 267,
+  "text": "Horký sýr",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 268,
+  "text": "Globální oteplování",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 269,
+  "text": "Vadný kondom",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 270,
+  "text": "Nevyhnutelný žhavý zánik vesmíru",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 271,
+  "text": "Republikáni",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Republikáni jsou jedna ze dvou hlavních politických stran USA. Prosazují svobodu jednotlivce, držení zbraní či tvrdší imigrační zákony. Jeden z jejich prezidentů byl Donald Trump."
+ },
+ {
+  "id": 272,
+  "text": "Václav Havel, služebník Satana",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 273,
+  "text": "Porno s chobotnicí",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 274,
+  "text": "Vorvani",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 275,
+  "text": "Lady Gaga",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 276,
+  "text": "Extra velké kousky mrtvé prostitutky",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 277,
+  "text": "Gloryholes",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Gloryhole: Díra ve zdu nebo v jiné přepážce, sloužící pro zapojení do sexuálních aktivit s osobou na druhé straně."
+ },
+ {
+  "id": 278,
+  "text": "Fixace na otce",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 279,
+  "text": "Mim v záchvatu mrtvice",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 280,
+  "text": "Běloši",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 281,
+  "text": "Život naplněný žalem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 282,
+  "text": "Lahodný boční pohled na prso",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 283,
+  "text": "Moře problémů",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 284,
+  "text": "Nácci",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 285,
+  "text": "Chladicí box plný orgánů",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 286,
+  "text": "Opření se do toho na 110 %",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 287,
+  "text": "Anál",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 288,
+  "text": "Vymazlený osobní profil na White Media",
+  "tags": [
+   "politika"
+  ],
+  "tip": "White Media: Neonacistický, pravicově extremistický a xenofobní web, který publikoval nenávistné, urážlivé, útočné a štvavé články a videa proti imigrantům, sexuálním menšinám a multikulturalistům"
+ },
+ {
+  "id": 289,
+  "text": "Obezita",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 290,
+  "text": "Homoerotická volejbalová montáž",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 291,
+  "text": "Štěňátka!",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 292,
+  "text": "Přírodní výrobek pro zlepšení erekce",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 293,
+  "text": "Hnědoši",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 294,
+  "text": "Shození lustru na nepřátele a vyšvihnutí se po provazu vzhůru",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 295,
+  "text": "Příliš horká polévka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 296,
+  "text": "Pornohvězdy",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 297,
+  "text": "Hormonální injekce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 298,
+  "text": "Pošta pro tebe",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 299,
+  "text": "Velký třesk",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 300,
+  "text": "Diskriminace bílých heterosexuálních křesťanských mužů",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 301,
+  "text": "Nošení spodního prádla naruby, abyste nemuseli prát",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 302,
+  "text": "Odvykačka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 303,
+  "text": "Nařízení Evropské unie",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 304,
+  "text": "Hrabě Čokula",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 305,
+  "text": "Vůně splašků po ránu",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 306,
+  "text": "Neopětovaný orální sex",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 307,
+  "text": "Mrazík",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 308,
+  "text": "Sexy lidi",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 309,
+  "text": "Předkožka",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 310,
+  "text": "Týpci bez zadku",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 311,
+  "text": "Zázrak lidského zrození",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 312,
+  "text": "Čekání až po svatbě",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 313,
+  "text": "Dva skrčci, kteří serou do kyblíku",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 314,
+  "text": "Stigmatizace transsexuálů",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Stigma: Specifický rys osobnosti člověka, který může být okolím chápán jako nežádoucí."
+ },
+ {
+  "id": 315,
+  "text": "Smutné honění",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 316,
+  "text": "Podvádění v paralympiádě",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 317,
+  "text": "Kvalitní MEME",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 318,
+  "text": "Olizování lidí v tramvaji",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 319,
+  "text": "Opíjení se ústní vodou",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 320,
+  "text": "Swag",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 321,
+  "text": "Propuknutí v tanec a zpěv",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 322,
+  "text": "Stříkací pistolka naplněná kočičí močí.",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 323,
+  "text": "Metro",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 324,
+  "text": "Xena, princezna válečnice",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 325,
+  "text": "Tomáš Garrigue Masaryk",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 326,
+  "text": "Extrémně těsné kalhoty",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 327,
+  "text": "Třetí meta",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 328,
+  "text": "Probuzení se polonahý na parkovišti před Lidlem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 329,
+  "text": "Piko",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 330,
+  "text": "Bělošská privilegia",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 331,
+  "text": "Naděje",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 332,
+  "text": "Svléknutí si košile",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 333,
+  "text": "Peřiny s neštovicemi",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 334,
+  "text": "Etnická čistka",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 335,
+  "text": "Vaginální prdění",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 336,
+  "text": "Nezastavitelné hihňání při zmínce o Hutuích a Tutsiích",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 337,
+  "text": "Pořádné zhulení",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 338,
+  "text": "Přirozený výběr",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 339,
+  "text": "Plynatá antilopa",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 340,
+  "text": "Můj pohlavní život",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 341,
+  "text": "Arnold Schwarzenegger",
+  "tags": [
+   "politika",
+   "popkultura"
+  ],
+  "tip": "Arnold Schwarzenegger: Jeden z nejznámnějších kulturistů v historii."
+ },
+ {
+  "id": 342,
+  "text": "Čech, který neskáče",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 343,
+  "text": "Ronald Reagan",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Ronald Reagan: 40. prezident USA."
+ },
+ {
+  "id": 344,
+  "text": "Vagína Heleny Vondráčkové",
+  "tags": [
+   "popkultura",
+   "sex"
+  ]
+ },
+ {
+  "id": 345,
+  "text": "Ohyzdná tvář",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 346,
+  "text": "Paprsek smrti",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 347,
+  "text": "BATMAN!!!",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 348,
+  "text": "Bezdomovci",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 349,
+  "text": "Úsporné žárovky",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 350,
+  "text": "Kentauři",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 351,
+  "text": "Slané překvapení",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 352,
+  "text": "72 panen",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 353,
+  "text": "Embryonální kmenové buňky",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 354,
+  "text": "Rozpixelované bukkake",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Bukkake: Sexuální praktika, při níž několik mužů masturbuje a ejakuluje na tělo ženy (nebo muže), většinou na obličej a ústa"
+ },
+ {
+  "id": 355,
+  "text": "Seppuku",
+  "tags": [
+   "hnus"
+  ],
+  "tip": "Seppuku: Japonská rituální sebevražda"
+ },
+ {
+  "id": 356,
+  "text": "Lobotomie sekáčkem na led",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 357,
+  "text": "Klonoví vojáci",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 358,
+  "text": "Menstruační zuřivost",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 359,
+  "text": "Zlaté vlasy děda Vševěda",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 360,
+  "text": "Eskalace konfiktů na Blízkém východě",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 361,
+  "text": "Strážci vesmíru",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 362,
+  "text": "Strašlivá nehoda při laserovém odstraňování ochlupení",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 363,
+  "text": "Autokanibalismus",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 364,
+  "text": "Embryo",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 365,
+  "text": "Odjíždění za zapadajícím sluncem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 366,
+  "text": "Goblini",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 367,
+  "text": "Snězení posledního známého bizona",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 368,
+  "text": "Lesklé předměty",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 369,
+  "text": "Nechutné zbohatnutí",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 370,
+  "text": "Nejasná rasová identita Tomia Okamury",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 371,
+  "text": "Lepra",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 372,
+  "text": "Světový mír",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 373,
+  "text": "Penisoprsty",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 374,
+  "text": "Motorové pily místo rukou",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 375,
+  "text": "Městský penis Brno",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "tip": "Brněnský orloj"
+ },
+ {
+  "id": 376,
+  "text": "Britney Spears v pětapadesáti",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 377,
+  "text": "Snesení vajíčka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 378,
+  "text": "Lidská pošetilost",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 379,
+  "text": "Moje genitálie",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 380,
+  "text": "Babička",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 381,
+  "text": "Masožravé bakterie",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 382,
+  "text": "Žebráci",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 383,
+  "text": "50 000 voltů přímo do bradavek",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 384,
+  "text": "Aktivní naslouchání",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 385,
+  "text": "Výrazné ženské postavy ve filmech",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 386,
+  "text": "Mizerná životní rozhodnutí",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 387,
+  "text": "Řetězovky, kvůli kterým vám zemře pejsek a nenajdete životní lásku",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 388,
+  "text": "Moje vagína",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 389,
+  "text": "Pac-Man neovladatelně se přecpávající spermatem",
+  "tags": [
+   "popkultura",
+   "sex"
+  ]
+ },
+ {
+  "id": 390,
+  "text": "Šňupání lepidla",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 391,
+  "text": "Placenta",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 392,
+  "text": "Vážně postižení",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 393,
+  "text": "Spontánní samovznícení člověka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 394,
+  "text": "Ku-klux-klan",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Ku-klux-klan: Rasistická sekta z 2. poloviny 19. století"
+ },
+ {
+  "id": 395,
+  "text": "Klitoris",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 396,
+  "text": "Nenošení kalhot",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 397,
+  "text": "Sex",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 398,
+  "text": "Černoši",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 399,
+  "text": "Kýbl rybích hlav",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 400,
+  "text": "Péče v hospicu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 401,
+  "text": "Pasivně agresivní nálepky na ledničce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 402,
+  "text": "Způsob, jakým James Bond zachází se ženami",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 403,
+  "text": "Dětské srdce",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 404,
+  "text": "Půjčování si jehel",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 405,
+  "text": "Skalpování",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 406,
+  "text": "Tlustí a hloupí zároveň",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 407,
+  "text": "Jára Cimrman",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 408,
+  "text": "Comic Sans",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 409,
+  "text": "Sean Connery",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 410,
+  "text": "Říhnutí, které se příliš pozdě ukáže být zvracením na podlahu",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 411,
+  "text": "Manželčiny povinnosti",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 412,
+  "text": "Pyramida zmrzačených hlav",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 413,
+  "text": "Čingischán",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Čingischán: Sjednotitel a vojevůdce mongolských kmenů ze 13. století."
+ },
+ {
+  "id": 414,
+  "text": "Pevnost Boyard",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 415,
+  "text": "Ukřižování",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 416,
+  "text": "Předplatné sportovního časopisu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 417,
+  "text": "Mlékař",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 418,
+  "text": "Friendly-fire",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Friendly-fire: Palba do vlastních řad."
+ },
+ {
+  "id": 419,
+  "text": "Ženské volební právo",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 420,
+  "text": "AIDS",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 421,
+  "text": "Bývalý americký prezident George W. Bush",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 422,
+  "text": "Čtvrt kila slaďoučkého mexického heráku",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 423,
+  "text": "Odfáknutá předehra",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 424,
+  "text": "Jedlé spodní prádlo",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 425,
+  "text": "Moje sbírka hightech sexuálních pomůcek",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 426,
+  "text": "Síla, Luku",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 427,
+  "text": "Včely?",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 428,
+  "text": "Aspoň chvilku zatraceného klidu a ticha",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 429,
+  "text": "Vyhonění si do jezera dětských slz",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 430,
+  "text": "Mini prasátko s prťavou pláštěnkou a gumáčkama",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 431,
+  "text": "Stahování z Torrentů",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 432,
+  "text": "Masturbace",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 433,
+  "text": "Tom Cruise",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 434,
+  "text": "Vyvážená snídaně",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 435,
+  "text": "Anální korálky",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 436,
+  "text": "Pití o samotě",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 437,
+  "text": "Karty proti lidskosti",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 438,
+  "text": "Potraty ramínkem na šaty",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 439,
+  "text": "Nošené kalhotky",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 440,
+  "text": "Mazlení se",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 441,
+  "text": "Utírání jejího zadku",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 442,
+  "text": "Hořká melancholie, když chytíš všechny pokémony",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 443,
+  "text": "Politický proces",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 444,
+  "text": "Hlas Morgana Freemana",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 445,
+  "text": "Muž ve středních letech na kolečkových bruslích",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 446,
+  "text": "Gándhí",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Mahátma Gándhí: Jeden z největších politických a duchovních vůdců Indie a indického hnutí za nezávislost."
+ },
+ {
+  "id": 447,
+  "text": "Sólo na irskou fétnu z „My Heart Will Go On“",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 448,
+  "text": "Hrabání se na koulích",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 449,
+  "text": "Keanu Reeves",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 450,
+  "text": "Dětská přehlídka krásy",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 451,
+  "text": "Zneužívání dětí",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 452,
+  "text": "Bill Nye the Science Guy",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Bill Nye the Science Guy: Americký popularizátor vědy moderující televizní vědecký pořad pro děti."
+ },
+ {
+  "id": 453,
+  "text": "Věda",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 454,
+  "text": "Kmen ženských válečnic",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 455,
+  "text": "Viagra®",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 456,
+  "text": "Její výsost královna Alžběta II",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 457,
+  "text": "Vykořisťování chudých Asiatů obuvnickým průmyslem",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 458,
+  "text": "Mrtví parťáci Semira Gerkhana",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Semir Gerkhan: Německý herec ze seriálu Kobra 11."
+ },
+ {
+  "id": 459,
+  "text": "Žalobníčci",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 460,
+  "text": "Erekce trvající přes několik hodin",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 461,
+  "text": "Jiří Ovčáček",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 462,
+  "text": "Sklon k samovolným potratům",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 463,
+  "text": "Rakovina",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 464,
+  "text": "Flaška methanolu",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 465,
+  "text": "Celonoční průjem",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 466,
+  "text": "Zasraný čůrák",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 467,
+  "text": "Komunisti",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 468,
+  "text": "Drátěnka v řiti",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 469,
+  "text": "Studentské stávky za klima",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 470,
+  "text": "Svatby homosexuálů",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 471,
+  "text": "Špatné rozhodnutí",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 472,
+  "text": "Jolanda",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 473,
+  "text": "Vlasta Plamínek",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 474,
+  "text": "Matrix",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 475,
+  "text": "Grammar Nazi",
+  "tags": [
+   "popkultura"
+  ],
+  "tip": "Grammar Nazis: Internetová komunitní skupina usilující o dodržování pravopisu a gramatiky."
+ },
+ {
+  "id": 476,
+  "text": "Posílání nahých fotek přes Messenger",
+  "tags": [
+   "popkultura",
+   "sex"
+  ]
+ },
+ {
+  "id": 477,
+  "text": "Black Friday",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 478,
+  "text": "Alzák",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 479,
+  "text": "Snídaně v KFC",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 480,
+  "text": "Microsoft Explorer",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 481,
+  "text": "Zkušební verze WinRARu",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 482,
+  "text": "Ordinace v růžové zahradě",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 483,
+  "text": "Milion chvilek pro demokracii",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 484,
+  "text": "Nacismus",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 485,
+  "text": "Nábytek z IKEA",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 486,
+  "text": "Půlnoční svačinka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 487,
+  "text": "BDSM",
+  "tags": [
+   "sex"
+  ],
+  "tip": "BDSM: Erotické praktiky, které zahrnují svazování, otroctví, disciplínu, dominanci, sadomasochismus a podobné praktiky."
+ },
+ {
+  "id": 488,
+  "text": "Celibát",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Celibát: Závazek žít bez manželství a bez pohlavního styku."
+ },
+ {
+  "id": 489,
+  "text": "30 dní předplatného na Netflixu zdarma",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 490,
+  "text": "Únos nevěsty ještě před obřadem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 491,
+  "text": "Neplánované početí",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 492,
+  "text": "Jižní spojka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 493,
+  "text": "Mýdlo v pisoáru",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 494,
+  "text": "Koťátko v epileptickém záchvatu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 495,
+  "text": "Kohout kokrhající každé ráno",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 496,
+  "text": "Předčasný porod",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 497,
+  "text": "Buřtpárty",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 498,
+  "text": "Věštkyně na Óčku",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 499,
+  "text": "Těhotná puberťačka",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 500,
+  "text": "Dominik Feri a jeho žluté vykřičníky",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 501,
+  "text": "Cyklista na D1",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 502,
+  "text": "Můj vztah",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 503,
+  "text": "Správný pionýr",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 504,
+  "text": "Podivně přitažlivé kravské semeno",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 505,
+  "text": "Láska",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 506,
+  "text": "Dítě v mikrovlnce",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 507,
+  "text": "Ignorace problémů třetího světa",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Země třetího světa: Ekonomicky málo rozvinuté země."
+ },
+ {
+  "id": 508,
+  "text": "Pandí sex",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 509,
+  "text": "Zamotané vánoční žárovičky",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 510,
+  "text": "Odfkláknutá předehra",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 511,
+  "text": "Přílišný tlak na klitoris",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 512,
+  "text": "Bulimie",
+  "tags": [
+   "hnus"
+  ],
+  "tip": "Bulimie: Porucha příjmu potravy spojená s přílišným přejídáním a následným zvracením."
+ },
+ {
+  "id": 513,
+  "text": "Tvoje máma",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 514,
+  "text": "Nagelovaný borec",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 515,
+  "text": "Délka mého přirození",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 516,
+  "text": "Propad tunelu Blanka",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 517,
+  "text": "Dětské srdíčko",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 518,
+  "text": "Kamarádství s výhodami",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 519,
+  "text": "Božský Kája",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 520,
+  "text": "Zapalování desinfekce",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 521,
+  "text": "Sto tabletů týdně",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 522,
+  "text": "Strkání tužky do zadku",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 523,
+  "text": "Puklý hemeroid",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 524,
+  "text": "Nezadržitelný smích při zmínce o Homo Erectus",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 525,
+  "text": "Svatba, dvě děti, nákupy, důchod, smrt.",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 526,
+  "text": "Slušné vychování",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 527,
+  "text": "Pražák",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 528,
+  "text": "Brňák",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 529,
+  "text": "Ostravák",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 530,
+  "text": "Bod G",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 531,
+  "text": "Eva a Vašek",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 532,
+  "text": "Rozpálená žehlička",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 533,
+  "text": "Přerušovaná soulož",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 534,
+  "text": "Otcův sklep",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 535,
+  "text": "Rákosníček",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 536,
+  "text": "Klystýr",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "tip": "Klystýr: Výplach tlustého střeva."
+ },
+ {
+  "id": 537,
+  "text": "Švejk",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 538,
+  "text": "Kulervoucí frajeřina",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 539,
+  "text": "Celulitida",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 540,
+  "text": "Tři klády najednou",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 541,
+  "text": "Sledování porna na návštěvě u babičky",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 542,
+  "text": "Předčasné vyvrcholení",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 543,
+  "text": "11. září",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 544,
+  "text": "Masáž se šťastným koncem",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 545,
+  "text": "Viróza",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 546,
+  "text": "Šikana",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 547,
+  "text": "Antidepresiva",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 548,
+  "text": "Matriarchát",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Matriarchát: Forma společnosti, které vládne žena (matka). Opakem je patriarchát."
+ },
+ {
+  "id": 549,
+  "text": "Já",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 550,
+  "text": "Kulička mazu, semene a okousaných nehtů",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 551,
+  "text": "Shrek",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 552,
+  "text": "Sedm trpaslíků",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 553,
+  "text": "Erotická verze Bible",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 554,
+  "text": "Naháč ve sparťanském kotli",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 555,
+  "text": "Pohled na nahou babičku",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 556,
+  "text": "Hra na ukulele",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 557,
+  "text": "Dycky Most!",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 558,
+  "text": "Když při hraní na písku zjistíš, že to hnědé není písek",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 559,
+  "text": "Distanční výuka",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 560,
+  "text": "Mini maňásek na prostředníčku pravé ruky",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 561,
+  "text": "Šachovnice zaseknutá v řitním otvoru",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 562,
+  "text": "Trojitý hamburger",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 563,
+  "text": "Uranové tyče",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 564,
+  "text": "Karpální tunel",
+  "tags": [
+   "sex"
+  ],
+  "tip": "Karpální tunel: Křečovité namožení zápěstí například z přílišeného klikání na počítačové myši."
+ },
+ {
+  "id": 565,
+  "text": "Zavařovací sklenice, do které jsem si uprdnul",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 566,
+  "text": "Odčervování zachycené v přímém přenosu",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 567,
+  "text": "Coonda",
+  "tags": [
+   "absurdni"
+  ],
+  "tip": "Coonda: Česká národní plyšová hračka vytvořená v rámci Kazmovy OMS."
+ },
+ {
+  "id": 568,
+  "text": "Porcelánové střepy zaražené ve vagíně",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 569,
+  "text": "Nechtěný vánoční dárek",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 570,
+  "text": "Skautský tábor",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 571,
+  "text": "Koncentrační tábor",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 572,
+  "text": "Romantické vypuštění bílých holubic",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 573,
+  "text": "Plácání se v bazénku mrtvých těl",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 574,
+  "text": "Staří lidé natáčející videa na TikTok",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 575,
+  "text": "Babišova poezie",
+  "tags": [
+   "politika"
+  ],
+  "tip": "Soubor krátkých básní vytvořených z projevů Andreje Babiše při koronavirové krizi na podzim 2020."
+ },
+ {
+  "id": 576,
+  "text": "Obnažování na veřejnosti",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 577,
+  "text": "Používání erotických pomůcek, které nebyly schváleny Evropskou komisí",
+  "tags": [
+   "politika",
+   "sex"
+  ]
+ },
+ {
+  "id": 578,
+  "text": "Svarta jump",
+  "tags": [
+   "absurdni"
+  ],
+  "tip": "Svarto, je ti něco? No je mu hodně!"
+ },
+ {
+  "id": 579,
+  "text": "Veganská bistra",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 580,
+  "text": "Natáčení porna se sestřenicí",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 581,
+  "text": "PES ve trojce",
+  "tags": [
+   "politika"
+  ],
+  "tip": "PES: Protiepidemický systém ČR ve 3. stupni NEBO souložení tří psů"
+ },
+ {
+  "id": 582,
+  "text": "Sólo Adama Vojtěcha v Superstar",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 583,
+  "text": "Kousavý svetr, který stejně nosíš, protože ti ho upletla babička s rakovinou",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 584,
+  "text": "Sraz anonymních alkoholiků v hospodě",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 585,
+  "text": "Suché kvítí na hrobu tvé máti",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 586,
+  "text": "Slevomat",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 587,
+  "text": "Agraelus",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 588,
+  "text": "Pětihodinová reakce od CzechClouda",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 589,
+  "text": "Obepisování dvanáctiletých holkek na Lidé.cz",
+  "tags": [
+   "politika",
+   "popkultura"
+  ],
+  "tip": "12? Tak to je pohoda."
+ },
+ {
+  "id": 590,
+  "text": "OSTRAVA!!!",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 591,
+  "text": "Zničující 5G čip ve vakcíně proti koronaviru",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 592,
+  "text": "Lehce explodující koťátko",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 593,
+  "text": "Ženy s velkým poprsím",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 594,
+  "text": "Muži s velkým poprsím",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 595,
+  "text": "Nebinární okurka",
+  "tags": [
+   "absurdni",
+   "politika"
+  ]
+ },
+ {
+  "id": 596,
+  "text": "Ozáření výbuchem atomové bomby",
+  "tags": [
+   "hnus",
+   "politika"
+  ]
+ },
+ {
+  "id": 597,
+  "text": "Znásilňování USB hubu",
+  "tags": [
+   "absurdni",
+   "sex"
+  ]
+ },
+ {
+  "id": 598,
+  "text": "Zlomený kaktus v řitním otvoru",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 599,
+  "text": "Alena Schillerová",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 600,
+  "text": "Hrůzostrašná nehoda při laserové depilaci",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 601,
+  "text": "Moje úchylky",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 602,
+  "text": "Komplikovaná oprava slovenského Lesního Kolového Traktoru \r\nLKT-81 Turbo",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 603,
+  "text": "Anální znásilnění, zatímco jste uvízl/a hlavou ve sběrném zvonu na sklo",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 604,
+  "text": "Práce v malé fabrice za krásných 13 000 kč v hrubém",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 605,
+  "text": "Neúprosný BAN od Tomia Okamury- SPD oficiální stránka",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 606,
+  "text": "Pěstování brambor na Marsu z vlastních výkalů",
+  "tags": [
+   "hnus",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 607,
+  "text": "Menstruační kalíšek",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 608,
+  "text": "Když po sraní na WC po sobě zanecháš brutální smrad, ale ty jsi v klidu, protože jsi tam nastříkal hodně osvěžovače s vůní levandule",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 609,
+  "text": "Když se tě při sexu partnerka dožaduje o hlubší penetraci, ale tobě už došel penis",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 610,
+  "text": "Plesnivý lilek",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 611,
+  "text": "Ochlupení ožralého řidiče autobusu",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 612,
+  "text": "Labužníci",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 613,
+  "text": "Sýrový mlsoun",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 614,
+  "text": "Ponožky v sandálech",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 615,
+  "text": "Ta podivně vypadající bradavice na pravém varleti",
+  "tags": [
+   "hnus",
+   "sex"
+  ]
+ },
+ {
+  "id": 616,
+  "text": "Pizza s ananasem",
+  "tags": [
+   "absurdni"
+  ]
+ },
+ {
+  "id": 617,
+  "text": "Velký koberec a spousta izolační pásky",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ]
+ },
+ {
+  "id": 618,
+  "text": "Latex",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 619,
+  "text": "Ikonické duo Ovčáček a Zeman",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 620,
+  "text": "Dáda Patrasová",
+  "tags": [
+   "popkultura"
+  ]
+ },
+ {
+  "id": 621,
+  "text": "Černobyl",
+  "tags": [
+   "politika",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 622,
+  "text": "Hromada nekvalitního porna",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 623,
+  "text": "Sledování porna s vaším EX",
+  "tags": [
+   "sex"
+  ]
+ },
+ {
+  "id": 624,
+  "text": "Soudní zákaz přiblížení",
+  "tags": [
+   "politika"
+  ]
+ },
+ {
+  "id": 625,
+  "text": "Zapíjení prášků na předpis alkoholem",
+  "tags": [
+   "hnus"
+  ]
+ },
+ {
+  "id": 626,
+  "text": "Superhrdinové v důchodovém věku",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ]
+ },
+ {
+  "id": 627,
+  "text": "Modřina na ruce a šlajs na noze",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 628,
+  "text": "Smysl života",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 629,
+  "text": "Dogmatil",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 630,
+  "text": "Jeden velkej tekutej",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 631,
+  "text": "Diskriminativní monogamie",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 632,
+  "text": "Šnorchl připojený na výfuk auta",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 633,
+  "text": "Tetris pro chudé",
+  "tags": [
+   "politika",
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 634,
+  "text": "Myslivecký posed",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 635,
+  "text": "Antigravitační kaše",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 636,
+  "text": "Hromadné zvracení",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 637,
+  "text": "Okukování pacientů na psychiatrii",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 638,
+  "text": "Když tě láska tvého života nechce",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 639,
+  "text": "Kytarou po hlavě",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 640,
+  "text": "Rum s colou",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 641,
+  "text": "Jirka Babica",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 642,
+  "text": "Slzy tvý mámy šedivý",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 643,
+  "text": "Homer Simpson",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 644,
+  "text": "iPhone",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 645,
+  "text": "Tetování na zadku",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 646,
+  "text": "LGBT",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 647,
+  "text": "Uvěznění ve výtahu",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 648,
+  "text": "Střed vesmíru",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 649,
+  "text": "Až moc podojená kráva",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 650,
+  "text": "Toi Toi Story",
+  "tags": [
+   "hnus",
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 651,
+  "text": "Mr. Bean",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 652,
+  "text": "Raději knihu!",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 653,
+  "text": "Profesionální truchlící na pohřbech",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 654,
+  "text": "Archeolog fekálií",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 655,
+  "text": "Obočí Leonida Iljiče Brežněva",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 656,
+  "text": "Kondom po záruční době",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 657,
+  "text": "Krteček bez kalhotek",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 658,
+  "text": "Křeček Mireček",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 659,
+  "text": "That's what she said!",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 660,
+  "text": "Párový profil na facebooku",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 661,
+  "text": "Smažák v housce",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 662,
+  "text": "Bývalý valašský kníže Vlad III. Dracula, zvaný též Napichovač či Naražeč",
+  "tags": [
+   "politika",
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 663,
+  "text": "Šmejděníčko šmejdění",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 664,
+  "text": "Babiččin popel",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 665,
+  "text": "hromadné orgie",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 666,
+  "text": "masáž se šťastným koncem",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 667,
+  "text": "prokrastinace",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 668,
+  "text": "sex z lítosti",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 669,
+  "text": "Švédská trojka",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 670,
+  "text": "Lehké ublinknutí při pouhé zmínce o bylinném likéru",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 671,
+  "text": "Bolestivá ejakulace",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 672,
+  "text": "Kočkoholky",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 673,
+  "text": "Stařenka v bazénu",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 674,
+  "text": "Swingersparty",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 675,
+  "text": "Vysoký jalovec",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 676,
+  "text": "Eva a Vašek",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 677,
+  "text": "Bába pod kořenem",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 678,
+  "text": "Jiřina Bohdalová v latexovém oblečku",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 679,
+  "text": "Dáda Patrasová",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 680,
+  "text": "Nesnesitelné svědění zad",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 681,
+  "text": "Celý den strávený sledováním porna",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 682,
+  "text": "Pár Pařmenů",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 683,
+  "text": "Ta nesnesitelná kráva sedící vedle mě v autobuse",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 684,
+  "text": "Pytel mrtvých batolat u mě ve sklepě",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 685,
+  "text": "Nemožná přeprava a následné sestavení šestnáctikolového amerického traktoru BigBud o výkonu 1000 koní",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 686,
+  "text": "Tchýně z manželčiny strany",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 687,
+  "text": "Miniaturní vibrátor",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 688,
+  "text": "Dubínek",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 689,
+  "text": "Jemnostpán Trautenberk",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 690,
+  "text": "Zpovědnice",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 691,
+  "text": "Skřítek s dvoumetrovým pérem",
+  "tags": [
+   "absurdni",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 692,
+  "text": "Rakovina děložního čípku",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 693,
+  "text": "Lidice",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 694,
+  "text": "Spontánní samovznícení",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 695,
+  "text": "Zkažený bramborový salát",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 696,
+  "text": "Pardubický \"perník\" podle originálního kolumbijského receptu",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 697,
+  "text": "Recepty přeložené Google Translatorem",
+  "tags": [
+   "absurdni",
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 698,
+  "text": "Příjezdová trať do schromažďovacího tábora Terezín",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 699,
+  "text": "Koťátko v asijské restauraci",
+  "tags": [
+   "hnus",
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 700,
+  "text": "Anonymní sex",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 701,
+  "text": "Pravidelný klystýr",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 702,
+  "text": "Ta holka odvedle",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 703,
+  "text": "Lahodné mléko z poprsí",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 704,
+  "text": "Analní Kolík",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 705,
+  "text": "Facebook",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 706,
+  "text": "Marťánci",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 707,
+  "text": "Pikachu",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 708,
+  "text": "Penisové šílenství",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 709,
+  "text": "Furry",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 710,
+  "text": "Nepříjemně špičatý dopravní kužel",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 711,
+  "text": "Plesnivá vagína",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 712,
+  "text": "Nafukovací pana",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 713,
+  "text": "Natrhnutý řitní otvor",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 714,
+  "text": "Nedobrovolná změna pohlaví",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 715,
+  "text": "Elmo",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 716,
+  "text": "Agresivní křeček",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 717,
+  "text": "Plesnivý sýr",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 718,
+  "text": "Teroristický útok",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 719,
+  "text": "Pedofil",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 720,
+  "text": "Dominátor",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 721,
+  "text": "Aristoteles",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 722,
+  "text": "Cracknutý Windows 10",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 723,
+  "text": "Městská policie",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 724,
+  "text": "Spadlý kopeček zmrzliny",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 725,
+  "text": "Černá díra",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 726,
+  "text": "Tramvaj plná bezdomovců",
+  "tags": [
+   "hnus",
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 727,
+  "text": "Pedofilní strýček",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 728,
+  "text": "Vlhká třináctka",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 729,
+  "text": "20 cm plus",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 730,
+  "text": "Chleba s máslem se salámem",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 731,
+  "text": "Můj milostný život",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 732,
+  "text": "Rouška",
+  "tags": [
+   "absurdni",
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 733,
+  "text": "e-girl",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 734,
+  "text": "Stránka pro dospělé",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 735,
+  "text": "Hnědá věc, co nechutná jako čokoláda",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 736,
+  "text": "Kočičí guláš",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 737,
+  "text": "Zmrzlina roztávající v análním otvoru",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 738,
+  "text": "Dopravní kužel",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 739,
+  "text": "Světelný meč",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 740,
+  "text": "Moje thajská přítelkyně",
+  "tags": [
+   "politika",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 741,
+  "text": "Guláš",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 742,
+  "text": "Filozofující bezdomovec",
+  "tags": [
+   "absurdni",
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 743,
+  "text": "3 průměrní sledující na Twitchi",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 744,
+  "text": "Zorro mstitel",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 745,
+  "text": "My Little Pony",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 746,
+  "text": "Gumová pěst",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 747,
+  "text": "Na to nebudu odpovídat",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 748,
+  "text": "Dobře rozjetá informatická párty",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 749,
+  "text": "Rámus skrze který neslyšíš ani vlastní myšlenky",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 750,
+  "text": "Franc Josef II.",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 751,
+  "text": "Karlík a továrna na čokoládu",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 752,
+  "text": "Milosrdné oslepnutí na nuda pláži plné důchodců",
+  "tags": [
+   "absurdni",
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 753,
+  "text": "Tatranka v trojobalu",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 754,
+  "text": "Promaštěná husička",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 755,
+  "text": "DDOS Attack",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 756,
+  "text": "Siamská dvojčata",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 757,
+  "text": "Prošlá antikoncepce",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 758,
+  "text": "Elon Musk",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 759,
+  "text": "Psíčková",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 760,
+  "text": "Takeshiho hrad",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 761,
+  "text": "Rasistický Číňan",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 762,
+  "text": "Vzestup třetí říše",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 763,
+  "text": "nadrženej děda",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 764,
+  "text": "Insulin",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 765,
+  "text": "Pád ze schodů",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 766,
+  "text": "Dildo místo kladiva.",
+  "tags": [
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 767,
+  "text": "Čtyřicetiletý panic",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 768,
+  "text": "Tank T-34",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 769,
+  "text": "Nevlastní bratranec z druhého kolene",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 770,
+  "text": "Pořádná nakládačka",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 771,
+  "text": "Třetí světová",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 772,
+  "text": "Sliny onkologického pacienta",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 773,
+  "text": "Peníze",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 774,
+  "text": "Pořádná lajna kokainu",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 775,
+  "text": "Žraní mrtvol",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 776,
+  "text": "Cikán, co tahá tank traktorem",
+  "tags": [
+   "absurdni",
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 777,
+  "text": "Zvracení v autobuse",
+  "tags": [
+   "hnus"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 778,
+  "text": "Zúžená předkožka",
+  "tags": [
+   "hnus",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 779,
+  "text": "Zástup černých lidí žádajících práva.",
+  "tags": [
+   "politika"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 780,
+  "text": "fake taxi",
+  "tags": [
+   "popkultura",
+   "sex"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 781,
+  "text": "Rick Astley",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 782,
+  "text": "Dvoumetrový zweihander.",
+  "tags": [
+   "absurdni"
+  ],
+  "source": "community"
+ },
+ {
+  "id": 783,
+  "text": "2L Braníka v PET",
+  "tags": [
+   "popkultura"
+  ],
+  "source": "community"
+ }
 ]

@@ -31,7 +31,7 @@
 		</div>
 		<div class="property__input">
 		<select bind:value={value.maxPlayers}>
-			{#each [5, 10, 15, 20] as goal}
+			{#each [3, 4, 5, 6, 8, 10, 12, 15, 20] as goal}
 				<option value={goal}>{goal}</option>
 			{/each}
 		</select>

@@ -81,6 +81,7 @@ export class KplRoom {
 	private decks = {
 		white: [] as Card[],
 		whiteUsed: [] as Card[],
+		blackUsed: [] as Card[],
 		black: [] as Card[],
 	}
 	private table = {
@@ -430,9 +431,22 @@ export class KplRoom {
 	}
 
 	private drawBlackCard(): Card | null {
+		// Retire the card the previous round was played on.
+		if (this.table.black) {
+			this.decks.blackUsed.push(this.table.black);
+		}
+
+		// Small themed packs hold as few as a dozen black cards, so a long game
+		// will empty the pile. Reshuffle what has been played rather than
+		// killing the room mid-game — the same thing the white deck already does.
 		if (this.decks.black.length === 0) {
-			//TODO: Error, no black cards left
-			return null;
+			if (this.decks.blackUsed.length === 0) {
+				return null;
+			}
+
+			this.decks.black = this.decks.blackUsed;
+			this.decks.blackUsed = [];
+			smartArrayShuffleAtPlace(this.decks.black);
 		}
 
 		return this.decks.black.pop() ?? null;
