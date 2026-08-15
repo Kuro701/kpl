@@ -1,11 +1,28 @@
 <script lang="ts">
-	import { link } from "svelte-routing";
+	import { link, navigate } from "svelte-routing";
 	import Debuger from "../../components/debug/Debuger.svelte";
 	import DebugVariable from "../../components/debug/DebugVariable.svelte";
 	import { PlayerIdentity } from "../../lib/networking/client";
 	import { LastGameResults } from "../../lib/networking/room";
 	import PlayerWidget from "./PlayerWidget.svelte";
   import { scoreSorter } from "../../lib/score-sorter";
+  import { leaveRoom } from "../../lib/networking/client";
+
+	/*
+	 * The room outlives the game now, so the same group can go straight into
+	 * another one without creating a room and re-sharing the code.
+	 */
+	$: roomUUID = $LastGameResults?.roomUUID ?? null;
+
+	function playAgain() {
+		if (!roomUUID) return;
+		navigate(`/room/${roomUUID}`);
+	}
+
+	function leave() {
+		leaveRoom();
+		navigate('/');
+	}
 </script>
 
 <Debuger>
@@ -45,15 +62,42 @@
 			{/each}
 		{/if}
 	</div>
-	<div>
-		<a href="/" use:link class="button invert">
-			<img src="/img/icons/leave.png" alt="Leave" draggable="false" class="icon invert" />
+	<div class="game-over__actions">
+		{#if roomUUID}
+			<button class="button button--again" on:click={playAgain}>
+				<img src="/img/icons/play.png" alt="" draggable="false" class="icon invert" />
+				Hrát znovu
+			</button>
+		{/if}
+		<button class="button" on:click={leave}>
+			<img src="/img/icons/leave.png" alt="" draggable="false" class="icon invert" />
 			Odejít
-		</a>
+		</button>
 	</div>
 </div>
 
 <style>
+	.game-over__actions {
+		display: flex;
+		gap: .75rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.game-over__actions .button--again {
+		background-color: var(--accent);
+		border-color: var(--accent);
+		color: var(--accent-contrast);
+		font-weight: 600;
+		box-shadow: var(--accent-glow);
+	}
+	.game-over__actions .button--again:hover {
+		background-color: var(--accent-hover);
+		border-color: var(--accent-hover);
+		color: var(--accent-contrast);
+		box-shadow: var(--accent-glow-strong);
+	}
+
 	.game-over {
 		background-color: var(--bg);
 		background-image: radial-gradient(120% 80% at 50% 0%, rgba(229, 50, 45, .18), transparent 70%);

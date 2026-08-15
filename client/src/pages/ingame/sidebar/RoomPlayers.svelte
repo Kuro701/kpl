@@ -10,7 +10,16 @@
 <div class="players">
 	{#each ($IngameRoom?.players ?? []).sort(scoreSorter($PlayerIdentity?.uuid || '')) as player (player.uuid)}
 		<div class="player" animate:flip={{ duration: 500 }}>
-			<div class="player__avatar">{player.image}</div>
+			<div class="player__avatar">
+				{player.image}
+				{#if $IngameRoom?.state === RoomState.PICK_WHITE && !player.isCzar}
+					<span
+						class="dot"
+						class:dot--done={player.hasPlayed}
+						title={player.hasPlayed ? 'Vybráno' : 'Ještě vybírá'}
+					></span>
+				{/if}
+			</div>
 			<div class="player__name">
 				<div class="role">
 					{#if player.isCzar && $IngameRoom?.state !== RoomState.LOBBY}
@@ -62,7 +71,30 @@
 		background-color: rgba(229, 50, 45, .2);
 	}
 
+	/*
+	 * Who is everyone waiting for? Grey while they are still choosing, green
+	 * once their cards are down. The czar has nothing to choose yet, so they
+	 * get no dot at all rather than a permanently grey one.
+	 */
+	.dot {
+		position: absolute;
+		right: -2px;
+		bottom: -2px;
+		width: .7rem;
+		height: .7rem;
+		border-radius: 50%;
+		background: var(--muted);
+		border: 2px solid var(--bg-deep);
+		box-sizing: border-box;
+		transition: background-color .2s ease, box-shadow .2s ease;
+	}
+	.dot--done {
+		background: var(--ok);
+		box-shadow: 0 0 8px rgba(74, 222, 128, .65);
+	}
+
 	.player__avatar {
+		position: relative;
 		height: 2.5rem;
 		width: 2.5rem;
 		border-radius: .75rem;

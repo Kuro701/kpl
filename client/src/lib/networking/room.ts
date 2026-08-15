@@ -18,6 +18,8 @@ export type PlayerResults = {
 export type OtherPlayerData = PlayerResults & {
 	isHost: boolean;
 	isCzar: boolean;
+	/** Their cards are already on the table this round. */
+	hasPlayed: boolean;
 }
 
 type WhiteCard = {
@@ -62,6 +64,8 @@ export type IngameRoom = {
 }
 
 export type GameResults = {
+	/** The room is still alive — this is where "play again" goes back to. */
+	roomUUID?: string;
 	score: PlayerResults[];
 }
 

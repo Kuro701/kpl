@@ -39,9 +39,11 @@ function cleanDeckIds(value: unknown): number[] {
 
 export const rpcFunctions: Record<string, RequestFunction> = {
 	createRoom: async (player: KplPlayer, reply: ReplyFunction, data) => {
+		// Rooms outlive the games played in them, so a player who just finished
+		// one is still sitting in it. Refusing here meant the create button
+		// silently did nothing; leave the old room instead.
 		if (player.room) {
-			reply(false);
-			return;
+			player.quitRoom();
 		}
 
 		const input = (data ?? {}) as Record<string, unknown>;
@@ -62,11 +64,6 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 	},
 
 	joinRoom: async (player: KplPlayer, reply: ReplyFunction, data) => {
-		if (player.room) {
-			reply(false);
-			return;
-		}
-
 		const roomId = normalizeJoinCode((data as any)?.roomUUID);
 		if (!roomId) {
 			reply(false);
@@ -79,6 +76,13 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			return;
 		}
 
+		// Already here? Nothing to do — this is a second tab or a reconnect.
+		if (player.room?.uuid === room.uuid) {
+			reply(room.uuid);
+			return;
+		}
+
+		// joinRoom() leaves whatever room they were in first.
 		const joined = player.joinRoom(room);
 		reply(joined ? room.uuid : false);
 	},

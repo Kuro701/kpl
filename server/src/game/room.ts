@@ -169,6 +169,7 @@ export class KplRoom {
 
 	private async end() {
 		const results = {
+			roomUUID: this.uuid,
 			score: this.players.map(player => ({
 				uuid: player.uuid,
 				username: player.username,
@@ -181,7 +182,43 @@ export class KplRoom {
 			player.rpc('gameResults', results, -1);
 		});
 
-		destroyRoom(this);
+		// The room used to be destroyed here, so playing again meant making a new
+		// one and re-sharing the code with everybody. The same group nearly always
+		// wants another round, so the room stays and resets instead.
+		this.resetForNewGame();
+	}
+
+	/** Back to the lobby with the same seats: scores, hands and decks cleared. */
+	private resetForNewGame(): void {
+		if (this.isDestroyed) {
+			return;
+		}
+
+		this.cancelIntermission();
+		this._state = RoomState.LOBBY;
+		this.czarUUID = null;
+
+		this.table = {
+			black: null,
+			lastRoundWinnerGroupId: null,
+			white: [],
+		};
+
+		// loadDecks() appends, so these have to be empty before the next start.
+		this.decks = {
+			white: [],
+			whiteUsed: [],
+			black: [],
+			blackUsed: [],
+		};
+
+		for (const uuid of Object.keys(this.playerData)) {
+			this.playerData[uuid] = { points: 0, hand: [], czarCounter: 0 };
+		}
+
+		this.postSystemMessage('Konec hry. Hostitel může rovnou spustit další.');
+		this.broadcastGameState();
+		broadcastLobbyUpdate();
 	}
 
 	/** Hold the game open while a dropped player reconnects. */
@@ -243,17 +280,25 @@ export class KplRoom {
 
 			if (error || !cardSelection || Array.isArray(cardSelection) && cardSelection.length === 0) {
 				// Player didn't pick cards in time, pick random cards
+				// Out of time, or gone. Play for them from their own hand so the
+				// round is not held up — picking DISTINCT cards, because drawing at
+				// random twice could otherwise put the same card down twice.
+				const remaining = [...playerCards];
 				const pickedCards: Card[] = [];
-				for (let i = 0; i < pickCount; i++) {
-					pickedCards.push(randomElement(playerCards));
+				for (let i = 0; i < pickCount && remaining.length > 0; i++) {
+					const card = randomElement(remaining);
+					pickedCards.push(card);
+					remaining.splice(remaining.indexOf(card), 1);
 				}
-				this.playerData[player.uuid].hand = playerCards.filter(card => !pickedCards.includes(card));
+				this.playerData[player.uuid].hand = remaining;
 				this.table.white.push({
 					id: cuid(),
 					playerUUID: player.uuid,
 					resource: pickedCards,
 				});
 
+				// Everyone is watching to see who they are still waiting for.
+				this.broadcastGameState();
 				return;
 			}
 
@@ -280,7 +325,8 @@ export class KplRoom {
 			// Wait for card animations to finish and remove cards from player hands
 			await wait(1000);
 			this.playerData[player.uuid].hand = playerCards.filter(card => !pickedCards.includes(card));
-			this.sendGameState(player);
+			// Not just this player: the others need to see that they are done.
+			this.broadcastGameState();
 		}));
 
 		// End player move
@@ -304,12 +350,19 @@ export class KplRoom {
 		const [ czarSelection, error ] = await safeAwait(czar.rpc('pickCzarCard', this.table.white, this.timings.czarPick * 1000));
 		this.cancelIntermission();
 
-		if (error || !czarSelection) {
-			// TODO: Czar didn't pick card in time (skip round and maybe give cards back to players)
-			return;
+		// A czar who never answers used to end the round with no winner and no
+		// points — everyone had played for nothing. Decide it for them instead.
+		let chosenGroupId = czarSelection;
+		if (error || !chosenGroupId) {
+			const fallback = randomElement(this.table.white);
+			if (!fallback) {
+				return;
+			}
+			chosenGroupId = fallback.id;
+			this.postSystemMessage(`${czar.username} nerozhodl včas — vítěze vybral los.`);
 		}
 
-		const winningCardGroup = this.table.white.find(cardGroup => cardGroup.id === czarSelection);
+		const winningCardGroup = this.table.white.find(cardGroup => cardGroup.id === chosenGroupId);
 		if (!winningCardGroup) {
 			//TODO: Error, invalid card group
 			return;
@@ -689,6 +742,9 @@ export class KplRoom {
 				points: this.playerData[p.uuid].points,
 				isHost: this.hostUUID === p.uuid,
 				isCzar: this.czarUUID === p.uuid,
+				// Who is everyone still waiting for? The table already knows — a
+				// player is done the moment their cards are on it.
+				hasPlayed: this.table.white.some(group => group.playerUUID === p.uuid),
 			})),
 		};
 

@@ -8,12 +8,23 @@
   export let noMargin: boolean = false;
   export let marked: boolean = false;
   export let tip: string | null = null;
+
+  /*
+   * Cards are a fixed size and the text is not: white cards run to 132
+   * characters and black ones to 175. A single threshold at 100 left an 85
+   * character card rendering at full size and spilling out through the logo,
+   * so the size steps down in stages that were measured against the real box.
+   */
+  $: length = text.length;
+  $: sizeClass =
+    length > 130 ? 'text-xs' :
+    length > 90  ? 'text-s'  :
+    length > 60  ? 'text-m'  : '';
 </script>
 
 <div
-  class="card"
+  class="card {sizeClass}"
   class:black
-  class:long={text.length > 100}
   class:shrink
   class:no-margin={noMargin}
 >
@@ -144,23 +155,37 @@
      ember edge so they read as lit on the dark board. */
   .card.black .back,
   .card.black .front {
-    box-shadow:
-      0 14px 44px rgba(0, 0, 0, .75),
-      0 0 46px rgba(229, 50, 45, .28),
-      inset 0 0 0 2px rgba(184, 55, 31, .55);
     background: #120806;
     color: #f7efe9;
     border: 1px solid rgba(229, 50, 45, .42);
     box-shadow:
       0 14px 44px rgba(0, 0, 0, .75),
-      0 0 46px rgba(229, 50, 45, .28);
+      0 0 46px rgba(229, 50, 45, .28),
+      inset 0 0 0 2px rgba(184, 55, 31, .55);
   }
 
-  .card .front p {
+  .card .front p,
+  .card.black .front p {
     font-family: var(--font-text);
     font-size: 1.3em;
+    line-height: 1.25;
     margin: 0;
     cursor: var(--cursor-pointer);
+    /* Blanks like zvaný______? are one unbreakable token and used to push the
+       line straight out of the card. */
+    overflow-wrap: anywhere;
+    /* Keep clear of the logo pinned to the bottom-left. */
+    padding-bottom: 2.1em;
+  }
+
+  .card.text-m .front p { font-size: 1.08em; }
+  .card.text-s .front p { font-size: .92em; }
+  .card.text-xs .front p { font-size: .78em; line-height: 1.2; }
+
+  /* Nothing may leave the card, whatever the text does. */
+  .card .front,
+  .card .back {
+    overflow: hidden;
   }
 
   .card .front img {
@@ -170,10 +195,6 @@
     position: absolute;
     bottom: 0;
     left: 0;
-  }
-
-  .card.long .front p {
-    font-size: 0.9em;
   }
 
   .card.shrink {
