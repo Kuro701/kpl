@@ -41,6 +41,8 @@ type TableData = {
 	black: BlackCard;
 	white: CardGroup<WhiteCard>[];
 	lastRoundWinnerGroupId: string | null;
+	/** Only sent once the czar has decided — anonymous until then. */
+	lastRoundWinner: { uuid: string; username: string } | null;
 };
 
 type HandData = {

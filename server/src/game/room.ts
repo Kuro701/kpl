@@ -33,6 +33,9 @@ const TIME_TO_START = 45;
  */
 const RECONNECT_GRACE_SECONDS = 90;
 
+/** How long the winning card is left on the table before the next round. */
+const WINNER_REVEAL_MS = 3500;
+
 export type ChatMessage = {
 	id: string;
 	kind: 'player' | 'system';
@@ -95,6 +98,7 @@ export class KplRoom {
 	private table = {
 		black: null as Card | null,
 		lastRoundWinnerGroupId: null as string | null,
+		lastRoundWinnerUUID: null as string | null,
 		white: [] as IdentifiedResource<Card[]>[],
 	}
 
@@ -201,6 +205,7 @@ export class KplRoom {
 		this.table = {
 			black: null,
 			lastRoundWinnerGroupId: null,
+			lastRoundWinnerUUID: null,
 			white: [],
 		};
 
@@ -248,6 +253,7 @@ export class KplRoom {
 	private async nextRound() {
 		// Init round
 		this.table.lastRoundWinnerGroupId = null;
+		this.table.lastRoundWinnerUUID = null;
 		this.table.white = [];
 		this.fillHandForAllPlayers();
 		this.pickNextCzar();
@@ -371,6 +377,7 @@ export class KplRoom {
 
 		// Show winner and give points
 		this.table.lastRoundWinnerGroupId = winningCardGroup.id;
+		this.table.lastRoundWinnerUUID = winningCardGroup.playerUUID;
 		const winnerUUID = winningCardGroup.playerUUID;
 		this.playerData[winnerUUID].points++;
 		this.broadcastGameState();
@@ -385,8 +392,9 @@ export class KplRoom {
 			this.decks.whiteUsed.push(...cardGroup.resource);
 		});
 
-		// Wait before starting next round
-		await wait(5000);
+		// The reveal: losing cards flip back, the winner stays face up with the
+		// name of whoever played it. Long enough to read, short enough not to drag.
+		await wait(WINNER_REVEAL_MS);
 	}
 
 	private pickNextCzar(): void {
@@ -733,6 +741,15 @@ export class KplRoom {
 
 
 				lastRoundWinnerGroupId: this.table.lastRoundWinnerGroupId,
+
+				// Who played it. Deliberately only after the czar has decided —
+				// during judging the cards must stay anonymous.
+				lastRoundWinner: this.table.lastRoundWinnerUUID
+					? {
+						uuid: this.table.lastRoundWinnerUUID,
+						username: this.players.find(p => p.uuid === this.table.lastRoundWinnerUUID)?.username ?? 'Hráč',
+					}
+					: null,
 			},
 
 			players: this.players.map(p => ({
