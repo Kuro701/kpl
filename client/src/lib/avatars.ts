@@ -18,7 +18,7 @@ export const AVATAR_GROUPS: AvatarGroup[] = [
 	{
 		name: 'Zvířata',
 		avatars: [
-			'🦆', '🐱', '🐶', '🦊', '🐻', '🐼', '🐨', '🐯',
+			'🐥', '🦆', '🐱', '🐶', '🦊', '🐻', '🐼', '🐨', '🐯',
 			'🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🦉',
 			'🦇', '🐺', '🦄', '🐝', '🦋', '🐙', '🦈', '🐬',
 			'🦀', '🦖', '🐢', '🐍', '🦥', '🦦',
@@ -43,8 +43,14 @@ export const AVATAR_GROUPS: AvatarGroup[] = [
 
 export const ALL_AVATARS: string[] = AVATAR_GROUPS.flatMap(group => group.avatars);
 
-/** Duck. Non-negotiable. */
-export const DEFAULT_AVATAR = '🦆';
+/*
+ * Duck. Non-negotiable.
+ *
+ * Unicode has no rubber duck — 🦆 is a brown mallard in profile. 🐥 is a
+ * front-facing yellow chick, which at avatar size is the bath duck everyone
+ * actually pictures. The mallard stays in the list for anyone who wants it.
+ */
+export const DEFAULT_AVATAR = '🐥';
 
 export function randomAvatar(): string {
 	return ALL_AVATARS[Math.floor(Math.random() * ALL_AVATARS.length)];

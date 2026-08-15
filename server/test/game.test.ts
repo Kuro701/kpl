@@ -29,7 +29,7 @@ class TestClient {
 	closed = false;
 	pending = new Map<string, (v: any) => void>();
 
-	constructor(name: string, avatar = '🦆') { this.name = name; this.avatar = avatar; }
+	constructor(name: string, avatar = '🐥') { this.name = name; this.avatar = avatar; }
 
 	connect(): Promise<void> {
 		return new Promise((resolve, reject) => {
@@ -154,7 +154,7 @@ async function main() {
 	log('\n--- connecting three players ---');
 	const host = new TestClient('Kuro', '🔥');
 	const b = new TestClient('Terka', '🌻');
-	const c = new TestClient('Marek', '🦆');
+	const c = new TestClient('Marek', '🐥');
 
 	async function connectWithRetry(client: TestClient) {
 		try {
@@ -204,7 +204,7 @@ async function main() {
 	await sleep(400);
 	const spoofRow = host.room.players.find((p: any) => p.uuid === spoof.uuid);
 	assert(spoofRow, 'the spoofing client joined');
-	assert(spoofRow?.image === '🦆', `a URL avatar is refused and replaced (got ${spoofRow?.image})`);
+	assert(spoofRow?.image === '🐥', `a URL avatar is refused and replaced (got ${spoofRow?.image})`);
 	await spoof.rpc('leaveRoom');
 	spoof.kill();
 	await sleep(300);

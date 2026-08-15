@@ -33,7 +33,7 @@ type AuthCredentials = {
 	image?: string;
 };
 
-const DEFAULT_AVATAR = '🦆';
+const DEFAULT_AVATAR = '🐥';
 
 /*
  * The avatar is picked in the browser, so it arrives as whatever the client
