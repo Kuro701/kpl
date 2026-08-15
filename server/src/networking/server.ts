@@ -26,6 +26,9 @@ export function runServer(port: number) {
 			res.writeHead(200, {
 				'Content-Type': 'application/json; charset=utf-8',
 				'Cache-Control': 'no-store',
+				// The website is on a different origin and pings this on load to
+				// wake the instance, so let the browser read the reply.
+				'Access-Control-Allow-Origin': '*',
 			});
 			res.end(JSON.stringify({
 				status: 'ok',

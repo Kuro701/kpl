@@ -64,6 +64,31 @@ if (!import.meta.env.VITE_SERVER_URL && import.meta.env.MODE !== 'development') 
 	console.warn(`VITE_SERVER_URL is not set — falling back to ${DEFAULT_SERVER_HOST}`);
 }
 
+/*
+ * Free hosting sleeps after 15 minutes idle and takes up to a minute to wake.
+ * The first player to arrive would click "create room", wait, and get a timeout
+ * that looks exactly like the game being broken.
+ *
+ * So knock on the door as soon as the page loads. By the time somebody has read
+ * the screen, picked a nickname and clicked, the server is usually already up —
+ * and the wait happens while they are busy rather than while they are staring at
+ * a dead button.
+ */
+function httpOrigin(wsUrl: string): string | null {
+	if (wsUrl.startsWith('wss://')) return `https://${wsUrl.slice(6)}`;
+	if (wsUrl.startsWith('ws://')) return `http://${wsUrl.slice(5)}`;
+	return null;
+}
+
+if (typeof fetch === 'function') {
+	const origin = httpOrigin(SERVER_URL);
+	if (origin) {
+		// Failure is fine and expected while the server is still booting; the
+		// point is that the request lands and starts the wake-up.
+		fetch(`${origin}/health`, { cache: 'no-store' }).catch(() => {});
+	}
+}
+
 let connection: WebSocket | null = null;
 let authCredentials: AuthCredentials | null = null;
 
@@ -141,6 +166,7 @@ export async function connectToServer(username: string): Promise<boolean> {
 	if (connectionError) {
 	  _connecting = false;
 	  console.error('Failed to connect:', connectionError);
+	  SystemMessage.set('Server se probouzí — zkus to prosím ještě jednou za chvilku.');
 	  return false;
 	}
 
@@ -149,10 +175,12 @@ export async function connectToServer(username: string): Promise<boolean> {
 	if (identityError) {
 	  _connecting = false;
 	  console.error('Failed to get identity:', identityError);
+	  SystemMessage.set('Server se probouzí — zkus to prosím ještě jednou za chvilku.');
 	  return false;
 	}
 
 	_connecting = false;
+	SystemMessage.set(null);
 	return true;
 }
 
