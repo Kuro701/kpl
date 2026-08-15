@@ -1,6 +1,7 @@
 import { get, writable } from "svelte/store";
 import type { AuthCredentials, AuthProvier } from "../networking/client";
 import { randomUsername } from "../random";
+import { normalizeAvatar, randomAvatar } from "../avatars";
 
 type ILocalIdentity = {
 	provider: AuthProvier;
@@ -27,7 +28,10 @@ function loadSavedIdentity(): ILocalIdentity {
 	const user_id = window.localStorage.getItem('uuid') || '';
 	const token = window.localStorage.getItem('token') || '';
 	const username = window.localStorage.getItem('username') || randomUsername();
-	const image = window.localStorage.getItem('avatar') || undefined;
+	// An older build stored a dicebear URL here; normalizeAvatar turns anything
+	// unexpected into a real avatar instead of a broken image.
+	const stored = window.localStorage.getItem('avatar');
+	const image = stored ? normalizeAvatar(stored) : randomAvatar();
 
 	return { provider, user_id, token, username, expires, image };
 }
@@ -52,6 +56,11 @@ function clearIdentityStorage() {
 	window.localStorage.removeItem('avatar');
 }
 
+export function setAvatar(image: string) {
+	window.localStorage.setItem('avatar', image);
+	LocalIdentity.update(identity => ({ ...identity, image }));
+}
+
 export function getLoginCredentials(username: string): AuthCredentials {
 	const identity = get(LocalIdentity);
 	return {
@@ -59,6 +68,7 @@ export function getLoginCredentials(username: string): AuthCredentials {
 		user_id: identity.user_id,
 		user_token: identity.token,
 		username: username,
+		image: identity.image,
 	};
 }
 

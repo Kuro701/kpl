@@ -10,7 +10,7 @@
 <div class="players">
 	{#each ($IngameRoom?.players ?? []).sort(scoreSorter($PlayerIdentity?.uuid || '')) as player (player.uuid)}
 		<div class="player" animate:flip={{ duration: 500 }}>
-			<img class="player__avatar" src={player.image} alt={player.username} draggable="false" referrerpolicy="no-referrer" />
+			<div class="player__avatar">{player.image}</div>
 			<div class="player__name">
 				<div class="role">
 					{#if player.isCzar && $IngameRoom?.state !== RoomState.LOBBY}
@@ -65,8 +65,13 @@
 	.player__avatar {
 		height: 2.5rem;
 		width: 2.5rem;
-		object-fit: cover;
 		border-radius: .75rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.4rem;
+		line-height: 1;
+		flex: none;
 		background-color: var(--avatar-bg);
 		border: 1px solid var(--border);
 		box-sizing: border-box;

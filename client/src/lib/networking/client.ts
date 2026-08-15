@@ -15,6 +15,7 @@ export type AuthCredentials = {
 	username: string;
 	user_id: string;
 	user_token: string;
+	image?: string;
 };
 
 /*

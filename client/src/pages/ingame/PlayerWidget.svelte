@@ -5,7 +5,7 @@
 
 <div class="player-widget">
 	{#if image}
-		<img class="player-widget__image" src={image} alt={name} draggable="false" referrerpolicy="no-referrer" />
+		<div class="player-widget__image">{image}</div>
 	{:else}
 		<div class="player-widget__image player-widget__image--placeholder">{'?'}</div>
 	{/if}
@@ -26,10 +26,14 @@
 		width: 5rem;
 		height: 5rem;
 		border-radius: 2rem;
-		object-fit: cover;
 		background-color: var(--avatar-bg);
 		border: 1px solid var(--border);
 		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 2.6rem;
+		line-height: 1;
 	}
 	.player-widget__image--placeholder {
 		background-color: var(--avatar-bg);

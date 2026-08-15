@@ -21,6 +21,7 @@ class TestClient {
 	name: string;
 	uuid = '';
 	token = '';
+	avatar: string;
 	room: any = null;
 	results: any = null;
 	chat: any[] = [];
@@ -28,7 +29,7 @@ class TestClient {
 	closed = false;
 	pending = new Map<string, (v: any) => void>();
 
-	constructor(name: string) { this.name = name; }
+	constructor(name: string, avatar = '🦆') { this.name = name; this.avatar = avatar; }
 
 	connect(): Promise<void> {
 		return new Promise((resolve, reject) => {
@@ -63,7 +64,7 @@ class TestClient {
 
 		switch (data.f) {
 			case 'auth':
-				reply({ provider: 'anonymous', username: this.name, user_id: this.uuid, user_token: this.token });
+				reply({ provider: 'anonymous', username: this.name, user_id: this.uuid, user_token: this.token, image: this.avatar });
 				return;
 
 			case 'identity':
@@ -151,9 +152,9 @@ const CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
 async function main() {
 	log('\n--- connecting three players ---');
-	const host = new TestClient('Kuro');
-	const b = new TestClient('Terka');
-	const c = new TestClient('Marek');
+	const host = new TestClient('Kuro', '🔥');
+	const b = new TestClient('Terka', '🌻');
+	const c = new TestClient('Marek', '🦆');
 
 	async function connectWithRetry(client: TestClient) {
 		try {
@@ -191,6 +192,22 @@ async function main() {
 	log(`   typing: "${messy}"`);
 	const joinedB = await b.rpc<string | false>('joinRoom', { roomUUID: messy });
 	assert(joinedB === code, 'O/0 and I/L/1 mix-ups still find the room');
+
+	log('\n--- avatars ---');
+	await sleep(300);
+	const hostRow = host.room.players.find((p: any) => p.uuid === host.uuid);
+	assert(hostRow?.image === '🔥', `the chosen avatar reaches the other players (got ${hostRow?.image})`);
+
+	const spoof = new TestClient('Podvodník', 'https://evil.example/x.png');
+	await spoof.connect();
+	await spoof.rpc('joinRoom', { roomUUID: code });
+	await sleep(400);
+	const spoofRow = host.room.players.find((p: any) => p.uuid === spoof.uuid);
+	assert(spoofRow, 'the spoofing client joined');
+	assert(spoofRow?.image === '🦆', `a URL avatar is refused and replaced (got ${spoofRow?.image})`);
+	await spoof.rpc('leaveRoom');
+	spoof.kill();
+	await sleep(300);
 
 	log('\n--- chat ---');
 	await sleep(250);

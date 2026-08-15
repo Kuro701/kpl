@@ -1,8 +1,6 @@
 <script lang="ts">
   import { link } from "svelte-routing";
   import { ActiveTheme, Theme } from "../../lib/theme";
-
-	const yearNow = new Date().getFullYear();
 </script>
 
 <div class="layout-menu" class:dark-theme={$ActiveTheme === Theme.DARK}>
@@ -15,8 +13,12 @@
 		<slot />
 	</div>
 	<div class="layout-menu__footer">
-		<div><a href="/rules" use:link>Pravidla</a></div>
-		<div>{yearNow}</div>
+		<div>Made by <span class="maker">Kuro Software</span></div>
+		<div>
+			<a href="https://instagram.com/6Kuro_Labs9" target="_blank" rel="noopener noreferrer">
+				@6Kuro_Labs9
+			</a>
+		</div>
 	</div>
 </div>
 
@@ -84,6 +86,11 @@
 	.layout-menu__footer > div:last-child {
 		border-right: none;
 		padding-right: 0;
+	}
+
+	.layout-menu__footer .maker {
+		color: var(--fg);
+		font-weight: 500;
 	}
 
 	.layout-menu__footer a {

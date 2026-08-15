@@ -30,7 +30,27 @@ type AuthCredentials = {
 	username: string;
 	user_id: string;
 	user_token: string;
+	image?: string;
 };
+
+const DEFAULT_AVATAR = '🦆';
+
+/*
+ * The avatar is picked in the browser, so it arrives as whatever the client
+ * chose to send. It is rendered next to every player's name, so it gets
+ * sanitised rather than trusted: short, no URLs, no markup. A player who edits
+ * their storage can end up with an emoji that is not in our picker — harmless —
+ * but not with a link, a script, or a wall of text.
+ */
+function cleanAvatar(raw: unknown): string {
+	if (typeof raw !== 'string') return DEFAULT_AVATAR;
+
+	const value = raw.trim();
+	if (!value || value.length > 8) return DEFAULT_AVATAR;
+	if (/[<>/\\:"'`\s]/.test(value)) return DEFAULT_AVATAR;
+
+	return value;
+}
 
 function cleanUsername(raw: unknown): string {
 	const name = typeof raw === 'string' ? raw.trim().replace(/\s+/g, ' ') : '';
@@ -63,7 +83,7 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 
 			const username = cleanUsername(data?.username);
 			const identity = tryReviveAnonymousPlayer(data?.user_id ?? '', data?.user_token ?? '') || createAnonymousPlayer();
-			const image = `https://api.dicebear.com/9.x/dylan/svg?mood=happy,hopeful,superHappy&seed=${encodeURIComponent(username)}`;
+			const image = cleanAvatar(data?.image);
 
 			player = createPlayer(username, identity.user_id, image, networkKit);
 
