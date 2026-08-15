@@ -102,13 +102,26 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 			}, -1));
 
 			networkKit.sendRaw(getLobbyStateNetworkMessage());
+
+			// If this identity was already sitting in a room, the new connection
+			// needs the room on screen straight away.
+			player.room?.syncPlayer(player);
 		},
 
 		onIdentityDisconnect() {
-			if (player) {
-				destroyPlayer(player);
-				player = null;
+			if (!player) {
+				return;
 			}
+
+			// A superseded socket closing must not destroy a player who has since
+			// moved to a newer connection.
+			if (!player.ownsConnection(networkKit)) {
+				player = null;
+				return;
+			}
+
+			destroyPlayer(player);
+			player = null;
 		}
 	};
 }

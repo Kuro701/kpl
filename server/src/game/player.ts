@@ -7,10 +7,10 @@ import { GameErrors } from "../errors.js";
 
 export class KplPlayer {
 	public readonly uuid: string;
-	public readonly username: string;
-	public readonly image: string;
+	public username: string;
+	public image: string;
 
-	private readonly netkit: NetworkKit;
+	private netkit: NetworkKit;
 
 	private roomUUID: string | null = null;
 	get room() {
@@ -76,5 +76,35 @@ export class KplPlayer {
 
 	public rpc<T>(method: string, data: any, timeout?: number) {
 		return this.netkit.rpcCall<T>(method, data, timeout);
+	}
+
+	/**
+	 * Is this the connection the player is currently using? A socket that has
+	 * been superseded must not tear the player down when it finally closes.
+	 */
+	public ownsConnection(netkit: NetworkKit): boolean {
+		return this.netkit === netkit;
+	}
+
+	/*
+	 * The same person opened the game again — another tab, a refresh, a phone.
+	 * Move them onto the new connection instead of destroying them and building
+	 * a stranger: they keep their seat, their points and their room. The old
+	 * socket is closed, and because it no longer owns the player, its close
+	 * handler leaves everything alone.
+	 */
+	public adoptConnection(netkit: NetworkKit, username: string, image: string) {
+		const previous = this.netkit;
+		this.netkit = netkit;
+		this.username = username;
+		this.image = image;
+
+		console.log(`${chalk.bold.yellowBright('~')} Player ${chalk.bold(this.username)} (${chalk.gray(this.uuid)}) ${chalk.yellowBright('reconnected from another tab/device')}`);
+
+		try {
+			previous.disconnect();
+		} catch {
+			// already gone, nothing to do
+		}
 	}
 }

@@ -3,6 +3,7 @@ import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, RoomCount,
 import { ChatMessages, IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type ChatMessage, type GameResults } from "./room";
 import { get } from "svelte/store";
 import { playSound } from "../sounds";
+import { identityStorage } from "../auth/auth";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -17,10 +18,10 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		const { uuid, token, username, anonymous } = data as { uuid: string, token: string, username: string, anonymous: boolean };
 
 		if (anonymous) {
-			localStorage.setItem('identity_provider', 'anonymous');
-			localStorage.setItem('username', username);
-			localStorage.setItem('uuid', uuid);
-			localStorage.setItem('token', token);
+			identityStorage.setItem('identity_provider', 'anonymous');
+			identityStorage.setItem('username', username);
+			identityStorage.setItem('uuid', uuid);
+			identityStorage.setItem('token', token);
 		}
 
 		PlayerIdentity.set({ uuid, username, anonymous });

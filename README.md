@@ -41,7 +41,12 @@ npm run dev
 
 Klient si v dev režimu sám sáhne na `ws://localhost:3000`.
 
-> Hra potřebuje **3 hráče**, aby šla spustit. Na testování otevři tři okna prohlížeče (aspoň jedno anonymní — identita se drží v `localStorage`).
+> Hra potřebuje **3 hráče**, aby šla spustit.
+>
+> Na testování přidej do adresy `?tab` — třeba `http://localhost:5173/?tab`.
+> Identita se pak drží per-záložka místo per-prohlížeč, takže tři záložky
+> v jednom okně jsou tři různí hráči. Bez `?tab` jsou všechny záložky jeden
+> hráč (což je správně: otevřeš hru podruhé a máš svoje místo s sebou).
 
 ### Vlastní karty
 

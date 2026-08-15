@@ -421,6 +421,12 @@ export class KplRoom {
 		return true;
 	}
 
+	/** Bring one player's screen up to date — used when a tab takes over. */
+	public syncPlayer(player: KplPlayer): void {
+		this.sendGameState(player);
+		this.sendChatHistory(player);
+	}
+
 	public sendChatHistory(player: KplPlayer): void {
 		safeAwait(player.rpc('chatHistory', { messages: this.chatLog }, -1));
 	}

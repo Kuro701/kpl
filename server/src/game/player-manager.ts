@@ -7,9 +7,13 @@ import { KplPlayer } from "./player.js";
 const players: KplPlayer[] = [];
 
 export function createPlayer(username: string, uuid: string, image: string, networkKit: NetworkKit): KplPlayer | null {
+	// Same identity already connected? Hand that player to the new socket rather
+	// than kicking them out — otherwise opening a second tab evicts you from
+	// your own room, and if you were alone in it the room is destroyed.
 	const existingPlayer = getPlayerById(uuid);
 	if (existingPlayer) {
-		existingPlayer.disconnect('ANOTHER_DEVICE_LOGGED_IN');
+		existingPlayer.adoptConnection(networkKit, username, image);
+		return existingPlayer;
 	}
 
 	const player = new KplPlayer(username, uuid, image, networkKit);
