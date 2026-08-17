@@ -12,7 +12,7 @@ const ROOM_LIMITS = {
 	nameMaxLength: 40,
 	goal: { min: 3, max: 20, fallback: 8 },
 	// 3 is the minimum the game engine can run a round with.
-	maxPlayers: { min: 3, max: 20, fallback: 8 },
+	maxPlayers: { min: 3, max: 15, fallback: 8 },
 };
 
 function clampInt(value: unknown, { min, max, fallback }: { min: number; max: number; fallback: number }): number {

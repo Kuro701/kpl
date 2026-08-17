@@ -31,8 +31,10 @@
 		</div>
 		<div class="property__input">
 		<select bind:value={value.maxPlayers}>
-			{#each [3, 4, 5, 6, 8, 10, 12, 15, 20] as goal}
-				<option value={goal}>{goal}</option>
+			<!-- Every number from 3 to 15: the old list skipped 7, 9, 11, 13, 14
+			     for no reason anyone could explain at the table. -->
+			{#each Array.from({ length: 13 }, (_, i) => i + 3) as count}
+				<option value={count}>{count}</option>
 			{/each}
 		</select>
 		</div>
