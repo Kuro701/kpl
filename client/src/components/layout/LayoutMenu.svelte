@@ -19,6 +19,11 @@
 				@6Kuro_Labs9
 			</a>
 		</div>
+		<div>
+			<a href="https://discord.gg/Xw5uXtQ9sV" target="_blank" rel="noopener noreferrer">
+				HellFire CZ/SK
+			</a>
+		</div>
 	</div>
 </div>
 
