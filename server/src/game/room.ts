@@ -36,6 +36,26 @@ const RECONNECT_GRACE_SECONDS = 90;
 /** How long the winning card is left on the table before the next round. */
 const WINNER_REVEAL_MS = 3500;
 
+/*
+ * Reading time has to scale with the table. Every player adds another answer
+ * for the czar to read, so at ten players there is three times as much to get
+ * through as at four and the clock ran out on the slower readers.
+ *
+ * Three to five players is the baseline, then every second player buys another
+ * thirty seconds: 6-7 get +30, 8-9 get +60, 10-11 get +90, up to +150 at 15.
+ */
+const BASE_TIMINGS = {
+	whitePick: 2 * 60,
+	czarPick: 3 * 60,
+};
+const READING_BONUS_SECONDS = 30;
+const BONUS_FREE_PLAYERS = 5;
+
+export function readingBonusSeconds(playerCount: number): number {
+	if (playerCount <= BONUS_FREE_PLAYERS) return 0;
+	return Math.ceil((playerCount - BONUS_FREE_PLAYERS) / 2) * READING_BONUS_SECONDS;
+}
+
 export type ChatMessage = {
 	id: string;
 	kind: 'player' | 'system';
@@ -79,6 +99,13 @@ export class KplRoom {
 	private playerData: Record<string, PlayerData> = {};
 
 	private _state: RoomState = RoomState.LOBBY;
+
+	/*
+	 * Who walked out on purpose. Their seat is still held — they can come back
+	 * with the code — but reopening the site must not drag them back into a
+	 * game they chose to leave.
+	 */
+	private leftDeliberately = new Set<string>();
 	private intermissionStart: Date | null = null;
 	private intermissionEnd: Date | null = null;
 	private intermissionTimer: NodeJS.Timeout | null = null;
@@ -102,9 +129,18 @@ export class KplRoom {
 		white: [] as IdentifiedResource<Card[]>[],
 	}
 
-	private timings = {
-		whitePick: 2 * 60,
-		czarPick: 3 * 60,
+	/*
+	 * Read once per phase, not per use — a player leaving mid-phase must not
+	 * move a deadline that has already been announced to everyone.
+	 */
+	private get timings() {
+		const bonus = readingBonusSeconds(this.players.length);
+		return {
+			// Your hand is ten cards whatever the table size, so this one does
+			// not grow. Only the pile everyone has to read does.
+			whitePick: BASE_TIMINGS.whitePick,
+			czarPick: BASE_TIMINGS.czarPick + bonus,
+		};
 	}
 
 	constructor({ name, goal, maxPlayers, isPublic, host, decks }: RoomConstructorData) {
@@ -132,6 +168,20 @@ export class KplRoom {
 
 	public get hostId(): string | null {
 		return this.hostUUID;
+	}
+
+	/**
+	 * A seat this identity still holds in a game that is still going, which they
+	 * did not walk out of. This is what lets a closed tab come back to the table
+	 * on its own instead of the game having to be restarted around them.
+	 */
+	public holdsSeatFor(uuid: string): boolean {
+		if (this.isDestroyed) return false;
+		if (this._state === RoomState.LOBBY) return false;
+		if (this.leftDeliberately.has(uuid)) return false;
+		if (this.players.some(p => p.uuid === uuid)) return false;
+
+		return !!this.playerData[uuid];
 	}
 
 
@@ -269,7 +319,8 @@ export class KplRoom {
 		// Let players play cards
 		this._state = RoomState.PICK_WHITE;
 		this.broadcastGameState();
-		this.setIntermission(this.timings.whitePick, this.cancelIntermission);
+		const whitePickSeconds = this.timings.whitePick;
+		this.setIntermission(whitePickSeconds, this.cancelIntermission);
 		await Promise.all(this.players.map(async (player) => {
 			// Skip czar
 			if (this.czarUUID === player.uuid) {
@@ -282,7 +333,7 @@ export class KplRoom {
 			// Wait for player to pick cards or timeout
 			const [ cardSelection, error ] = await safeAwait(player.rpc<number[]>('pickWhiteCards', {
 				count: pickCount,
-			}, this.timings.whitePick * 1000));
+			}, whitePickSeconds * 1000));
 
 			if (error || !cardSelection || Array.isArray(cardSelection) && cardSelection.length === 0) {
 				// Player didn't pick cards in time, pick random cards
@@ -341,7 +392,8 @@ export class KplRoom {
 		// Prepare czar move
 		this._state = RoomState.PICK_CZAR;
 		smartArrayShuffleAtPlace(this.table.white);
-		this.setIntermission(this.timings.czarPick, this.cancelIntermission);
+		const czarPickSeconds = this.timings.czarPick;
+		this.setIntermission(czarPickSeconds, this.cancelIntermission);
 		this.broadcastGameState();
 		const czar = this.players.find(player => player.uuid === this.czarUUID);
 		if (!czar) {
@@ -353,7 +405,7 @@ export class KplRoom {
 			//TODO: Error, no white cards to pick from
 		}
 
-		const [ czarSelection, error ] = await safeAwait(czar.rpc('pickCzarCard', this.table.white, this.timings.czarPick * 1000));
+		const [ czarSelection, error ] = await safeAwait(czar.rpc('pickCzarCard', this.table.white, czarPickSeconds * 1000));
 		this.cancelIntermission();
 
 		// A czar who never answers used to end the round with no winner and no
@@ -601,21 +653,29 @@ export class KplRoom {
 			return false;
 		}
 
-		// If room is full, refuse to join
-		if (this.players.length >= this.maxPlayers) {
-			player.sendError(GameErrors.ROOM_FULL);
-			return false;
-		}
-
-		// If player already was in the room before but disconnected (reconnect)
+		/*
+		 * Coming back to a seat you already hold. This is checked BEFORE the
+		 * room-full check on purpose: your seat, your score and your hand are
+		 * still here, so the room being at maxPlayers is not your problem — it
+		 * was counting you a moment ago. Checking full first meant a player who
+		 * dropped out of a 10/10 game could be locked out of their own game by
+		 * the count they were part of.
+		 */
 		if (this.playerData[player.uuid]) {
 			console.log(`Player ${chalk.bold(player.username)} (${chalk.gray(player.uuid)}) ${chalk.yellowBright('rejoined room')} ${chalk.bold(this.name)} (${chalk.gray(this.uuid)})`);
+			this.leftDeliberately.delete(player.uuid);
 			this.players.push(player);
 			broadcastLobbyUpdate();
 			this.broadcastGameState();
 			this.sendChatHistory(player);
 			this.postSystemMessage(`${player.username} se vrátil do hry.`);
 			return true;
+		}
+
+		// If room is full, refuse to join
+		if (this.players.length >= this.maxPlayers) {
+			player.sendError(GameErrors.ROOM_FULL);
+			return false;
 		}
 
 		// If player is new and game is already running, refuse to join
@@ -648,8 +708,17 @@ export class KplRoom {
 		return true;
 	}
 
-	public onPlayerLeave(player: KplPlayer): void {
+	/**
+	 * @param deliberate They pressed Opustit místnost, as opposed to their
+	 * connection dying. Both keep the seat so they can come back with the code,
+	 * but only a drop gets pulled back in automatically.
+	 */
+	public onPlayerLeave(player: KplPlayer, deliberate = false): void {
 		console.log(`Player ${chalk.bold(player.username)} (${chalk.gray(player.uuid)}) ${chalk.red('left room')} ${chalk.bold(this.name)} (${chalk.gray(this.uuid)})`);
+
+		if (deliberate) {
+			this.leftDeliberately.add(player.uuid);
+		}
 
 		// Remove player from room
 		this.players = this.players.filter(p => p !== player);

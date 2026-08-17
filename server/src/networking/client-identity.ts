@@ -6,7 +6,7 @@ import { safeAwait } from "../utils/safe-await.js";
 import { createPlayer, destroyPlayer } from "../game/player-manager.js";
 import { createAnonymousPlayer, tryReviveAnonymousPlayer } from "./anonymous-player-provider.js";
 import { NetworkKit } from "./socket-connection-client.js";
-import { getLobbyStateNetworkMessage } from "../game/room-manager.js";
+import { findHeldSeat, getLobbyStateNetworkMessage } from "../game/room-manager.js";
 
 /*
  * How long the server waits for a client to answer the auth handshake.
@@ -102,6 +102,19 @@ export function createClientIdentity(networkKit: NetworkKit, sendRequest: AwaitR
 			}, -1));
 
 			networkKit.sendRaw(getLobbyStateNetworkMessage());
+
+			/*
+			 * Back from a closed tab or a dead connection. The game they were in
+			 * is still running and their seat, score and hand are still there, so
+			 * put them back in it rather than making them find the code — and
+			 * rather than the table having to restart the game around them.
+			 */
+			if (!player.room) {
+				const heldSeat = findHeldSeat(player.uuid);
+				if (heldSeat) {
+					player.joinRoom(heldSeat);
+				}
+			}
 
 			// If this identity was already sitting in a room, the new connection
 			// needs the room on screen straight away.

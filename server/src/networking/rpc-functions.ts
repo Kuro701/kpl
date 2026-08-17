@@ -43,7 +43,7 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		// one is still sitting in it. Refusing here meant the create button
 		// silently did nothing; leave the old room instead.
 		if (player.room) {
-			player.quitRoom();
+			player.quitRoom(true);
 		}
 
 		const input = (data ?? {}) as Record<string, unknown>;
@@ -90,7 +90,8 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 	leaveRoom: async (player: KplPlayer, reply: ReplyFunction) => {
 		reply(OK);
 		if (player.room) {
-			player.quitRoom();
+			// Deliberate: they will not be pulled back in on their next visit.
+			player.quitRoom(true);
 		}
 	},
 

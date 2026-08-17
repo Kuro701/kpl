@@ -18,6 +18,33 @@
 
 	let joining = false;
 	let failed = false;
+	let reason = '';
+
+	/*
+	 * The server puts a player who dropped out of a running game straight back
+	 * into it as soon as they authenticate — no code needed. That arrives as a
+	 * pushed room update a moment after the socket is up, so give it a beat
+	 * before asking to join, or we race it and ask for a seat we already have.
+	 */
+	function waitForRoom(ms: number): Promise<boolean> {
+		if (get(IngameRoom)) return Promise.resolve(true);
+
+		return new Promise(resolve => {
+			let done = false;
+			const finish = (value: boolean) => {
+				if (done) return;
+				done = true;
+				unsubscribe();
+				clearTimeout(timer);
+				resolve(value);
+			};
+
+			const timer = setTimeout(() => finish(false), ms);
+			const unsubscribe = IngameRoom.subscribe(room => {
+				if (room) finish(true);
+			});
+		});
+	}
 
 	/*
 	 * This page used to call leaveRoom() when it unmounted, which quietly threw
@@ -41,10 +68,18 @@
 
 		joining = true;
 		failed = false;
+		reason = '';
 
 		if (!await connectToServer(get(LocalIdentity).username)) {
 			joining = false;
 			failed = true;
+			reason = 'Server neodpovídá. Může se zrovna probouzet — zkus to za chvíli znovu.';
+			return;
+		}
+
+		// Already back at the table? Then there is nothing to ask for.
+		if (await waitForRoom(1500)) {
+			joining = false;
 			return;
 		}
 
@@ -53,6 +88,9 @@
 
 		if (error || !joined) {
 			failed = true;
+			reason = error
+				? 'Server neodpověděl včas.'
+				: 'Místnost už neexistuje, je plná, nebo v ní běží hra, které ses neúčastnil.';
 		}
 	}
 
@@ -72,9 +110,13 @@
 	{:else}
 		<div class="placeholder">
 			{#if failed}
-				<h2>Místnost nenalezena</h2>
-				<p>Nejspíš už skončila nebo ji všichni opustili.</p>
-				<button class="button" on:click={() => navigate('/')}>Zpět na začátek</button>
+				<h2>Nepodařilo se připojit</h2>
+				<p>{reason}</p>
+				<p>Kód místnosti: <b>{roomUUID}</b></p>
+				<div class="actions">
+					<button class="button" on:click={ensureInRoom}>Zkusit znovu</button>
+					<button class="button" on:click={() => navigate('/')}>Zpět na začátek</button>
+				</div>
 			{:else}
 				<h2>{joining ? 'Připojuji do místnosti…' : 'Načítání…'}</h2>
 				<p>Kód místnosti: <b>{roomUUID}</b></p>
@@ -105,6 +147,11 @@
 	.placeholder p {
 		margin: 0;
 		color: var(--muted);
+	}
+	.actions {
+		display: flex;
+		gap: .5rem;
+		margin-top: .5rem;
 	}
 	.placeholder b {
 		font-family: var(--font-mono);

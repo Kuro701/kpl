@@ -17,18 +17,36 @@
 	export let roomUUID: string;
 	let connecting = false;
 	let loading = true;
+	let joinError = '';
 
 	let username = $LocalIdentity.username;
 	let roomInfo: null | LobbyRoom = null;
 
 	async function joinRoom() {
-	  if(!await connectToServer(username)) return;
-	  const [roomId, error] = await safeAwait(rpcCall('joinRoom', {
+	  joinError = '';
+	  connecting = true;
+
+	  if (!await connectToServer(username)) {
+		connecting = false;
+		joinError = 'Server neodpovídá. Zkus to za chvíli znovu.';
+		return;
+	  }
+
+	  const [roomId, error] = await safeAwait(rpcCall<string | false>('joinRoom', {
 		roomUUID: roomUUID,
 	  }));
+	  connecting = false;
 
-	  if (error) {
-		console.error('Failed to join random room:', error);
+	  /*
+	   * The server answers false when it will not let you in — full, or a game
+	   * already running that you were never part of. This used to be treated as
+	   * success and navigated to /room/false, which is a room that cannot exist,
+	   * so the screen just went blank instead of saying what happened.
+	   */
+	  if (error || !roomId) {
+		joinError = roomInfo && roomInfo.playerCount >= roomInfo.maxPlayers
+		  ? 'Místnost je plná.'
+		  : 'Do téhle hry se připojit nejde — už běží a nejsi v ní.';
 		return;
 	  }
 
@@ -104,11 +122,14 @@
 						/>
 					</div>
 					<div class="actions">
-						<button class="button" on:click={joinRoom}>
+						<button class="button" on:click={joinRoom} disabled={connecting}>
 							<img src="/img/icons/play.png" alt="Náhodná hra" draggable="false" class="icon invert" />
-							Připojit se
+							{connecting ? 'Připojuji…' : 'Připojit se'}
 						</button>
 					</div>
+					{#if joinError}
+						<div class="join-error">{joinError}</div>
+					{/if}
 				{:else if !loading}
 					<div class="no-room">
 						<h2>Místnost neexistuje</h2>
@@ -148,7 +169,12 @@
 	}
 	.no-room p {
 		font-size: .8rem;
-		color: #333;
+		color: var(--muted);
+	}
+	.join-error {
+		font-size: .85rem;
+		color: var(--accent-text);
+		text-align: center;
 	}
 
 </style>

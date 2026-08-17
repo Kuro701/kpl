@@ -63,6 +63,23 @@ export function getRoomByUUID(uuid: string): KplRoom | undefined {
 	return rooms.get(uuid);
 }
 
+/**
+ * The running game this identity still has a seat in, if any. Used to put a
+ * player who closed their tab straight back at the table when they come back,
+ * without anyone having to restart the game around them.
+ */
+export function findHeldSeat(uuid: string): KplRoom | undefined {
+	if (!uuid) return undefined;
+
+	for (const room of rooms.values()) {
+		if (room.holdsSeatFor(uuid)) {
+			return room;
+		}
+	}
+
+	return undefined;
+}
+
 export function destroyRoom(room: KplRoom): void {
 	rooms.delete(room.uuid);
 	room.onRoomDestroy();

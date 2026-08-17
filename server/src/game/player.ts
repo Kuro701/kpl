@@ -38,11 +38,15 @@ export class KplPlayer {
 		this.quitRoom();
 	}
 
-	public quitRoom() {
+	/**
+	 * @param deliberate They pressed the leave button, rather than their
+	 * connection dying under them.
+	 */
+	public quitRoom(deliberate = false) {
 		if (this.roomUUID) {
 			const room = getRoomByUUID(this.roomUUID);
 			if (room) {
-				room.onPlayerLeave(this);
+				room.onPlayerLeave(this, deliberate);
 			}
 			this.roomUUID = null;
 			safeAwait(this.netkit.rpcCall('room', null, -1));
@@ -50,7 +54,8 @@ export class KplPlayer {
 	}
 
 	public joinRoom(room: KplRoom) {
-		this.quitRoom();
+		// Going somewhere else is a deliberate exit from wherever you were.
+		this.quitRoom(true);
 		const joined = room.onPlayerJoin(this);
 		if (joined) {
 			this.roomUUID = room.uuid;
