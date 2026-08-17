@@ -146,9 +146,15 @@
     background-image: url('/img/card-back.webp');
     background-repeat: no-repeat;
     background-position: center;
-    /* contain, not cover — cover would crop the ornate frame off the top and
-       bottom edges of the artwork. */
-    background-size: contain;
+    /*
+     * The artwork is 440x615 — a real playing-card 5:7 — and the card box is
+     * 12x15, so contain left black bars down both sides. cover fills the card
+     * instead, at the price of 33px off the top and bottom of the source. The
+     * outer 28px of the art is unlit black margin, so that costs about five
+     * pixels of actual design at each end and nothing of the frame reads as
+     * missing.
+     */
+    background-size: cover;
   }
 
   /* Black cards keep the deep-black face of the physical game, but pick up an

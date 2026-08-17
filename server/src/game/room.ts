@@ -106,6 +106,16 @@ export class KplRoom {
 	 * game they chose to leave.
 	 */
 	private leftDeliberately = new Set<string>();
+
+	/*
+	 * The black cards this room has seen lately, newest last. This deliberately
+	 * survives the end of a game: the deck is shuffled fresh every time, but a
+	 * fresh shuffle is perfectly happy to open the next game on the prompt you
+	 * just finished playing, which is what makes a new game feel like a repeat.
+	 * These get sunk to the bottom of the pile instead.
+	 */
+	private recentBlackIds: number[] = [];
+	private blackMemoryLimit = 0;
 	private intermissionStart: Date | null = null;
 	private intermissionEnd: Date | null = null;
 	private intermissionTimer: NodeJS.Timeout | null = null;
@@ -578,6 +588,44 @@ export class KplRoom {
 
 		smartArrayShuffleAtPlace(this.decks.white);
 		smartArrayShuffleAtPlace(this.decks.black);
+
+		/*
+		 * How far back the room remembers. Half the pack: enough that a new game
+		 * does not open on the prompts the last one ended with, and never so much
+		 * that a twelve-card pack has nothing left to deal.
+		 */
+		this.blackMemoryLimit = Math.max(1, Math.floor(this.decks.black.length / 2));
+		this.recentBlackIds = this.recentBlackIds.slice(-this.blackMemoryLimit);
+		this.sinkRecentBlackCards();
+	}
+
+	/**
+	 * Move anything played recently to the bottom of the black pile. Cards are
+	 * drawn with pop(), off the end, so "bottom" is the front of the array.
+	 */
+	private sinkRecentBlackCards(): void {
+		if (this.recentBlackIds.length === 0 || this.decks.black.length < 2) {
+			return;
+		}
+
+		const recent = new Set(this.recentBlackIds);
+		const seen: Card[] = [];
+		const fresh: Card[] = [];
+
+		for (const card of this.decks.black) {
+			(recent.has(card.id) ? seen : fresh).push(card);
+		}
+
+		// Everything unseen is still in shuffled order; this only reorders the
+		// two groups relative to each other.
+		this.decks.black = [...seen, ...fresh];
+	}
+
+	private rememberBlackCard(card: Card): void {
+		this.recentBlackIds.push(card.id);
+		if (this.blackMemoryLimit > 0 && this.recentBlackIds.length > this.blackMemoryLimit) {
+			this.recentBlackIds = this.recentBlackIds.slice(-this.blackMemoryLimit);
+		}
 	}
 
 	private drawWhiteCard(): Card | null {
@@ -612,9 +660,17 @@ export class KplRoom {
 			this.decks.black = this.decks.blackUsed;
 			this.decks.blackUsed = [];
 			smartArrayShuffleAtPlace(this.decks.black);
+			// A twelve-card pack comes round fast; at least do not hand back the
+			// prompt from two rounds ago first.
+			this.sinkRecentBlackCards();
 		}
 
-		return this.decks.black.pop() ?? null;
+		const drawn = this.decks.black.pop() ?? null;
+		if (drawn) {
+			this.rememberBlackCard(drawn);
+		}
+
+		return drawn;
 	}
 
 	private fillHand(player: KplPlayer): void {
