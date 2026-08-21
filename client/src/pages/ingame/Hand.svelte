@@ -1,10 +1,61 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount, tick } from "svelte";
 	import Card from "../../components/cards/Card.svelte";
 	import { HandCards, IngameRoom, pushSelectedCard, RoomState, SelectedCards, ServerResponseFn } from "../../lib/networking/room";
-	import { dealFromDeck, returnToDeck } from "../../lib/deck-motion";
+	import { flyCards } from "../../lib/deck-motion";
 
 	export let hide = false;
+
+	/*
+	 * `hide` says whether you should have a hand. `showing` says whether the
+	 * cards are still on screen — they lag behind on the way out, because they
+	 * turn face down and then fly back to the deck before they can be taken
+	 * away.
+	 */
+	let showing = !hide;
+	let faceDown = false;
+	let cardNodes: (HTMLElement | undefined)[] = [];
+	let flightId = 0;
+
+	/** Long enough for the turn to read before the cards start moving. */
+	const FLIP_LEAD_MS = 320;
+	const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+	$: syncHand(hide);
+
+	async function syncHand(hidden: boolean) {
+		const flight = ++flightId;
+
+		if (hidden) {
+			if (!showing) return;
+
+			// Turn first, then leave: they go back into a pile of face-down
+			// cards, so they are face down by the time they get there.
+			faceDown = true;
+			await wait(FLIP_LEAD_MS);
+			if (flight !== flightId) return;
+
+			await flyCards(cardNodes, 'out');
+			// A new round may have started while they were in the air.
+			if (flight !== flightId) return;
+			showing = false;
+			faceDown = false;
+			cardNodes = [];
+			return;
+		}
+
+		showing = true;
+		faceDown = false;
+		/*
+		 * Wait for the cards to exist before dealing them. This also covers the
+		 * first render of a game: the reactive statement runs before there is
+		 * any DOM, so without the tick the opening hand would appear with no
+		 * deal at all.
+		 */
+		await tick();
+		if (flight !== flightId) return;
+		flyCards(cardNodes, 'in');
+	}
 
 	let elementWidth = 0;
 	let wrapperElement: HTMLElement | null = null;
@@ -51,7 +102,7 @@
 	style={`--card-count: ${$HandCards.length}; --hand-width: ${elementWidth}px`}
 	bind:this={wrapperElement}
 >
-	{#if !hide}
+	{#if showing}
 	<div class="shrinkable">
 		{#each $HandCards as card, i (card.id)}
 			{#if i !== $HandCards.length - 1}
@@ -61,12 +112,11 @@
 					class:onBoard={$SelectedCards.includes(card.id)}
 					on:click={() => onCardClick(card.id)}
 					on:dblclick={() => onCardDoubleClick(card.id)}
-					in:dealFromDeck={{ index: i, count: $HandCards.length }}
-					out:returnToDeck={{ index: i, count: $HandCards.length }}
+					bind:this={cardNodes[i]}
 				>
 					<Card
 						black={false}
-						show={!hide}
+						show={!faceDown}
 						text={card.text}
 						tip={card.tip}
 					/>
@@ -83,12 +133,11 @@
 				class:onBoard={$SelectedCards.includes(card.id)}
 				on:click={() => onCardClick(card.id)}
 				on:dblclick={() => onCardDoubleClick(card.id)}
-				in:dealFromDeck={{ index: $HandCards.length - 1, count: $HandCards.length }}
-				out:returnToDeck={{ index: $HandCards.length - 1, count: $HandCards.length }}
+				bind:this={cardNodes[$HandCards.length - 1]}
 			>
 				<Card
 					black={false}
-					show={!hide}
+					show={!faceDown}
 					text={card.text}
 					tip={card.tip}
 				/>

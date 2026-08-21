@@ -1,100 +1,97 @@
-import { cubicOut } from "svelte/easing";
-
 /*
- * Cards are dealt out of the draw pile and sent back to it.
+ * Cards flying between your hand and the draw pile.
  *
- * The pile marks itself with data-deck-anchor and this reads that element's box
- * at the moment a transition starts. An earlier version had DeckPile publish
- * its rectangle into a store on mount — which meant the animation depended on
- * that store being non-null and up to date at exactly the right time, and when
- * it was not the cards fell back to a barely visible nudge and the whole thing
- * looked broken rather than absent. Asking the DOM has no such state to get
- * wrong.
+ * This is done with element.animate() rather than a Svelte transition. The
+ * transition version looked right on paper and did nothing on screen: the
+ * cards sat out the duration — long enough to flip — and then vanished without
+ * ever moving. Rather than keep guessing at why the generated keyframes were
+ * not taking, this drives the animation itself, where the only things that can
+ * go wrong are visible in this file.
+ *
+ * The pile marks itself with data-deck-anchor and we read its box at the moment
+ * the cards start moving, so there is no cached rectangle to go stale.
  */
 const DECK_SELECTOR = '[data-deck-anchor]';
-
-/** Respect the system setting — this is decoration, not information. */
-function motionAllowed(): boolean {
-	if (typeof window === 'undefined' || !window.matchMedia) return true;
-	return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
 
 const DEAL_MS = 460;
 const RETURN_MS = 340;
 const STAGGER_MS = 38;
-/** Never make the last card of a big hand wait more than this to be dealt. */
+/** Never make the last card of a big hand wait more than this. */
 const MAX_STAGGER_MS = 380;
+const EASE = 'cubic-bezier(.22,.61,.36,1)';
 
-type CardMotionOptions = { index?: number; count?: number };
+/** Respect the system setting — this is decoration, not information. */
+function motionAllowed(): boolean {
+	if (typeof window === 'undefined') return false;
+	if (typeof Element === 'undefined' || !Element.prototype.animate) return false;
+	if (!window.matchMedia) return true;
+	return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
 
-type Path = { dx: number; dy: number; scale: number; spin: number };
+function stagger(index: number, count: number): number {
+	if (count <= 1) return 0;
+	return index * Math.min(STAGGER_MS, MAX_STAGGER_MS / (count - 1));
+}
 
-function pathToDeck(node: Element): Path | null {
+/** Where a card has to go to be sitting on the deck, from where it is now. */
+function deckKeyframe(node: HTMLElement): Keyframe | null {
 	const card = node.getBoundingClientRect();
 	if (!card.width || !card.height) return null;
 
 	const deck = document.querySelector(DECK_SELECTOR)?.getBoundingClientRect();
 
-	/*
-	 * No deck on screen — a narrow window hides it. Fly in from well below the
-	 * bottom edge instead. Deliberately a long way: a small nudge reads as a
-	 * glitch, not as a card arriving.
-	 */
+	// No deck on screen — a narrow window hides it. Off the bottom edge instead.
 	if (!deck || !deck.width || !deck.height) {
-		return { dx: 0, dy: window.innerHeight - card.top, scale: .8, spin: 0 };
+		return {
+			transform: `translate(0px, ${Math.round(window.innerHeight - card.top + 40)}px) scale(.85)`,
+			opacity: 0,
+		};
 	}
 
+	const dx = (deck.x + deck.width / 2) - (card.left + card.width / 2);
+	const dy = (deck.y + deck.height / 2) - (card.top + card.height / 2);
+
 	return {
-		dx: (deck.x + deck.width / 2) - (card.left + card.width / 2),
-		dy: (deck.y + deck.height / 2) - (card.top + card.height / 2),
-		scale: deck.height / card.height,
-		spin: -9,
+		transform: `translate(${Math.round(dx)}px, ${Math.round(dy)}px) rotate(-9deg) scale(${(deck.height / card.height).toFixed(3)})`,
+		opacity: .25,
 	};
 }
 
-function stagger(index: number, count: number): number {
-	if (count <= 1) return 0;
-	const step = Math.min(STAGGER_MS, MAX_STAGGER_MS / (count - 1));
-	return index * step;
-}
-
-function flight(path: Path) {
-	// `u` is the distance still to travel: 1 at the deck, 0 in place.
-	return (t: number, u: number) =>
-		`transform: translate(${u * path.dx}px, ${u * path.dy}px)` +
-		` rotate(${u * path.spin}deg) scale(${1 - u * (1 - path.scale)});` +
-		`opacity: ${Math.min(1, t * 3)};`;
-}
-
-/** Deal: the card starts sitting on the deck and flies out to your hand. */
-export function dealFromDeck(node: Element, { index = 0, count = 1 }: CardMotionOptions = {}) {
-	if (!motionAllowed()) return { duration: 0 };
-
-	const path = pathToDeck(node);
-	if (!path) return { duration: 0 };
-
-	return {
-		delay: stagger(index, count),
-		duration: DEAL_MS,
-		easing: cubicOut,
-		css: flight(path),
-	};
-}
+const HOME: Keyframe = { transform: 'translate(0px, 0px) rotate(0deg) scale(1)', opacity: 1 };
 
 /**
- * The other direction: whatever is left in your hand once you have played goes
- * back onto the pile. Quicker than the deal — nobody is waiting to read these.
+ * Fly a set of cards to or from the deck. Resolves once every card has landed,
+ * so the caller can wait before taking the cards out of the DOM.
  */
-export function returnToDeck(node: Element, { index = 0, count = 1 }: CardMotionOptions = {}) {
-	if (!motionAllowed()) return { duration: 0 };
+export function flyCards(nodes: (HTMLElement | null | undefined)[], direction: 'in' | 'out'): Promise<void> {
+	const cards = nodes.filter((n): n is HTMLElement => !!n && n.isConnected);
+	if (!cards.length || !motionAllowed()) return Promise.resolve();
 
-	const path = pathToDeck(node);
-	if (!path) return { duration: 0 };
+	const dealing = direction === 'in';
+	const running: Animation[] = [];
 
-	return {
-		delay: stagger(index, count) * .6,
-		duration: RETURN_MS,
-		easing: cubicOut,
-		css: flight(path),
-	};
+	cards.forEach((node, index) => {
+		const atDeck = deckKeyframe(node);
+		if (!atDeck) return;
+
+		const animation = node.animate(
+			dealing ? [atDeck, HOME] : [HOME, atDeck],
+			{
+				duration: dealing ? DEAL_MS : RETURN_MS,
+				delay: stagger(index, cards.length) * (dealing ? 1 : .6),
+				easing: EASE,
+				fill: 'both',
+			},
+		);
+		running.push(animation);
+	});
+
+	if (!running.length) return Promise.resolve();
+
+	return Promise.all(running.map(a => a.finished.catch(() => undefined))).then(() => {
+		// Dealt cards are home; drop the animation so nothing is left pinned by
+		// fill: both. Returning cards keep theirs — they are about to be removed
+		// and must not snap back to the hand first.
+		if (dealing) running.forEach(a => { try { a.cancel(); } catch { /* already gone */ } });
+	});
 }
