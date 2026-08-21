@@ -1,6 +1,7 @@
 <script lang="ts">
   import { link } from "svelte-routing";
   import { ActiveTheme, Theme } from "../../lib/theme";
+  import { APP_VERSION } from "../../lib/version";
 
   /*
    * The server this deck belongs to. Drop the invite in here and the footer
@@ -20,7 +21,10 @@
 		<slot />
 	</div>
 	<div class="layout-menu__footer">
-		<div>Made by <span class="maker">Kuro Software</span></div>
+		<div>
+			<div>Made by <span class="maker">Kuro Software</span></div>
+			<div class="version">V:{APP_VERSION}</div>
+		</div>
 		<div>
 			<a href="https://instagram.com/6Kuro_Labs9" target="_blank" rel="noopener noreferrer">
 				@6Kuro_Labs9
@@ -95,6 +99,9 @@
 		padding-top: 1.5rem;
 		cursor: var(--cursor-text);
 		flex-wrap: wrap;
+		/* The maker cell is two lines tall now; hang the dividers from the top
+		   rather than letting them centre against it. */
+		align-items: flex-start;
 	}
 	.layout-menu__footer > div {
 		border-right: 1px solid var(--border);
@@ -108,6 +115,14 @@
 	.layout-menu__footer .maker {
 		color: var(--fg);
 		font-weight: 500;
+	}
+
+	.layout-menu__footer .version {
+		margin-top: .1rem;
+		font-size: .72rem;
+		letter-spacing: .06em;
+		color: var(--muted);
+		opacity: .75;
 	}
 
 	.layout-menu__footer a {

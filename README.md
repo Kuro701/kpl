@@ -26,6 +26,12 @@ Celý vzhled visí na třech barvách a čtyřech obrázcích, takže překlopit
 3. `client/src/components/layout/LayoutMenu.svelte` — nahoře `COMMUNITY_NAME` a `COMMUNITY_DISCORD` (prázdný odkaz = jméno se vypíše jako text).
 4. `client/index.html` a `wrangler.jsonc` — název hry a jméno Workeru (mění URL).
 
+## Verze
+
+Číslo ve patičce (`V:1.0`) je jediná konstanta v `client/src/lib/version.ts`.
+Zvyš ji při každém nasazení — když pak někdo pošle screenshot, je z něj hned
+vidět, jestli má aktuální build, nebo starou záložku.
+
 ## Jak to rozjet lokálně
 
 Potřebuješ Node 20+.
