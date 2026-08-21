@@ -100,6 +100,12 @@ export const BoardCards = derived(IngameRoom, ($IngameRoom => {
 	return $IngameRoom.table.white;
 }));
 
+/*
+ * Seven players or more and the board is tight: the black card and the deck
+ * both stand down a size together. One flag so they cannot drift apart.
+ */
+export const CrowdedTable = derived(IngameRoom, ($IngameRoom => ($IngameRoom?.players.length ?? 0) >= 7));
+
 export const ServerResponseFn = writable<((data: unknown) => void) | null>(null);
 export const SelectedCards = writable<number[]>([]);
 export const LastGameResults = writable<GameResults | null>(null);

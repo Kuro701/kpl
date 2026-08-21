@@ -80,13 +80,16 @@
 	   both sides at every width — the answers below it are never reached. */
 	.deck-corner {
 		position: absolute;
-		top: 3.25rem;
+		/* Level with the black card: 1rem of board padding plus the 2rem the
+		   timer occupies. The two of them are the same size and read as one
+		   row. */
+		top: 3rem;
 		left: 1.5rem;
 		z-index: 1;
 	}
 
-	/* Narrow enough that the black card starts crowding the corner. */
-	@media (max-width: 62rem) {
+	/* Narrow enough that the deck would start crowding the middle. */
+	@media (max-width: 68rem) {
 		.deck-corner {
 			display: none;
 		}
