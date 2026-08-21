@@ -18,13 +18,24 @@
 	{#if $IngameRoom?.state === RoomState.LOBBY}
 		<LobbyState />
 	{:else}
-		{@const hideHand = ($IngameRoom?.state === RoomState.PICK_CZAR) || ($IngameRoom?.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid))}
+		{@const me = $IngameRoom?.players.find(p => p.uuid === $PlayerIdentity?.uuid)}
+		{@const picking = $IngameRoom?.state === RoomState.PICK_WHITE}
+		{@const iAmCzar = !!me?.isCzar}
+		{@const iHavePlayed = picking && !!me?.hasPlayed}
+		<!--
+			You hold cards while you still have a play to make. The moment your
+			cards are down — hasPlayed comes from the table itself, so it is the
+			server's word, not a guess — the rest of the hand goes back on the
+			pile rather than sitting there for the rest of the round with nothing
+			left to do. The czar never gets a hand at all.
+		-->
+		{@const hideHand = !picking || iAmCzar || iHavePlayed}
 
 		<BlackCardWidget />
 
-		{#if $IngameRoom?.state === RoomState.PICK_WHITE && $IngameRoom.players.some(p => p.isCzar && p.uuid === $PlayerIdentity?.uuid)}
+		{#if picking && iAmCzar}
 			<BoardCzar />
-		{:else if $IngameRoom?.state === RoomState.PICK_WHITE}
+		{:else if picking}
 			<BoardPick />
 		{:else}
 			<BoardWhiteCards />

@@ -215,8 +215,15 @@
 		transition: opacity .3s ease, transform .3s ease;
 	}
 	.card-group--faded {
-		opacity: .45;
+		/*
+		 * This was opacity: .45, which let the dark board show straight through
+		 * the card backs — the gold went grey and the artwork looked washed out
+		 * and broken rather than simply not-the-winner. The winner picks itself
+		 * out with its own glow and its lift, so the losers only need to sit
+		 * back a step: still solid cards, just further away.
+		 */
 		transform: scale(.94);
+		filter: brightness(.72);
 	}
 	.card-group--winner {
 		transform: translateY(-.5rem);
