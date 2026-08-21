@@ -28,9 +28,10 @@ Celý vzhled visí na třech barvách a čtyřech obrázcích, takže překlopit
 
 ## Verze
 
-Číslo ve patičce (`V:1.0`) je jediná konstanta v `client/src/lib/version.ts`.
-Zvyš ji při každém nasazení — když pak někdo pošle screenshot, je z něj hned
-vidět, jestli má aktuální build, nebo starou záložku.
+Číslo ve patičce (`V:1.1`) je jediná konstanta v `client/src/lib/version.ts`.
+Zvyšuje se **jednou za push**, po desetinách: `1.1` → `1.2` → … → `1.9` → `2.0`
+(ne `1.10`). Když pak někdo pošle screenshot, je z něj hned vidět, jestli má
+aktuální build, nebo starou záložku.
 
 ## Jak to rozjet lokálně
 

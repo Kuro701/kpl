@@ -3,6 +3,7 @@
  * from — worth more than it looks when someone reports a bug from a tab they
  * opened before the last deploy.
  *
- * Bump this by hand with each release. One line, one place.
+ * Bumped once per push, not once per change: one decimal at a time, and 1.9
+ * rolls to 2.0 rather than 1.10.
  */
-export const APP_VERSION = '1.0';
+export const APP_VERSION = '1.1';
