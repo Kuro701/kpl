@@ -159,6 +159,11 @@
 		   being centred out past the scroll origin. */
 		align-content: center;
 		align-content: safe center;
+		/* Rows are as tall as the cards in them and no taller. Without this a
+		   grid with spare height stretches its rows to fill it, which pushes
+		   the second row of answers half a screen away from the first and
+		   quietly breaks the height maths in fitCards(). */
+		grid-auto-rows: max-content;
 		justify-items: center;
 		align-items: start;
 		gap: .5rem;

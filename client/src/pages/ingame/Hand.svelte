@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 	import Card from "../../components/cards/Card.svelte";
 	import { HandCards, IngameRoom, pushSelectedCard, RoomState, SelectedCards, ServerResponseFn } from "../../lib/networking/room";
+	import { dealFromDeck, returnToDeck } from "../../lib/deck-motion";
 
 	export let hide = false;
 
@@ -47,10 +48,10 @@
 <svelte:window on:resize={updateElementWidth} />
 <div
 	class="hand"
-	class:hide={hide}
 	style={`--card-count: ${$HandCards.length}; --hand-width: ${elementWidth}px`}
 	bind:this={wrapperElement}
 >
+	{#if !hide}
 	<div class="shrinkable">
 		{#each $HandCards as card, i (card.id)}
 			{#if i !== $HandCards.length - 1}
@@ -60,6 +61,8 @@
 					class:onBoard={$SelectedCards.includes(card.id)}
 					on:click={() => onCardClick(card.id)}
 					on:dblclick={() => onCardDoubleClick(card.id)}
+					in:dealFromDeck={{ index: i, count: $HandCards.length }}
+					out:returnToDeck={{ index: i, count: $HandCards.length }}
 				>
 					<Card
 						black={false}
@@ -80,6 +83,8 @@
 				class:onBoard={$SelectedCards.includes(card.id)}
 				on:click={() => onCardClick(card.id)}
 				on:dblclick={() => onCardDoubleClick(card.id)}
+				in:dealFromDeck={{ index: $HandCards.length - 1, count: $HandCards.length }}
+				out:returnToDeck={{ index: $HandCards.length - 1, count: $HandCards.length }}
 			>
 				<Card
 					black={false}
@@ -89,6 +94,7 @@
 				/>
 			</button>
 		</div>
+	{/if}
 	{/if}
 </div>
 
@@ -105,13 +111,16 @@
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		transition: transform .2s ease-out, height .2s ease-out;
-		transform: translateY(0);
 		height: 15rem;
+		pointer-events: none;
 	}
 
 	.card {
 		display: inline-block;
+		/* The hand spans the full width of the board so the cards can centre in
+		   it, but only the cards themselves may take a click — otherwise the
+		   empty width either side of them sits over the board and swallows it. */
+		pointer-events: auto;
 		width: min(var(--other-card-width), var(--card-width));
 		transition: width 0.175s ease-out, transform 0.1s ease-out, opacity 0.1s ease-out;
 		font: inherit;
@@ -190,8 +199,7 @@
 		}
 	}
 
-	.hand.hide {
-		transform: translateY(-2rem);
-		height: 0rem;
-	}
+	/* `hide` used to squash this to nothing and let the cards spill out of the
+	   bottom of the screen. It now empties the hand instead, and each card
+	   leaves by flying back to the deck. */
 </style>
