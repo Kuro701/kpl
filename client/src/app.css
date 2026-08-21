@@ -1,5 +1,14 @@
 /* ============================================================
-   Karty proti lidskosti — HELLFIRE CZ/SK theme
+   MYTHEDER
+   ------------------------------------------------------------
+   The palette is lifted from the deck artwork: gold leaf and a
+   teal dragon on a deep blue-black field.
+
+   Every accent in the app resolves through the --accent-rgb /
+   --accent-2-rgb triplets below, so re-skinning the whole site
+   for another server is a matter of changing these numbers and
+   dropping in new art — not hunting hard-coded colours through
+   thirty components, which is what the last theme took.
    ============================================================ */
 
 @font-face {
@@ -15,40 +24,56 @@ body {
 	min-height: 100%;
 
 	/* --- palette --- */
-	--bg: #0a0605;
-	--bg-deep: #060302;
-	--panel: #18100d;
-	--panel-raised: #21160f;
+	/* Three brand channels. Everything else is derived from them. */
+	--accent-rgb: 217 162 39;        /* gold leaf — primary */
+	--accent-2-rgb: 47 156 147;      /* the teal dragon — secondary */
+	--ember-rgb: 224 122 40;         /* the warm dragon — highlights */
+
+	--bg: #080d0f;
+	--bg-deep: #05090a;
+	--panel: #0e1719;
+	--panel-raised: #142023;
 	--surface: rgba(255, 255, 255, .045);
 	--surface-hover: rgba(255, 255, 255, .09);
 	--border: rgba(255, 255, 255, .1);
 	--border-strong: rgba(255, 255, 255, .17);
 
-	--accent: #e5322d;
-	--accent-hover: #ff4a3a;
-	--accent-dim: rgba(229, 50, 45, .34);
-	--accent-text: #ffa24d;
-	--accent-contrast: #170503;
-	--accent-glow: 0 0 22px rgba(229, 50, 45, .5);
-	--accent-glow-strong: 0 0 34px rgba(255, 106, 26, .68);
+	--accent: rgb(var(--accent-rgb));
+	--accent-hover: #edc056;
+	--accent-dim: rgb(var(--accent-rgb) / .34);
+	--accent-text: #e6c15f;
+	--accent-contrast: #120c02;
+	--accent-glow: 0 0 22px rgb(var(--accent-rgb) / .42);
+	--accent-glow-strong: 0 0 34px rgb(var(--accent-rgb) / .62);
 
-	--fg: #f2ebe6;
-	--muted: #9c8a80;
+	--accent-2: rgb(var(--accent-2-rgb));
+	--accent-2-text: #6fd0c6;
+
+	--fg: #ece7dc;
+	--muted: #8b948f;
 	--danger: #ff6b81;
-	--ok: #4ade80;
+	--ok: #4fc9a6;
 
 	--chip-bg: rgba(255, 255, 255, .045);
-	--chip-bg-hover: rgba(229, 50, 45, .14);
+	--chip-bg-hover: rgb(var(--accent-rgb) / .14);
 	--chip-border: rgba(255, 255, 255, .1);
-	--joinbox-bg: linear-gradient(150deg, rgba(229, 50, 45, .16), rgba(255, 138, 31, .08));
+	--joinbox-bg: linear-gradient(150deg, rgb(var(--accent-rgb) / .16), rgb(var(--accent-2-rgb) / .12));
 	--avatar-bg: rgba(255, 255, 255, .07);
 
+	/* The card faces, so the deck and the chrome can never drift apart. */
+	--card-paper: #ded0b0;
+	--card-ink: #1a1509;
+	--card-paper-won: #f0e3c4;
+	--card-trim: #a9801f;
+	--card-dark: #0b1214;
+	--card-dark-ink: #f1ece0;
+
 	/* Kept for components that still reference the original names. */
-	--blackish: #120a07;
-	--black: #060302;
+	--blackish: #0b1214;
+	--black: #05090a;
 	--white: #ffffff;
 	--white-transparency: rgba(255, 255, 255, .6);
-	--gray: #9c8a80;
+	--gray: #8b948f;
 
 	/* --- shape --- */
 	--radius: .65rem;
@@ -117,7 +142,7 @@ input::placeholder {
 
 input:focus, select:focus {
 	border-color: var(--accent);
-	box-shadow: 0 0 0 3px rgba(229, 50, 45, .22);
+	box-shadow: 0 0 0 3px rgb(var(--accent-rgb) / .22);
 }
 
 select {

@@ -1,6 +1,6 @@
-# Karty proti lidskosti
+# Mytheder
 
-Česká online verze karetní hry. Založíš místnost, dostaneš pětiznakový kód, pošleš ho kámošům — a hrajete. Žádné účty, žádné reklamy, žádný veřejný seznam místností.
+Česká online karetní hra pro partu. Založíš místnost, dostaneš pětiznakový kód, pošleš ho kámošům — a hrajete. Žádné účty, žádné reklamy, žádný veřejný seznam místností.
 
 Fork původní hry od **Sáry Hýžové**, která projekt v roce 2024 ukončila a zveřejnila kód pro komunitní vývoj. Původní autorství viz [LICENSE](LICENSE).
 
@@ -14,8 +14,17 @@ Fork původní hry od **Sáry Hýžové**, která projekt v roce 2024 ukončila 
 - **Bez účtů.** Přihlašování přes Google a Discord bylo odstraněné (bez původních API klíčů stejně nefungovalo). Hraje se pod přezdívkou.
 - **Chat.** Původní `RoomChat.svelte` byl prázdný soubor — hra chat nikdy neměla. Teď má: zprávy, historie pro toho, kdo přijde později, systémové hlášky (kdo přišel, kdo odešel, kdo bere bod) a ochrana proti spamu.
 - **Tematické balíčky.** Místo dvou historických balíčků je jich pět podle témat: *Sex a erotika*, *Hnus a tělesnosti*, *Politika a dějiny*, *Popkultura*, *Absurdní humor*. Karta nese štítky, ne příslušnost k jednomu balíčku — většina karet patří do víc témat najednou. Když vybereš víc balíčků, karty se sloučí a nedublují.
-- **Nový vzhled.** Tmavé neonové téma.
+- **Nový vzhled.** Téma *Mytheder*: zlato a tyrkys na temně modročerné, podle grafiky balíčku.
 - **HTTP + WebSocket.** Server odpovídá na `/health`, takže se dá hostovat na platformách, které kontrolují běh služby.
+
+## Přebarvení pro jiný server
+
+Celý vzhled visí na třech barvách a čtyřech obrázcích, takže překlopit hru pro jinou komunitu je práce na pár minut, ne na odpoledne.
+
+1. `client/src/app.css` — nahoře v paletě přepiš `--accent-rgb`, `--accent-2-rgb` a `--ember-rgb`. Všechny odstíny v aplikaci se počítají z nich; v komponentách nejsou žádné natvrdo zapsané barvy.
+2. `client/public/img/` — vyměň `card-back.webp` (rub karty, ořízni na poměr 4:5), `logo_white.png` a `logo.png` (640×128, světlá a tmavá varianta) a `favicon.png` (128×128).
+3. `client/src/components/layout/LayoutMenu.svelte` — nahoře `COMMUNITY_NAME` a `COMMUNITY_DISCORD` (prázdný odkaz = jméno se vypíše jako text).
+4. `client/index.html` a `wrangler.jsonc` — název hry a jméno Workeru (mění URL).
 
 ## Jak to rozjet lokálně
 

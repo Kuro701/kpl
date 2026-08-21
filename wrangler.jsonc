@@ -4,7 +4,11 @@
   // This is an assets-only Worker: no server code, just the built Svelte app
   // served from the edge. The game server is a separate long-lived process on
   // Render — a Worker cannot hold a WebSocket game open.
-  "name": "hellfirecards",
+  // Renaming this publishes to a NEW workers.dev URL (mytheder.<sub>.workers.dev).
+  // The old hellfirecards Worker stays up serving whatever was last deployed to
+  // it, so the previous server's site keeps working instead of turning into this
+  // one. Both talk to the same game server on Render.
+  "name": "mytheder",
   "compatibility_date": "2026-08-01",
 
   "assets": {

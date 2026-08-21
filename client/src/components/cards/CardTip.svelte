@@ -37,6 +37,6 @@
 	.tooltip:hover,
 	.tooltip:focus-visible {
 		opacity: 1;
-		filter: drop-shadow(0 0 4px rgba(229, 50, 45, .8));
+		filter: drop-shadow(0 0 4px rgb(var(--accent-rgb) / .8));
 	}
 </style>

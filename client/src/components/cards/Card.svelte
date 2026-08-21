@@ -40,13 +40,13 @@
         <p>{text.replaceAll(/_+/g, '______')}</p>
         <img
           src={`/img/logo${black ? "_white" : ""}.png`}
-          alt="Karty proti lidskosti"
+          alt="Mytheder"
         />
       </slot>
     </div>
     <div class="back">
       <slot name="back">
-        <span class="back-art" role="img" aria-label="HELLFIRE CZ/SK"></span>
+        <span class="back-art" role="img" aria-label="Mytheder"></span>
       </slot>
     </div>
   </div>
@@ -97,26 +97,26 @@
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid rgba(140, 110, 90, .55);
+    border: 1px solid rgba(120, 104, 72, .55);
     border-radius: 13px;
     box-sizing: border-box;
     padding: 14px;
     box-shadow:
       0 10px 30px rgba(0, 0, 0, .6),
-      0 0 0 1px rgba(229, 50, 45, .1);
+      0 0 0 1px rgb(var(--accent-rgb) / .1);
   }
 
   .card .front {
-    /* Ash paper, not white. Seven of these in a hand against a black board is
-       a glare panel at #f7f5fb. */
-    background: #d8cec2;
-    color: #1a1310;
-    /* The trim: a dark card edge with an ember rule just inside it, echoing the
-       frame on the back without crowding the text. */
+    /* Aged paper, not white. Seven of these in a hand against a dark board is
+       a glare panel at #f7f5fb, and the warm tone sits with the gold. */
+    background: var(--card-paper);
+    color: var(--card-ink);
+    /* The trim: a gold rule just inside the edge, echoing the frame on the
+       back of the card without crowding the text. */
     box-shadow:
       0 10px 30px rgba(0, 0, 0, .6),
-      inset 0 0 0 2px #b8371f,
-      inset 0 0 12px rgba(229, 50, 45, .3);
+      inset 0 0 0 2px var(--card-trim),
+      inset 0 0 12px rgb(var(--accent-rgb) / .22);
     z-index: 2;
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
@@ -130,9 +130,9 @@
   .card .back {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    /* The house deck. Black so the artwork's own background disappears into
-       the card and the letterboxing at the sides is invisible. */
-    background: #050303;
+    /* The house deck. Near-black so the artwork's own field disappears into
+       the card and no seam shows at the edges. */
+    background: var(--card-dark);
     color: var(--fg);
     border: 1px solid var(--accent-dim);
     padding: 0;
@@ -147,27 +147,25 @@
     background-repeat: no-repeat;
     background-position: center;
     /*
-     * The artwork is 440x615 — a real playing-card 5:7 — and the card box is
-     * 12x15, so contain left black bars down both sides. cover fills the card
-     * instead, at the price of 33px off the top and bottom of the source. The
-     * outer 28px of the art is unlit black margin, so that costs about five
-     * pixels of actual design at each end and nothing of the frame reads as
-     * missing.
+     * Shipped already cropped to the card's 4:5, so cover and contain agree
+     * and there is nothing to letterbox. The original art is a taller 5:7;
+     * the trim came off the top and bottom border, clear of the emblem and
+     * the wordmark.
      */
     background-size: cover;
   }
 
-  /* Black cards keep the deep-black face of the physical game, but pick up an
-     ember edge so they read as lit on the dark board. */
+  /* Black cards keep the dark face of the physical game, but pick up a gold
+     edge so they read as lit on the dark board. */
   .card.black .back,
   .card.black .front {
-    background: #120806;
-    color: #f7efe9;
-    border: 1px solid rgba(229, 50, 45, .42);
+    background: var(--card-dark);
+    color: var(--card-dark-ink);
+    border: 1px solid rgb(var(--accent-rgb) / .42);
     box-shadow:
       0 14px 44px rgba(0, 0, 0, .75),
-      0 0 46px rgba(229, 50, 45, .28),
-      inset 0 0 0 2px rgba(184, 55, 31, .55);
+      0 0 46px rgb(var(--accent-rgb) / .28),
+      inset 0 0 0 2px rgb(var(--accent-rgb) / .55);
   }
 
   .card .front p,
@@ -194,13 +192,16 @@
     overflow: hidden;
   }
 
+  /* The house mark, bottom-left. Sized as a fraction of the card rather than
+     left at its natural width — the wordmark is heavy enough that at full
+     width it competed with the card's own text for attention. */
   .card .front img {
-    max-width: 100%;
-    -webkit-transform: scale(0.8);
-    transform: scale(0.8);
+    width: 58%;
+    max-width: 58%;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: .5em;
+    left: .8em;
+    opacity: .9;
   }
 
   .card.shrink {
@@ -223,10 +224,10 @@
   }
 
   .card .front.marked {
-    background: #f2e4d2;
+    background: var(--card-paper-won);
     border-color: var(--accent);
     box-shadow:
       0 14px 36px rgba(0, 0, 0, .65),
-      0 0 34px rgba(229, 50, 45, .6);
+      0 0 34px rgb(var(--accent-rgb) / .6);
   }
 </style>

@@ -25,10 +25,13 @@
 		width: calc(100% - var(--sidebar-size));
 		box-sizing: border-box;
 		color: var(--fg);
-		background-color: #100806;
+		/* The two dragons: teal coming in over the left shoulder, gold answering
+		   from the far corner. Kept low so the cards stay the brightest thing
+		   on the board. */
+		background-color: var(--bg);
 		background-image:
-			radial-gradient(120% 90% at 12% 0%, rgba(122, 24, 12, .55), transparent 55%),
-			radial-gradient(80% 70% at 95% 100%, rgba(255, 138, 31, .16), transparent 60%);
+			radial-gradient(120% 90% at 12% 0%, rgb(var(--accent-2-rgb) / .20), transparent 58%),
+			radial-gradient(80% 70% at 95% 100%, rgb(var(--accent-rgb) / .13), transparent 62%);
 		background-repeat: no-repeat;
 	}
 	.layout-game__sidebar {

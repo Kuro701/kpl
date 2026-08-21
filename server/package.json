@@ -2,7 +2,7 @@
   "name": "kpl-server",
   "version": "4.0.0",
   "type": "module",
-  "description": "Game server for Karty proti lidskosti",
+  "description": "Game server for Mytheder",
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",

@@ -1,12 +1,19 @@
 <script lang="ts">
   import { link } from "svelte-routing";
   import { ActiveTheme, Theme } from "../../lib/theme";
+
+  /*
+   * The server this deck belongs to. Drop the invite in here and the footer
+   * turns the name into a link; leave it empty and it stays plain text.
+   */
+  const COMMUNITY_NAME = 'Mytheder';
+  const COMMUNITY_DISCORD: string = '';
 </script>
 
 <div class="layout-menu" class:dark-theme={$ActiveTheme === Theme.DARK}>
 	<a href="/" use:link>
 		<div class="layout-menu__logo">
-			<img src="/img/logo_white.png" alt="Logo" draggable="false" />
+			<img src="/img/logo_white.png" alt="Mytheder" draggable="false" />
 		</div>
 	</a>
 	<div class="layout-menu__content">
@@ -20,9 +27,13 @@
 			</a>
 		</div>
 		<div>
-			<a href="https://discord.gg/Xw5uXtQ9sV" target="_blank" rel="noopener noreferrer">
-				HellFire CZ/SK
-			</a>
+			{#if COMMUNITY_DISCORD}
+				<a href={COMMUNITY_DISCORD} target="_blank" rel="noopener noreferrer">
+					{COMMUNITY_NAME}
+				</a>
+			{:else}
+				{COMMUNITY_NAME}
+			{/if}
 		</div>
 	</div>
 </div>
@@ -31,8 +42,9 @@
 	.layout-menu {
 		background-color: var(--bg);
 		background-image:
-			radial-gradient(60rem 38rem at 50% 32%, rgba(229, 50, 45, .18), transparent 70%),
-			radial-gradient(34rem 26rem at 82% 92%, rgba(255, 138, 31, .08), transparent 72%);
+			radial-gradient(60rem 38rem at 50% 30%, rgb(var(--accent-rgb) / .13), transparent 70%),
+			radial-gradient(34rem 26rem at 84% 92%, rgb(var(--accent-2-rgb) / .10), transparent 72%),
+			radial-gradient(30rem 24rem at 14% 88%, rgb(var(--ember-rgb) / .06), transparent 72%);
 		background-repeat: no-repeat;
 		color: var(--fg);
 		height: 100vh;
@@ -69,7 +81,7 @@
 		max-width: calc(100% - 2rem);
 		width: 100%;
 		margin-top: 1rem;
-		filter: drop-shadow(0 0 18px rgba(229, 50, 45, .35));
+		filter: drop-shadow(0 0 18px rgb(var(--accent-rgb) / .35));
 	}
 	.dark-theme .layout-menu__content {
 		background: var(--panel);

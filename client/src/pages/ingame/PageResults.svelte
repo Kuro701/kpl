@@ -100,7 +100,7 @@
 
 	.game-over {
 		background-color: var(--bg);
-		background-image: radial-gradient(120% 80% at 50% 0%, rgba(229, 50, 45, .18), transparent 70%);
+		background-image: radial-gradient(120% 80% at 50% 0%, rgb(var(--accent-rgb) / .18), transparent 70%);
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
@@ -170,7 +170,7 @@
 		order: 1;
 	}
 	.podium-player:nth-child(2) .player-podium__pedestal {
-		background-color: rgba(229, 50, 45, .22);
+		background-color: rgb(var(--accent-rgb) / .22);
 		border-color: var(--accent-dim);
 		color: var(--fg);
 		height: 6rem;
@@ -224,7 +224,7 @@
 	}
 
 	.player-score.me {
-		background-color: rgba(229, 50, 45, .14);
+		background-color: rgb(var(--accent-rgb) / .14);
 		color: var(--fg);
 		box-shadow: inset 3px 0 0 var(--accent);
 	}
