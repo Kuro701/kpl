@@ -6,4 +6,4 @@
  * Bumped once per push, not once per change: one decimal at a time, and 1.9
  * rolls to 2.0 rather than 1.10.
  */
-export const APP_VERSION = '1.1';
+export const APP_VERSION = '1.2';
