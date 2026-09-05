@@ -20,3 +20,8 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "22"
+      # Solo/test mode. Set the value in the Render dashboard, never here —
+      # this file is public. Unset means solo mode is simply off, which is the
+      # right default for a normal deploy.
+      - key: SOLO_CODE
+        sync: false

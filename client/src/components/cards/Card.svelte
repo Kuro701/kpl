@@ -40,7 +40,7 @@
       <slot name="front">
         <p>{text.replaceAll(/_+/g, '______')}</p>
         <img
-          src={`/img/logo${black ? "_white" : ""}.png`}
+          src={asset(`/img/logo${black ? "_white" : ""}.png`)}
           alt="Mytheder"
         />
       </slot>

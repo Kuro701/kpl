@@ -2,6 +2,7 @@ import { getAvailableDecks, getDefaultDeckIds } from "../database.js";
 import { KplPlayer } from "../game/player.js";
 import { createRoom, getRoomByUUID, getRoomLobbyState, normalizeJoinCode } from "../game/room-manager.js";
 import { RoomState } from "../game/room.js";
+import { addBotsToRoom, SOLO_ENABLED, soloCodeMatches } from "../game/bot.js";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (player: KplPlayer, reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -117,6 +118,41 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 
 	// Room info for the join-by-code screen. Works for private rooms on purpose —
 	// knowing the code is what grants you the preview.
+	/*
+	 * Solo mode: make a private room, fill it with bots, start it immediately.
+	 * Gated on SOLO_CODE being set server-side — the client never receives the
+	 * code, it only sends what was typed.
+	 */
+	startSoloGame: async (player: KplPlayer, reply: ReplyFunction, data) => {
+		const input = (data ?? {}) as Record<string, unknown>;
+
+		if (!soloCodeMatches(input.code)) {
+			reply(false);
+			return;
+		}
+
+		if (player.room) {
+			player.quitRoom(true);
+		}
+
+		const bots = clampInt(input.bots, { min: 2, max: 5, fallback: 3 });
+
+		const room = createRoom({
+			name: 'Solo',
+			goal: clampInt(input.goal, ROOM_LIMITS.goal),
+			maxPlayers: bots + 1,
+			isPublic: false,
+			decks: cleanDeckIds(input.decks),
+			host: player,
+		});
+
+		player.joinRoom(room);
+		addBotsToRoom(room, bots);
+
+		reply(room.uuid);
+		room.start();
+	},
+
 	getRoomInfo: async (player: KplPlayer, reply: ReplyFunction, data) => {
 		const roomId = normalizeJoinCode((data as any)?.roomUUID);
 
@@ -143,6 +179,10 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		}
 
 		reply(room.postPlayerMessage(player, (data as any)?.text));
+	},
+
+	serverFeatures: async (_player: KplPlayer, reply: ReplyFunction) => {
+		reply({ solo: SOLO_ENABLED });
 	},
 
 	getAvailableCardDecks: async (player: KplPlayer, reply: ReplyFunction) => {
