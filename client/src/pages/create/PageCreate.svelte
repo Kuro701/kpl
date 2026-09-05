@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { navigate } from "svelte-routing";
+	import { asset } from '../../lib/asset';
+  import { navigate } from '../../lib/nav';
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import LobbyBackButton from "../../components/layout/LobbyBackButton.svelte";
   import LobbyHeader from "../../components/layout/LobbyHeader.svelte";
@@ -100,7 +101,7 @@
 
     <div class="actions">
       <button class="button" on:click={createRoom} disabled={selectedPacks.length === 0}>
-        <img src="/img/icons/plus.png" alt="Vytvořit místnost" class="icon invert" />
+        <img src={asset('/img/icons/plus.png')} alt="Vytvořit místnost" class="icon invert" />
         Vytvořit místnost
       </button>
     </div>

@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { asset } from '../../lib/asset';
 	import ProfileEditor from './ProfileEditor.svelte';
 	import ItemList from "../../components/layout/ItemList.svelte";
 	import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
 	import TwoColumns from "../../components/layout/TwoColumns.svelte";
 	import { connectToServer, type LobbyRoom } from '../../lib/networking/client';
-	import { navigate } from 'svelte-routing';
+	import { navigate, route } from '../../lib/nav';
 	import { safeAwait } from '../../utils/safe-await';
 	import LobbyHeader from '../../components/layout/LobbyHeader.svelte';
 	import { rpcCall } from '../../lib/networking/req-res-manager';
@@ -94,28 +95,28 @@
 					<div class="room">
 						<h2>{roomInfo.name}</h2>
 						<RoomPictogram
-							src="/img/icons/user.png"
+							src={asset('/img/icons/user.png')}
 							alt="Počet hráčů"
 							text={`${roomInfo.playerCount}/${roomInfo.maxPlayers}`}
 							horizontal
 						/>
 						{#if roomInfo.state === 'lobby'}
 							<RoomPictogram
-								src="/img/icons/waiting.png"
+								src={asset('/img/icons/waiting.png')}
 								alt="Stav místnosti"
 								text="Čeká na start"
 								horizontal
 							/>
 						{:else}
 							<RoomPictogram
-								src="/img/icons/ingame.png"
+								src={asset('/img/icons/ingame.png')}
 								alt="Stav místnosti"
 								text="Ve hře"
 								horizontal
 							/>
 						{/if}
 						<RoomPictogram
-							src="/img/icons/goal.png"
+							src={asset('/img/icons/goal.png')}
 							alt="Cílový počet bodů"
 							text={`${roomInfo.goal}`}
 							horizontal
@@ -123,7 +124,7 @@
 					</div>
 					<div class="actions">
 						<button class="button" on:click={joinRoom} disabled={connecting}>
-							<img src="/img/icons/play.png" alt="Náhodná hra" draggable="false" class="icon invert" />
+							<img src={asset('/img/icons/play.png')} alt="Náhodná hra" draggable="false" class="icon invert" />
 							{connecting ? 'Připojuji…' : 'Připojit se'}
 						</button>
 					</div>
@@ -135,8 +136,8 @@
 						<h2>Místnost neexistuje</h2>
 						<p>Je nám líto, ale místnost do které se snažíte připojit již neexistuje</p>
 					</div>
-					<a href="/" use:link class="button">
-						<img src="/img/icons/leave.png" alt="leave" class="icon invert" />
+					<a href={route('/')} use:link class="button">
+						<img src={asset('/img/icons/leave.png')} alt="leave" class="icon invert" />
 						Zpět
 					</a>
 				{/if}

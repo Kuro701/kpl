@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { asset } from '../../lib/asset';
   import { onMount } from "svelte";
   import { link } from "svelte-routing";
+  import { route } from '../../lib/nav';
   import { APP_VERSION } from "../../lib/version";
 
   /*
@@ -8,7 +10,7 @@
    * turns the name into a link; leave it empty and it stays plain text.
    */
   const COMMUNITY_NAME = 'Mytheder';
-  const COMMUNITY_DISCORD: string = '';
+  const COMMUNITY_DISCORD: string = 'https://discord.gg/yhQGRDBEzM';
 
   /*
    * The menu is one piece of artwork — dragons, sky and the ornate frame all in
@@ -47,10 +49,10 @@
   <div
     class="stage"
     bind:this={stage}
-    style={`--art-w: ${ART_W}; --art-h: ${ART_H}; --box-w: ${BOX_W}px; --box-h: ${BOX_H}px; --menu-scale: ${scale}`}
+    style={`--art-w: ${ART_W}; --art-h: ${ART_H}; --box-w: ${BOX_W}px; --box-h: ${BOX_H}px; --menu-scale: ${scale}; --menu-frame: url(${asset('/img/menu-frame.webp')})`}
   >
-    <a class="stage__title" href="/" use:link>
-      <img src="/img/logo_white.png" alt="Mytheder" draggable="false" />
+    <a class="stage__title" href={route('/')} use:link>
+      <img src={asset('/img/logo_white.png')} alt="Mytheder" draggable="false" />
     </a>
 
     <div class="stage__content">
@@ -95,7 +97,7 @@
     position: relative;
     aspect-ratio: var(--art-w) / var(--art-h);
     width: max(100vw, calc(100vh * var(--art-w) / var(--art-h)));
-    background: url('/img/menu-frame.webp') center / 100% 100% no-repeat;
+    background: var(--menu-frame) center / 100% 100% no-repeat;
   }
 
   .stage__title {

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { asset } from '../../lib/asset';
 	import { randomRoomName } from "../../lib/random";
 
 	type RoomSettings = {
@@ -20,7 +21,7 @@
 		<input type="text" bind:value={value.name} maxlength="40" placeholder="Název místnosti" />
 		<div aria-label="Náhodný název" data-balloon-pos="up">
 			<button class="button button--random" on:click={() => value.name = randomRoomName()}>
-			<img src="/img/icons/dice.png" alt="Obnovit" />
+			<img src={asset('/img/icons/dice.png')} alt="Obnovit" />
 			</button>
 		</div>
 		</div>

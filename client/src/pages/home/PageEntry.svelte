@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { asset } from '../../lib/asset';
   import ProfileEditor from './ProfileEditor.svelte';
   import ItemList from "../../components/layout/ItemList.svelte";
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import TwoColumns from "../../components/layout/TwoColumns.svelte";
   import { connectToServer } from '../../lib/networking/client';
-  import { navigate, link } from 'svelte-routing';
+  import { link } from 'svelte-routing';
+  import { navigate, route } from '../../lib/nav';
   import LobbyHeader from '../../components/layout/LobbyHeader.svelte';
   import { LocalIdentity } from '../../lib/auth/auth';
   import Debuger from '../../components/debug/Debuger.svelte';
@@ -71,8 +73,8 @@
   <LobbyHeader>
     <h1>Hrát</h1>
     <div class="header-actions" slot="right">
-      <a class="button button--ghost" aria-label="Pravidla" data-balloon-pos="down" href="/rules" use:link>
-        <img src="/img/icons/rules.png" alt="Pravidla" draggable="false" class="icon invert" />
+      <a class="button button--ghost" aria-label="Pravidla" data-balloon-pos="down" href={route('/rules')} use:link>
+        <img src={asset('/img/icons/rules.png')} alt="Pravidla" draggable="false" class="icon invert" />
       </a>
     </div>
   </LobbyHeader>
@@ -86,7 +88,7 @@
 
       <div class="actions">
         <button class="button button--primary" class:button--loading={connecting} on:click={createRoom} disabled={connecting}>
-          <img src="/img/icons/plus.png" alt="" class="icon invert" draggable="false" />
+          <img src={asset('/img/icons/plus.png')} alt="" class="icon invert" draggable="false" />
           Vytvořit místnost
         </button>
       </div>

@@ -1,4 +1,4 @@
-import { navigate } from "svelte-routing";
+import { navigate, appPath } from '../nav';
 import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, RoomCount, type LobbyRoom } from "./client";
 import { ChatMessages, IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type ChatMessage, type GameResults } from "./room";
 import { get } from "svelte/store";
@@ -43,7 +43,7 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 			SelectedCards.set([]);
 			ChatMessages.set([]);
 
-			if (window.location.pathname.startsWith('/room/')) {
+			if (appPath().startsWith('/room/')) {
 				navigate('/');
 			}
 

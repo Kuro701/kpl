@@ -8,6 +8,7 @@
   import SystemMessageWidget from "./components/layout/SystemMessageWidget.svelte";
   import PageResults from "./pages/ingame/PageResults.svelte";
   import { phoneMode } from "./lib/phone-mode";
+  import { BASE_PATH } from "./lib/nav";
 
 </script>
 
@@ -15,7 +16,7 @@
   on:touchstart={() => phoneMode.set(true)}
 />
 
-<Router>
+<Router basepath={BASE_PATH}>
   <Route path="/" component={PageEntry} />
   <Route path="/create" component={PageCreate} backTo="/" />
   <Route path="/rules" component={PageRules} />

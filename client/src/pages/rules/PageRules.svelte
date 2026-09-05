@@ -1,5 +1,5 @@
 <script>
-  import { navigate } from "svelte-routing";
+  import { navigate } from '../../lib/nav';
   import LayoutMenu from "../../components/layout/LayoutMenu.svelte";
   import LobbyBackButton from "../../components/layout/LobbyBackButton.svelte";
   import LobbyHeader from "../../components/layout/LobbyHeader.svelte";

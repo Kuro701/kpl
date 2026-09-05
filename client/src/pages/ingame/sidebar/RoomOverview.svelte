@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { asset } from '../../../lib/asset';
 	import { onDestroy } from "svelte";
 	import { leaveRoom } from "../../../lib/networking/client";
 	import { IngameRoom } from "../../../lib/networking/room";
@@ -99,7 +100,7 @@
 
 <div class="leave-wrapper">
 	<button class="button button--leave" on:click={leaveRoom}>
-		<img src="/img/icons/leave.png" alt="Odhlásit se" class="icon invert" draggable="false" />
+		<img src={asset('/img/icons/leave.png')} alt="Odhlásit se" class="icon invert" draggable="false" />
 		<span>Opustit místnost</span>
 	</button>
 </div>

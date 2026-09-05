@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { asset } from '../../lib/asset';
   import { PlayerIdentity } from "../../lib/networking/client";
   import { rpcCall } from "../../lib/networking/req-res-manager";
   import { IngameRoom, RoomState } from "../../lib/networking/room";
@@ -30,7 +31,7 @@
 				</div>
 				<div class="start-btn-wrapper">
 					<button class="button" on:click={startGame}>
-						<img src="/img/icons/play.png" alt="Start" draggable="false" class="icon invert" />
+						<img src={asset('/img/icons/play.png')} alt="Start" draggable="false" class="icon invert" />
 						Spustit hru
 					</button>
 				</div>

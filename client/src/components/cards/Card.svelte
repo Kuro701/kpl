@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { asset } from '../../lib/asset';
   import CardTip from "./CardTip.svelte";
 
   export let black: boolean = false;
@@ -39,14 +40,15 @@
       <slot name="front">
         <p>{text.replaceAll(/_+/g, '______')}</p>
         <img
-          src={`/img/logo${black ? "_white" : ""}.png`}
+          src={asset(`/img/logo${black ? "_white" : ""}.png`)}
           alt="Mytheder"
         />
       </slot>
     </div>
     <div class="back">
       <slot name="back">
-        <span class="back-art" role="img" aria-label="Mytheder"></span>
+        <span class="back-art" role="img" aria-label="Mytheder"
+              style="--back-art: url({asset('/img/card-back.webp')})"></span>
       </slot>
     </div>
   </div>
@@ -143,7 +145,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url('/img/card-back.webp');
+    background-image: var(--back-art);
     background-repeat: no-repeat;
     background-position: center;
     /*

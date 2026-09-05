@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { link, navigate } from "svelte-routing";
+	import { asset } from '../../lib/asset';
+	import { link } from 'svelte-routing';
+	import { navigate } from '../../lib/nav';
 	import Debuger from "../../components/debug/Debuger.svelte";
 	import DebugVariable from "../../components/debug/DebugVariable.svelte";
 	import { PlayerIdentity } from "../../lib/networking/client";
@@ -65,12 +67,12 @@
 	<div class="game-over__actions">
 		{#if roomUUID}
 			<button class="button button--again" on:click={playAgain}>
-				<img src="/img/icons/play.png" alt="" draggable="false" class="icon invert" />
+				<img src={asset('/img/icons/play.png')} alt="" draggable="false" class="icon invert" />
 				Hrát znovu
 			</button>
 		{/if}
 		<button class="button" on:click={leave}>
-			<img src="/img/icons/leave.png" alt="" draggable="false" class="icon invert" />
+			<img src={asset('/img/icons/leave.png')} alt="" draggable="false" class="icon invert" />
 			Odejít
 		</button>
 	</div>

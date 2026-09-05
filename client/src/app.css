@@ -13,7 +13,8 @@
 
 @font-face {
 	font-family: '7tA114RsvV';
-	src: url('/font/destroy.ttf');
+	/* imported from src/ so Vite hashes it and applies the base path */
+	src: url('./font/destroy.ttf');
 	font-display: swap;
 }
 

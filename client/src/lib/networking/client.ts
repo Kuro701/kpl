@@ -1,6 +1,6 @@
 import { get, writable } from "svelte/store";
 import { handleNetworkMessage } from "./message-handler";
-import { navigate } from "svelte-routing";
+import { navigate } from '../nav';
 import { safeAwait } from "../../utils/safe-await";
 import { getLoginCredentials } from "../auth/auth";
 import { SystemMessage } from "./system-message";

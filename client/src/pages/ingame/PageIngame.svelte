@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { get } from "svelte/store";
-	import { navigate } from "svelte-routing";
+	import { navigate } from '../../lib/nav';
 	import Debuger from "../../components/debug/Debuger.svelte";
 	import DebugVariable from "../../components/debug/DebugVariable.svelte";
 	import LayoutGame from "../../components/layout/LayoutGame.svelte";
