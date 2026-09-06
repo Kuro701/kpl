@@ -3,7 +3,7 @@ import { KplPlayer } from "./player.js";
 import { randomBytes } from "crypto";
 import { broadcastLobbyUpdate, destroyRoom, generateUniqueJoinCode } from "./room-manager.js";
 import { safeAwait } from "../utils/safe-await.js";
-import { Card, getCardsForDecks } from "../database.js";
+import { Card, getCardsForDecks, isJokerCardId, JOKER_MAX_LENGTH } from "../database.js";
 import { smartArrayShuffleAtPlace } from "../utils/shuffle.js";
 import { wait } from "../utils/wait.js";
 import { randomElement } from "../utils/random.js";
@@ -22,6 +22,25 @@ type PlayerData = {
 	czarCounter: number;
 	hand: Card[];
 };
+/*
+ * A Žolík is a blank card the player writes on. The text arrives with the pick,
+ * gets cleaned here, and is written onto a COPY of the card — the room's card
+ * objects are reused for the rest of the game, so writing on the original would
+ * leave one player's joke sitting in the deck.
+ */
+const JOKER_AFK_TEXT = '(prázdná karta — hráč nestihl nic napsat)';
+
+function cleanJokerText(raw: unknown): string {
+	if (typeof raw !== 'string') return '';
+	// Newlines and control characters would break out of the card box.
+	const flat = raw.replace(/[\r\n\t\u0000-\u001f\u007f]+/g, ' ').replace(/\s+/g, ' ').trim();
+	return flat.slice(0, JOKER_MAX_LENGTH);
+}
+
+function fillJoker(card: Card, text: string): Card {
+	return { ...card, tags: [...card.tags], text: text || JOKER_AFK_TEXT };
+}
+
 const MIN_PLAYERS = 3;
 const TIME_TO_START = 45;
 
@@ -340,21 +359,40 @@ export class KplRoom {
 			const pickCount = this.table.black!.pick;
 			const playerCards = this.playerData[player.uuid].hand;
 
-			// Wait for player to pick cards or timeout
-			const [ cardSelection, error ] = await safeAwait(player.rpc<number[]>('pickWhiteCards', {
+			/*
+			 * The reply is either a bare list of card ids (how it has always
+			 * worked) or, once a Žolík is involved, `{cards, texts}` carrying
+			 * what the player typed. Both are accepted so a client from before
+			 * the joker deploy still plays normally instead of being read as a
+			 * timeout.
+			 */
+			const [ rawSelection, error ] = await safeAwait(player.rpc<unknown>('pickWhiteCards', {
 				count: pickCount,
 			}, whitePickSeconds * 1000));
 
-			if (error || !cardSelection || Array.isArray(cardSelection) && cardSelection.length === 0) {
+			const selectionObject = (rawSelection && typeof rawSelection === 'object' && !Array.isArray(rawSelection))
+				? rawSelection as { cards?: unknown; texts?: Record<string, unknown> }
+				: null;
+			const cardSelection = Array.isArray(rawSelection)
+				? rawSelection as number[]
+				: Array.isArray(selectionObject?.cards) ? selectionObject!.cards as number[] : null;
+			const jokerTexts = selectionObject?.texts ?? {};
+
+			if (error || !cardSelection || cardSelection.length === 0) {
 				// Player didn't pick cards in time, pick random cards
 				// Out of time, or gone. Play for them from their own hand so the
 				// round is not held up — picking DISTINCT cards, because drawing at
 				// random twice could otherwise put the same card down twice.
+				//
+				// Blanks go last: nobody is here to write on one, and a card
+				// reading "(nothing written)" is a dead answer on the table. Only
+				// reach for one if the hand is somehow nothing but blanks.
 				const remaining = [...playerCards];
 				const pickedCards: Card[] = [];
 				for (let i = 0; i < pickCount && remaining.length > 0; i++) {
-					const card = randomElement(remaining);
-					pickedCards.push(card);
+					const writable = remaining.filter(card => !isJokerCardId(card.id));
+					const card = randomElement(writable.length > 0 ? writable : remaining);
+					pickedCards.push(isJokerCardId(card.id) ? fillJoker(card, '') : card);
 					remaining.splice(remaining.indexOf(card), 1);
 				}
 				this.playerData[player.uuid].hand = remaining;
@@ -371,10 +409,16 @@ export class KplRoom {
 
 			//Validate card selection and add to table
 			const pickedCards: Card[] = [];
+			const playedFromHand: Card[] = [];
 			cardSelection.forEach(cardId => {
 				const card = playerCards.find(card => card.id === cardId);
 				if (card) {
-					pickedCards.push(card);
+					playedFromHand.push(card);
+					pickedCards.push(
+						isJokerCardId(card.id)
+							? fillJoker(card, cleanJokerText(jokerTexts[String(cardId)]))
+							: card
+					);
 				}
 			});
 			if (pickedCards.length !== pickCount) {
@@ -391,7 +435,8 @@ export class KplRoom {
 
 			// Wait for card animations to finish and remove cards from player hands
 			await wait(1000);
-			this.playerData[player.uuid].hand = playerCards.filter(card => !pickedCards.includes(card));
+			// Compare against what came OUT of the hand: a played joker is a copy.
+			this.playerData[player.uuid].hand = playerCards.filter(card => !playedFromHand.includes(card));
 			// Not just this player: the others need to see that they are done.
 			this.broadcastGameState();
 		}));
@@ -839,10 +884,13 @@ export class KplRoom {
 			intermissionEnd: this.intermissionEnd,
 
 			hand: {
+				// `joker` only ever goes to the card's owner — it is what tells the
+				// client to render a blank and ask for text when it is played.
 				cards: (playerData?.hand ?? []).map(card => ({
 					id: card.id,
 					text: card.text,
 					tip: card.tip,
+					joker: isJokerCardId(card.id) || undefined,
 				})),
 			},
 			table: {
@@ -853,11 +901,18 @@ export class KplRoom {
 					pick: this.table.black.pick,
 				} : null,
 
+				/*
+				 * On the table a Žolík has to be indistinguishable from a printed
+				 * card, or the czar judges the format instead of the joke. The
+				 * text is already filled in, but the id would still give it away —
+				 * blanks live in their own high id range — so it is replaced by a
+				 * position. The client only uses this id to key the list.
+				 */
 				white: this.state === RoomState.PICK_CZAR ? this.table.white.map(cardGroup => {
 					return {
 						id: cardGroup.id,
-						cards: cardGroup.resource.map(card => ({
-							id: card.id,
+						cards: cardGroup.resource.map((card, index) => ({
+							id: isJokerCardId(card.id) ? -(index + 1) : card.id,
 							text: card.text,
 							tip: card.tip,
 						})),

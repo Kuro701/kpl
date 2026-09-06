@@ -26,6 +26,8 @@ type WhiteCard = {
 	id: number;
 	text: string;
 	tip: string | null;
+	/** Only ever set on cards in your own hand — a blank you write yourself. */
+	joker?: boolean;
 }
 
 type BlackCard = WhiteCard & {
@@ -110,7 +112,18 @@ export const ServerResponseFn = writable<((data: unknown) => void) | null>(null)
 export const SelectedCards = writable<number[]>([]);
 export const LastGameResults = writable<GameResults | null>(null);
 
-function submitSelectedCards(cards: number[]) {
+export const JOKER_MAX_LENGTH = 120;
+
+/*
+ * Blank cards waiting to be written on.
+ *
+ * A normal pick submits the moment you have chosen enough cards. A Žolík can't:
+ * the card is empty until the player types something, so the selection is held
+ * here and the submit waits for the text. Empty means nothing is pending.
+ */
+export const PendingJokers = writable<number[]>([]);
+
+function submitSelectedCards(cards: number[], texts?: Record<string, string>) {
 	const reponse = get(ServerResponseFn);
 	if (!reponse) {
 		console.error('No response function');
@@ -118,7 +131,8 @@ function submitSelectedCards(cards: number[]) {
 	}
 
 	ServerResponseFn.set(null);
-	reponse(cards);
+	PendingJokers.set([]);
+	reponse(texts ? { cards, texts } : cards);
 }
 
 export function pushSelectedCard(id: number) {
@@ -137,10 +151,24 @@ export function pushSelectedCard(id: number) {
 		}
 
 		if (cards.length >= ingameRoom.table.black.pick) {
+			const jokers = cards.filter(cardId =>
+				ingameRoom.hand.cards.find(card => card.id === cardId)?.joker);
+
+			if (jokers.length > 0) {
+				// Hand off to the writing step instead of submitting a blank.
+				PendingJokers.set(jokers);
+				return cards;
+			}
+
 			submitSelectedCards(cards);
 			return cards;
 		}
 
 		return cards;
 	});
+}
+
+/** Called by the joker prompt once every blank in the selection has text. */
+export function submitJokerTexts(texts: Record<string, string>) {
+	submitSelectedCards(get(SelectedCards), texts);
 }

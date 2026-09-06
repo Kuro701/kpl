@@ -10,10 +10,12 @@
 	import Hand from "./Hand.svelte";
 	import HandTouchscreen from "./HandTouchscreen.svelte";
 	import Intermission from "./Intermission.svelte";
+	import JokerPrompt from "./JokerPrompt.svelte";
 	import LobbyState from "./LobbyState.svelte";
 </script>
 <div class="board" class:board--touchscreen={$phoneMode}>
 	<Intermission />
+	<JokerPrompt />
 
 	{#if $IngameRoom?.state === RoomState.LOBBY}
 		<LobbyState />

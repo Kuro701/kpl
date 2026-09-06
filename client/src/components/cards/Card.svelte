@@ -9,6 +9,12 @@
   export let noMargin: boolean = false;
   export let marked: boolean = false;
   export let tip: string | null = null;
+  /*
+   * A blank Žolík in your own hand. It only ever renders this way while you
+   * hold it — once played, the server has filled the text in and it is an
+   * ordinary card, which is the point.
+   */
+  export let joker: boolean = false;
 
   /*
    * Cards are a fixed size and the text is not: white cards run to 132
@@ -38,7 +44,11 @@
       {/if}
 
       <slot name="front">
-        <p>{text.replaceAll(/_+/g, '______')}</p>
+        {#if joker && !text}
+          <p class="joker-hint">Žolík<span>napiš si vlastní odpověď</span></p>
+        {:else}
+          <p>{text.replaceAll(/_+/g, '______')}</p>
+        {/if}
         <img
           src={asset(`/img/logo${black ? "_white" : ""}.png`)}
           alt="Mytheder"
@@ -61,6 +71,26 @@
     width: 12em;
     height: 15em;
     font-size: 1em;
+  }
+
+  .joker-hint {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+    font-style: italic;
+    opacity: .72;
+  }
+  .joker-hint span {
+    font-size: .62em;
+    font-style: normal;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    opacity: .75;
   }
 
   .card {

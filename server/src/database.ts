@@ -55,6 +55,32 @@ const CARDS_DIR = path.resolve(HERE, '..', 'cards');
 /** Cards with no usable tag fall in here, so nothing is ever unreachable. */
 const FALLBACK_TAG = 'absurdni';
 
+export const JOKER_TAG = 'joker';
+
+/*
+ * How many blanks the Žolík pack holds, and where their ids live.
+ *
+ * 24 against 783 real white cards is about 3% with every pack enabled — often
+ * enough that everyone gets a couple over a game to eight points, rare enough
+ * that drawing one still feels like something. The ids sit in their own range
+ * so they can never collide with a card from the JSON files, which are numbered
+ * from 1 and are edited by hand.
+ */
+const JOKER_COUNT = 24;
+const JOKER_ID_BASE = 900_000;
+
+/*
+ * Longest a written answer may be. The longest real white card is 132
+ * characters, so this keeps a joker inside what a printed card could have said
+ * and, more practically, inside what the card layout can render.
+ */
+export const JOKER_MAX_LENGTH = 120;
+
+/** Blank cards are identified by id range, not by empty text — text gets filled in. */
+export function isJokerCardId(id: number): boolean {
+	return id >= JOKER_ID_BASE && id < JOKER_ID_BASE + JOKER_COUNT;
+}
+
 const DECKS: CardDeck[] = [
 	{
 		id: 1,
@@ -100,6 +126,24 @@ const DECKS: CardDeck[] = [
 		description: 'Nesmysly, náhoda a obyčejné věci ve špatnou chvíli.',
 		public: true,
 		default: true,
+	},
+	/*
+	 * Žolíci are blank cards the player fills in when they play one. They are a
+	 * pack rather than a separate mechanic so the host turns them on exactly
+	 * like any other deck, and they shuffle into the white pile like any other
+	 * card — nobody gets a guaranteed joker, you draw one or you don't.
+	 *
+	 * Off by default: a blank card is a surprise, and a group that did not ask
+	 * for one should not be handed one mid-game.
+	 */
+	{
+		id: 6,
+		tag: JOKER_TAG,
+		ownerUUID: 'system',
+		name: 'Žolíci',
+		description: 'Prázdné karty — vlastní odpověď si napíšeš sám.',
+		public: true,
+		default: false,
 	},
 ];
 
@@ -153,6 +197,18 @@ function loadCards(): void {
 			tip: null,
 			pick: card.pick && card.pick > 0 ? card.pick : 1,
 			tags: cleanTags(card.tags),
+		});
+	}
+
+	// The blanks carry no text of their own — the player supplies it at the
+	// moment they play one, and the server writes it onto a copy.
+	for (let i = 0; i < JOKER_COUNT; i++) {
+		CARDS.push({
+			id: JOKER_ID_BASE + i,
+			text: '',
+			tip: null,
+			pick: 0,
+			tags: [JOKER_TAG],
 		});
 	}
 

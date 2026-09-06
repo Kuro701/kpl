@@ -119,6 +119,7 @@
 						show={!faceDown}
 						text={card.text}
 						tip={card.tip}
+						joker={!!card.joker}
 					/>
 				</button>
 			{/if}
@@ -140,6 +141,7 @@
 					show={!faceDown}
 					text={card.text}
 					tip={card.tip}
+					joker={!!card.joker}
 				/>
 			</button>
 		</div>
