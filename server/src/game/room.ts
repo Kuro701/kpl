@@ -257,7 +257,7 @@ export class KplRoom {
 				uuid: player.uuid,
 				username: player.username,
 				image: player.image,
-				points: this.playerData[player.uuid].points,
+				points: this.playerData[player.uuid]?.points ?? 0,
 			})),
 		}
 
@@ -357,7 +357,20 @@ export class KplRoom {
 			}
 
 			const pickCount = this.table.black!.pick;
-			const playerCards = this.playerData[player.uuid].hand;
+
+			/*
+			 * The seat can go while the round is running — a player leaves, or
+			 * drops during the minutes the czar spends reading. Without their
+			 * data there is nothing to play, and throwing here used to reject
+			 * into a Promise.all nobody awaits, which killed the process and
+			 * with it every other game on the server.
+			 */
+			const seat = this.playerData[player.uuid];
+			if (!seat) {
+				console.warn(`${chalk.yellow('[round]')} no seat data for ${player.username} (${player.uuid}) — skipping their pick`);
+				return;
+			}
+			const playerCards = seat.hand;
 
 			/*
 			 * The reply is either a bare list of card ids (how it has always
@@ -395,7 +408,7 @@ export class KplRoom {
 					pickedCards.push(isJokerCardId(card.id) ? fillJoker(card, '') : card);
 					remaining.splice(remaining.indexOf(card), 1);
 				}
-				this.playerData[player.uuid].hand = remaining;
+				seat.hand = remaining;
 				this.table.white.push({
 					id: cuid(),
 					playerUUID: player.uuid,
@@ -436,7 +449,7 @@ export class KplRoom {
 			// Wait for card animations to finish and remove cards from player hands
 			await wait(1000);
 			// Compare against what came OUT of the hand: a played joker is a copy.
-			this.playerData[player.uuid].hand = playerCards.filter(card => !playedFromHand.includes(card));
+			seat.hand = playerCards.filter(card => !playedFromHand.includes(card));
 			// Not just this player: the others need to see that they are done.
 			this.broadcastGameState();
 		}));
@@ -486,7 +499,12 @@ export class KplRoom {
 		this.table.lastRoundWinnerGroupId = winningCardGroup.id;
 		this.table.lastRoundWinnerUUID = winningCardGroup.playerUUID;
 		const winnerUUID = winningCardGroup.playerUUID;
-		this.playerData[winnerUUID].points++;
+		// They played this card and then left — the card still won, and the
+		// point still belongs to the seat in case they come back.
+		const winnerSeat = this.playerData[winnerUUID];
+		if (winnerSeat) {
+			winnerSeat.points++;
+		}
 		this.broadcastGameState();
 
 		const winner = this.players.find(p => p.uuid === winnerUUID);
@@ -507,16 +525,34 @@ export class KplRoom {
 	private pickNextCzar(): void {
 		// TODO: Prevent player who was offline to go on czar spree
 
-		this.czarUUID = this.players.reduce((candidate, player) => {
-			const candidateCzarCounter = this.playerData[candidate].czarCounter;
-			const playerCzarCounter = this.playerData[player.uuid].czarCounter;
+		/*
+		 * Only seats that still exist can wear the crown. The old version read
+		 * this.players[0].uuid unconditionally, which throws on an empty table —
+		 * and the table can empty between the check at the top of the game loop
+		 * and this call, because a round is minutes long.
+		 */
+		const seated = this.players.filter(player => this.playerData[player.uuid]);
+		if (seated.length === 0) {
+			this.czarUUID = null;
+			return;
+		}
+
+		const nextCzarUUID = seated.reduce((candidate, player) => {
+			const candidateCzarCounter = this.playerData[candidate]?.czarCounter ?? 0;
+			const playerCzarCounter = this.playerData[player.uuid]?.czarCounter ?? 0;
 
 			if (playerCzarCounter < candidateCzarCounter) {
 				return player.uuid;
 			}
 			return candidate;
-		}, this.players[0].uuid);
-		this.playerData[this.czarUUID].czarCounter++;
+		}, seated[0].uuid);
+
+		this.czarUUID = nextCzarUUID;
+
+		const czarSeat = this.playerData[nextCzarUUID];
+		if (czarSeat) {
+			czarSeat.czarCounter++;
+		}
 	}
 
 	// #endregion
@@ -591,7 +627,9 @@ export class KplRoom {
 
 	/** Bring one player's screen up to date — used when a tab takes over. */
 	public syncPlayer(player: KplPlayer): void {
-		this.sendGameState(player);
+		// Reached straight from the auth handler on reconnect, where a throw
+		// would reject with nobody listening.
+		this.sendStateSafely(player);
 		this.sendChatHistory(player);
 	}
 
@@ -719,7 +757,10 @@ export class KplRoom {
 	}
 
 	private fillHand(player: KplPlayer): void {
-		const hand = this.playerData[player.uuid].hand;
+		const hand = this.playerData[player.uuid]?.hand;
+		if (!hand) {
+			return;
+		}
 		while (hand.length < 10) {
 			const card = this.drawWhiteCard();
 			if (!card) {
@@ -727,7 +768,7 @@ export class KplRoom {
 			}
 			hand.push(card);
 		}
-		this.sendGameState(player);
+		this.sendStateSafely(player);
 	}
 
 	private fillHandForAllPlayers(): void {
@@ -865,8 +906,22 @@ export class KplRoom {
 
 	// #region Sync
 
+	/*
+	 * Nearly every caller fires this without awaiting it — join, leave, the
+	 * round loop. That makes an unhandled rejection here a process-level event,
+	 * so one player whose state cannot be built must not become everybody's
+	 * problem: each send is contained on its own.
+	 */
 	private async broadcastGameState(): Promise<void> {
-		await Promise.all(this.players.map(player => this.sendGameState(player)));
+		await Promise.all(this.players.map(player => this.sendStateSafely(player)));
+	}
+
+	private sendStateSafely(player: KplPlayer): Promise<unknown> {
+		return Promise.resolve()
+			.then(() => this.sendGameState(player))
+			.catch(error => {
+				console.error(`${chalk.red('[state]')} could not send room state to ${player.username} (${player.uuid}):`, error);
+			});
 	}
 
 	private async sendGameState(player: KplPlayer) {
@@ -936,7 +991,7 @@ export class KplRoom {
 				uuid: p.uuid,
 				username: p.username,
 				image: p.image,
-				points: this.playerData[p.uuid].points,
+				points: this.playerData[p.uuid]?.points ?? 0,
 				isHost: this.hostUUID === p.uuid,
 				isCzar: this.czarUUID === p.uuid,
 				// Who is everyone still waiting for? The table already knows — a

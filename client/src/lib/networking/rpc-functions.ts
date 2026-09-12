@@ -3,7 +3,7 @@ import { getAuthCredentials, LobbyRooms, PlayerCount, PlayerIdentity, RoomCount,
 import { ChatMessages, IngameRoom, LastGameResults, RoomState, SelectedCards, ServerResponseFn, type ChatMessage, type GameResults } from "./room";
 import { get } from "svelte/store";
 import { playSound } from "../sounds";
-import { identityStorage } from "../auth/auth";
+import { LocalIdentity, setIdentity } from "../auth/auth";
 
 type ReplyFunction = (data: unknown) => void;
 type RequestFunction = (reply: ReplyFunction, data: unknown) => Promise<void>;
@@ -14,14 +14,38 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 	auth: async (reply) => {
 		reply(getAuthCredentials());
 	},
+	/*
+	 * The server has just told us who we are. Both halves of that matter.
+	 *
+	 * This used to write uuid and token straight into storage and stop there,
+	 * leaving the LocalIdentity store holding whatever it was initialised with
+	 * at page load — an empty uuid on a first visit. getLoginCredentials() reads
+	 * the STORE, not storage, so every reconnect inside the same page sent an
+	 * empty uuid, the server could not revive the identity, and it minted a
+	 * brand new one. A player who blipped for two seconds came back as a
+	 * stranger: their seat was vacated, their hand and points were gone, and at
+	 * six players enough blips happened that a table emptied out over a game.
+	 *
+	 * A page RELOAD always worked, because that re-runs loadSavedIdentity() and
+	 * reads storage — which is exactly why this was easy to miss in testing.
+	 *
+	 * setIdentity() writes both, so the store and storage cannot drift apart.
+	 */
 	identity: async (reply, data) => {
 		const { uuid, token, username, anonymous } = data as { uuid: string, token: string, username: string, anonymous: boolean };
 
 		if (anonymous) {
-			identityStorage.setItem('identity_provider', 'anonymous');
-			identityStorage.setItem('username', username);
-			identityStorage.setItem('uuid', uuid);
-			identityStorage.setItem('token', token);
+			const current = get(LocalIdentity);
+			setIdentity({
+				...current,
+				provider: 'anonymous',
+				user_id: uuid,
+				token,
+				username,
+				// Push the expiry out on every handshake, so a long session does
+				// not age out of its own identity part-way through a game.
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+			});
 		}
 
 		PlayerIdentity.set({ uuid, username, anonymous });
