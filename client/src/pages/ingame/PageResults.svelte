@@ -25,6 +25,22 @@
 		leaveRoom();
 		navigate('/');
 	}
+
+	/*
+	 * Built once, not per render: the values are random but they must not
+	 * change on every state update, or the embers would teleport each time the
+	 * score list re-sorts.
+	 */
+	const EMBERS = Array.from({ length: 18 }, (_, i) => ({
+		i,
+		x: Math.round(Math.random() * 100),
+		delay: +(Math.random() * 9).toFixed(2),
+		dur: +(7 + Math.random() * 7).toFixed(2),
+		size: +(2 + Math.random() * 4).toFixed(1),
+		drift: Math.round((Math.random() - 0.5) * 120),
+		// Mostly the gold of the winner's podium, occasionally the teal dragon.
+		hue: Math.random() < 0.22 ? '168 190 180' : '217 162 39',
+	}));
 </script>
 
 <Debuger>
@@ -32,6 +48,21 @@
 </Debuger>
 
 <div class="game-over">
+	<!--
+		The celebration. Embers rather than confetti — this game is dragons and
+		cathedrals, and party streamers would look borrowed from somewhere else.
+		aria-hidden because it is atmosphere: a screen reader should get the
+		scores, not eighteen decorative dots.
+	-->
+	<div class="embers" aria-hidden="true">
+		{#each EMBERS as ember (ember.i)}
+			<span
+				class="ember"
+				style="--x:{ember.x}%; --delay:{ember.delay}s; --dur:{ember.dur}s; --size:{ember.size}px; --drift:{ember.drift}px; --hue:{ember.hue}"
+			></span>
+		{/each}
+	</div>
+
 	<h1 class="game-over__title">Konec hry</h1>
 	<div class="podium">
 		{#if $LastGameResults}
@@ -101,6 +132,7 @@
 	}
 
 	.game-over {
+		position: relative;
 		background-color: var(--bg);
 		background-image: radial-gradient(120% 80% at 50% 0%, rgb(var(--accent-rgb) / .18), transparent 70%);
 		height: 100vh;
@@ -110,6 +142,64 @@
 		color: var(--fg);
 		gap: 2rem;
 		overflow: auto;
+	}
+
+	/* A slow breath of light behind the podium, under everything else. */
+	.game-over::before {
+		content: "";
+		position: absolute;
+		inset: -10% -20% auto;
+		height: 70%;
+		z-index: 0;
+		pointer-events: none;
+		background: radial-gradient(50% 50% at 50% 30%, rgb(var(--accent-rgb) / .2), transparent 70%);
+		animation: celebrate-bloom 7s ease-in-out infinite;
+	}
+	@keyframes celebrate-bloom {
+		0%, 100% { opacity: .55; transform: scale(1); }
+		50%      { opacity: 1;   transform: scale(1.08); }
+	}
+
+	.embers {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		overflow: hidden;
+		pointer-events: none;
+	}
+	.ember {
+		position: absolute;
+		left: var(--x);
+		bottom: -12px;
+		width: var(--size);
+		height: var(--size);
+		border-radius: 50%;
+		background: rgb(var(--hue));
+		box-shadow: 0 0 8px 1px rgb(var(--hue) / .7);
+		opacity: 0;
+		animation: ember-rise var(--dur) linear var(--delay) infinite;
+	}
+	/*
+	 * Fades in off the bottom edge and out before the top, so nothing is seen
+	 * to pop into or out of existence at a screen edge.
+	 */
+	@keyframes ember-rise {
+		0%   { transform: translate3d(0, 0, 0) scale(.6); opacity: 0; }
+		12%  { opacity: .85; }
+		70%  { opacity: .6; }
+		100% { transform: translate3d(var(--drift), -102vh, 0) scale(1); opacity: 0; }
+	}
+
+	/* Everything real sits above the atmosphere. */
+	.game-over > :not(.embers) {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Celebration is not worth making anyone motion-sick. */
+	@media (prefers-reduced-motion: reduce) {
+		.ember { animation: none; opacity: .5; }
+		.game-over::before { animation: none; opacity: .8; }
 	}
 	.game-over__title {
 		font-size: 3rem;
