@@ -1,6 +1,6 @@
 <script>
 	import Card from "../../components/cards/Card.svelte";
-	import { IngameRoom, SelectedCards } from "../../lib/networking/room";
+	import { IngameRoom, SelectedCards, reshuffleHand } from "../../lib/networking/room";
 	import { phoneMode } from "../../lib/phone-mode";
 
 </script>
@@ -32,6 +32,20 @@
 	{/if}
 </div>
 
+<!--
+	The free swap. Only here when the server says so — after everyone has been
+	czar once, before you have played, and not for the czar. It disappears the
+	moment you use it, so there is nothing to explain about how many are left.
+-->
+{#if $IngameRoom?.canReshuffle}
+	<div class="swap">
+		<button class="swap__btn" on:click={reshuffleHand}>
+			Vyměnit karty
+		</button>
+		<span class="swap__note">jednou za kolo</span>
+	</div>
+{/if}
+
 <style>
 	.picker {
 		display: flex;
@@ -44,6 +58,34 @@
 		flex-direction: column;
 		padding-bottom: 1rem;
 		align-items: center;
+	}
+
+	.swap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: .6rem;
+		margin-top: .6rem;
+	}
+	.swap__btn {
+		padding: .42rem 1rem;
+		border-radius: calc(var(--radius) / 2);
+		border: 1px solid rgb(var(--accent-rgb) / .5);
+		background: rgb(var(--accent-rgb) / .1);
+		color: var(--accent-text);
+		font: inherit;
+		font-size: .82rem;
+		letter-spacing: .04em;
+		cursor: pointer;
+		transition: background .18s, border-color .18s;
+	}
+	.swap__btn:hover {
+		background: rgb(var(--accent-rgb) / .22);
+		border-color: rgb(var(--accent-rgb) / .85);
+	}
+	.swap__note {
+		font-size: .72rem;
+		opacity: .5;
 	}
 
 	.card-shim {

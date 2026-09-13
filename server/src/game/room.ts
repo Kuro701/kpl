@@ -144,6 +144,21 @@ export class KplRoom {
 	private chatLog: ChatMessage[] = [];
 	private lastChatAt: Record<string, number> = {};
 
+	/*
+	 * The free hand swap.
+	 *
+	 * Once everybody has worn the crown, the deal has had a fair chance to be
+	 * unkind to somebody — so a new cycle opens one swap per player. Tracking
+	 * the cycle rather than a per-player counter means a seat that joined late,
+	 * or came back from a drop, is on the same footing as everyone else.
+	 *
+	 * Cycle number is the LOWEST czarCounter at the table: it only rises when
+	 * the last person who had not been czar has been, which is exactly what
+	 * "a full round" means.
+	 */
+	private reshuffleCycle = 0;
+	private reshuffleUsed = new Set<string>();
+
 	private deckIds: number[] = [];
 	private decks = {
 		white: [] as Card[],
@@ -300,6 +315,9 @@ export class KplRoom {
 			this.playerData[uuid] = { points: 0, hand: [], czarCounter: 0 };
 		}
 
+		this.reshuffleCycle = 0;
+		this.reshuffleUsed.clear();
+
 		this.postSystemMessage('Konec hry. Hostitel může rovnou spustit další.');
 		this.broadcastGameState();
 		broadcastLobbyUpdate();
@@ -336,6 +354,7 @@ export class KplRoom {
 		this.table.white = [];
 		this.fillHandForAllPlayers();
 		this.pickNextCzar();
+		this.refreshReshuffleGrants();
 		this.broadcastGameState();
 
 		this.table.black = this.drawBlackCard();
@@ -520,6 +539,63 @@ export class KplRoom {
 		// The reveal: losing cards flip back, the winner stays face up with the
 		// name of whoever played it. Long enough to read, short enough not to drag.
 		await wait(WINNER_REVEAL_MS);
+	}
+
+	/** Lowest czarCounter at the table — rises once per completed cycle. */
+	private currentCycle(): number {
+		const counters = this.players
+			.map(player => this.playerData[player.uuid]?.czarCounter)
+			.filter((c): c is number => typeof c === 'number');
+
+		return counters.length > 0 ? Math.min(...counters) : this.reshuffleCycle;
+	}
+
+	private refreshReshuffleGrants(): void {
+		const cycle = this.currentCycle();
+		if (cycle <= this.reshuffleCycle) {
+			return;
+		}
+
+		this.reshuffleCycle = cycle;
+		this.reshuffleUsed.clear();
+		this.postSystemMessage('Každý už byl císařem — kdo chce, může si vyměnit karty.');
+	}
+
+	/*
+	 * Only before you have played, and never as czar: the czar has no hand in
+	 * play this round, and swapping after your cards are on the table would be
+	 * taking them back.
+	 */
+	public canReshuffle(player: KplPlayer): boolean {
+		return this._state === RoomState.PICK_WHITE
+			&& this.reshuffleCycle > 0
+			&& !this.reshuffleUsed.has(player.uuid)
+			&& this.czarUUID !== player.uuid
+			&& !!this.playerData[player.uuid]
+			&& !this.table.white.some(group => group.playerUUID === player.uuid);
+	}
+
+	public reshuffleHand(player: KplPlayer): boolean {
+		if (!this.canReshuffle(player)) {
+			return false;
+		}
+
+		const seat = this.playerData[player.uuid];
+		if (!seat) {
+			return false;
+		}
+
+		this.reshuffleUsed.add(player.uuid);
+
+		// The old hand goes back to the bottom of the pile rather than being
+		// destroyed — a small deck would otherwise bleed cards every cycle.
+		this.decks.whiteUsed.push(...seat.hand);
+		seat.hand = [];
+		this.fillHand(player);
+
+		this.postSystemMessage(`${player.username} si vyměnil karty.`);
+		this.broadcastGameState();
+		return true;
 	}
 
 	private pickNextCzar(): void {
@@ -937,6 +1013,9 @@ export class KplRoom {
 			state: this._state,
 			intermissionStart: this.intermissionStart,
 			intermissionEnd: this.intermissionEnd,
+
+			// Per-player: the czar and anyone who has already played do not get it.
+			canReshuffle: this.canReshuffle(player),
 
 			hand: {
 				// `joker` only ever goes to the card's owner — it is what tells the

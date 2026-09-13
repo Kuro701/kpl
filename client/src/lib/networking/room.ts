@@ -1,5 +1,6 @@
 import { derived, get, writable } from "svelte/store";
 import { playSound } from "../sounds";
+import { rpcCall } from "./req-res-manager";
 
 export enum RoomState {
 	LOBBY = 'lobby',
@@ -65,6 +66,13 @@ export type IngameRoom = {
 	players: OtherPlayerData[];
 	table: TableData;
 	hand: HandData;
+
+	/*
+	 * Whether the free hand swap is open FOR YOU right now. Decided by the
+	 * server per player — the czar and anyone who has already played this round
+	 * do not get it — so the client never has to work out the rules itself.
+	 */
+	canReshuffle?: boolean;
 }
 
 export type GameResults = {
@@ -166,6 +174,15 @@ export function pushSelectedCard(id: number) {
 
 		return cards;
 	});
+}
+
+/*
+ * Swap the whole hand for a fresh one. Fire and forget: the server answers by
+ * pushing new state, and a refusal (already used, already played, czar) simply
+ * leaves the hand alone — the button is gone by then anyway.
+ */
+export function reshuffleHand() {
+	rpcCall('reshuffleHand').catch(() => {});
 }
 
 /** Called by the joker prompt once every blank in the selection has text. */

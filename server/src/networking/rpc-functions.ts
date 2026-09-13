@@ -88,6 +88,20 @@ export const rpcFunctions: Record<string, RequestFunction> = {
 		reply(joined ? room.uuid : false);
 	},
 
+	/*
+	 * Swap your whole hand. The room decides whether you may — the client only
+	 * shows the button when the state says so, and a button is not a permission.
+	 */
+	reshuffleHand: async (player: KplPlayer, reply: ReplyFunction) => {
+		const room = player.room;
+		if (!room) {
+			reply(false);
+			return;
+		}
+
+		reply(room.reshuffleHand(player));
+	},
+
 	leaveRoom: async (player: KplPlayer, reply: ReplyFunction) => {
 		reply(OK);
 		if (player.room) {
