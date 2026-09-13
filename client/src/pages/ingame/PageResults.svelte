@@ -31,13 +31,15 @@
 	 * change on every state update, or the embers would teleport each time the
 	 * score list re-sorts.
 	 */
-	const EMBERS = Array.from({ length: 18 }, (_, i) => ({
+	const EMBERS = Array.from({ length: 40 }, (_, i) => ({
 		i,
 		x: Math.round(Math.random() * 100),
-		delay: +(Math.random() * 9).toFixed(2),
-		dur: +(7 + Math.random() * 7).toFixed(2),
-		size: +(2 + Math.random() * 4).toFixed(1),
-		drift: Math.round((Math.random() - 0.5) * 120),
+		// Short delays so the screen is already alive when it appears, rather
+		// than filling up over the first ten seconds.
+		delay: +(Math.random() * 5).toFixed(2),
+		dur: +(5 + Math.random() * 6).toFixed(2),
+		size: +(2.5 + Math.random() * 5).toFixed(1),
+		drift: Math.round((Math.random() - 0.5) * 160),
 		// Mostly the gold of the winner's podium, occasionally the teal dragon.
 		hue: Math.random() < 0.22 ? '168 190 180' : '217 162 39',
 	}));
@@ -54,6 +56,8 @@
 		aria-hidden because it is atmosphere: a screen reader should get the
 		scores, not eighteen decorative dots.
 	-->
+	<div class="rays" aria-hidden="true"></div>
+
 	<div class="embers" aria-hidden="true">
 		{#each EMBERS as ember (ember.i)}
 			<span
@@ -184,14 +188,59 @@
 	 * to pop into or out of existence at a screen edge.
 	 */
 	@keyframes ember-rise {
-		0%   { transform: translate3d(0, 0, 0) scale(.6); opacity: 0; }
-		12%  { opacity: .85; }
-		70%  { opacity: .6; }
-		100% { transform: translate3d(var(--drift), -102vh, 0) scale(1); opacity: 0; }
+		0%   { transform: translate3d(0, 0, 0) scale(.5); opacity: 0; }
+		10%  { opacity: 1; }
+		75%  { opacity: .75; }
+		100% { transform: translate3d(var(--drift), -102vh, 0) scale(1.15); opacity: 0; }
+	}
+
+	/*
+	 * A slow wheel of light behind the podium. Very low contrast on purpose —
+	 * at full strength a rotating conic reads as a loading spinner, and the
+	 * point is warmth, not motion for its own sake.
+	 */
+	.rays {
+		position: absolute;
+		top: -42vh;
+		left: 50%;
+		width: 150vh;
+		height: 150vh;
+		margin-left: -75vh;
+		z-index: 0;
+		pointer-events: none;
+		border-radius: 50%;
+		background: conic-gradient(
+			from 0deg,
+			transparent 0deg 14deg, rgb(var(--accent-rgb) / .10) 16deg 20deg,
+			transparent 22deg 44deg, rgb(var(--accent-rgb) / .07) 46deg 50deg,
+			transparent 52deg 88deg, rgb(var(--accent-rgb) / .10) 90deg 94deg,
+			transparent 96deg 134deg, rgb(var(--accent-rgb) / .06) 136deg 140deg,
+			transparent 142deg 180deg, rgb(var(--accent-rgb) / .10) 182deg 186deg,
+			transparent 188deg 226deg, rgb(var(--accent-rgb) / .07) 228deg 232deg,
+			transparent 234deg 270deg, rgb(var(--accent-rgb) / .10) 272deg 276deg,
+			transparent 278deg 316deg, rgb(var(--accent-rgb) / .06) 318deg 322deg,
+			transparent 324deg 360deg
+		);
+		/* Fades out well before the edges so no circle is ever visible. */
+		mask-image: radial-gradient(closest-side, #000 12%, transparent 62%);
+		-webkit-mask-image: radial-gradient(closest-side, #000 12%, transparent 62%);
+		animation: rays-turn 48s linear infinite;
+	}
+	@keyframes rays-turn {
+		to { transform: rotate(1turn); }
+	}
+
+	/* The winner's pedestal breathes, so the eye lands on first place. */
+	.podium-player:nth-child(1) .player-podium__pedestal {
+		animation: winner-pulse 2.6s ease-in-out infinite;
+	}
+	@keyframes winner-pulse {
+		0%, 100% { box-shadow: var(--accent-glow-strong); }
+		50%      { box-shadow: var(--accent-glow-strong), 0 0 46px 6px rgb(var(--accent-rgb) / .55); }
 	}
 
 	/* Everything real sits above the atmosphere. */
-	.game-over > :not(.embers) {
+	.game-over > :not(.embers):not(.rays) {
 		position: relative;
 		z-index: 1;
 	}
@@ -200,6 +249,8 @@
 	@media (prefers-reduced-motion: reduce) {
 		.ember { animation: none; opacity: .5; }
 		.game-over::before { animation: none; opacity: .8; }
+		.rays { animation: none; opacity: .7; }
+		.podium-player:nth-child(1) .player-podium__pedestal { animation: none; }
 	}
 	.game-over__title {
 		font-size: 3rem;

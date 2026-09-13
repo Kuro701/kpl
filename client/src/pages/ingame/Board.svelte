@@ -1,6 +1,6 @@
 <script>
 	import { PlayerIdentity } from "../../lib/networking/client";
-	import { IngameRoom, RoomState } from "../../lib/networking/room";
+	import { IngameRoom, RoomState, reshuffleHand } from "../../lib/networking/room";
 	import { phoneMode } from "../../lib/phone-mode";
 	import BlackCardWidget from "./BlackCardWidget.svelte";
 	import BoardCzar from "./BoardCzar.svelte";
@@ -55,7 +55,22 @@
 			and the board gets the space it was holding on to.
 		-->
 		<div class="deck-corner">
-			<DeckPile />
+			<div class="deck-corner__pile">
+				<DeckPile />
+			</div>
+
+			<!--
+				The free hand swap, parked under the draw pile: it is about your
+				cards, and this is where cards come from. Only present when the
+				server says it is open for you — after everyone has been czar
+				once, before you have played, and never for the czar.
+			-->
+			{#if $IngameRoom?.canReshuffle}
+				<button class="swap" on:click={reshuffleHand}>
+					Vyměnit karty
+					<span class="swap__note">jednou za kolo</span>
+				</button>
+			{/if}
 		</div>
 
 		{#if $phoneMode}
@@ -99,13 +114,53 @@
 		top: 3rem;
 		left: 1.5rem;
 		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: .8rem;
 	}
 
-	/* Narrow enough that the deck would start crowding the middle. */
+	/*
+	 * Narrow enough that the deck would start crowding the middle — but the
+	 * swap button is a control, not decoration, so only the pile stands down.
+	 * Hiding the whole corner here would have quietly taken the feature away
+	 * from anyone on a smaller laptop.
+	 */
 	@media (max-width: 68rem) {
-		.deck-corner {
+		.deck-corner__pile {
 			display: none;
 		}
+		.deck-corner {
+			top: 1rem;
+			left: 1rem;
+		}
+	}
+
+	.swap {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: .15rem;
+		padding: .5rem .9rem;
+		border-radius: calc(var(--radius) / 2);
+		border: 1px solid rgb(var(--accent-rgb) / .5);
+		background: rgb(10 7 8 / .82);
+		color: var(--accent-text);
+		font: inherit;
+		font-size: .82rem;
+		letter-spacing: .04em;
+		line-height: 1.1;
+		cursor: pointer;
+		transition: background .18s, border-color .18s;
+	}
+	.swap:hover {
+		background: rgb(var(--accent-rgb) / .2);
+		border-color: rgb(var(--accent-rgb) / .85);
+	}
+	.swap__note {
+		font-size: .66rem;
+		letter-spacing: .02em;
+		opacity: .55;
 	}
 	.board--touchscreen {
 		overflow: auto;
