@@ -182,6 +182,11 @@ export function pushSelectedCard(id: number) {
  * leaves the hand alone — the button is gone by then anyway.
  */
 export function reshuffleHand() {
+	// Drop any half-made selection first. On a pick-two prompt you can choose
+	// one card, then swap — and the old card's id would otherwise ride along
+	// with a new one into a submit the server can't match to your hand.
+	SelectedCards.set([]);
+	PendingJokers.set([]);
 	rpcCall('reshuffleHand').catch(() => {});
 }
 

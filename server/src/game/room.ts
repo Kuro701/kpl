@@ -384,12 +384,10 @@ export class KplRoom {
 			 * into a Promise.all nobody awaits, which killed the process and
 			 * with it every other game on the server.
 			 */
-			const seat = this.playerData[player.uuid];
-			if (!seat) {
+			if (!this.playerData[player.uuid]) {
 				console.warn(`${chalk.yellow('[round]')} no seat data for ${player.username} (${player.uuid}) — skipping their pick`);
 				return;
 			}
-			const playerCards = seat.hand;
 
 			/*
 			 * The reply is either a bare list of card ids (how it has always
@@ -410,32 +408,56 @@ export class KplRoom {
 				: Array.isArray(selectionObject?.cards) ? selectionObject!.cards as number[] : null;
 			const jokerTexts = selectionObject?.texts ?? {};
 
-			if (error || !cardSelection || cardSelection.length === 0) {
-				// Player didn't pick cards in time, pick random cards
-				// Out of time, or gone. Play for them from their own hand so the
-				// round is not held up — picking DISTINCT cards, because drawing at
-				// random twice could otherwise put the same card down twice.
-				//
-				// Blanks go last: nobody is here to write on one, and a card
-				// reading "(nothing written)" is a dead answer on the table. Only
-				// reach for one if the hand is somehow nothing but blanks.
+			/*
+			 * Read the seat and the hand AFTER the wait, never before.
+			 *
+			 * This RPC is open for the whole pick window — up to two minutes —
+			 * and "Vyměnit karty" can be pressed at any point inside it. A swap
+			 * replaces seat.hand with a brand-new array. A reference taken before
+			 * the await kept pointing at the old one, so every card the player
+			 * then picked from their NEW hand failed the lookup below, the
+			 * selection came up short, and the round silently skipped them.
+			 * Worse, the last line of this block then wrote the OLD hand back
+			 * over the new one — cards that were also sitting in the discard
+			 * pile, now in two places at once.
+			 */
+			const seat = this.playerData[player.uuid];
+			if (!seat) {
+				console.warn(`${chalk.yellow('[round]')} ${player.username} (${player.uuid}) left during their pick`);
+				return;
+			}
+			const playerCards = seat.hand;
+
+			// Out of time, or gone — or a selection that doesn't match the hand.
+			// Play for them from their own hand so the round is not held up,
+			// picking DISTINCT cards, because drawing at random twice could
+			// otherwise put the same card down twice.
+			//
+			// Blanks go last: nobody is here to write on one, and a card reading
+			// "(nothing written)" is a dead answer on the table. Only reach for
+			// one if the hand is somehow nothing but blanks.
+			const playForThem = () => {
 				const remaining = [...playerCards];
-				const pickedCards: Card[] = [];
+				const autoCards: Card[] = [];
 				for (let i = 0; i < pickCount && remaining.length > 0; i++) {
 					const writable = remaining.filter(card => !isJokerCardId(card.id));
 					const card = randomElement(writable.length > 0 ? writable : remaining);
-					pickedCards.push(isJokerCardId(card.id) ? fillJoker(card, '') : card);
+					autoCards.push(isJokerCardId(card.id) ? fillJoker(card, '') : card);
 					remaining.splice(remaining.indexOf(card), 1);
 				}
 				seat.hand = remaining;
 				this.table.white.push({
 					id: cuid(),
 					playerUUID: player.uuid,
-					resource: pickedCards,
+					resource: autoCards,
 				});
 
 				// Everyone is watching to see who they are still waiting for.
 				this.broadcastGameState();
+			};
+
+			if (error || !cardSelection || cardSelection.length === 0) {
+				playForThem();
 				return;
 			}
 
@@ -444,7 +466,7 @@ export class KplRoom {
 			const playedFromHand: Card[] = [];
 			cardSelection.forEach(cardId => {
 				const card = playerCards.find(card => card.id === cardId);
-				if (card) {
+				if (card && !playedFromHand.includes(card)) {
 					playedFromHand.push(card);
 					pickedCards.push(
 						isJokerCardId(card.id)
@@ -454,8 +476,15 @@ export class KplRoom {
 				}
 			});
 			if (pickedCards.length !== pickCount) {
-				//Invalid card selection, skip player round
-				//TODO: Send error to player
+				/*
+				 * This used to be a bare `return` — the player was simply
+				 * dropped from the round with no cards on the table and no word
+				 * why. A mismatch means the client and server disagree about the
+				 * hand, and that is our bug, not their move: say so in the log and
+				 * play for them rather than cost them the round.
+				 */
+				console.warn(`${chalk.yellow('[round]')} ${player.username} sent ${cardSelection.length} card(s), ${pickedCards.length} matched their hand of ${playerCards.length} — playing for them instead of skipping`);
+				playForThem();
 				return;
 			}
 
@@ -468,7 +497,11 @@ export class KplRoom {
 			// Wait for card animations to finish and remove cards from player hands
 			await wait(1000);
 			// Compare against what came OUT of the hand: a played joker is a copy.
-			seat.hand = playerCards.filter(card => !playedFromHand.includes(card));
+			// Re-read once more — the seat can go during the animation wait too.
+			const seatAfter = this.playerData[player.uuid];
+			if (seatAfter) {
+				seatAfter.hand = seatAfter.hand.filter(card => !playedFromHand.includes(card));
+			}
 			// Not just this player: the others need to see that they are done.
 			this.broadcastGameState();
 		}));
