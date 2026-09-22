@@ -10,7 +10,7 @@
    * turns the name into a link; leave it empty and it stays plain text.
    */
   const COMMUNITY_NAME = 'Mytheder';
-  const COMMUNITY_DISCORD: string = 'https://discord.gg/yhQGRDBEzM';
+  const COMMUNITY_DISCORD: string = 'https://discord.gg/hJNFfvf8nA';
 
   /*
    * The menu is one piece of artwork — dragons, sky and the ornate frame all in
